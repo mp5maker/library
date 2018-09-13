@@ -1,0 +1,75 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <title>Grid Practice</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+</head>
+<body>
+    <div class = 'wrapper'>
+        <div>
+            Lorem ipsum dolor sit amet consectetur adipisicing elit. Blanditiis distinctio quibusdam laborum ad maiores et nulla dolorem suscipit corporis, eaque quod obcaecati quae harum dolorum similique id incidunt necessitatibus voluptate quisquam. Totam inventore repudiandae minima necessitatibus impedit temporibus facilis officia nostrum numquam eius, autem amet quibusdam blanditiis ut ducimus veritatis.
+        </div>
+        <div>
+            Lorem ipsum dolor sit amet consectetur adipisicing elit. Eius ipsam, aspernatur aliquam ratione magni soluta obcaecati magnam veniam sunt eos aut quo alias asperiores sequi!
+        </div>
+        <div>
+            Lorem ipsum dolor sit amet consectetur adipisicing elit. Dolore, impedit! Eligendi facere soluta ad deleniti aut explicabo adipisci ab sunt illum consequatur, rerum cupiditate sint impedit possimus rem saepe reprehenderit id, natus corporis? Nemo, veritatis.
+        </div>
+        <div>
+            Lorem ipsum dolor sit amet consectetur adipisicing elit. Dolore, impedit! Eligendi facere soluta ad deleniti aut explicabo adipisci ab sunt illum consequatur, rerum cupiditate sint impedit possimus rem saepe reprehenderit id, natus corporis? Nemo, veritatis.
+        </div>
+        <div class = 'nested'>
+            <div>
+                Lorem ipsum dolor sit amet.
+            </div>
+            <div>
+                Lorem ipsum dolor sit amet.
+            </div>
+            <div>
+                Lorem ipsum dolor sit amet.
+            </div>
+            <div>
+                Lorem ipsum dolor sit amet.
+            </div>
+        </div>
+        <div>
+            Lorem ipsum dolor sit amet consectetur adipisicing elit. Dolore, impedit! Eligendi facere soluta ad deleniti aut explicabo adipisci ab sunt illum consequatur, rerum cupiditate sint impedit possimus rem saepe reprehenderit id, natus corporis? Nemo, veritatis.
+        </div>
+        <div>
+            Lorem ipsum dolor sit amet consectetur adipisicing elit. Dolore, impedit! Eligendi facere soluta ad deleniti aut explicabo adipisci ab sunt illum consequatur, rerum cupiditate sint impedit possimus rem saepe reprehenderit id, natus corporis? Nemo, veritatis.
+        </div>
+        <div>
+            Lorem ipsum dolor sit amet consectetur adipisicing elit. Dolore, impedit! Eligendi facere soluta ad deleniti aut explicabo adipisci ab sunt illum consequatur, rerum cupiditate sint impedit possimus rem saepe reprehenderit id, natus corporis? Nemo, veritatis.
+        </div>
+    </div>
+    <style>
+        .wrapper{
+            display: grid;
+            /* grid-template-columns: 1fr 2fr; */
+            grid-template-columns: repeat(3, 1fr 2fr);
+            grid-gap: 1em;
+            /* grid-auto-rows: 100px; */
+            grid-auto-rows: minmax(100px, auto);
+        }
+
+        .wrapper > div {
+            background: #eee;
+        }
+
+        .wrapper > div:nth-child(odd){
+            background: #ddd;
+        }
+        
+        .nested{
+            display: grid;
+            grid-template-columns: 2fr 1fr 1fr;
+        }
+        
+        .nested > div{
+            border: lightgrey 1px solid;
+        }
+    </style>
+</body>
+</html>

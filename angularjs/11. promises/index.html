@@ -1,0 +1,126 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <title>Promises</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="stylesheet" type="text/css" media="screen" href="/libraries/angularjs/node_modules/font-awesome/css/font-awesome.min.css"/>
+    <link rel="stylesheet" type="text/css" media="screen" href="/libraries/angularjs/node_modules/bootstrap/dist/css/bootstrap.min.css"/>
+    <link rel="stylesheet" href="main.css">
+    <script src="/libraries/angularjs/node_modules/jquery/jquery.min.js"></script>
+    <script src="/libraries/angularjs/node_modules/popper/dist/umd/popper.min.js"></script>
+    <script src="/libraries/angularjs/node_modules/bootstrap/dist/js/bootstrap.min.js"></script>
+    <script src="/libraries/angularjs/node_modules/angular/angular.min.js"></script>
+    <script src="/libraries/angularjs/node_modules/angular-route/angular-route.min.js"></script>
+    <script src="/libraries/angularjs/node_modules/angular-animate/angular-animate.min.js"></script>
+    <script src="/libraries/angularjs/node_modules/angular-resource/angular-resource.min.js"></script>
+    <script src="/libraries/angularjs/node_modules/angular-ui-router/release/angular-ui-router.min.js"></script>
+    <script src="main.js"></script>
+</head>
+<body>
+    <div class="container border" ng-controller = 'mainCtrl'>
+        <div class="row my-1 p-5">
+            <div class="col">
+                <h3>Concept of $d and the promise</h3>
+                <div class = 'text-success'>
+                    {{hello_message_resolve}}
+                </div>
+                <div class = 'text-danger'>
+                    {{hello_message_reject}}
+                </div>
+            </div>
+            <div class="col">
+                <h3>Alternative $d and the promise</h3>
+                <div class = 'text-success'>
+                    {{async_resolve_message}}
+                </div>
+                <div class = 'text-danger'>
+                    {{async_reject_message}}
+                </div>
+            </div>
+        </div>
+        <div class="row my-1 p-5">
+            <div class="col">
+                <h3>Cool Progress Bar</h3>
+                <p class = 'text-success'>
+                    {{notify}}
+                </p>
+                <div class = "progressbar">
+                    <div class="progress-bar w-{{notify}} bg-{{color}} rounded" aria-valuenow="{{notify}}" aria-valuemin="0" aria-valuemax="100">
+                        {{notify}}
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="row my-1 p-5">
+            <div class="col">
+                <h3>Callbacks Concepts</h3>
+                <div class="card" ng-repeat = 'post in posts'>
+                    <div class="card-header">
+                        <h1>{{post.title}}</h1>
+                    </div>
+                    <div class="card-body">
+                        <p>
+                            {{post.body}}
+                        </p>
+                    </div>  
+                </div>
+            </div>
+            <div class="col">
+                <h3>Alternative Concepts</h3>
+                <div class="container">
+                    <div class="row">
+                        <div class="col p-5" ng-if="spin">
+                            <div class="spinner text-center">
+                                <i class = "fa fa-spin fa-spinner fa-3x"></i>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="card" ng-repeat = 'data in fetchedData | orderBy: id'>
+                    <div class="card-header">
+                        <h1>{{data.title}}</h1>
+                    </div>
+                    <div class="card-body">
+                        <p>
+                            {{data.body}}
+                        </p>
+                    </div>  
+                </div>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col">
+                <h1>Common Status Codes</h1>
+                <table class = 'table table-bordered table-striped'>
+                    <thead class = 'thead-light'>
+                        <tr>
+                            <th>Status Codes</th>
+                            <th>Meaning</th>
+                            <th>Who Uses It</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td>200</td>
+                            <td>Operation Successful</td>
+                            <td>GET, PUT, DELETE</td>
+                        </tr>
+                        <tr>
+                            <td>201</td>
+                            <td>Resource Created Successfully</td>
+                            <td>POST</td>
+                        </tr>
+                        <tr>
+                            <td>202</td>
+                            <td>Request Received</td>
+                            <td>POST, PUT, DELETE</td>
+                        </tr>
+                    </tbody>
+                </table> 
+            </div>
+        </div>
+    </div>
+</body>
+</html>

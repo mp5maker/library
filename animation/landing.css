@@ -1,0 +1,65 @@
+body, html {
+    background-color: #333;
+    color: #999999;
+}
+
+.heading{
+    position: relative;
+    animation-name: heading;
+    animation-duration: 1s;
+    animation-fill-mode: forwards;
+    animation-timing-function: linear;
+}
+
+.content{
+    position: relative;
+    animation-name: content;
+    animation-duration: 1s;
+    animation-fill-mode: forwards;
+    animation-timing-function: linear;
+}
+
+.button{
+    position: relative;
+    opacity: 0;
+    animation-name: button;
+    animation-duration: 1s;
+    animation-delay: 1s;
+    animation-fill-mode: forwards;
+    padding: 0.5rem 1rem;
+    transition-property: all;
+    transition-duration: 1s;
+    transition-timing-function: linear;
+    border: white;
+}
+
+.button:hover{
+    border-radius: 0% 50% 50% 0;
+    background-color: #754145;
+}
+
+
+
+@keyframes heading{
+    0%{
+        top: -100px;
+    }100%{
+        top: 0px;
+    }
+}
+
+@keyframes content{
+    0%{
+        left: -1000px;
+    }100%{
+        left: 0px;
+    }
+}
+
+@keyframes button{
+    0%{
+        opacity: 0;
+    }100%{
+        opacity: 1;
+    }
+}

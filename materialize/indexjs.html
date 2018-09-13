@@ -1,0 +1,228 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <title>Materialize CSS</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+    <link rel="stylesheet" type="text/css" media="screen" href="./node_modules/materialize-css/dist/css/materialize.css" />
+    <link rel="stylesheet" type="text/css" media="screen" href="main.css" />
+</head>
+<body>
+    <div class="container">
+        <!-- Carousel -->
+        <h1>Carousel</h1>
+        <div class="carousel">
+            <a href="#one!" class="carousel-item">
+                <img src="download.jpg" alt="ok">
+            </a>
+            <a href="#two!" class="carousel-item">
+                <img src="download.jpg" alt="ok">
+            </a>
+            <a href="#three!" class="carousel-item">
+                <img src="download.jpg" alt="ok">
+            </a>
+            <a href="#four!" class="carousel-item">
+                <img src="download.jpg" alt="ok">
+            </a>
+        </div>
+        <!-- Collapsible -->
+        <ul class="collapsible" data-collapsible="accordion">
+            <li>
+                <div class="collapsible-header">
+                    <i class="material-icons">filter_drama</i>First
+                </div>
+                <div class="collapsible-body">
+                    <span>Lorem ipsum dolor sit amet consectetur adipisicing elit. Doloremque, minima.</span>
+                </div>
+            </li>
+            <li>
+                <div class="collapsible-header">
+                    <i class="material-icons">filter_drama</i>Second
+                </div>
+                <div class="collapsible-body">
+                    <span>Lorem ipsum dolor sit amet consectetur adipisicing elit. Doloremque, minima.</span>
+                </div>
+            </li>
+            <li>
+                <div class="collapsible-header">
+                    <i class="material-icons">filter_drama</i>Third
+                </div>
+                <div class="collapsible-body">
+                    <span>Lorem ipsum dolor sit amet consectetur adipisicing elit. Doloremque, minima.</span>
+                </div>
+            </li>
+        </ul>
+        <!-- Toasts -->
+        <a onclick="Materialize.toast('Post Saved', 5000)" class="btn">Toast!</a>
+        <!-- Tooltip -->
+        <a href="" class="btn tooltipped" data-position="top" data-tooltip="I am a tooltip">Hover Me</a>
+        <a href="" class="btn tooltipped" data-position="bottom" data-tooltip="I am a tooltip">Hover Me</a>
+        <a href="" class="btn tooltipped" data-position="left" data-tooltip="I am a tooltip" data-delay="1000">Hover Me</a>
+        <a href="" class="btn tooltipped" data-position="right" data-tooltip="I am a tooltip">Hover Me</a>
+
+        <!-- Dropdown -->
+        <div class="dropdown-button btn" data-activates="dropdown1">Dropdown</div>
+        <ul id="dropdown1" class="dropdown-content">
+            <li>
+                <a href="#!">One</a>
+            </li>
+            <li>
+                <a href="#!">Two</a>
+            </li>
+            <li class="divider"></li>
+            <li>
+                <a href="#!">Three</a>
+            </li>
+            <li>
+                <a href="#!">
+                    <i class="material-icons">view_module</i>
+                </a>
+            </li>
+            <li>
+                <a href="#!">
+                    <i class="material-icons">cloud</i>
+                </a>
+            </li>
+        </ul>
+
+        <!-- Material Boxed -->
+        <img src="download.jpg" alt="" class="materialboxed" data-caption="Image Caption">
+
+        <!-- Slider -->
+        <div class="slider">
+            <ul class="slides">
+                <li>
+                    <img src="download.jpg" alt="">
+                    <div class="caption center-align">
+                        <h3>This is our tagline</h3>
+                        <h5 class="light grey-text text-lighten-3"></h5>
+                    </div>
+                </li>
+                <li>
+                    <img src="download.jpg" alt="">
+                    <div class="caption left-align">
+                        <h3>This is our tagline</h3>
+                        <h5 class="light grey-text text-lighten-3"></h5>
+                    </div>
+                </li>
+                <li>
+                    <img src="download.jpg" alt="">
+                    <div class="caption right-align">
+                        <h3>This is our tagline</h3>
+                        <h5 class="light grey-text text-lighten-3"></h5>
+                    </div>
+                </li>
+                <li>
+                    <img src="download.jpg" alt="">
+                    <div class="caption center-align">
+                        <h3>This is our tagline</h3>
+                        <h5 class="light grey-text text-lighten-3"></h5>
+                    </div>
+                </li>
+            </ul>
+        </div>
+
+        <!-- Modal -->
+        <h1>Modal</h1>
+        <a href="#modal1" class="btn waves-effect modal-trigger">Modal 1</a>
+
+        <div id="modal1" class="modal">
+            <div class="modal-content">
+                <h4>Modal Header</h4>
+                <p>Lorem ipsum dolor, sit amet consectetur adipisicing elit. Tenetur itaque natus quae.</p> 
+            </div>
+            <div class="modal-footer">
+                <a href="#!" class="modal-close waves-effect waves-green btn-flat">Agree</a>
+            </div>
+        </div>
+
+        <!-- Sidenav -->
+        <ul id="slide-out" class="side-nav">
+            <li>
+                <a href="">
+                    <i class="material-icons">cloud</i>
+                    <span>Link 1</span>
+                </a>
+            </li>
+            <li>
+                <a href="">
+                    <i class="material-icons">cloud</i>
+                    <span>Link 2</span>
+                </a>
+            </li>
+            <div class="divider"></div>
+            <li>
+                <a href="">
+                    <i class="material-icons">cloud</i>
+                    <span>Link 3</span>
+                </a>
+            </li>
+            <li>
+                <a href="" class="subheader">Subheader</a>
+            </li>
+            <li>
+                <a href="">
+                    <i class="material-icons">cloud</i>
+                    <span>Link 4</span>
+                </a>
+            </li>
+        </ul>
+        <a href="" data-activates="slide-out" class="button-collapse">
+            <i class="material-icons">menu</i>
+        </a>
+
+        <!-- Tabs -->
+        <div class="row">
+            <div class="col s12">
+                <ul class="tabs">
+                    <li class="tab s3">
+                        <a href="#test1">Test 1</a>
+                    </li>
+                    <li class="tab s3">
+                        <a href="#test2" class="active">Test 2</a>
+                    </li>
+                    <li class="tab s3">
+                        <a href="#test3">Test 3</a>
+                    </li>
+                </ul>
+            </div>
+            <div id="test1" class="col s12">
+                Test 1
+            </div>
+            <div id="test2" class="col s12">
+                Test 2
+            </div>
+            <div id="test3" class="col s12">
+                Test 3
+            </div>
+        </div>
+        
+        <!-- Tap Target -->
+        <div class="fixed-action-btn" style="bottom:45px; right:24px;">
+            <a id="menu" class="waves-effect waves-light btn btn-floating btn-large cyan" onclick="$('.tap-target').tapTarget('open')">
+                <i class="material-icons">menu</i>
+            </a>
+        </div>
+        <div class="tap-target cyan" data-activates="menu">
+            <div class="tap-target-content white-text">
+                <h5>Tap Target Content</h5>
+                <p class="white-text">Lorem ipsum dolor, sit amet consectetur adipisicing elit. Quis, eligendi. Molestias, eum.</p>
+            </div>
+        </div>
+        <div style="height:500px"></div>
+    </div>
+    <script src="./node_modules/hammerjs/hammer.js"></script>
+    <script src="./node_modules/jquery/dist/jquery.js"></script>
+    <script src="./node_modules/materialize-css/dist/js/materialize.js"></script>
+    <script>
+        $(document).ready(function(){
+            $(".carousel").carousel();
+            $(".slider").slider();
+            $(".modal").modal();
+            $(".button-collapse").sideNav();
+        }); 
+    </script>
+</body>
+</html>

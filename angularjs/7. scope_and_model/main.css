@@ -1,0 +1,39 @@
+.transition-repeat{
+    transition: all linear 1s;
+}
+
+.transtition-repeat.ng-move,
+.transition-repeat.ng-enter,
+.transition-repeat.ng-leave.ng-leave-active{
+    opacity: 0;
+}
+
+.transition-repeat.ng-leave,
+.transtition-repeat.ng-move-active,
+.transition-repeat.ng-enter.ng-enter-active{
+    opacity: 1;
+}
+
+.css-animation.ng-move, .css-animation.ng-leave{
+    animation: css-animation-move-leave linear 1s;
+}
+
+.css-animation.ng-move-active, .css-animation.ng-enter{
+    animation: css-animation-move-enter linear 1s;
+}
+
+@keyframes css-animation-move-enter{
+    0%{
+        opacity: 0;
+    }100%{
+        opacity: 1;
+    }
+}
+
+@keyframes css-animation-move-leave{
+    0%{
+        opacity: 1;
+    }100%{
+        opacity: 0;
+    }
+}

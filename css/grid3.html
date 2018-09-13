@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <title>Grid Practice 3</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <style>
+        .wrapper > div{
+            background-color: #eee;
+        }
+
+        .wrapper > div:nth-child(odd){
+            background-color: #ddd;
+        }
+
+        .wrapper{
+            display: grid;
+            grid-template-columns: 1fr 2fr 1fr;
+            grid-auto-rows: minmax(100px, auto);
+            grid-gap: 1em;
+            /* justify-items: stretch; */
+            /* justify-items: start; */
+            /* justify-items: center; */
+            /* justify-items: end; */
+            /* align-items: stretch; */
+            /* align-items: start; */
+            /* align-items: center; */
+            /* align-items: end; */ 
+        }
+    </style>
+</head>
+<body>
+    <div class = 'wrapper'>
+        <div>
+            Lorem ipsum dolor sit.
+        </div>
+        <div>
+            Lorem ipsum dolor sit.
+        </div>
+        <div>
+            Lorem ipsum dolor sit.
+        </div>
+        <div>
+            Lorem ipsum dolor sit.
+        </div>
+        <div>
+            Lorem ipsum dolor sit.
+        </div>
+        <div>
+            Lorem ipsum dolor sit.
+        </div>
+    </div>
+</body>
+</html>

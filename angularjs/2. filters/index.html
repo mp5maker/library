@@ -1,0 +1,155 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <title>Angular JS Filters</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="stylesheet" type="text/css" media="screen" href="/libraries/angularjs/node_modules/font-awesome/css/font-awesome.min.css"/>
+    <link rel="stylesheet" type="text/css" media="screen" href="/libraries/angularjs/node_modules/bootstrap/dist/css/bootstrap.min.css"/>
+    <script src="/libraries/angularjs/node_modules/jquery/jquery.min.js"></script>
+    <script src="/libraries/angularjs/node_modules/popper/dist/umd/popper.min.js"></script>
+    <script src="/libraries/angularjs/node_modules/bootstrap/dist/js/bootstrap.min.js"></script>
+    <script src="/libraries/angularjs/node_modules/angular/angular.min.js"></script>
+    <script src="/libraries/angularjs/node_modules/angular-route/angular-route.min.js"></script>
+    <script src="main.js"></script>
+</head>
+<body ng-app = 'myApp'>
+    <div class="container" ng-controller = 'mainCtrl'>
+        <div class="row my-3" class = 'testing-uppercase'>
+            <!-- Uppercase Filter -->
+            <div class="col">
+                <p class = 'lead'>Uppercase</p>
+                <p>{{ data.text | uppercase}}</p>
+                <p>{{ data.nums | uppercase}}</p>
+                <p>{{ data.specialChars | uppercase}}</p>
+                <p>_{{ data.whitespace | uppercase}}_</p>
+            </div>
+
+            <!-- Lowercase Filter -->
+            <div class="col">
+                <p class = 'lead'>Lowercase</p>
+                <p>{{ data.text | lowercase}}</p>
+                <p>{{ data.nums | lowercase}}</p>
+                <p>{{ data.specialChars | lowercase}}</p>
+                <p>_{{ data.whitespace | lowercase}}_</p>
+            </div>
+
+            <!-- Number Filter -->
+            <div class="col">
+                <p class = 'lead'>Number</p>
+                <p>{{ numbers.bignum | number}}</p>
+                <p>{{ numbers.num | number}}</p>
+                <p>{{ numbers.smallnum | number}}</p>
+                <p>{{ numbers.tinynum | number}}</p>
+            </div>
+
+            <!-- Number Fraction Filter -->
+            <div class="col">
+                <p class = 'lead'>Number Fraction</p>
+                <p>{{ numbers.bignum | number: 4}}</p>
+                <p>{{ numbers.num | number: 7}}</p>
+                <p>{{ numbers.smallnum | number: 7}}</p>
+                <p>{{ numbers.tinynum | number: 2}}</p>
+            </div>
+        </div>
+
+        <div class="row my-3" class = 'testing-currency'>
+            <!-- Currency Filter -->
+            <div class = 'col'>
+                <p class = 'lead'>Curreny</p>
+                <p>{{1234.234 | currency}}</p>
+                <p>{{0.02 | currency}}</p>
+                <p>{{4312.02 | currency: "TK "}}</p>
+            </div>
+            
+            <!-- Date Filter -->
+            <div class = 'col'>
+                <p class = 'lead'>Date</p>
+                <p>{{date.unix | date}}</p>
+                <p>{{date.iso | date}}</p>
+                <p>{{date.normal | date}}</p>
+            </div>
+            
+            
+            <!-- Date Filter Parameters -->
+            <div class = 'col'>
+                <p class = 'lead'>Date</p>
+                <p>{{date.unix | date: "EEEE 'at' H:mma"}}</p>
+                <p>{{date.iso | date: "longDate"}}</p>
+                <p>{{date.normal | date: "M/d H:m:s.sss"}}</p>
+            </div>
+
+            <!-- Useful for debugging pretty url -->
+            <div class="row my-3" class = 'testing-debugging'>
+                <div class="col">
+                    <div class="lead">Debugging</div>
+                    <pre>{{user | json}}</pre>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Using Filters outside the template -->
+    <div class="container" ng-controller = 'filtersCtrl'>
+        <!-- Filters using javascript -->
+        <div class="row">
+            <div class="col">
+                <div class = 'lead'>Outside Filters</div>
+                <span>{{filteredVal}}</span>
+            </div>
+
+            <!-- Search Filters -->
+            <div class="col">
+                <div class = 'lead'>Search Filters</div>
+                <div class="input-group">
+                    <span class = "input-group-text">
+                        <i class = 'fa fa-user'></i>
+                    </span>
+                    <input type = 'text' ng-model = 'searchuser'/>
+                </div>
+                <p ng-repeat = "user in users | filter: searchuser | limitTo: 3">
+                    <span class = 'lead'>{{user}}</span>
+                </p>
+            </div>
+
+            <!-- Custom Data Filter -->
+            <div class = 'col'>
+                <div class="lead">Custom Data Filter</div>
+                <filter-directive data = 'randomText'></filter-directive>
+            </div>
+
+            <!-- Translations -->
+            <div class="col">
+                <div class="lead">Language Filter</div>
+                <span>{{ 'HELLO' | translate}}</span>
+            </div>
+        </div>
+
+        <div class="container" ng-controller = 'customCtrl'>
+            <div class="row">
+                <div class="col">
+                    <div class="lead">Custom Search Filters</div>
+                    <div class="input-group">
+                        <span class = 'input-group-text'>
+                            Everything 
+                        </span>
+                        <!-- Search every properties of a object  -->
+                        <input ng-model = "search.$" class = 'form-control' required/>
+                    </div>
+                    <div class="input-group">
+                        <span class = 'input-group-text'>
+                            Number
+                        </span> 
+                        <input ng-model = "search.number" class = 'form-control' required/>
+                    </div>
+                    <!-- Over here the true specifices that the match needs to be exact -->
+                    <p ng-repeat = 'user in users | filter : search:true'>
+                        {{user.firstname}} {{user.lastname}}
+                    </p>
+                </div>
+            </div>
+        </div>
+    </div>
+</body>
+</html>

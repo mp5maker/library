@@ -1,0 +1,14 @@
+angular.element(document).ready(function () {
+    angular.bootstrap(document, ['myApp']);
+});
+
+var app = angular.module('myApp', []);
+
+app.controller('mainCtrl', function ($scope) {
+
+    //Dumping Random Models
+    $scope.employers = ["Photon Khan", "Ashique Khanna", "Rizwan Manna"];
+    $scope.players = ["Shariar Zaman", "Manna Dey", "Whoopy Mastadon"];
+    console.log(angular.element(document).scope());
+});
+

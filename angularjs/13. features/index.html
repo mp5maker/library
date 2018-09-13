@@ -1,0 +1,192 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <title>Page Title</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="stylesheet" type="text/css" media="screen" href="/libraries/angularjs/node_modules/font-awesome/css/font-awesome.min.css"/>
+    <link rel="stylesheet" type="text/css" media="screen" href="/libraries/angularjs/node_modules/bootstrap/dist/css/bootstrap.min.css"/>
+    <link rel="stylesheet" href="main.css">
+    <script src="/libraries/angularjs/node_modules/jquery/jquery.min.js"></script>
+    <script src="/libraries/angularjs/node_modules/popper/dist/umd/popper.min.js"></script>
+    <script src="/libraries/angularjs/node_modules/bootstrap/dist/js/bootstrap.min.js"></script>
+    <script src="/libraries/angularjs/node_modules/angular/angular.min.js"></script>
+    <script src="/libraries/angularjs/node_modules/angular-route/angular-route.min.js"></script>
+    <script src="/libraries/angularjs/node_modules/angular-animate/angular-animate.min.js"></script>
+    <script src="/libraries/angularjs/node_modules/angular-resource/angular-resource.min.js"></script>
+    <script src="/libraries/angularjs/node_modules/angular-ui-router/release/angular-ui-router.min.js"></script>
+    <script src="/libraries/angularjs/node_modules/angular-messages/angular-messages.min.js"></script>
+    <script src="main.js"></script>
+</head>
+<body ng-app = 'myApp'>
+    <div class="container">
+        <div class="row p-5">
+            <div class="col">
+                <div class="input-group">
+                    <span class = "input-group-text">
+                        <i class = 'fa fa-calendar'></i>
+                    </span>
+                    <input type = 'date' class = 'form-control'/>
+                </div>
+            </div>  
+            <div class="col">
+                <div class="input-group">
+                    <span class = "input-group-text">
+                        <i class = 'fa fa-calendar'></i>
+                    </span>
+                    <input type = 'datetime-local' class = 'form-control'/>
+                </div>
+            </div>  
+            <div class="col">
+                <div class="input-group">
+                    <span class = "input-group-text">
+                        <i class = 'fa fa-calendar'></i>
+                    </span>
+                    <input type = 'time' class = 'form-control'/>
+                </div>
+            </div>  
+        </div>
+        <div class="row p-5">
+            <div class="col">
+                <div class="input-group">
+                    <span class = "input-group-text">
+                        <i class = 'fa fa-calendar'></i>
+                    </span>
+                    <input type = 'week' class = 'form-control'/>
+                </div>
+            </div>  
+            <div class="col">
+                <div class="input-group">
+                    <span class = "input-group-text">
+                        <i class = 'fa fa-calendar'></i>
+                    </span>
+                    <input type = 'month' class = 'form-control'/>
+                </div>
+            </div>  
+        </div>
+    </div>
+    <!-- Ng-Strict-Di doesn't allow any kind of minificatoin of the file -->
+    <!-- <div class="container" ng-controller = 'mainCtrl' ng-strict-di> -->
+    <div class="container" ng-controller = 'mainCtrl'>
+        <div class="row p-5">
+            <div class="col">
+                <button type = 'button' class = 'btn btn-success' ng-click = 'clickOne()'>Click Me 1</button>
+                <button type = 'button' class = 'btn btn-primary' ng-click = 'clickTwo()'>Click Me 2</button>
+                <p class = 'text-success'>
+                    {{alert}}
+                </p>
+            </div>
+            <!-- Update on -->
+            <div class="col">
+                <form name = 'practice'>
+                    <pre>
+                        {{practice.fullname.$error | json}}
+                    </pre>
+                    <div class="input-group">
+                        <span class = 'input-group-text'>
+                            <i class = 'fa fa-user'></i>
+                        </span>
+                        <input type = 'text' ng-model = 'fullname' name = 'fullname' 
+                               ng-model-options = "{UpdateOn: 'blur click mousemove', debounce: {'blur': 500, 'click': 300, 'mousemove': 0}}" 
+                               class = 'form-control' min-length = '2' ng-pattern = '/^[A-Za-z]+$/' required/>
+                    </div>
+                    <div class="my-3">
+                        <ng-messages for = "practice.fullname.$error">
+                            <div>
+                                <ng-message when="required">
+                                    Your name is required
+                                </ng-message>
+                            </div>
+                            <div>
+                                <ng-message when="minlength">
+                                    Minimum length should be four
+                                </ng-message>
+                            </div>
+                            <div>
+                                <ng-message when="pattern">
+                                    It cannot have any numbers
+                                </ng-message>
+                            </div>
+                        </ng-messages>
+                    </div>
+
+                    <!-- Including the template -->
+                    <div class="my-3">
+                        <div ng-messages = "practice.fullname.$error">
+                            <div ng-include="error-messages.html"></div>
+                        </div>
+                    </div>
+
+                    <div class = 'my-3'>
+                        <!-- <button type = 'reset' class = 'btn btn-success' ng-click = 'cancel()'> -->
+                        <button type = 'reset' class = 'btn btn-danger' ng-click = 'practice.fullname.$rollbackViewValue()'>
+                            Reset
+                        </button>
+                    </div>
+                    <div class = 'my-3'>
+                        <button type = 'submit' class = 'btn btn-success'>
+                            Submit
+                        </button>
+                    </div>
+                </form>
+                <div class="cotainer">
+                    <div class="row">
+                        <div class="col">
+                            <div class = 'my-3'>
+                                {{fullname}}
+                            </div>
+                            <div class="my-3" ng-if='practice.$submitted'>
+                                You have submitted the form
+                            </div>
+                            <div class="my-3 text-danger" ng-if='practice.fullname.$touched && practice.fullname.$invalid'>
+                                Invalid Username
+                            </div>
+                            <div class="my-3 text-success" ng-if='practice.fullname.$touched && practice.fullname.$valid'>
+                                <i class = 'fa fa-check'></i>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="container">
+            <div class="row my-3">
+                <div class="col">
+                    <h4>Alternative to Curly Braces Model</h4>
+                    <div ng-bind = 'players'></div>
+                    <div ng-bind = 'employer'></div>
+                </div>
+            </div>
+        </div>
+        <div class="container">
+            <div class="row">
+                <div class="col">
+                    <comment> Alternative Way to comment! </comment>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="container">
+        <div class="row">
+            <div class="col">
+                <p>Asynchronous Validators have three states now Valid, Invalid, Pending</p>
+                <p>
+                    $scope.formname.field.$pending, $scope.formname.field.$valid, $scope.formname.field.$invalid
+                </p>
+            </div>
+        </div>
+    </div>
+    <script type = 'text/ng-template' id = 'error-messages.html'>
+        <div ng-message = "required" class = 'text-danger'>
+            Name is required
+        </div>
+        <div ng-message = "pattern" class = 'text-danger'>
+            It cannot container numbers
+        </div>
+        <div ng-message = "minlength" class = 'text-danger'>
+            It needs to be at least 4 letters
+        </div>
+    </script>
+</body>
+</html>

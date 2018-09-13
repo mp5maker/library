@@ -1,0 +1,317 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <title>Angular Js Animation</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="stylesheet" type="text/css" media="screen" href="/libraries/angularjs/node_modules/font-awesome/css/font-awesome.min.css"/>
+    <link rel="stylesheet" type="text/css" media="screen" href="/libraries/angularjs/node_modules/bootstrap/dist/css/bootstrap.min.css"/>
+    <link rel="stylesheet" href="main.css">
+    <script src="/libraries/angularjs/node_modules/jquery/jquery.min.js"></script>
+    <script src="/libraries/angularjs/node_modules/popper/dist/umd/popper.min.js"></script>
+    <script src="/libraries/angularjs/node_modules/bootstrap/dist/js/bootstrap.min.js"></script>
+    <script src="/libraries/angularjs/node_modules/angular/angular.min.js"></script>
+    <script src="/libraries/angularjs/node_modules/angular-route/angular-route.min.js"></script>
+    <script src="/libraries/angularjs/node_modules/angular-animate/angular-animate.min.js"></script>
+    <script src="main.js"></script>
+</head>
+<body ng-app = 'myApp'>
+    <div class="container" ng-controller = 'animationCtrl'>
+        <div class="row my-3">
+            <div class="col">
+                <div class="lead">
+                    <strong>Animation CSS</strong>
+                </div>
+                <!-- Hide and Show [CSS Transition/ngHide] -->
+                <div class = 'my-3'>
+                    <button class = 'btn btn-danger' type = 'button' ng-click = 'hideBox = !hideBox'>
+                        Hide/Show
+                    </button>
+                </div>
+                <div class="container magic-color hide-show" ng-hide = 'hideBox'>
+                    <div class="row">
+                        <div class="col text-light">
+                            <h1>Hide/Show</h1>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="row my-3">
+            <div class="col">
+                <!-- Slide Up & Down [CSS Transition/ngHide] -->
+                <div class="my-3">
+                    <button class = 'btn btn-success' type = 'button' ng-click = "slideBox =! slideBox">
+                        Slide Up/Down
+                    </button>
+                </div>
+                <div class="container slide-up-down magic-color" ng-hide = 'slideBox'>
+                    <div class="row">
+                        <div class="col text-white">
+                            <h1>Slide Up/Down</h1>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="row my-3">
+            <div class="col">
+                <!-- Show [CSS Transition/ngIf/Enter Event] -->
+                <div class="my-3">
+                    <button class = 'btn btn-primary' type = 'button' ng-click = 'enterBox =! enterBox'>
+                        Show Animate
+                    </button>
+                </div>
+                <div class="container show magic-color" ng-if = 'enterBox'>
+                    <div class="row">
+                        <div class="col text-white">
+                            <h1>Show Animate</h1>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Enter Event [Javascript Animation] -->
+        <div class="row my-3">
+            <div class="col">
+                <div class="my-3">
+                    <button class = 'btn btn-primary' type = 'button' ng-click = 'jsBox =! jsBox'>
+                        JavaScript Animation
+                    </button>
+                </div>
+                <div class="container js-animation magic-color" ng-if = 'jsBox'>
+                    <div class="row">
+                        <div class="col text-white">
+                            <h1>JavaScript Animation</h1>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Fade In [CSS Transition/Enter Event/Leave Event] -->
+        <div class="row my-3">
+            <div class="col">
+                <nav class="navbar navbar-expand-sm navbar-dark bg-dark">
+                    <ul class = 'navbar-nav'>
+                        <li class = 'nav-item'>
+                            <a href = '#!home' class = 'nav-link'>Home</a>                                    
+                        </li>
+                        <li class = 'nav-item'>
+                            <a href = '#!contact' class = 'nav-link'>Contact</a>                                    
+                        </li>
+                    </ul>
+                </nav>
+                <div ng-view class = 'view-transition-container'></div>
+            </div>
+        </div>
+
+        <!-- Fade In [CSS Animation/Enter Event/Levae Event] -->
+        <div class="row my-3">
+            <div class="col">
+                <nav class="navbar navbar-expand-sm navbar-dark bg-dark">
+                    <ul class = 'navbar-nav'>
+                        <li class = 'nav-item'>
+                            <a href = '#!home' class = 'nav-link'>Home</a>                                    
+                        </li>
+                        <li class = 'nav-item'>
+                            <a href = '#!contact' class = 'nav-link'>Contact</a>                                    
+                        </li>
+                    </ul>
+                </nav>
+                <div ng-view class = 'view-animation-container'></div>
+            </div>
+        </div>
+
+        <!-- Fade In [Javascript Animation/Enter Event/Levae Event] -->
+        <div class="row my-3">
+            <div class="col">
+                <nav class="navbar navbar-expand-sm navbar-dark bg-dark">
+                    <ul class = 'navbar-nav'>
+                        <li class = 'nav-item'>
+                            <a href = '#!home' class = 'nav-link'>Home</a>                                    
+                        </li>
+                        <li class = 'nav-item'>
+                            <a href = '#!contact' class = 'nav-link'>Contact</a>                                    
+                        </li>
+                    </ul>
+                </nav>
+                <div ng-view class = 'view-js-animation-container'></div>
+            </div>
+        </div>
+
+        <!-- Few Fake HTML locations Needed for few examples -->
+        <script type = 'text/ng-template' id = 'home.html'>
+            <div class="container">
+                <div class="row">
+                    <div class="col">
+                        <div class="lead">
+                            Home Page
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </script>
+        <script type = 'text/ng-template' id = 'contact.html'>
+            <div class="container">
+                <div class="row">
+                    <div class="col">
+                        <div class="lead">
+                            Contact Page
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </script>
+
+        <!-- Fade In/Out [CSS Transition/Enter Event/Leave Event/ng-repeat] -->
+        <div class="row my-3">
+            <div class="col">
+                <div class="input-group my-3">
+                    <span class = 'input-group-text'>
+                        <i class = 'fa fa-address-book'></i>
+                    </span>
+                    <input type = 'text' ng-model = 'reorganize.transition' class = 'form-control'/>
+                </div>
+                <ul class = 'list-group'>
+                    <li ng-repeat = 'item in items | filter: reorganize.transition' class = 'list-group-item repeat-transition'>
+                        {{item}}
+                    </li>
+                </ul>
+            </div>
+        </div>
+
+        <!-- Fade In/Out [CSS Animation/Enter Event/Leave Event/ng-repeat] -->
+        <div class="row my-3">
+            <div class="col">
+                <div class="input-group my-3">
+                    <span class = 'input-group-text'>
+                        <i class = 'fa fa-address-book'></i>
+                    </span>
+                    <input type = 'text' ng-model = 'reorganize.animation' class = 'form-control'/>
+                </div>
+                <ul class = 'list-group'>
+                    <li ng-repeat = 'item in items | filter: reorganize.animation' class = 'list-group-item repeat-animation'>
+                        {{item}}
+                    </li>
+                </ul>
+            </div>
+        </div>
+
+        <!-- Fade In/Out [Javascript Animation/Enter Event/Leave Event/ng-repeat] -->
+        <div class="row my-3">
+            <div class="col">
+                <div class="input-group my-3">
+                    <span class = 'input-group-text'>
+                        <i class = 'fa fa-address-book'></i>
+                    </span>
+                    <input type = 'text' ng-model = 'reorganize.js.animation' class = 'form-control'/>
+                </div>
+                <ul class = 'list-group'>
+                    <li ng-repeat = 'item in items | filter: reorganize.js.animation' class = 'list-group-item repeat-js-animation'>
+                        {{item}}
+                    </li>
+                </ul>
+            </div>
+        </div>
+
+        <!-- Fade In/Out [CSS Transition/ng-show] -->
+        <div class="row my-3">
+            <div class="col">
+                <button class = 'btn btn-secondary' ng-click = 'ngshowtoggle =! ngshowtoggle'>
+                    Angular Show Toggle
+                </button>
+                <div class="container magic-color show-transition-container my-3" ng-show = 'ngshowtoggle'>
+                    <div class="row">
+                        <div class = 'text-light'>
+                            <h1>Angular Show Toggle</h1>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Fade In/Out [CSS Animation/ng-show] -->
+        <div class="row my-3">
+            <div class="col">
+                <button class = 'btn btn-secondary' ng-click = 'ngshowtoggle2 =! ngshowtoggle2'>
+                    Angular Show Toggle
+                </button>
+                <div class="container magic-color show-animation-container my-3" ng-show = 'ngshowtoggle2'>
+                    <div class="row">
+                        <div class = 'text-light'>
+                            <h1>Angular Show Toggle</h1>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Fade In/Out [Javascript Animation/ng-show] -->
+        <div class="row my-3">
+            <div class="col">
+                <button class = 'btn btn-secondary' ng-click = 'ngshowtoggle3 =! ngshowtoggle3'>
+                    Angular Show Toggle
+                </button>
+                <div class="container magic-color show-js-animation-container my-3" ng-show = 'ngshowtoggle3'>
+                    <div class="row">
+                        <div class = 'text-light'>
+                            <h1>Angular Show Toggle</h1>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        
+        <!-- Slide In/Out [CSS Transition/ng-class] -->
+        <div class="row my-3">
+            <div class="col">
+                <button class = 'btn btn-info' ng-click = 'ngclasstoggle =! ngclasstoggle'>
+                    Angular Slide In/Out
+                </button>
+                <div class="container my-3">
+                    <div class="row">
+                        <div class="col text-dark" ng-class = "{blackout: ngclasstoggle}">
+                            <h1>Angular Slide In/Out</h1>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Slide In/Out [CSS Animation/ng-class] -->
+        <div class="row my-3">
+            <div class="col">
+                <button class = 'btn btn-info' ng-click = 'ngclasstoggle2 =! ngclasstoggle2'>
+                    Angular Slide In/Out
+                </button>
+                <div class="container my-3">
+                    <div class="row">
+                        <div class="col text-dark" ng-class = "{blackout2: ngclasstoggle2}">
+                            <h1>Angular Slide In/Out</h1>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Slide In/Out [Javascript Animation/ng-class] -->
+        <div class="row my-3">
+            <div class="col">
+                <button class = 'btn btn-info' ng-click = 'ngclasstoggle3 =! ngclasstoggle3'>
+                    Angular Slide In/Out
+                </button>
+                <div class="container my-3">
+                    <div class="row">
+                        <div class="col text-dark" ng-class = "{blackout3: ngclasstoggle3}">
+                            <h1>Angular Slide In/Out</h1>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</body>
+</html>

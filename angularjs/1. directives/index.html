@@ -1,0 +1,117 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <title>Directives</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="stylesheet" type="text/css" media="screen" href="/libraries/angularjs/node_modules/font-awesome/css/font-awesome.min.css" />
+    <link rel="stylesheet" type="text/css" media="screen" href="/libraries/angularjs/node_modules/bootstrap/dist/css/bootstrap.min.css" />
+    <script src="/libraries/angularjs/node_modules/jquery/jquery.min.js"></script>
+    <script src="/libraries/angularjs/node_modules/popper/dist/umd/popper.min.js"></script>
+    <script src="/libraries/angularjs/node_modules/bootstrap/dist/js/bootstrap.min.js"></script>
+    <script src="/libraries/angularjs/node_modules/angular/angular.min.js"></script>
+    <script src="/libraries/angularjs/node_modules/angular-route/angular-route.min.js"></script>
+    <script src="main.js"></script>
+</head>
+<body ng-app = 'myApp'>
+    <!-- Basic Directives Understanding -->
+    <div class="container">
+        <div class="row">
+            <div class="col">
+                <!-- Elements -->
+                <content-directive></content-directive>
+            
+                <!-- Attribute -->
+                <div content-directive></div>
+            
+                <!-- Class -->
+                <div class = 'content-directive'></div>
+            
+                <!-- Comment -->
+                <!-- directive: content-directive -->
+            </div>
+        </div>
+    </div>
+
+    <!-- Isolated Scopes Concepts -->
+    <div class="container my-3" ng-controller = "isolatedCtrl">
+        <div class="row">
+            <div class="col">
+                <!-- Without Two Way -->
+                <div class = 'ml-3'>
+                    <span class = 'lead'>
+                        Value from Controller: {{name}}
+                    </span>
+                </div>
+                <isolated-directive get-name = "{{name}}"></isolated-directive>
+
+                <!-- Two Way -->
+                <div class = 'ml-3'>
+                    <span class = 'lead'>
+                        Value from Controller: {{name}}
+                    </span>
+                </div>
+                <isolated-binding-directive get-name ="name"></isolated-binding-directive>
+
+                <!-- Pass Function Too  -->
+                <div>
+                    <isolated-function calculate = "rectangle(width, height)"></isolated-function>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Nested Directives [Interaction between controllers] -->
+    <div class="container my-3">
+        <div class="row">
+            <div class="col">
+                <parent-directive>
+                    <child-directive sibling-directive></child-directive>
+                </parent-directive>
+            </div>
+        </div>
+    </div>
+
+    <!-- Directive Templating -->
+    <div class="container my-3" ng-controller = 'directiveCtrl'>
+        <div class="row">
+            <div class="col">
+                <template-directive></template-directive>
+            </div>
+        </div>
+    </div>
+
+    <script type = 'text/ng-template' id = 'template-directive.html'>
+        <div>
+            <p>Directive Template</p>
+            <p>Scope from {{origin}}</p>
+            <p>Overwritter? {{overwrite}}</p>
+        </div>
+    </script>
+
+    <!-- Directive Transclusion -->
+    <div class="container my-3">
+        <div class="row">
+            <div class="col">
+                <dad-directive>
+                    <kid-directive></kid-directive>
+                </dad-directive>
+            </div>
+        </div>
+    </div>
+
+    <!-- Template Cache -->
+    <div class="container my-3">
+        <div class="row">
+            <div class="col">
+                <cache-directive></cache-directive>
+            </div>
+        </div>
+    </div>
+
+    <script type = 'text/ng-template' id = 'cache-directive.html'>
+        <p> This is the content of the template </p>
+    </script>
+</body>
+</html>

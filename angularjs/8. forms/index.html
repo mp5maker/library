@@ -1,0 +1,128 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <title>Page Title</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="stylesheet" type="text/css" media="screen" href="/libraries/angularjs/node_modules/font-awesome/css/font-awesome.min.css"/>
+    <link rel="stylesheet" type="text/css" media="screen" href="/libraries/angularjs/node_modules/bootstrap/dist/css/bootstrap.min.css"/>
+    <link rel="stylesheet" href="main.css">
+    <script src="/libraries/angularjs/node_modules/jquery/jquery.min.js"></script>
+    <script src="/libraries/angularjs/node_modules/popper/dist/umd/popper.min.js"></script>
+    <script src="/libraries/angularjs/node_modules/bootstrap/dist/js/bootstrap.min.js"></script>
+    <script src="/libraries/angularjs/node_modules/angular/angular.min.js"></script>
+    <script src="/libraries/angularjs/node_modules/angular-route/angular-route.min.js"></script>
+    <script src="/libraries/angularjs/node_modules/angular-animate/angular-animate.min.js"></script>
+    <script src="main.js"></script>
+</head>
+<body>
+    <div class="container my-3" ng-controller = 'formCtrl'>
+        <div class="row">
+            <div class="col">
+                <form name = 'exampleform' novalidate>
+                    <h3>
+                        <label for = 'heading'>Example Form</label>
+                    </h3>
+                    <div class="input-group">
+                        <span class = 'input-group-text'>
+                            <i class = 'fa fa-user'></i>
+                        </span>
+                        <input type = 'text' name = 'fullname' ng-model = 'formdata.fullname' class = 'form-control' required/>
+                    </div>
+                    <div>
+                        <code ng-show = 'isPristine'>Enter a value!</code>
+                    </div>
+                    <div>
+                        <code ng-show = 'isInvalid'>Field cannot be empty!</code>
+                    </div>
+                </form>
+                <form name = 'exampleform2' novalidate>
+                    <h3>
+                        <label for = 'heading'>Example Form Two</label>
+                    </h3>
+                    <div class="input-group">
+                        <span class = 'input-group-text'>
+                            <i class = 'fa fa-user'></i>
+                        </span>
+                        <input type = 'text' name = 'fullname2' ng-model = 'formdata.fullname2' class = 'form-control' required/>
+                    </div>
+                    <div>
+                        <code ng-show = 'exampleform2.fullname2.$pristine'>Enter a value!</code>
+                    </div>
+                    <div>
+                        <code ng-show = 'exampleform2.fullname2.$touched && exampleform2.fullname2.$invalid'>Field cannot be empty!</code>
+                    </div>
+                </form>
+                <form name = 'checknumber'>
+                    <h3>
+                        <label for = 'heading'>Custom Validation</label>
+                    </h3>
+                    <div class="input-group">
+                        <span class = 'input-group-text'>
+                            <i class = 'fa fa-user'></i>
+                        </span>
+                        <input type = 'text' name = 'primenumber' ng-model = 'formdata.primenumber' custom-validation class = 'form-control' required/>
+                    </div>
+                    <div ng-show = 'checknumber.primenumber.$invalid'>
+                        <p class = 'text-danger'>
+                            Number needs to be an prime number!
+                        </p>
+                    </div>
+                </form>
+                <form name = 'selection'>
+                    <h3>
+                        <label for = 'heading'>Select Varieties</label>
+                    </h3>
+                    <div class="input-group">
+                        <span class = 'input-group-text'>
+                            <i class = 'fa fa-users'></i>
+                        </span>
+                        <!-- Loop the array object(associateive array), for $key use p.name and for $value use p.id  -->
+                        <select ng-model = 'member' class = 'form-control' ng-options = "p.name for p in players track by p.id"></select>
+                        <!-- Same as above just added group by -->
+                        <select ng-model = 'member' class = 'form-control' ng-options = "p.name group by p.age for p in players track by p.id">
+                            <option value = ''>Choose a option</option>
+                        </select>
+                    </div>
+                    <div class="container">
+                        <div class="row">
+                            <div class="col">
+                                <code>{{member}}</code>
+                            </div>
+                        </div>
+                    </div>
+                </form>
+                <form name = 'loads' class = 'my-3'>
+                    <h3>
+                        <label for = 'heading'>Select Object</label>
+                    </h3>
+                    <div class="input-group">
+                        <span class = 'input-group-text'>
+                            <i class = 'fa fa-user'></i>
+                        </span>
+                        <select ng-model = 'writer' class = 'form-control' ng-options = 'b.book for (author, b) in books'></select>
+                    </div>
+                    <div class="container">
+                        <div class="row">
+                            <div class="col">
+                                <code>{{writer}}</code>
+                            </div>
+                        </div>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>    
+    <div class="container" ng-controller = 'eventBusCtrl'>
+        <div class="row">
+            <div class="col">
+                <button type = 'button' class = 'btn btn-success' ng-click = 'generateEvent()'>
+                    Generate Event
+                </button>
+            </div>
+        </div>
+        <div bus-directive></div>
+    </div>
+</body>
+</html>
