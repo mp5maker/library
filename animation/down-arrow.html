@@ -1,0 +1,81 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <title>Down Arrow</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="stylesheet" type="text/css" media="screen" href="./node_modules/bootstrap/dist/css/bootstrap.css" />
+    <link rel="stylesheet" type="text/css" media="screen" href="./node_modules/font-awesome/css/font-awesome.min.css" />
+    <script src="main.js"></script>
+</head>
+<body>
+    <div class="container">
+        <div class="row border">
+            <div class="col my-5 py-5 text-center bounce">
+                <span>
+                    <i class="fa fa-chevron-down fa-2x"></i>
+                </span>
+            </div>
+        </div>
+    </div>
+    <style>
+        .bounce {
+            animation: bounce 2s infinite ease-in-out;
+            opacity: 0.8;
+        }
+        .bounce:after {
+            position: relative;
+            content: "Auto Scroll On";
+            right: 55px; 
+            top: -30px;
+            font-size: 12px;
+            color: red;
+            animation: pulse 2s infinite linear;
+        }
+        .bounce:before {
+            position: relative;
+            content: "Turn off";
+            top: 30px;
+            right: -40px; 
+            font-size: 12px;
+            color: blue;
+        }
+
+        @keyframes bounce {
+            0%{
+                transform: translateY(0);
+            }10%{
+                transform: translateY(0);
+            }20%{
+                transform: translateY(-15px);
+            }30%{
+                transform: translateY(0);
+            }40%{
+                transform: translateY(0);
+            }50%{
+                transform: translateY(-15px);
+            }60%{
+                transform: translateY(0);
+            }70%{
+                transform: translateY(0);
+            }80%{
+                transform: translateY(-15px);
+            }90%{
+                transform: translateY(0);
+            }100%{
+                transform: translateY(0);
+            }
+        }
+        @keyframes pulse {
+            0%{
+                opacity: 1;
+            }50%{
+                opacity: 0;
+            }100%{
+                opacity: 1;
+            }
+        }
+    </style>
+</body>
+</html>
