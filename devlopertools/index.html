@@ -1,0 +1,387 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <title>Google Developer Tools Guide</title>
+    <link rel="stylesheet" type="text/css" media="screen" href="./node_modules/bootstrap/dist/css/bootstrap.css" />
+    <link rel="stylesheet" type="text/css" media="screen" href="./node_modules/font-awesome/css/font-awesome.css" />
+    <link rel="stylesheet" type="text/css" media="screen" href="main.css" />
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+</head>
+<body>
+    <div class="container">
+        <div class="row">
+            <div class="col mt-3 p-5 border">
+                <h1 class="lead text-center">
+                    <strong>
+                        Testing out the developer tools
+                    </strong>    
+                </h1>
+                <p class="text-center">
+                    <span>
+                        <kbd>CTRL + SHIFT + I</kbd>
+                        to open the developer tools, F12 also works in similar fashion
+                    </span>
+                </p>
+            </div>
+            <div class="col mt-3 p-5 border">
+                <p class="text-center mb-0">
+                     Major Looks on 
+                </p>
+                <p class="text-center">
+                    <strong>Elements, </strong>
+                    <strong>Console, </strong>
+                    <strong>Sources, </strong>
+                    <strong>Network, </strong>
+                    <strong>Application, </strong>
+                    <strong>Audits, </strong>
+                </p>
+            </div>
+            <div class="col mt-3 p-5 border">
+                <div class="text-center">
+                    <em>Responsive</em>
+                </div>
+                <div>
+                    Click on 
+                    <strong>
+                        <i class="fa fa-ellipsis-v"></i>
+                    </strong>
+                    to change the direction of the developer tool's dock
+                </div>
+                <div>
+                    Click on
+                    <strong>
+                        <i class="fa fa-tablet"></i>
+                    </strong>
+                    to show responsive designs
+                </div>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col p-5 text-center border">
+                <div>
+                    <em>Styles</em>
+                    <p class="mb-0">
+                        <strong>
+                            :hov
+                        </strong>,
+                        <strong>
+                            .class
+                        </strong>,
+                        <strong>
+                            +
+                        </strong>
+                    </p>
+                </div>
+                <div>
+                    We can also <strong> filter </strong>the classes 
+                </div>
+            </div>
+            <div class="col p-5 text-center border">
+                <em>Styles</em>
+                <div class="mb-3">
+                    Right click on the element to see other options
+                    <span>
+                        Force state to :hover, :active and many more
+                    </span>
+                </div>
+                <div>
+                    Go to the colors in css and click it, it will have
+                    a color palette,  we can use the toggle color[Eye Dropper Tool] and use
+                    copy clipboard to get the color
+                </div>
+            </div>
+            <div class="col p-5 text-center border">
+                <em>Computed</em>
+                <div>
+                    Use Up Arrow or Down Arrow to change the value of the margin, padding [Numbers Related]
+                </div>
+                <div class="mb-3">
+                    Go to computed of the styles
+                </div>
+                <div>
+                    <p class="mb-0">
+                        <span class="text-success">Green</span>
+                        means padding
+                    </p>
+                    <p>
+                        <span class="text-orange">Orange</span>
+                        means margin
+                    </p>
+                </div>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col p-5 border">
+                <div class="text-center">
+                    <em>Console Log</em>
+                </div>
+                <div class="text-center">
+                    <i class="fa fa-ban"></i>
+                    Clears the console
+                </div>
+                <p class="mb-3 text-center">
+                    <code>
+                        Press <kbd>ESC</kbd> if you want to open the console.log any where
+                    </code>
+                </p>
+                <p class="mb-3 text-center">
+                    <code>
+                        Press <kbd>CTRL + SHIFT + J</kbd> directly opens the console log
+                    </code>
+                </p>
+                <p class="mb-3 text-center">
+                    <code>
+                        Change the default levels to select info, warnings, errors
+                    </code>
+                </p>
+            </div>
+            <div class="col p-5 text-center border">
+                <div>
+                    <em>Console Log</em>
+                </div>
+                <div class="text-center">
+                    <p class="mb-0">
+                        <code>Input: 1 + 3</code>
+                    </p>
+                    <p>
+                        <code>Output: 4</code>
+                    </p>
+                </div>
+                <div class="text-center">
+                    <p class="mb-0">
+                        <code>Input: Alert(1)</code>
+                    </p>
+                    <p>
+                        <code>Output: Undefined</code>
+                    </p>
+                </div>
+                <div class="text-center">
+                    <p class="mb-0">
+                        <code>$_</code>
+                    </p>
+                    <p>
+                        <code>Output: {Last returned value from the last expression in the console}</code>
+                    </p>
+                </div>
+                <div class="text-center">
+                    <p class="mb-0">
+                        <code> $0, $1, $2 </code>
+                    </p>
+                    <p>
+                        <code>Last Element selected using the selector</code>
+                    </p>
+                </div>
+                <div class="text-center">
+                    <p class="mb-0">
+                        <code> Simple Javascript in the console </code>
+                    </p>
+                    <p>
+                        <code>document.querySelector("h1").style.color = "red"</code>
+                    </p>
+                </div>
+            </div>
+            <div class="col p-5 border">
+                <div class="text-center">
+                    <em>Console Log</em>
+                </div>
+                <div class="text-center">
+                    <p class="mb-0">
+                        <code class="text-success">
+                            console.log("Hello");
+                        </code>
+                    </p>
+                    <p class="mb-0">
+                        <code class="text-danger">
+                            console.error("This is an error");
+                        </code>
+                    </p>
+                    <p class="mb-0">
+                        <code class="text-warning">
+                            console.warn("This is a warning");
+                        </code>
+                    </p>
+                    <p class="mb-0">
+                        <code class="text-info">
+                            console.dir(document);
+                        </code>
+                    </p>
+                    <p class="mb-0">
+                        <code class="text-primary">
+                            console.log(document.URL);
+                        </code>
+                    </p>
+                    <p class="my-3">
+                        <code class="text-secondary">
+                            Object: console.table({name: "Photon Khan", age: "27", salary: "25000"});
+                        </code>
+                    </p>
+                    <p class="my-3">
+                        <code class="text-secondary">
+                            Array: console.table([{name: "Photon Khan", age: "27", salary: "25000"}]);
+                        </code>
+                    </p>
+                    <p class="mb-0">
+                        <code>
+                            console.clear()
+                        </code>
+                    </p>
+                </div>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col p-5 border">
+                <div class="text-center">
+                    <em>Console Log</em>
+                </div>
+                <div class="text-center">
+                    <p class="my-3">
+                        <code>
+                            console.group('Names');
+                                console.log("John");
+                                console.log("Mary");
+                                console.log("Will");
+                                console.log("Daniel");
+                            console.groupEnd('Names');
+                        </code>
+                    </p>
+                </div>
+            </div>
+            <div class="col p-5 border">
+                <div class="text-center">
+                    <em>Console Log</em>
+                </div>
+                <p class="my-3">
+                    <code>
+                        console.time('For Loop');
+                            console.log("John");
+                            console.log("Mary");
+                            console.log("Will");
+                            console.log("Daniel");
+                        console.timeEnd('For Loop');
+                    </code>
+                </p>
+            </div>
+            <div class="col p-5 border">
+                <div class="text-center">
+                    <em>Console Log</em>
+                </div>
+                <p class="my-3">
+                    <code>
+                        function greaterThan(x, y) {
+                            console.assert(x > y, 
+                                {
+                                    message: "X is not supposed to be greater than y", 
+                                    "x": x, 
+                                    "y": y
+                                }
+                            );
+                        }
+                        greaterThan(4, 5);
+                    </code>
+                </p>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col p-5 border">
+                <div class="text-center">
+                    <em>Sources</em>
+                </div>
+                <div class="text-center">
+                    <p class="mb-0">
+                        Sources  --> Snippets --> New Snippets
+                    </p>
+                    <p class="mb-0">
+                        Right click on the file --> Then run
+                    </p>
+                </div>
+                <div class="text-center">
+                    <p class="mb-0">
+                        Drop a folder in the workspace to live edit
+                        and use the developer tool as a text editor
+                    </p>
+                </div>
+            </div>
+            <div class="col p-5 border">
+                <div class="text-center">
+                    <em>Network</em>
+                </div>
+                <div class="text-center">
+                    <p class="mb-0">
+                        Shows all the files are loading 
+                        and gives us the loading time
+                    </p>
+                </div>
+                <div class="text-center">
+                    <p>Header, Preview, Response, Timing</p>
+                </div>
+                <div class="text-center">
+                    <p class="my-3">
+                        Live Server on the WebSocket (WS)
+                    </p>
+                </div>
+                <div class="text-center">
+                    <p class="my-3">
+                        Simple Ajax Request
+                    </p>
+                    <button id="ajax-request" type="button" class="btn btn-success">
+                        Click For XHR
+                    </button>
+                    <p id="ajax-display"></p>
+                </div>
+            </div>
+            <div class="col p-5 border">
+                <div class="text-center">
+                    <em>Application</em>
+                </div>
+                <div class="text-center">
+                    <div class="mb-0">
+                        <p class="mb-3">
+                            <strong>Local Storage</strong>
+                            <code>
+                                localStorage.setItem('name', 'John');
+                                localStorage.clear('name');
+                            </code>
+                        </p>
+                        <p class="mb-3">
+                            <strong>Session Storage</strong>
+                            <code>
+                                sessionStorage.setItem('age', '27');
+                                sessionStorage.clear('age');
+                            </code>
+                        </p>
+                        <p class="mb-0">
+                            <strong>Cookies</strong>
+                        </p>
+                        <p class="mb-3">
+                            <code>
+                                document.cookie = "username=John Doe";
+                            </code>
+                        </p>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col p-5 border">
+                <div class="text-center">
+                    <em>Audits</em>
+                    <p>
+                        Run Audit to check the standard of your website
+                    </p>
+                </div>
+            </div>
+        </div>
+        <footer class="mt-5 text-center">
+            <span>
+                2018 &copy; Photon Enterprise All Rights Reserved
+            </span>
+        </footer>
+    </div>
+    <script src="./node_modules/jquery/dist/jquery.js"></script>
+    <script src="./node_modules/popper.js/dist/umd/popper.js"></script>
+    <script src="./node_modules/bootstrap/dist/js/bootstrap.js"></script>
+    <script src="main.js"></script>
+</body>
+</html>

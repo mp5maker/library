@@ -1,0 +1,8 @@
+.text-orange {
+    color: orange;
+    opacity: 0.8;
+}
+
+.border:hover{
+    box-shadow: 0 4px 8px 0 lightgray;
+}
