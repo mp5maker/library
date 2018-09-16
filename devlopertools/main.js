@@ -42,5 +42,4 @@ localStorage.setItem('name', 'John');
 sessionStorage.setItem('age', '27');
 // sessionStorage.clear('age');
 
-document.cookie = "username=John Doe";
-document.cookie.clear();
+// document.cookie = "username=John Doe";
