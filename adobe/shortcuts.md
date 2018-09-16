@@ -31,9 +31,6 @@ Ctrl + Alt + N | Last document's created settings
     * Second Group: Adjustments and Styles
     * Third Group: Layers, channels and paths
 
-### Color and Swatches ###
-
-
 ### Elliptical Marquee Tool ##
 The marquee tools let us select rectangles, ellipses, and 1‑pixel rows and columns.
 
