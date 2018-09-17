@@ -22,6 +22,14 @@ Ctrl + N | Create a new document
 Ctrl + A | Select All
 Ctrl + C | Copy the document's content
 Ctrl + Alt + N | Last document's created settings
+Ctrl + S | Save
+Ctrl + Shift + s | Save Location
+Ctrl + 0 | Open a file
+Ctrl + + | Zoom In
+Ctrl + - | Zoom Out
+H | Hand Grab Tool
+Alt + Mouse Scroll | Zoom in/Zoom out with control
+R | Rotate Tool
 
 ## Working With Panels ##
 ### Getting Started ###
@@ -45,4 +53,28 @@ Ctrl + A, to select all
 Ctrl + C, Copy the document's content
 Ctrl + N, Automatically fills the document's setting
 Ctrl + Alt + N,  Last document created settings
+
+## Color Mode ##
+* Bitmap: Black and White
+* Grayscale: Shades of Black and White
+* RGB Color: Red, Green, Blue
+* CMYK Color: Used in printing, cyan, magenta, yellow, black
+* Lab Color: Represents all colors
+
+## Understanding Bit ##
+* Bitmap: 1-bit image
+* 8-bit: 2^8 = 256 bit image 
+* 16-bit: 2^16 = 65536 bit image
+* 32-bit: 2^32 =  High Dynamic Range
+
+## File Formats ##
+* JPEG: Compresses Images and takes up less space and used for graphics
+* GIF: Popular choice of graphics but include limited number of colors
+* PNG: Better Quality than JPEG but takes up more space
+
+## Raster Images ##
+* They are made from pixels, tiny blocks of color
+
+## Vector Images ##
+* They are made of points and paths and can easily be easily be big and small
 
