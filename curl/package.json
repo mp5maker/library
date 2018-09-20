@@ -3,7 +3,9 @@
   "version": "1.0.0",
   "description": "",
   "main": "index.js",
-  "scripts": {},
+  "scripts": {
+    "dev:server": "json-server --watch db.json"
+  },
   "keywords": [],
   "author": "",
   "license": "ISC"
