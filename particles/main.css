@@ -1,0 +1,15 @@
+body, html {
+    height: 100%;
+    margin: 0;
+    padding: 0;
+}
+
+
+#particles-js{
+    background-color: firebrick;
+    height: 400px;
+}
+
+input {
+    position: absolute;
+}
