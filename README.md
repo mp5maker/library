@@ -5,12 +5,15 @@
 4) Animation
 5) Chart Js
 6) CSS Grids
-7) Google Chrome Developer Tools
-8) Emmet
-9) Gulp JS
-10) Underscore JS
-11) Materialize
-12) Parallax
+7) Curl
+8) Google Chrome Developer Tools
+9) Emmet
+10) Gulp JS
+11) Npm
+12) Underscore JS
+13) Materialize
+14) Parallax
+15) Particles
 
 All thanks to [Traversy Media](http://www.traversymedia.com)
 
