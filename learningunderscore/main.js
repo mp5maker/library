@@ -552,6 +552,20 @@ _.bindAll(buttonView, 'onClick', 'onHover');
 jQuery("#button-binding").on('click', buttonView.onClick);
 jQuery("#button-binding").on('mouseover', buttonView.onHover);
 
+/**
+ * Underscore JS _.partial(function, *arguments)
+ * Partially apply a function by filling in any number of its arguments,
+ */
+var subtract = function(a, b) {
+    return b - a;
+}
+var substractByFive = _.partial(subtract, 5);
+console.log("%c Underscore Partial", "background-color: green; color: white");
+console.log(substractByFive(20));
 
-
-
+/**
+ * Underscore JS _.delay(function, wait, *arguments)
+ * Much like setTimeout, invokes function after wait milliseconds..
+ */
+console.log("%c Underscore Delay", "background-color: firebrick; color: white");
+_.delay(console.log, 1000, "Underscore Delay 1000ms");
