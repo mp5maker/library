@@ -55,6 +55,7 @@ Installs the bootstrap in the npm_module and add dependency in the package.json
 
 ```bash
     npm install --save-dev gulp gulp-sass gulp-concat
+    npm -i -D jest
 ```
 Installs the multiple gulp modules and add the modules as dev dependency in package.json
 
