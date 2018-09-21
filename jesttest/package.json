@@ -4,12 +4,16 @@
   "description": "",
   "main": "main.js",
   "scripts": {
-    "test": "jest"
+    "test": "jest",
+    "test-watch": "jest --watchAll"
   },
   "keywords": [],
   "author": "Shabuktagin Photon Khan",
   "license": "MIT",
   "devDependencies": {
     "jest": "^23.6.0"
+  },
+  "dependencies": {
+    "axios": "^0.18.0"
   }
 }

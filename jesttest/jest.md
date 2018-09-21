@@ -4,6 +4,7 @@
 npm install --save-dev jest
     or
 npm -i -D jest
+npm install axios
 ```
 
 **Test Added in package.json**
@@ -45,3 +46,14 @@ test('Adds 2 + 2 to equal to 4', function(){
 * *toMatch*: Regular Expression
 * *toContain*: In array
 
+**Work with Asynchoronous Data**
+* Install Axios
+* Using Fake JSON Request [JSON Placeholder]
+* *assertions*
+
+**Work with Jest Watch**
+```json
+    "scripts": {
+        "test-watch": "jest --watchAll"
+    }
+```
