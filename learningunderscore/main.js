@@ -1,6 +1,5 @@
 /**
- * Underscore JS Basics
- * Starting with Collections
+ * Underscore JS Collections
  */
 var employee = [
     {
@@ -293,8 +292,11 @@ console.log("%c Underscore Filter", "background-color: darkgrey; color: white");
 console.log(_.filter(someValue, (num) => (num % 2 === 0)));
 
 /**
- * Underscore JS Basics
- * Array
+ *  :::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::
+ */
+
+/**
+ * Underscore JS Array
  */
 var items = [
     "tomato", 
@@ -351,3 +353,205 @@ console.log(_.union(num1, num2));
  */
 console.log("%c Underscore Intersection", "background-color: red; color: white;");
 console.log(_.intersection(num1, num2));
+
+/**
+ * Underscore JS _.difference(array, *others)
+ * Similar to without, but returns the values from array 
+ * That are not present in the other arrays.
+ */
+console.log("%c Underscore Difference", "background-color: firebrick; color: white;")
+console.log(_.difference(num1, num2));
+
+/**
+ * Underscore JS _.uniq(array, [isSorted])
+ * Produces a duplicate-free version of the array
+ */
+console.log("%c Underscore Unique", "background-color: pink; color: black");
+console.log(_.unique([1, 2, 2, 3, 3, 4, 4, 4, 5, 5]));
+
+/**
+ * Unserscore JS _.zip(*arrays)
+ * Merges together the values of each of the arrays 
+ * With the values at the corresponding position.
+ */
+console.log("%c Underscore Zip", "background-color: brown; color: white");
+console.log(_.zip(["Hi", "hello", "welcome"], ["Robert", "Ann", "Mary"]));
+
+/**
+ * Unserscore JS _.unzip(array)
+ * Merges together the values of each of the arrays 
+ * With the values at the corresponding position.
+ */
+console.log("%c Underscore Unzip", "background-color: darkgreen; color: white");
+console.log(_.unzip([
+    [
+        "Hi", "Photon"
+    ],
+    [
+        "Hello", "Robert"
+    ],
+    [
+        "Welcome", "Mary"
+    ]
+]));
+
+/**
+ * Unserscore JS _.compact(*arrays)
+ * Returns a copy of the list with all falsy values removed.
+ */
+console.log("%c Underscore Compact", "background-color: darkgray; color: white");
+console.log(_.compact([0, null, 1, 'yellow', "blue", undefined, "none", false]));
+
+/**
+ * Unserscore JS _.flatten(array, shallow)
+ * Flattens a nested array (the nesting can be to any depth).
+ */
+console.log("%c Underscore Flatten", "background-color: orange; color: white");
+var flatten = [
+    [
+        "Colors", 
+        [
+            "Colors", "Type of Colors"
+        ], 
+        ["Colors", "Type of Colors",
+        [
+            "yellow",
+            "blue",
+            "orange"
+        ]
+    ]
+]
+];
+console.log(_.flatten(flatten));
+console.log(_.flatten(flatten, true));
+
+/**
+ * Underscore JS _.without(array, *values)
+ * Returns a copy of the array with all instances of the values removed.
+ */
+console.log("%c Underscore Without", "background-color: black; color: white");
+console.log(_.without([1, 2, 3, 4, 5], 0, 1));
+
+/**
+ * Underscore JS _.objects(list, [values])
+ * Converts arrays into objects. Pass either a single list of [key, value] pairs
+ */
+console.log("%c Underscore Object", "background-color: indigo; color: white");
+var dogs = [
+    "Husky",
+    "Malamute",
+    "Shiba"
+];
+var dogAge = [
+    5, 
+    7, 
+    3
+];
+console.log(_.object(dogs, dogAge));
+console.log(_.object(['Hi', "Hello"], ["Photon", "Adam"]));
+
+/**
+ * Underscore JS _.chunk(array, length)
+ * Chunks an array into multiple arrays, each containing length or fewer items.
+ */
+console.log("%c Underscore Chunk", "color: blue");
+console.log(_.chunk(_.shuffle(items), 2));
+
+
+/**
+ * Underscore JS _.indexOf(array, value)
+ * Returns the index at which value can be found in the array,
+ */
+console.log("%c Underscore Index OF", "color: green");
+console.log(_.indexOf([1, 2, 3], 2));
+
+/**
+ * Underscore JS _.lastIndexOf(array, value)
+ * Returns the index of the last occurrence of value in the array,
+ */
+console.log("%c Underscore Last Index OF", "color: purple");
+console.log(_.lastIndexOf([1, 2, 3, 1, 2, 3], 3));
+
+/**
+ * Underscore JS _.sortedIndex(array, value, [iteratee])
+ * Uses a binary search to determine the index at which the value
+ */
+console.log("%c Underscore Sorted Index", "color: magenta");
+console.log(_.sortedIndex([10, 20, 30, 40, 50, 60], 45));
+console.log(_.sortedIndex(kids, {name: "John", age: 8}, 'age'));
+
+/**
+ * Underscore JS _.findIndex(array, predicate, [context])
+ * Returns the first index where the predicate truth test passes;
+ */
+console.log("%c Underscore Find Index", "color: gold; background-color: black;");
+var users = [
+    {
+        id: 1,
+        name: "Bob",
+    },
+    {
+        id: 2,
+        name: "Ted"
+    },
+    {
+        id: 3,
+        name: "Frank"
+    },
+    {
+        id: 4,
+        name: "Jones"
+    }
+]
+console.log(_.findIndex(users, {name: "Frank"}));
+
+/**
+ * Underscore JS _.range([start], stop, [step])
+ * A function to create flexibly-numbered lists of integers, 
+ * Handy for each and map loops. start, 
+ * If omitted, defaults to 0; step defaults to 1.
+ */
+console.log("%c Underscore Range", "color: grey; background-color: pink;");
+console.log(_.range(0, 30, 5));
+
+/**
+ *  :::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::
+ */
+
+/**
+ * Underscore JS Functions
+ */
+
+/**
+ * Underscore JS _.bind(function, object, *arguments)
+ * Bind a function to an object, 
+ * Meaning that whenever the function is called, 
+ * The value of this will be the object.
+ * Arrow Function do not works over here
+ */
+console.log("%c Underscore Bind", "color: blue; background-color: yellow;");
+const greetings = _.bind( 
+                    function(greeting) {
+                        return greeting + ": " + this.name;
+                    },
+                    { name: "Photon Khan" },
+                    "Welcome"
+                );
+console.log(greetings());
+
+/**
+ * Underscore JS _.bindAll(object, *methodNames)
+ * Binds a number of methods on the object, specified by methodNames,
+ */
+console.log("%c Underscore Bind All", "color: green; background-color: pink;");
+const buttonView = {
+    onClick: () => (console.log("%c Button has been clicked", "background-color: black; color: white")),
+    onHover: () => (console.log("%c Button has been hovered", "background-color: blue; color: white;"))
+};
+_.bindAll(buttonView, 'onClick', 'onHover');
+jQuery("#button-binding").on('click', buttonView.onClick);
+jQuery("#button-binding").on('mouseover', buttonView.onHover);
+
+
+
+
