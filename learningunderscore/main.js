@@ -569,3 +569,45 @@ console.log(substractByFive(20));
  */
 console.log("%c Underscore Delay", "background-color: firebrick; color: white");
 _.delay(console.log, 1000, "Underscore Delay 1000ms");
+
+/**
+ * Underscroe JS _.defer(function, *arguments)
+ * Defers invoking the function until the current call stack has cleared,
+ * Similar to using setTimeout with a delay of 0.
+ */
+console.log("%c Underscore Defer", "background-color: violet; color: white");
+_.defer(function(){console.log("Defered Function");});
+
+/**
+ * Underscroe JS _.throttle(function, wait)
+ * Creates and returns a new, throttled version of the passed function, 
+ * When invoked repeatedly, will only actually call the original function at most once per every wait milliseconds.
+ */
+console.log("%c Underscore Throttle", "background-color: green; color: white");
+
+// Returns height of browser viewport
+console.log(`%c Window Height: ${$(window).height()}`, "background-color: silver; color: black");   
+
+// Returns the scrollTop of browser viewport 
+console.log(`%c Window Scroll Top: ${$(window).scrollTop()}`, "background-color: silver; color: black"); 
+
+// Addition of window scroll top and height
+console.log(`%c Window Top + Height: ${$(window).scrollTop() + $(window).height()}`, "background-color: silver; color: black");
+
+// Returns the height of the HTML document
+console.log(`%c Document Height: ${$(document).height()}`, "background-color: black; color: white");
+
+// Idea of infinit scrolling
+var viewportHeight = $(window).scrollTop() + $(window).height();
+$(window).scroll(function() {
+    if ($(window).scrollTop() + $(window).height() > $(document).height() - 100) {
+        console.log("near bottom!");
+    }
+});
+
+$(window).scroll(function () {
+    if ($(window).scrollTop() + $(window).height() == $(document).height()) {
+        console.log("bottom!");
+    }
+});
+
