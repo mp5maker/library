@@ -583,31 +583,582 @@ _.defer(function(){console.log("Defered Function");});
  * Creates and returns a new, throttled version of the passed function, 
  * When invoked repeatedly, will only actually call the original function at most once per every wait milliseconds.
  */
-console.log("%c Underscore Throttle", "background-color: green; color: white");
+console.log("%c Underscore Throttle", "background-color: red; color: white");
+window.addEventListener('scroll', 
+_.throttle(function() {
+    console.log(window.innerHeight);
+}, 1000)
+)
 
-// Returns height of browser viewport
-console.log(`%c Window Height: ${$(window).height()}`, "background-color: silver; color: black");   
+/**
+ * Underscore JS _.debounce(function, wait)
+ * Creates and returns a new debounced version of the passed function which 
+ * Will postpone its execution until after wait milliseconds have elapsed 
+ * Since the last time it was invoked.
+ */
+console.log("%c Underscore Debounce", "background-color: violet; color: white");
+window.addEventListener('resize', 
+_.debounce(function() {
+    console.log(window.innerHeight);
+}, 1000)    
+)
 
-// Returns the scrollTop of browser viewport 
-console.log(`%c Window Scroll Top: ${$(window).scrollTop()}`, "background-color: silver; color: black"); 
+/**
+ * Underscroe JS _.after(count, function)
+ * Creates a version of the function that will only be run after being called count times.
+ */
+console.log("%c Underscore After", "background-color: indigo; color: white");
+var notes = [
+    {
+        subject: "Math"
+    },
+    {
+        subject: "Biology"
+    },
+    {
+        subject: "Physics"
+    },
+    {
+        subject: "Chemistry"
+    },
+    {
+        subject: "Geography"
+    },
+];
 
-// Addition of window scroll top and height
-console.log(`%c Window Top + Height: ${$(window).scrollTop() + $(window).height()}`, "background-color: silver; color: black");
-
-// Returns the height of the HTML document
-console.log(`%c Document Height: ${$(document).height()}`, "background-color: black; color: white");
-
-// Idea of infinit scrolling
-var viewportHeight = $(window).scrollTop() + $(window).height();
-$(window).scroll(function() {
-    if ($(window).scrollTop() + $(window).height() > $(document).height() - 100) {
-        console.log("near bottom!");
-    }
+var clickThreeTimes = _.after(3, function(){
+    console.log("Now you can save the data after three clicks");
 });
 
-$(window).scroll(function () {
-    if ($(window).scrollTop() + $(window).height() == $(document).height()) {
-        console.log("bottom!");
+document.getElementById('after-button').addEventListener('click', clickThreeTimes);
+
+/**
+ * Underscore JS _.before(count, function)
+ * Creates a version of the function that can be called no more than count times.
+ */
+console.log("%c Underscore Before", "background-color: green; color: white");
+var fourWorkingMonths = _.before(3, askForRaise);
+fourWorkingMonths();
+fourWorkingMonths();
+fourWorkingMonths();
+
+function askForRaise() {
+    console.log("You salary has been increased");
+}
+
+/**
+ * Underscore JS _.wrap(function, wrapper)
+ * Wraps the first function inside of the wrapper function,
+ * Passing it as the first argument. 
+ * This allows the wrapper to execute code before and 
+ * After the function runs, adjust the arguments, and execute it conditionally.
+ */
+console.log("%c Underscore Wrap", "background-color: orange; color: white");
+var hello = function(name) {
+    return "Hello, " + name;
+}
+
+hello = _.wrap(hello, function(func){
+    return "Before:: " + func('Photon') + " :: After";
+});
+
+console.log(hello());
+
+/**
+ * Underscore JS _.negate(predicate)
+ * Returns a new negated version of the predicate function.
+ */
+console.log("%c Underscore Negate", "background-color: black; color: white");
+console.log(_.find([-2, -1, 0, 1, 2, 3], _.negate(Boolean)));
+
+/**
+ * Underscore JS _.compose(*functions)
+ * Returns the composition of a list of functions, 
+ * Where each function consumes the return value of the function that follows. 
+ * In math terms, composing the functions f(), g(), and h() produces f(g(h())).
+ */
+console.log("%c Underscore Compose", "background-color: silver; color: black");
+var birthdayTheme = function(uppercasedName){
+    return "Happy Birthday to you, Happy Birthday to " + uppercasedName + " Happy Birthday to you!";
+};
+var capitalizeName = function(name) {
+    return name.toUpperCase();
+};
+var birthdayWish = _.compose(birthdayTheme, capitalizeName);
+console.log(birthdayWish("Photon"));
+
+/**
+ * Underscore JS _.restArguments(function, [startIndex])
+ * Returns a version of the function that, when called, 
+ * $eceives all arguments from and beyond startIndex collected into a single array.
+ */
+console.log("%c Underscore Rest Arguments", "background-color: silver; color: white");
+var raceResult = _.restArguments(function(gold, silver, bronze, everyoneElse){ 
+    _.each(everyoneElse, function(name) {
+        console.log("Better Luck Next Time: " + name);
+    });
+});
+raceResult("John", "Doe", "Mary", "Bob", "Smith", "Richard", "Sinister");
+/**
+ * ::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::
+ */
+
+/**
+ *  Underscore JS Objects 
+ */
+var themes = {
+    light: "white",
+    dark: "black",
+    mint: "lightgreen"
+};
+/**
+ * Underscore JS _.keys(object)
+ * Retrieve all the names of the object's own enumerable properties.
+ */
+console.log("%c Underscore Keys", "background-color: yellow; color: black");
+console.log(_.keys(themes));
+
+/**
+ * Underscore JS _allKeys(object)
+ * Retrieve all the names of object's own and inherited properties.
+ */
+console.log("%c Underscore All Keys", "background-color: yellow; color: green");
+function Person(name){
+    this.name = name;
+}
+Person.prototype.age = 16;
+console.log(_.allKeys(new Person("Johnny")));
+
+/**
+ * Underscore JS _.values(object)
+ * Return all of the values of the object's own properties.
+ */
+console.log("%c Underscore Values", "background-color: yellow; color: red");
+console.log(_.values(themes));
+
+/**
+ * Underscore JS _.mapObject(object, iteratee)
+ * Like map, but for objects. Transform the value of each property in turn.
+ */
+var timings = {
+    start: 15,
+    break: 5,
+    end: 60,
+}
+console.log("%c Underscore Map Object", "background-color: yellow; color: blue");
+console.log(_.mapObject(timings, (value, key) => (value + 5)));
+
+/**
+ * Underscore JS _.pairs(object)
+ * Convert an object into a list of [key, value] pairs. The opposite of object.
+ */
+console.log("%c Underscore Pairs", "background-color: yellow; color: brown");
+console.log(_.pairs(timings));
+
+/**
+ * Underscore JS _.invert(object)
+ * Returns a copy of the object where the keys have become the values and the values the keys.
+ */
+console.log("%c Underscore Invert", "background-color: yellow; color: orange");
+console.log(_.invert(timings));
+
+/**
+ * Underscore JS _.create(prototype, props)
+ * Creates a new object with the given prototype, optionally attaching props as own properties
+ */
+console.log("%c Underscore Create", "background-color: yellow; color: green");
+var salary = _.create(Person.prototype, {salary: 25000});
+console.log(salary);
+
+/**
+ * Underscore JS _.functions(object)
+ * Returns a sorted list of the names of every method in an object
+ */
+console.log("%c Underscore Functions", "background-color: yellow; color: green");
+console.log(_.functions(_));
+
+/**
+ * Underscore JS _.findKey(object, predicate)
+ * Similar to _.findIndex but for keys in objects.
+ */
+var someJSONFormat = {
+    ronaldo : {
+        team: "Real Madrid"
+    },
+    messi : {
+        team: "Barcelona"
+    },
+    torres : {
+        team: "Liverpool"
+    }
+}
+console.log("%c Underscore Find Key", "background-color: yellow; color: black");
+console.log(_.findKey(someJSONFormat, (player) => (player.team == "Barcelona")));
+
+/**
+ * Underscore JS _.extend(destination, *sources)
+ * Shallowly copy all of the properties in the source objects over to the destination object,
+ */
+console.log("%c Underscore Extend", "background-color: yellow; color: black");
+console.log(_.extend({name: "Photon"}, {age: 27}));
+
+/**
+ * Underscore JS _.extendOwn(destination, *sources)
+ * Like extend, but only copies own properties over to the destination object.
+ */
+console.log("%c Underscore Extend Own", "background-color: yellow; color: black");
+console.log(_.extendOwn({name: "Photon"}, {age: 27}));
+
+/**
+ * Underscore JS _.pick(object, *keys)
+ * Return a copy of the object, filtered to only have 
+ * Values for the whitelisted keys (or array of valid keys).
+ */
+console.log("%c Underscore Pick", "background-color: yellow; color: black");
+console.log(_.pick(timings, 'break'));
+
+/**
+ * Underscore JS _.omit(object, *keys)
+ * Return a copy of the object, filtered to omit the blacklisted keys (or array of keys).
+ */
+console.log("%c Underscore Omit", "background-color: yellow; color: black");
+console.log(_.omit(timings, 'break'));
+
+/**
+ * Underscore JS _.defaults(object, *default)
+ * Returns object after filling in its undefined properties with the 
+ * First value present in the following list of defaults objects.
+ */
+console.log("%c Underscore Defaults", "background-color: yellow; color: black");
+console.log(_.omit({break: 5}, {break: 5, checkpoint: 20}));
+
+/**
+ * Underscore JS _.clone(Object)
+ * Create a shallow-copied clone of the provided plain object.
+ */
+console.log("%c Underscore Clone", "background-color: yellow; color: black");
+console.log(_.clone(timings));
+
+/**
+ * Underscore JS _.tap(object, interceptor)
+ * Invokes interceptor with the object, and then returns object.
+ */
+console.log("%c Underscore Tap", "background-color: yellow; color: black");
+console.log(
+    _.chain([1, 2, 3, 4, 5, 6])
+    .filter((num) => num % 2 == 0)
+    .tap(alert)
+    .map(function (num) { return num * num })
+    .value()
+);
+function alert() {
+    console.log("I just filtered");
+}
+
+/**
+ * Underscore JS _.has(object, key)
+ * Does the object contain the given key? Identical to object.hasOwnProperty(key),
+ */
+console.log("%c Underscore Has", "background-color: yellow; color: black");
+console.log(_.has(timings, "end"));
+
+/**
+ * Underscore JS _.property(path)
+ * Does the object contain the given key? Identical to object.hasOwnProperty(key),
+ */
+console.log("%c Underscore Property", "background-color: yellow; color: black");
+console.log(_.property("end")(timings) == 60);
+
+/**
+ * Underscore JS _.propertyOf(object)
+ * Does the object contain the given key? Identical to object.hasOwnProperty(key),
+ */
+console.log("%c Underscore Property Of", "background-color: yellow; color: black");
+console.log(_.propertyOf(timings)('end'));
+
+/**
+ * Underscore JS _.matcher(attrs)
+ * Returns a predicate function that will tell you 
+ * If a passed in object contains all of the key/value properties present in attrs.
+ */
+console.log("%c Underscore Matcher", "background-color: yellow; color: black");
+console.log(_.matcher({visible: true})({visible:true, stable: true}));
+
+/**
+ * Underscore JS _.isEqual(object, other)
+ * Performs an optimized deep comparison between the two objects, to determine if they should be considered equal.
+ */
+console.log("%c Underscore Is Equal", "background-color: yellow; color: black");
+console.log(_.isEqual({name: "photon"}, {name: "photon"}));
+
+/**
+ * Underscore JS _.isMatch(object, properties)
+ * Tells you if the keys and values in properties are contained in object.
+ */
+console.log("%c Underscore is Match", "background-color: yellow; color: black");
+console.log(_.isEqual({name: "photon"}, {name: "photon"}));
+
+/**
+ * Underscore JS _.isElement(object)
+ * Returns true if object is a DOM element.
+ */
+console.log("%c Underscore is Element", "background-color: yellow; color: black");
+console.log(_.isElement(document.getElementById('after-button')));
+
+/**
+ * Underscore JS _.isArray(object)
+ * Returns true if object is a DOM element.
+ */
+console.log("%c Underscore is Array", "background-color: yellow; color: black");
+console.log(_.isArray([1, 2, 3]));
+
+/**
+ * Underscore JS _.isArguments(object)
+ * Returns true if object is an Arguments object
+ */
+console.log("%c Underscore Is Arguments", "background-color: yellow; color: black");
+(function(){
+    console.log(_.isArguments(arguments));
+})([1,2,3]);
+
+/**
+ * Underscore JS _.isFunction(object)
+ * Returns true if object is a Function.
+ */
+console.log("%c Underscore Is Function", "background-color: yellow; color: black");
+console.log(_.isFunction(alert));
+
+/**
+ * Underscore JS _.isString(object)
+ * Returns true if object is a String.
+ */
+console.log("%c Underscore Is String", "background-color: yellow; color: black");
+console.log(_.isString("Photon"));
+
+/**
+ * Underscore JS _.isNumber(object)
+ * Returns true if object is a number.
+ */
+console.log("%c Underscore Is Number", "background-color: yellow; color: black");
+console.log(_.isNumber(1));
+
+/**
+ * Underscore JS _.isBoolean(object)
+ * Returns true if object is a Boolean.
+ */
+console.log("%c Underscore Is Boolean", "background-color: yellow; color: black");
+console.log(_.isBoolean(true));
+
+/**
+ * Underscore JS _.isDate(object)
+ * Returns true if object is a Date.
+ */
+console.log("%c Underscore Is Date", "background-color: yellow; color: black");
+console.log(_.isDate(new Date()));
+
+/**
+ * Underscore JS _.isRegExp(object)
+ * Returns true if object is a Regular Expression.
+ */
+console.log("%c Underscore Is Reg Exp", "background-color: yellow; color: black");
+console.log(_.isRegExp(new RegExp("\d")));
+
+/**
+ * Underscore JS _.isMap(object)
+ * Returns true if object is a Map.
+ */
+console.log("%c Underscore Is Map", "background-color: yellow; color: black");
+console.log(_.isMap(new Map()));
+
+/**
+ * Underscore JS _.isSet(object)
+ * Returns true if object is a Set.
+ */
+console.log("%c Underscore Is Set", "background-color: yellow; color: black");
+console.log(_.isSet(new Set()));
+
+/**
+ * Underscore JS _.isWeakSet(object)
+ * Returns true if object is a Weak Set.
+ */
+console.log("%c Underscore Is Weak Set", "background-color: yellow; color: black");
+console.log(_.isWeakSet(new WeakSet()));
+
+/**
+ * Underscore JS _.isNaN(object)
+ * Returns true if object is a NaN.
+ */
+console.log("%c Underscore Is Nan", "background-color: yellow; color: black");
+console.log(_.isNaN(NaN));
+
+/**
+ * Underscore JS _.isNull(object)
+ * Returns true if object is a Null.
+ */
+console.log("%c Underscore Is Null", "background-color: yellow; color: black");
+console.log(_.isNull(null));
+
+/**
+ * Underscore JS _.isUndefined(object)
+ * Returns true if object is a Undefined.
+ */
+console.log("%c Underscore Is Undefined", "background-color: yellow; color: black");
+console.log(_.isUndefined(undefined));
+
+/**
+ * :::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::
+ */
+
+/**
+ * Underscore JS Utilities
+ */
+
+/**
+ *  Underscore JS _.noConflict()
+ *  Give control of the _ variable back to its previous owner.
+ *  Returns a reference to the Underscore object.
+ */
+console.log("%c Underscore No Conflict", "background-color: yellow; color: black");
+var underscore = _.noConflict();
+console.log(underscore.isUndefined(undefined));
+
+/**
+ *  Underscore JS _.identity(value)
+ *  Returns the same value that is used as the argument. In math: f(x) = x. 
+ * This function looks useless, but is used throughout Underscore as a default iteratee.
+ */
+console.log("%c Underscore Identity", "background-color: yellow; color: black");
+function Coffee() {
+    this.type = "Mocha";
+}
+Mocha = {
+    type: "Mocha"
+};
+console.log(underscore.identity(Mocha));
+
+/**
+ *  Underscore JS _.constant()
+ *  Creates a function that returns the same value that is used as the argument of
+ */
+console.log("%c Underscore Constant", "background-color: yellow; color: black");
+var stooge = { name: 'moe' };
+console.log(stooge === underscore.constant(stooge)());
+
+/**
+ *  Underscore JS _.noop()
+ *  Returns undefined irrespective of the arguments passed to it. 
+ *  Useful as the default for optional callback arguments.
+ */
+console.log("%c Underscore Noop", "background-color: yellow; color: black");
+console.log(underscore.noop());
+
+/**
+ *  Underscore JS _.times(n, iteratee)
+ *  Invokes the given iteratee function n times. 
+ *  Each invocation of iteratee is called with an index argument. 
+ *  Produces an array of the returned values.
+ */
+console.log("%c Underscore Times", "background-color: yellow; color: black");
+console.log(underscore.times(3, underscore.noop));
+
+/**
+ *  Underscore JS _.times(n, iteratee)
+ *  Returns a random integer between min and max, inclusive. 
+ *  If you only pass one argument, 
+ *  It will return a number between 0 and that number.
+ */
+console.log("%c Underscore Random", "background-color: yellow; color: black");
+console.log(underscore.random(0, 5));
+
+/**
+ * Underscore JS _.mixin(object)
+ * Allows you to extend Underscore with your own utility functions. 
+ * Pass a hash of {name: function} definitions to have your functions 
+ * Added to the Underscore object, as well as the OOP wrapper. 
+ * Returns the Underscore object to facilitate chaining.
+ */
+console.log("%c Underscore Mixin", "background-color: yellow; color: black");
+var _ = underscore.noConflict();
+_.mixin({
+    capitalize: function(string){
+        return string.charAt(0).toUpperCase() + string.substring(1).toLowerCase();
     }
 });
+console.log(_.capitalize("PHOTON"));
+
+/**
+ * Underscore JS _.iteratee(value)
+ * Generates a callback that can be applied to each element in a collection. _.iteratee
+ */
+console.log("%c Underscore Iteratee", "background-color: yellow; color: black");
+console.log(_.iteratee(function(n){
+    return n*2;
+}));
+
+/**
+ * Underscore JS _.uniqueId([prefix])
+ * Generate a globally-unique id for client-side models or DOM elements that need one. 
+ * If prefix is passed, the id will be appended to it.
+ */
+console.log("%c Underscore Unique Id", "background-color: yellow; color: black");
+console.log(_.uniqueId('contact_'));
+
+/**
+ * Underscore JS _.escape(string)
+ * Escapes a string for insertion into HTML, replacing &, <, >, ", `, and ' characters.
+ */
+console.log("%c Underscore Escape", "background-color: yellow; color: black");
+console.log(_.escape('Tom, Dick & Harry'));
+
+/**
+ * Underscore JS _.unescape(string)
+ * The opposite of escape, replaces &amp;, &lt;, &gt;, &quot;, &#96; and &#x27; with their unescaped counterparts.
+ */
+console.log("%c Underscore Escape", "background-color: yellow; color: black");
+console.log(_.unescape('Tom, Dick &amp; Harry'));
+
+/**
+ * Underscore JS _.unescape(string)
+ * The opposite of escape, replaces &amp;, &lt;, &gt;, &quot;, &#96; and &#x27; with their unescaped counterparts.
+ */
+console.log("%c Underscore Escape", "background-color: yellow; color: black");
+console.log(_.unescape('Tom, Dick &amp; Harry'));
+
+/**
+ * Underscore JS _.result(object, property)
+ * f the value of the named property is a function then invoke it with the object as context
+ */
+console.log("%c Underscore Result", "background-color: yellow; color: black");
+var shirtSize = {
+    "small": "sm",
+    "medium": "md",
+    "large": "lg",
+    "extra-large": "xl",
+};
+console.log(_.result(shirtSize, 'large'));
+
+/**
+ * Underscore JS _.now()
+ * Returns an integer timestamp for the current time, using the fastest method available in the runtime. 
+ * Useful for implementing timing/animation functions.
+ */
+console.log("%c Underscore Now", "background-color: yellow; color: black");
+console.log(_.now());
+
+/**
+ * Underscore JS _.template()
+ * Compiles JavaScript templates into functions that can be evaluated for rendering. 
+ * Useful for rendering complicated bits of HTML from JSON data sources.
+ */
+console.log("%c Underscore Template", "background-color: yellow; color: black");
+_.templateSettings = {
+    interpolate: /\{\{(.+?)\}\}/g
+};
+
+var template = _.template("{{ name }}");
+console.log(template(
+    {
+        name: "Photon Khan"
+    }
+));
 
