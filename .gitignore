@@ -15,4 +15,5 @@ package-lock.json
 *.mobi
 *.pdf
 *.ico
+.png
 img

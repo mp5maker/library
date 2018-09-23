@@ -11,7 +11,7 @@ body, html {
 
 .container-fluid {
   padding: 25px;
-  margin-left: 20px; }
+  margin: 0 20px; }
 
 .green {
   color: rgba(17, 201, 9, 0.7); }
@@ -429,3 +429,45 @@ table tbody tr td:last-child span {
 
 [class^="container-fluid"] {
   background-color: #f0f0f0; }
+
+.clearfix {
+  overflow: auto;
+  zoom: 2; }
+  .clearfix span {
+    vertical-align: top;
+    margin-right: 5rem; }
+
+.card {
+  box-shadow: 0 4px 8px 0 lightgrey;
+  margin: 2rem;
+  padding: 1rem; }
+  .card .card-image {
+    box-shadow: 0 4px 8px 0 lightgrey; }
+
+.chapter-summary:nth-child(1) div {
+  color: indigo;
+  background-color: indigo; }
+
+.chapter-summary:nth-child(2) div {
+  color: black;
+  background-color: rgba(75, 0, 130, 0.9); }
+
+.chapter-summary:nth-child(3) div {
+  color: #8080ff;
+  background-color: black; }
+
+.chapter-summary:nth-child(4) div {
+  color: firebrick;
+  background-color: black; }
+
+.chapter-summary:nth-child(5) div {
+  color: #cccc00;
+  background-color: #cc0088; }
+
+.chapter-summary:nth-child(6) div {
+  color: black;
+  background-color: #404040; }
+
+.chapter-summary:nth-child(7) div {
+  background-color: #995191;
+  color: white; }

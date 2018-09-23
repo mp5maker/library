@@ -26,7 +26,8 @@ body, html {
 
 .container-fluid {
     padding: 25px;
-    margin-left: 20px;
+    margin: 0 20px;
+
 }
 
 // Using Variables
@@ -259,4 +260,63 @@ $blue-shortcut: #00f;
 // Apply to all the class starting with container-fluid
 [class ^="container-fluid"] {
     background-color: lighten(darkgrey, 28%);
+}
+
+// Concept of clearfix: Prevents overflow of the images
+// Concept of zoom
+.clearfix {
+    overflow: auto;
+    zoom: 2;
+    span {
+        vertical-align: top;
+        margin-right: 5rem;
+    }
+}
+
+.card {
+    box-shadow: 0 4px 8px 0 lightgrey;
+    margin: 2rem;
+    padding: 1rem;
+    .card-image {
+        box-shadow: 0 4px 8px 0 lightgrey;
+    }
+}
+
+// Pseudo class nth-child
+// adjust-hue
+// saturate 
+// desaturate
+// transparentize/fade-out
+// fade-in (opposite of transparent)
+// gray-scale
+// mix
+.chapter-summary {
+    &:nth-child(1) div {
+        color: color(primary);
+        background-color: fade-in(color(primary), 0.5);
+    }
+    &:nth-child(2) div {
+        color: color(secondary);
+        background-color: transparentize(color(primary), 0.1);
+    }
+    &:nth-child(3) div {
+        color: color(info);
+        background-color: desaturate(black, 90%);
+    }
+    &:nth-child(4) div {
+        color: color(danger);
+        background-color: saturate(black, 90%);
+    }
+    &:nth-child(5) div {
+        color: color(warning);
+        background-color: adjust-hue(color(warning), 260deg);
+    }
+    &:nth-child(6) div {
+        color: black;
+        background-color: grayscale(green);
+    }
+    &:nth-child(7) div {
+        background-color: mix(color(info), color(danger), 50%);
+        color: white;
+    }
 }
