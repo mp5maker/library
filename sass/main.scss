@@ -1,0 +1,262 @@
+// Importing
+@import "media-width";
+
+// Basic Configuration
+body, html {
+    height: 100%;
+    padding: 0;
+    margin: 0;
+    font-family: Cambria, Cochin, Georgia, Times, 'Times New Roman', serif;
+}
+
+// Since the result of using "box-sizing: border-box" is so much better, 
+// many developers want all elements on their pages to work this way. 
+// The first style in the head section above ensures that all elements are sized in this more intuitive way. 
+// The width you set is the width you get, without having to perform mental math and manage the complexity 
+// that comes from widths that come from multiple properties. Applying this to all elements is safe and wise:
+@mixin create-box-sizing($box-sizing-type) {
+    -webkit-box-sizing: $box-sizing-type;
+    -moz-box-sizing: $box-sizing-type;
+    box-sizing: $box-sizing-type;
+}
+
+* {
+    @include create-box-sizing(border-box);
+}
+
+.container-fluid {
+    padding: 25px;
+    margin-left: 20px;
+}
+
+// Using Variables
+$red: #ff0b13;
+$blue: #091fff;
+$green: #11c909;
+
+// Applyng variables to the classes
+.green {
+    color: rgba($green, 0.7);
+}
+
+// Using Mixins
+@mixin border-radius($i) {
+    -webkit-border-radius: #{$i}px;
+    -moz-border-radius: #{$i}px;
+    -ms-border-radius: #{$i}px;
+    -o-border-radius: #{$i}px;
+    border-radius: #{$i}px;
+}
+
+// Applyings mixins to classes
+.rounded-border {
+    border: 1px solid firebrick;
+    @include border-radius(10px);
+}
+
+// Nesting Rules
+.btn.btn-red {
+    color: white;
+    background-color: firebrick;
+    padding: 10px 15px;
+    border: none;
+    transition-property: box-shadow;
+    transition-duration: 1s;
+    transition-timing-function: linear;
+    &:hover {
+        box-shadow: 0 4px 8px 0 darkgrey;
+        transition-property: box-shadow;
+        transition-duration: 1s;
+        transition-timing-function: linear;
+    }
+    &:visited {
+        color: black;
+    }
+}
+
+// Creating different device width colors
+span {
+    @include device-width(0, 767) {
+        color: $red;
+    }
+    @include device-width(768, 1024) {
+        color: $blue; 
+    }
+    @include device-width(1025, 'min') {
+        color: $green;
+    }
+}
+
+// Pseudo class for selecting the parents last-child
+table {
+    tbody {
+        tr {
+           td {
+               span {
+                   color: burlywood;
+                }
+                &:last-child {
+                    span {
+                        color: pink;
+                    }
+                }
+            }
+        }
+    }
+}
+
+// Creating Mixin for width 
+@mixin create-width($i) {
+    .width-#{$i}{
+        width: #{$i*10}px;
+    }
+}
+
+// Creating different width
+@for $i from 1 through 100 {
+    @include create-width($i);
+}
+
+// Creating Stamp Parent Selector &:
+.stamp-border {
+    cursor: pointer;
+    margin-top: 100px;
+    margin-left: 100px;
+    border: 1px solid black;
+    width: 25px;
+    height: 25px;
+    .stamp-content {
+        span {
+            position: absolute;
+            margin-left: 8px;
+        }       
+    }
+    &:hover {
+        .stamp-content {
+            animation-name: bounce;
+            animation-duration: 2s;
+            animation-timing-function: ease-in-out;
+            animation-iteration-count: infinite;
+        }
+    }
+}
+
+@keyframes bounce {
+    0% {
+        transform: translateY(0);
+    } 10% {
+        transform: translateY(0);
+    } 20% {
+        transform: translateY(5px);
+    } 30% {
+        transform: translateY(0);
+    } 40% {
+        transform: translateY(0);
+    } 50% {
+        transform: translateY(5px);
+    } 60% {
+        transform: translateY(0);
+    } 70% {
+        transform: translateY(0);
+    } 80% {
+        transform: translateY(5px);
+    } 90% {
+        transform: translateY(0);
+    } 100% {
+        transform: translateY(0);
+    }
+}
+
+
+// Selectors Parent Selectors
+.border {
+    margin-top: 20px;
+    width: 25%;
+    
+    // & This calls the parent class it can placed on any side 
+    // Ex: & .border-orange ==> .border .border.orange {Inside border there is border-orange}
+    // Ex: .border-orange & ===> .border-orange .border {Inside border-orange there is border}
+    & .border-orange {
+        border: 1px solid orange;
+    }
+    // Chaining the classes
+    &.border-orange {
+        border: 1px solid orange;
+    }
+}
+
+// This syntax support internet explorer 6, or we can use #suport-ie6
+[id="support-ie6"]{
+    color: red;
+}
+
+.box{
+    border: 1px solid black;
+    @extend .width-20;
+}
+
+// Extends class using the classname selectors
+.danger-box {
+    @extend .box;
+    border-color: firebrick;
+}
+
+// When a class created only to extend it (Almost similar concept like Abstract Method or Interface
+// This is also known as placeholder
+%circle{
+    border-radius: 50%;
+    @extend .width-40;
+}
+
+.circle-orange{
+    @extend %circle;
+    border: 1px solid orange;
+}
+
+$primary: indigo;
+
+// Set $primary to darkgrey if it is not set
+$primary: darkgrey !default;
+
+.text-primary {
+    color: $primary;
+}
+
+// Use lighten and darken
+$colors: (
+    primary: indigo,
+    secondary: black,
+    info: lighten(blue, 25%),
+    success: lighten(green, 5%),
+    danger: firebrick,
+    warning: darken(yellow, 10%)
+);
+
+// Functions
+@function color($name) {
+    @return map-get($colors , $name);
+}
+
+.text-info {
+    color: color(info);
+}
+
+.text-warning {
+    color: color(warning);
+}
+
+// Hex color Codes
+$hex-color-red: #ff0000;
+$hex-color-green: #00ff00;
+$hex-color-blue: #0000ff;
+$hex-color-random: #fcaa00;
+
+// Hex color shortcuts
+$red-shorcut: #f00;
+$green-shortcut: #0f0;
+$blue-shortcut: #00f;
+
+// Apply to all the class starting with container-fluid
+[class ^="container-fluid"] {
+    background-color: lighten(darkgrey, 28%);
+}

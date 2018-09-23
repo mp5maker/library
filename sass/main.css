@@ -1,0 +1,431 @@
+body, html {
+  height: 100%;
+  padding: 0;
+  margin: 0;
+  font-family: Cambria, Cochin, Georgia, Times, 'Times New Roman', serif; }
+
+* {
+  -webkit-box-sizing: border-box;
+  -moz-box-sizing: border-box;
+  box-sizing: border-box; }
+
+.container-fluid {
+  padding: 25px;
+  margin-left: 20px; }
+
+.green {
+  color: rgba(17, 201, 9, 0.7); }
+
+.rounded-border {
+  border: 1px solid firebrick;
+  -webkit-border-radius: 10pxpx;
+  -moz-border-radius: 10pxpx;
+  -ms-border-radius: 10pxpx;
+  -o-border-radius: 10pxpx;
+  border-radius: 10pxpx; }
+
+.btn.btn-red {
+  color: white;
+  background-color: firebrick;
+  padding: 10px 15px;
+  border: none;
+  transition-property: box-shadow;
+  transition-duration: 1s;
+  transition-timing-function: linear; }
+  .btn.btn-red:hover {
+    box-shadow: 0 4px 8px 0 darkgrey;
+    transition-property: box-shadow;
+    transition-duration: 1s;
+    transition-timing-function: linear; }
+  .btn.btn-red:visited {
+    color: black; }
+
+span {
+  color: #11c909; }
+  @media screen and (min-width: 0) and (max-width: 767px) {
+    span {
+      color: #ff0b13; } }
+  @media screen and (min-width: 768px) and (max-width: 1024px) {
+    span {
+      color: #091fff; } }
+
+table tbody tr td span {
+  color: burlywood; }
+
+table tbody tr td:last-child span {
+  color: pink; }
+
+.width-1 {
+  width: 10px; }
+
+.width-2 {
+  width: 20px; }
+
+.width-3 {
+  width: 30px; }
+
+.width-4 {
+  width: 40px; }
+
+.width-5 {
+  width: 50px; }
+
+.width-6 {
+  width: 60px; }
+
+.width-7 {
+  width: 70px; }
+
+.width-8 {
+  width: 80px; }
+
+.width-9 {
+  width: 90px; }
+
+.width-10 {
+  width: 100px; }
+
+.width-11 {
+  width: 110px; }
+
+.width-12 {
+  width: 120px; }
+
+.width-13 {
+  width: 130px; }
+
+.width-14 {
+  width: 140px; }
+
+.width-15 {
+  width: 150px; }
+
+.width-16 {
+  width: 160px; }
+
+.width-17 {
+  width: 170px; }
+
+.width-18 {
+  width: 180px; }
+
+.width-19 {
+  width: 190px; }
+
+.width-20, .box, .danger-box {
+  width: 200px; }
+
+.width-21 {
+  width: 210px; }
+
+.width-22 {
+  width: 220px; }
+
+.width-23 {
+  width: 230px; }
+
+.width-24 {
+  width: 240px; }
+
+.width-25 {
+  width: 250px; }
+
+.width-26 {
+  width: 260px; }
+
+.width-27 {
+  width: 270px; }
+
+.width-28 {
+  width: 280px; }
+
+.width-29 {
+  width: 290px; }
+
+.width-30 {
+  width: 300px; }
+
+.width-31 {
+  width: 310px; }
+
+.width-32 {
+  width: 320px; }
+
+.width-33 {
+  width: 330px; }
+
+.width-34 {
+  width: 340px; }
+
+.width-35 {
+  width: 350px; }
+
+.width-36 {
+  width: 360px; }
+
+.width-37 {
+  width: 370px; }
+
+.width-38 {
+  width: 380px; }
+
+.width-39 {
+  width: 390px; }
+
+.width-40, .circle-orange {
+  width: 400px; }
+
+.width-41 {
+  width: 410px; }
+
+.width-42 {
+  width: 420px; }
+
+.width-43 {
+  width: 430px; }
+
+.width-44 {
+  width: 440px; }
+
+.width-45 {
+  width: 450px; }
+
+.width-46 {
+  width: 460px; }
+
+.width-47 {
+  width: 470px; }
+
+.width-48 {
+  width: 480px; }
+
+.width-49 {
+  width: 490px; }
+
+.width-50 {
+  width: 500px; }
+
+.width-51 {
+  width: 510px; }
+
+.width-52 {
+  width: 520px; }
+
+.width-53 {
+  width: 530px; }
+
+.width-54 {
+  width: 540px; }
+
+.width-55 {
+  width: 550px; }
+
+.width-56 {
+  width: 560px; }
+
+.width-57 {
+  width: 570px; }
+
+.width-58 {
+  width: 580px; }
+
+.width-59 {
+  width: 590px; }
+
+.width-60 {
+  width: 600px; }
+
+.width-61 {
+  width: 610px; }
+
+.width-62 {
+  width: 620px; }
+
+.width-63 {
+  width: 630px; }
+
+.width-64 {
+  width: 640px; }
+
+.width-65 {
+  width: 650px; }
+
+.width-66 {
+  width: 660px; }
+
+.width-67 {
+  width: 670px; }
+
+.width-68 {
+  width: 680px; }
+
+.width-69 {
+  width: 690px; }
+
+.width-70 {
+  width: 700px; }
+
+.width-71 {
+  width: 710px; }
+
+.width-72 {
+  width: 720px; }
+
+.width-73 {
+  width: 730px; }
+
+.width-74 {
+  width: 740px; }
+
+.width-75 {
+  width: 750px; }
+
+.width-76 {
+  width: 760px; }
+
+.width-77 {
+  width: 770px; }
+
+.width-78 {
+  width: 780px; }
+
+.width-79 {
+  width: 790px; }
+
+.width-80 {
+  width: 800px; }
+
+.width-81 {
+  width: 810px; }
+
+.width-82 {
+  width: 820px; }
+
+.width-83 {
+  width: 830px; }
+
+.width-84 {
+  width: 840px; }
+
+.width-85 {
+  width: 850px; }
+
+.width-86 {
+  width: 860px; }
+
+.width-87 {
+  width: 870px; }
+
+.width-88 {
+  width: 880px; }
+
+.width-89 {
+  width: 890px; }
+
+.width-90 {
+  width: 900px; }
+
+.width-91 {
+  width: 910px; }
+
+.width-92 {
+  width: 920px; }
+
+.width-93 {
+  width: 930px; }
+
+.width-94 {
+  width: 940px; }
+
+.width-95 {
+  width: 950px; }
+
+.width-96 {
+  width: 960px; }
+
+.width-97 {
+  width: 970px; }
+
+.width-98 {
+  width: 980px; }
+
+.width-99 {
+  width: 990px; }
+
+.width-100 {
+  width: 1000px; }
+
+.stamp-border {
+  cursor: pointer;
+  margin-top: 100px;
+  margin-left: 100px;
+  border: 1px solid black;
+  width: 25px;
+  height: 25px; }
+  .stamp-border .stamp-content span {
+    position: absolute;
+    margin-left: 8px; }
+  .stamp-border:hover .stamp-content {
+    animation-name: bounce;
+    animation-duration: 2s;
+    animation-timing-function: ease-in-out;
+    animation-iteration-count: infinite; }
+
+@keyframes bounce {
+  0% {
+    transform: translateY(0); }
+  10% {
+    transform: translateY(0); }
+  20% {
+    transform: translateY(5px); }
+  30% {
+    transform: translateY(0); }
+  40% {
+    transform: translateY(0); }
+  50% {
+    transform: translateY(5px); }
+  60% {
+    transform: translateY(0); }
+  70% {
+    transform: translateY(0); }
+  80% {
+    transform: translateY(5px); }
+  90% {
+    transform: translateY(0); }
+  100% {
+    transform: translateY(0); } }
+
+.border {
+  margin-top: 20px;
+  width: 25%; }
+  .border .border-orange {
+    border: 1px solid orange; }
+  .border.border-orange {
+    border: 1px solid orange; }
+
+[id="support-ie6"] {
+  color: red; }
+
+.box, .danger-box {
+  border: 1px solid black; }
+
+.danger-box {
+  border-color: firebrick; }
+
+.circle-orange {
+  border-radius: 50%; }
+
+.circle-orange {
+  border: 1px solid orange; }
+
+.text-primary {
+  color: indigo; }
+
+.text-info {
+  color: #8080ff; }
+
+.text-warning {
+  color: #cccc00; }
+
+[class^="container-fluid"] {
+  background-color: #f0f0f0; }
