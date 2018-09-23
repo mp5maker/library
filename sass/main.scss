@@ -1,5 +1,6 @@
 // Importing
 @import "media-width";
+@import "node_modules/susy/sass/susy-prefix";
 
 // Basic Configuration
 body, html {
@@ -283,40 +284,123 @@ $blue-shortcut: #00f;
 }
 
 // Pseudo class nth-child
-// adjust-hue
-// saturate 
-// desaturate
-// transparentize/fade-out
-// fade-in (opposite of transparent)
-// gray-scale
-// mix
 .chapter-summary {
     &:nth-child(1) div {
         color: color(primary);
-        background-color: fade-in(color(primary), 0.5);
     }
     &:nth-child(2) div {
         color: color(secondary);
-        background-color: transparentize(color(primary), 0.1);
     }
     &:nth-child(3) div {
         color: color(info);
-        background-color: desaturate(black, 90%);
     }
     &:nth-child(4) div {
         color: color(danger);
-        background-color: saturate(black, 90%);
     }
     &:nth-child(5) div {
         color: color(warning);
-        background-color: adjust-hue(color(warning), 260deg);
     }
-    &:nth-child(6) div {
-        color: black;
-        background-color: grayscale(green);
+}
+
+// Color Functions
+// 1. adjust-hue
+// 2. saturate 
+// 3. desaturate
+// 4. transparentize/fade-out
+// 5. fade-in (opposite of transparent)
+// 6. grayscale
+// 7. mix
+// 8. adjust-color :: Relevant keyword :: $red, $green, $blue, $hue, $lightness, $saturation, $alpa
+// 9. shade
+// 10. tint
+
+.color-functions {
+    &:nth-child(1) span {
+        background-color: adjust-hue(red, 270deg);
     }
-    &:nth-child(7) div {
-        background-color: mix(color(info), color(danger), 50%);
-        color: white;
+    &:nth-child(2) span {
+        background-color: saturate(red, 100%);
+    }
+    &:nth-child(3) span {
+        background-color: desaturate(red, 100%);
+    }
+    &:nth-child(4) span {
+        background-color: transparentize(#f00, 0.9);
+    }
+    &:nth-child(5) span {
+        background-color: fade-out(#ff0000, 0.9);
+    }
+    &:nth-child(6) span {
+        background-color: fade-in(red, 0.9);
+    }
+    &:nth-child(7) span {
+        background-color: grayscale(red);
+    }
+    &:nth-child(8) span {
+        background-color: mix(yellow, blue, 50%);
+    }
+    &:nth-child(9) span {
+       background-color: adjust-color(color(primary), $red: 0, $green: 255, $blue: 0);
+    }
+    &:nth-child(10) span {
+        background-color: scale-color(color(secondary), $lightness: 80%);
+    }
+    &:nth-child(11) span {
+        background-color: shade(color(primary), 60%);
+    }
+    &:nth-child(12) span {
+        background-color: tint(color(primary), 60%);
+    }
+}
+
+// Responsiveness and Flexible with grids
+// Susy is a lightweight grid-layout engine for Sass
+// Learning the susy specific variables
+// [Not Recommended to use]
+
+$susy: (
+    // How many columns [grid-template-columns]
+    // susy-repaat(count, value)
+    'columns': susy-repeat(12),
+    // Space between columns [grid-column-gap]
+    // One-fourth the size of the fraction of the column
+    'gutters': 0.25,
+    // Only gutters betweem columns [1 less gutter than columsn]
+    // spread: narrow [gutters == columns - 1]
+    // spread: wide [gutters == columns]
+    // spread: wider [gutters == columns + 1]
+    'spread': 'narrow',
+    // Container with one less gutter than columns
+    // container-spread: narrow [gutters == columns - 1]
+    // container-spread: wide [gutters == columns]
+    // container-spread: wider [gutters == columns + 1]
+    'container-spread': 'narrow'
+);
+
+.susy-col {
+    width: susy-span(4);
+    margin-right: 15px;
+    display: inline-block;
+    border: 1px solid black;
+}
+
+// Build in functions border-radius
+.border-rounded {
+    @extend .width-15;
+    @include border-radius(12);
+    border: 1px solid black;
+}
+
+// Built in random function
+.border-random {
+    @extend .width-5;
+    @include border-radius(random(12));
+    border: 1px solid black;
+}
+
+// Using For each loop
+@each $key,$value in $colors {
+    .bg-#{$key} {
+        background-color: $value;
     }
 }
