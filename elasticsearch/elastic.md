@@ -4,6 +4,15 @@
 * Elastic *nodes* can be set up on a physical or a virtual server 
 * Depends on RAM, CPU, and disk space
 
+### Some Features ###
+* Powerful Datastore
+* Search Engined
+* Unstructured Data
+* Schema Less
+* Real Time Searching
+* Smaller Server Requirement
+* Fast and Responsive Interface
+
 ### Key Points ###
 1) Node
 2) Index
@@ -41,7 +50,72 @@ Every record is stored in only a shard
 #### Mapping ####
 * The data is grouped into data types called mappings.
 * It shows the property type of the object
+* *Types* string, long, double, date, byte, shorts, double, boolean, binary, null, ip
+* External Mapping needs to be mentioned before the indexing
 
+*Regular JSON*
+```json
+    {
+        "library":  {
+            "books": {
+                "id": 1,
+                "title": "Angels and Demons",
+                "author": "Dan Brown",
+                "publish_date": "09 2001"
+            }
+        }
+    }
+```
+*Default Mapping*
+```json
+    GET /library/books/_mapping 
+    Below gives the default mapping by the elastic search 
+    {
+        "library":  {
+            "mappings": {
+                "books": {
+                    "properties": {
+                        "id": {
+                            "type": "string"
+                        },
+                        "title": {
+                            "type": "string"
+                        },
+                        "author": {
+                            "type": "string"
+                        }
+                    }
+                }
+            }
+        }
+    }
+```
+*External Mapping*
+```json
+    GET /library/books/_mapping
+    DELETE /library/books
+
+    PUT /library/books/_mapping
+        {
+        "library":  {
+            "mappings": {
+                "books": {
+                    "properties": {
+                        "id": {
+                            "type": "string"
+                        },
+                        "title": {
+                            "type": "string"
+                        },
+                        "author": {
+                            "type": "date"
+                        }
+                    }
+                }
+            }
+        }
+    }
+```
 #### ElasticSearch Operations ####
 1) Cluster/Index Operation
     *   Active writes are locked, applied to master first then to secondary
@@ -198,4 +272,314 @@ snowball | This works as a standard analyzer plus a stemming at the end of proce
 
     INPUT: déjà vu
     OUTPUT: deja vu
+```
+
+### Installing and Configuring ###
+1) bin
+2) config
+3) data
+4) lib
+5) log
+6) search_app
+
+**bin**
+Contains all the elastic search executables
+
+**config**
+* One for elastic search, one for logging
+* yml can be changed to json
+
+**data**
+* It contains the actual indexes
+
+**lib**
+* It contains all the jar files
+
+**log**
+* It is useful for debugging and analysis
+
+### Changing Configuration ###
+* Change elasticsearch.yml
+
+```bash
+    [elasticsearch.yml]
+    path.data: app_data
+    path.logs: app_logs
+    cluster.name: booksearch
+```
+* Install Requirements
+```bash
+    sudo add-apt-repository ppa:webupd8team/java
+    sudo apt-get update
+    sudo apt-get install oracle-java8-installer
+    java -version
+    sudo service elasticsearch start
+```
+
+### Check localhost ###
+http://localhost:9200/
+
+### Data Ingestion ###
+1) Text Analyzers
+2) Stemming
+3) Multi-fields
+4) Document Routing
+5) Batch Ingestion
+
+**Text Analyzers** ["analyzer": "whitespace"]
+* Analyzers: Standard, Simple, Whitespace, Stop, Keyword, Pattern, Snowball
+
+*Whitespace Example*
+```json
+    GET /library/_analyze?text=Example+teXt&analyzer=whitespace
+    PUT /library/books/_mapping
+    {
+        "properties":  {
+            "title": {
+                "type": "string",
+                "analyzer": "whitespace"
+            }
+        }
+    }
+```
+**Stemming** ["analyzer": "english"]
+* Breaking words down to their base root
+* Example: *Interper* will give *Interpreter*, *Interpreting*
+* For the time being: *machine* will not result in *machines*
+
+```json
+    GET  /library/_search?q=title:machines
+    {
+        "properties":  {
+            "title": {
+                "type": "string",
+                "analyzer": "english"
+            }
+        }
+    }
+```
+**Multi-fields**
+* Multiple fields with boosts
+```json
+    GET  /library/_search?q=title:machines
+    {
+        "properties":  {
+            "title": {
+                "type": "string",
+                "analyzer": "english",
+                "fields": {
+                    "basic": {
+                        "type": "string",
+                        "analyer": "standard",
+                        "boost": "1.5"
+                    }
+                }
+            }
+        }
+    }
+```
+
+**Document Routing**
+* Documents are evenly distributed among all the shards using hash
+* Downside: All shards needs to be queried
+* Custom routing improves performance
+```json
+    POST /library/books/1?routing=2
+```
+
+**Batch Ingestion**
+```json
+    POST /library/books/_bulk
+    POST /library/_stats
+```
+
+**Basic Query Types**
+1) Terms, Match, Range, Filters
+2) Special Query Types
+3) Combining queries
+
+*URL*
+_search?q=:web+design&analyzer=english&default_operator=AND&fields=title^5,description
+
+*JSON*
+```json
+    "simple_query_string": {
+        "query": "web design",
+        "analyzer": "english",
+        "fields": ["title^5", "description"],
+        "default_operatory": "AND"
+    }
+```
+**Terms**
+* Identical matches of the given term
+* Uppercase title won't give the lowercase terms
+```json
+    GET /library/books/_search
+    {
+        "query": {
+            "term": {
+                "title": "JAVA",
+            }
+        }
+    }
+```
+**Match**
+* It uses the same analyzer chain as the field that is being searched
+```json
+    GET /library/books/_search
+    {
+        "query": {
+            "match": {
+                "title": "JAVA",
+                "operator": "and"
+            }
+        }
+    }
+```
+
+**Multi-Match**
+* Allows search multiple fields
+```json
+    GET /library/books/_search
+    {
+        "query": {
+            "multi_match": {
+                "fields": ["title"],
+                "operator": "and"
+            }
+        }
+    }
+```
+**Match Phrase Prefix**
+* Just the keywords
+```json
+    GET /library/books/_search
+    {
+        "query": {
+            "match_phrase_prefix": {
+                "title": "Ajax"
+            }
+        }
+    }
+```
+
+**Range**
+* Greater than/equal to or less than/equal to
+```json
+    GET /library/books/_search
+    {
+        "query": {
+            "FIELD": {
+                "gte": 10,
+                "lte": 20
+            }
+        }
+    }
+```
+
+**Filters**
+* Narrowing down results
+* Filters are heavily cached
+```json
+    GET /library/books/_search
+    {
+        "query": {
+            "FIELD": {
+                "gte": 10,
+                "lte": 20
+            }
+        },
+        "filter": {
+            "range": {
+                "price_gbp": {
+                    "gt": 30
+                }
+            }
+        }
+    }
+```
+
+**Specialized Query Types**
+*Fuzzy*
+* Searching "pithon" will still give "python"
+```json
+    GET /library/books/_search
+    {
+        "query": {
+            "fuzzy": {
+                "title": "pithon"
+            }
+        }
+    }
+```
+*Common*
+* Categorized as low frequency and high frequency
+```json
+    GET /library/books/_search
+   {
+       "query": {
+           "common": {
+               "FIELD": {
+                   "query": "",
+                   "cutoff_frequency": 0.001
+               }
+           }
+       }
+   }
+```
+
+*Wildcard*
+* java* will give java as well as javascript
+```json
+    GET /library/books/_search
+   {
+       "query": {
+           "wildcard": {
+               "title": "java*"
+           }
+       }
+   }
+```
+*RegExp*
+* Regular Expression
+```json
+    GET /library/books/_search
+   {
+       "query": {
+           "regexp": {
+               "id": "[0-9]"
+           }
+       }
+   }
+```
+
+Validate Query
+* Validating Query
+```json
+    GET _validate/query
+    {
+        "query": {
+            "boosting": {
+                "positive": [
+                    {
+                        "term": {
+                            "title": {
+                                "value": "drupal"
+                            }
+                        }
+                    }
+                ],
+                "negative": [
+                    {
+                        "term": {
+                            "title": {
+                                "value": "flash"
+                            }
+                        }
+                    }
+                ],
+                "negative_boost": 0.2
+            }
+        }
+    }
 ```
