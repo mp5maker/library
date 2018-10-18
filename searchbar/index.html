@@ -1,0 +1,77 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <title>New Search Bar</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.css">
+</head>
+<body>
+    <div class="container">
+        <div class="row">
+            <div class="col">
+                <div class="search-box">
+                    <input type="text" class="search-text" placeholder="Type to search"/>
+                    <div class="search-btn">
+                        <i class="fa fa-search"></i>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <style>
+        body {
+            margin: 0;
+            padding: 0;
+            background: firebrick; 
+        }
+        .container {
+           position: absolute;
+           top: 50%;
+           left: 50%;
+        }
+        .search-box {
+            position: relative;
+            transform: translate(-50%, -50%);
+            background: #2f3640;
+            height: 40px;
+            border-radius: 40px;
+            padding: 10px;
+        }
+        
+        .search-box:hover > .search-text {
+            width: 240px;
+            padding: 0 6px;
+        }
+
+        .search-box:hover > .search-btn {
+            background: white; 
+        }
+
+        .search-btn {
+            color: firebrick;
+            float: right;
+            width: 40px;
+            height: 40px;
+            border-radius: 50%;
+            background: #2f3640;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            transition-duration: 0.4s;
+        }
+        .search-text {
+            border: none;
+            background: none;
+            outline: none;
+            padding: 0;
+            font-size: 16px;
+            transition-duration: 0.4s;
+            line-height: 40px;
+            float: left;
+            width: 0;
+        }
+    </style>
+</body>
+</html>

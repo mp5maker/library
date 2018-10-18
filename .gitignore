@@ -18,6 +18,6 @@ db.json
 *.mobi
 *.pdf
 *.ico
-.png
-img
+*.png
+*.img
 *.txt
