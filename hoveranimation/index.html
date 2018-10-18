@@ -1,0 +1,101 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <title>Page Title</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link href="https://fonts.googleapis.com/css?family=Raleway" rel="stylesheet">
+</head>
+<body>
+    <div class="middle">
+        <div class="margin-top">
+            <div class="btn btn1">Hover Me</div>
+        </div>
+        <div class="margin-top">
+            <div class="btn btn2">Hover Me</div>
+        </div>
+        <div class="margin-top">
+            <div class="btn btn3">Hover Me</div>
+        </div>
+        <div class="margin-top">
+            <div class="btn btn4">Hover Me</div>
+        </div>
+    </div>
+    <style>
+        body {
+            padding: 0;
+            margin: 0;
+            background: #2f3640;
+        }
+        .middle {
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+        }
+        .margin-top {
+            margin-top: 1rem;
+        }
+        .btn {
+            position: relative;
+            cursor: pointer;
+            display: block;
+            color: white;
+            font-size: 14px;
+            text-decoration: none;
+            border: 2px solid pink;
+            padding: 14px 50px;
+            text-transform: uppercase;
+            font-family: 'Raleway', sans-serif;
+            overflow: hidden;
+            transition-property: all;
+            transition-duration: 1s;
+            transition-timing-function: ease;
+        }
+        .btn::before {
+            background: pink;
+            content: "";
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            z-index: -1;
+            transition-property: all;
+            transition-duration: 0.6s;
+            transition-timing-function: ease;
+        }
+        .btn1::before {
+            width: 0;
+            height: 100%;
+        }
+        .btn1:hover::before {
+            width: 100%;
+        }
+        .btn2::before {
+            width: 100%;
+            height: 0;
+        }
+        .btn2:hover::before {
+            height: 100%;
+        }
+        .btn3::before {
+            width: 100%;
+            height: 0;
+            transform: translate(-50%, -50%) rotate(45deg)
+        }
+        .btn3:hover::before {
+            height: 380%;
+        }
+        .btn4::before {
+            width: 100%;
+            height: 0;
+            transform: translate(-50%, -50%) rotate(-45deg)
+        }
+        .btn4:hover::before {
+            height: 380%;
+        }
+
+    </style>
+</body>
+</html>
