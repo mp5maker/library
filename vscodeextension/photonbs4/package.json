@@ -1,0 +1,38 @@
+{
+    "name": "photonbs4",
+    "displayName": "photonbs4",
+    "description": "Simple Bootstrap 4 Snippet Generator",
+    "version": "1.0.0",
+    "publisher": "photon",
+    "engines": {
+        "vscode": "^1.28.0"
+    },
+    "repository": {
+        "type": "git",
+        "url": "https://github.com/mp5maker/library"
+    },
+    "categories": [
+        "Snippets"
+    ],
+    "icon": "icon.png",
+    "contributes": {
+        "snippets": [
+            {
+                "language": "html",
+                "path": "./snippets/html.json"
+            },
+            {
+                "language": "javascript",
+                "path": "./snippets/javascript.json"
+            },
+            {
+                "language": "javascriptreact",
+                "path": "./snippets/snippets.json"
+            },
+            {
+                "language": "php",
+                "path": "./snippets/snippets.json"
+            }
+        ]
+    }
+}

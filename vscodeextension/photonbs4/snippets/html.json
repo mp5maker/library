@@ -1,0 +1,36 @@
+{
+    "Photon Button Group": {
+        "prefix": "!buttongroup",
+        "body": [
+            "<div class=\"btn-group\">",
+                "\t<button type=\"button\" class=\"btn btn-primary\">$1</button>",
+                "\t<button type=\"button\" class=\"btn btn-primary\">$2</button>",
+                "\t<button type=\"button\" class=\"btn btn-primary\">$3</button>",
+            "</div>",
+            "$0"
+        ]
+    },
+    "Photon Button Badge": {
+        "prefix": "!buttonbadge",
+        "body": [
+            "<button type=\"button\" class=\"btn btn-primary\">",
+            "\t<span>$1</span>",
+            "\t<span class=\"badge badge-light\">$2</span>",
+            "</button>",
+            "$0"
+        ]
+    },
+    "Photon Pagination": {
+        "prefix": "!pagination",
+        "body": [
+            "<ul class=\"pagination\">",
+            "\t<li class=\"page-item\"><a class=\"page-link\" href=\"#\">Previous</a></li>",
+            "\t<li class=\"page-item\"><a class=\"page-link\" href=\"#\">$1</a></li>",
+            "\t<li class=\"page-item\"><a class=\"page-link\" href=\"#\">$2</a></li>",
+            "\t<li class=\"page-item\"><a class=\"page-link\" href=\"#\">$3</a></li>",
+            "\t<li class=\"page-item\"><a class=\"page-link\" href=\"#\">Next</a></li>",
+            "</ul>",
+            "$0"
+        ]
+    }
+}
