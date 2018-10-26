@@ -85,4 +85,36 @@
             "</div>",
             "$0"
         ]
+    },
+    "Photon List Group": {
+        "prefix": "!listgroupitem",
+        "body": [
+            "<div class=\"list-group\">",
+            "\t<a href=\"${first}\" class=\"list-group-item list-group-item-action\">${itemOne}</a>",
+            "\t<a href=\"${second}\" class=\"list-group-item list-group-item-action\">${itemTwo}</a>",
+            "\t<a href=\"${third}\" class=\"list-group-item list-group-item-action\">${itemThree}</a>",
+            "</div>",
+            "$0"
+        ]
+    },
+    "Photon List Group With Badges": {
+        "prefix": "!listgroupbadge",
+        "body": [
+                "<ul class=\"list-group\">",
+                "\t<li class=\"list-group-item d-flex justify-content-between align-items-center\">",
+                "\t\t${first}",
+                "\t\t<span class=\"badge badge-primary badge-pill\">${numberOne}</span>",
+                "\t</li>",
+                "\t<li class=\"list-group-item d-flex justify-content-between align-items-center\">",
+                "\t\t${second}",
+                "\t\t<span class=\"badge badge-primary badge-pill\">${numberTwo}</span>",
+                "\t</li>",
+                "\t<li class=\"list-group-item d-flex justify-content-between align-items-center\">",
+                "\t\t${third}",
+                "\t\t<span class=\"badge badge-primary badge-pill\">${numberThree}</span>",
+                "\t</li>",
+                "</ul>",
+                "$0"
+        ]
+    }
 }
