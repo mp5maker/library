@@ -32,5 +32,57 @@
             "</ul>",
             "$0"
         ]
-    }
+    },
+    "Photon Card": {
+        "prefix": "!card",
+        "body": [
+            "<div class=\"card\">",
+            "\t<div class=\"card-header\">${header}</div>",
+            "\t<div class=\"card-body\">${content}</div> ",
+            "\t<div class=\"card-footer\">${footer}</div>",
+            "</div>",
+            "$0"
+        ]
+    },
+    "Photon Card Link": {
+        "prefix": "!cardlink",
+        "body": [
+            "<div class=\"card\">",
+            "\t<div class=\"card-body\">",
+            "\t\t<h4 class=\"card-title\">${title}</h4>",
+            "\t\t<p class=\"card-text\">${text}</p>",
+            "\t\t<a href=\"${linkOne}\" class=\"card-link\">${linkDescriptionOne}</a>",
+            "\t\t<a href=\"${linkTwo}\" class=\"card-link\">${linkDescriptionTwo}</a>",
+            "\t</div>",
+            "</div>",
+            "$0"
+        ]
+    }, 
+    "Photon Card Image": {
+        "prefix": "!cardimage",
+        "body": [
+            "<div class=\"card\" style=\"width:400px\">",
+            "\t<img class=\"card-img-top\" src=\"${cardImage}\" alt=\"${altCardImage}\">",
+            "\t<div class=\"card-body\">",
+            "\t\t<h4 class=\"card-title\">${title}</h4>",
+            "\t\t<p class=\"card-text\">${text}</p>",
+            "\t\t<a href=\"#\" class=\"btn btn-${color}\">${button}</a>",
+            "\t</div>",
+            "</div>",
+            "$0"
+        ]
+    },
+    "Photon Card Image Overlay": {
+        "prefix": "!cardimageoverlay",
+        "body": [
+            "<div class=\"card\" style=\"width:500px\">",
+            "\t<img class=\"card-img-top\" src=\"${image}\" alt=\"${imagealt}\">",
+            "\t<div class=\"card-img-overlay\">",
+            "\t\t<h4 class=\"card-title\">${title}</h4>",
+            "\t\t<p class=\"card-text\">${text}</p>",
+            "\t\t<a href=\"${link}\" class=\"btn btn-${color}\">${linktext}</a>",
+            "\t</div>",
+            "</div>",
+            "$0"
+        ]
 }

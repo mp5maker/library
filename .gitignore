@@ -19,5 +19,6 @@ db.json
 *.pdf
 *.ico
 *.png
+!vscodeextension/photonbs4/icon.png
 img
 *.txt
