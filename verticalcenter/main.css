@@ -1,0 +1,47 @@
+body {
+  background-color: rgba(20, 25, 25, 0.9);
+  color: white;
+}
+
+h1, h4 {
+  text-align: center;
+}
+
+.container.section-one {
+  display: table;
+  height: 250px;
+  width: 100%;
+  border: 1px solid firebrick;
+  background-color: teal;
+}
+
+.container.section-one p {
+  display: table-cell;
+  vertical-align: middle;
+  text-align: center;
+}
+
+/* /////////////////////////////////////////////////// */
+.container.section-two {
+  position: relative;
+  background-color: rgba(255, 0, 0, 0.4);
+  height: 250px;
+  border: 1px solid black;
+}
+
+.container.section-two p {
+  position: absolute;
+  top: 50%;
+  width: 100%;
+  transform: translateY(-50%);
+  text-align: center;
+}
+
+/* /////////////////////////////////////////////////// */
+.container.section-three {
+  background-color: darkgrey;
+  height: 250px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}

@@ -1,0 +1,74 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <title>CSS Variables</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+</head>
+<body>
+    <div class="container section-one">
+        <div class="row">
+            <div class="col">
+                <h1> CSS Variables </h1>
+                <p class="bg-secondary">
+                    Secondary Color
+                </p>
+                <p class="bg-danger">
+                    Danger Color
+                </p>
+                <p class="bg-info">
+                    Info Color
+                </p>
+                <p class="bg-warning">
+                    Warning Color
+                </p>
+                <p class="bg-success">
+                    Success Color
+                </p>
+            </div>
+        </div>
+    </div>
+    <style>
+        :root {
+            --primary-color: rgba(20, 20, 20, 0.9);
+            --secondary-color: rgba(50, 50, 50, 0.9);
+            --info-color: rgba(20, 20, 50, 0.9);
+            --danger-color: rgba(50, 20, 20, 0.9);
+            --success-color: rgba(20, 50, 20, 0.9);
+            --warning-color: rgb(251, 221, 64, 0.9);
+        }
+
+        body {
+            background: var(--primary-color);
+            color: white;
+        }
+
+        h1, p {
+            text-align: center;
+            padding-top: 24px;
+            padding-bottom: 24px;
+        }
+
+        .bg-secondary {
+            background-color: var(--secondary-color);
+        }
+
+        .bg-info {
+            background-color: var(--info-color);
+        }
+
+        .bg-success {
+            background-color: var(--success-color);
+        }
+
+        .bg-warning {
+            background-color: var(--warning-color);
+        }
+
+        .bg-danger {
+            background-color: var(--danger-color);
+        }
+    </style>
+</body>
+</html>
