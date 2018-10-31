@@ -1,0 +1,26 @@
+body {
+    background-color: rgba(20, 20 ,20 , 0.9);
+    color: white;
+}
+
+h4 {
+    text-align: center;
+}
+
+.section-one, 
+.section-two, 
+.section-three, 
+.section-four, 
+.section-five,
+.section-six {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    background-color: rgba(50, 20, 20, 0.9);
+}
+
+.view-port {
+    width: 200px;
+    height: 200px;
+    border: 3px solid firebrick;
+}

@@ -1,0 +1,101 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <title>Creating SVG</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="stylesheet" type="text/css" media="screen" href="main.css" />
+</head>
+<body>
+    <h4> Circle </h4>
+    <div class="container section-one">
+        <div class="row">
+            <div class="col">
+                <svg width="250" height="250">
+                    <!-- Center Point (cx, cy) background-color (fill) 
+                         border (stroke) border-width (stroke-width) -->
+                    <circle cx="125" cy="125" r="80" 
+                        fill="rgba(20, 50, 20, 0.9)" 
+                        stroke="white" stroke-width="2px"/>
+                </svg>
+            </div>
+        </div>
+    </div>
+    <hr/>
+    <h4> Nested Circle </h4>
+    <div class="container section-two">
+        <div class="row">
+            <div class="col">
+                <svg width="250" height="250">
+                    <circle cx="125" cy="125" r="80" 
+                        fill="rgba(20, 50, 20, 0.9)" 
+                        stroke="white" stroke-width="4px"/>
+                    <circle cx="125" cy="125" r="30" 
+                        fill="rgba(20, 20, 50, 0.9)" 
+                        stroke="white" stroke-width="1px"/>
+                </svg>
+            </div>
+        </div>
+    </div>
+    <hr/>
+    <h4> Rectangle </h4>
+    <div class="container section-three">
+        <div class="row">
+            <div class="col">
+                <svg width="250px" height="250px">
+                    <!-- Starting Position (x,y) Rounded Corners(rx, ry) -->
+                    <rect x="25" y="25" rx="25" ry="25" height="200" width="200"/>
+                </svg>
+            </div>
+        </div>
+    </div>
+    <hr/>
+
+    <h4> Lines </h4>
+    <div class="container section-four">
+        <div class="row">
+            <div class="col">
+                <svg width="250px" height="250px">
+                    <!-- Coordinates(x1,y1) to (x2,y2) -->
+                    <line x1="25" y1="125" x2="200" y2="100" stroke="white"/>  
+                </svg>
+            </div>
+        </div>
+    </div>
+    <hr/>
+
+    <h4> Polygon [Triangle] </h4>
+    <div class="container section-five">
+        <div class="row">
+            <div class="col">
+                <svg width="200px" height="200px">
+                    <!-- Different Points (x1, y1, x2, y2, x3, y3) -->
+                    <polygon fill="yellow" points="100, 25, 200, 200, 0, 200"/>
+                </svg>
+            </div>
+        </div>
+    </div>
+    <hr/>
+
+    <h4> Viewbox </h4>
+    <div class="container section-six">
+        <div class="row">
+            <div class="col">
+                <!-- ViewBox -->
+                <!-- Through CSS given width and height is 200px -->
+                <!-- preserveAspectRatio will not scale -->
+                <!-- <svg viewBox="0 0 200 200" class="view-port" preserveAspectRatio="none"> -->
+                <svg viewBox="0 0 200 200" class="view-port">
+                    <!-- Points (x1,y1) ==> Moving the view-port (starting position)
+                         Dimension (width, height) ==> Zoom In -->
+                         <!-- eg: 400 400 will zoom out ==> It wants to cramp 200*2 more pixels -->
+                    <circle cx="100" cy="100" r="100" fill="rgba(20, 20, 50, 0.9)" 
+                        stroke="white" stroke-width="1px" />
+                </svg>
+            </div>
+        </div>
+    </div>
+    <hr/>
+</body>
+</html>
