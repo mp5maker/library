@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <title>Service Worker Test</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="stylesheet" type="text/css" media="screen" href="node_modules/bootstrap/dist/css/bootstrap.css" />
+    <link rel="stylesheet" type="text/css" media="screen" href="main.css" />
+</head>
+<body>
+    <div class="container">
+        <div class="row">
+            <div class="col p-5 m-5">
+                <div>
+                    <h2 class="text-left">
+                        Testing out the Service Worker
+                    </h2>
+                </div>
+                <div>
+                    <p>
+                        <strong>
+                            Service Worker status: 
+                        </strong>
+                        <span id="support"></span>
+                    </p>
+                </div>
+                <div>
+                    <p>
+                        <strong>
+                            Service Worker Registration: 
+                        </strong>
+                        <span id="registration-state"></span>
+                    </p>
+                </div>
+            </div>
+        </div>
+    </div>
+    <script src="main.js"></script>
+</body>
+</html>
