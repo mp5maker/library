@@ -15,7 +15,7 @@ function init() {
 
         // Register Service Worker
         navigator.serviceWorker
-        .register('./serviceworker.js')
+        .register('serviceworker.js', {scope: ""})
         .then((registration) => {
             var registrationState = document.getElementById('registration-state');
             if (registration) {
@@ -27,5 +27,13 @@ function init() {
         })
     } else {
         console.log(notSupportedText);
+    }
+
+    // Instantiating Indexed Db
+    if (window.indexedDB) {
+        console.log('indexedDb activated');
+    } else {
+        console.log('This browser doesn\'t support indexedDB');
+        return;
     }
 }

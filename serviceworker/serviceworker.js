@@ -6,7 +6,6 @@ const cacheAssets = [
     'main.css',
     'index.html',
     'main.js',
-    'serviceworker.js'
 ]
 
 // Install Event [Cache Adding]
