@@ -10,6 +10,8 @@
   "author": "Shabuktagin Photon Khan",
   "license": "MIT",
   "dependencies": {
-    "bootstrap": "^4.1.3"
+    "bootstrap": "^4.1.3",
+    "idb": "^2.1.3",
+    "lodash": "^4.17.11"
   }
 }
