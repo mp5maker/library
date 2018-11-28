@@ -1,39 +1,46 @@
 window.onload = init;
 
 function init() {
-    
-    var support = document.getElementById('support');
-    var supportedText = 'Service Worker is supported';
-    var notSupportedText = 'Service Worker is not supported';
-    var serviceWorkerRegistered = 'Service Worker Registered';
-    var serviceWorkerError = "Service Worker Error: ";
+    // Service Worker
+    var supportDisplay = document.getElementById('service-worker-support');
+    var registrationDisplay = document.getElementById('service-worker-registration');
+    var supported = "Is Supported";
+    var notSupported = "Is not supported in your version of browser";
 
-    // Check if the service worker is supported by the browser
-    if ('serviceWorker' in navigator) {
-        console.log(supportedText);
-        support.innerHTML = supportedText;
-
-        // Register Service Worker
-        navigator.serviceWorker
-        .register('serviceworker.js', {scope: ""})
+    // Check whether the browser supports service worker or not
+    if (navigator.serviceWorker) {
+        supportDisplay.innerHTML = supported;
+        // Service Worker Registration
+        navigator.serviceWorker.register('serviceworker.js')
         .then((registration) => {
-            var registrationState = document.getElementById('registration-state');
             if (registration) {
-                registrationState.innerHTML = serviceWorkerRegistered;
+                registrationDisplay.innerHTML = "Registered"
             }
-        })
-        .catch( (error) => {
-            console.log(serviceWorkerError + error);
+        }).catch((error) => {
+            registrationDisplay.innerHTMNL = error;
         })
     } else {
-        console.log(notSupportedText);
+        supportDisplay.innerHTML = notSupported;
     }
 
-    // Instantiating Indexed Db
+    // Check indexedDb is supported or not
+    var indexedDBDisplay = document.getElementById('indexed-db-support');
+    var indexDBSupported = "Is Supported";
+    var indexDBNotSupported = "Is not Supported";
     if (window.indexedDB) {
-        console.log('indexedDb activated');
+        indexedDBDisplay.innerHTML = indexDBSupported;
+        console.log("IndexedDB: " + indexDBSupported);
+
+        // Open a database
+        var dbPromise = window.indexedDB.open('TestDatabase', 1, (upgradeDB) => {
+            console.log("Making a new object store");
+            if (!upgradeDB.objectStoreNames.contains('employee')) {
+                // Create Table
+                upgradeDb.createObjectStore('employee', {autoIncrement: true});
+            }
+        });
+
     } else {
-        console.log('This browser doesn\'t support indexedDB');
-        return;
+        indexedDBDisplay.innerHTML = indexDBNotSupported;
     }
 }

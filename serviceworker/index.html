@@ -3,39 +3,74 @@
 <head>
     <meta charset="utf-8" />
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <title>Service Worker Test</title>
+    <title>Page Title</title>
     <meta name="viewport" content="width=device-width, initial-scale=1">
-    <link rel="stylesheet" type="text/css" media="screen" href="node_modules/bootstrap/dist/css/bootstrap.css" />
+    <link rel="stylesheet" type="text/css" media="screen" href="./node_modules/bootstrap/dist/css/bootstrap.css" />
     <link rel="stylesheet" type="text/css" media="screen" href="main.css" />
+    <script src="main.js"></script>
 </head>
 <body>
     <div class="container">
         <div class="row">
-            <div class="col p-5 m-5">
+            <div class="col text-left p-5 m-5">
                 <div>
-                    <h2 class="text-left">
-                        Testing out the Service Worker
-                    </h2>
+                    <h4>
+                        Testing the Service Worker
+                    </h4>
                 </div>
                 <div>
-                    <p>
+                    <span>
                         <strong>
-                            Service Worker status: 
+                            Service Worker Support: 
                         </strong>
-                        <span id="support"></span>
-                    </p>
+                    </span>
+                    <span>
+                        <span id="service-worker-support"></span>
+                    </span>
                 </div>
                 <div>
-                    <p>
+                    <span>
                         <strong>
                             Service Worker Registration: 
                         </strong>
-                        <span id="registration-state"></span>
-                    </p>
+                    </span>
+                    <span>
+                        <span id="service-worker-registration"></span>
+                    </span>
                 </div>
             </div>
         </div>
     </div>
-    <script src="main.js"></script>
+    <div class="container">
+        <div class="row">
+            <div class="col text-left p-5 m-5">
+                <div>
+                    <h4>
+                        Testing the Indexed DB
+                    </h4>
+                </div>
+                <div>
+                    <span>
+                        <strong>
+                            Indexed Db: 
+                        </strong>
+                    </span>
+                    <span>
+                        <span id="indexed-db-support"></span>
+                    </span>
+                </div>
+                <div>
+                    <span>
+                        <strong>
+                            Employee Information 
+                        </strong>
+                    </span>
+                </div>
+                <div>
+                    <div id="employee-information"></div>
+                </div>
+            </div>
+        </div>
+    </div>
 </body>
 </html>
