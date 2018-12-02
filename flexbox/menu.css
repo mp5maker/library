@@ -1,0 +1,81 @@
+* {
+    margin: 0;
+}
+
+body, html {
+    height: 100%;
+    margin: 0;
+    padding: 0;
+    background-color: rgba(20, 20, 20, 0.8);
+}
+
+.container {
+    text-align: center;
+    color: white;
+}
+
+.wrapper {
+    width: 100%;
+}
+
+nav {
+    background-color: lightcyan;
+}
+
+nav ul {
+    list-style-type: none;
+    padding: 0;
+}
+
+nav a {
+    text-decoration: none;
+    color: salmon;
+    display: block;
+    padding: 10px;
+}
+
+nav a:hover {
+    background-color: floralwhite;
+}
+
+/* Navbar Using Flex */
+@media only screen and
+(min-width: 767px) {
+    .normal nav ul {
+        display: flex;
+    }
+    
+    .justify-content-center nav ul {
+        display: flex;
+        justify-content: center;
+    }
+    
+    .justify-content-flex-start nav ul {
+        display: flex;
+        justify-content: flex-start;
+    }
+    
+    .justify-content-flex-end nav ul {
+        display: flex;
+        justify-content: flex-end;
+    }
+    
+    .justify-content-space-around nav ul {
+        display: flex;
+        justify-content: space-around;
+    }
+    
+    .justify-content-space-between nav ul {
+        display: flex;
+        justify-content: space-between;
+    }
+    
+    .nested nav {
+        display: flex;
+        justify-content: space-between;
+    }
+
+    .nested nav > ul {
+        display: flex;
+    }
+}

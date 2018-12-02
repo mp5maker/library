@@ -1,0 +1,166 @@
+body, html {
+    height: 100%;
+    margin: 0;
+    padding: 0;
+    color: white;
+    background-color: rgba(20, 20, 20, 0.8);
+}
+
+/* Flex Containers */
+.container {
+    border-bottom: 1px solid white;
+    text-align: center;
+}
+
+.wrapper.grow, .wrapper.shrink {
+    width: 100%;
+    /* max-width: 960px;
+    margin: 0 auto; */
+}
+
+/* Flex */
+.flex-container {
+    display: flex;
+    background-color: lightgrey;
+}
+
+.one {
+    background-color: firebrick;
+}
+
+.two {
+    background-color: saddlebrown;
+}
+
+.three {
+    background-color: lightcoral;
+}
+/* ***************************************************************************** */
+
+
+/* Flex Grow */
+.grow .box {
+    height: 100px;
+    min-width: 100px;
+    /* flex-grow: 1; */
+}
+
+.grow .one {
+    flex-grow: 6;
+}
+
+.grow .two {
+    flex-grow: 4;
+}
+
+.grow .three {
+    flex-grow: 2;
+}
+/* ***************************************************************************** */
+
+/* Flex Shrink */
+.shrink .box {
+    height: 100px;
+    width: 100%;
+    flex-shrink: 1;
+}
+
+.shrink .one {
+    flex-shrink: 1;
+}
+
+.shrink .two {
+    flex-shrink: 2;
+}
+
+.shrink .three {
+    flex-shrink: 2;
+}
+/* ***************************************************************************** */
+
+/* Flex Wrap */
+.wrap .flex-container {
+    display: flex;
+    flex-wrap: wrap;
+}
+
+.wrap .box {
+    height: 100px;
+    width: 200px;
+    flex-grow: 1;
+}
+/* ***************************************************************************** */
+
+/* Flex Basis */
+.basis .box {
+    height: 100px;
+    flex-basis: 100%;
+}
+/* ***************************************************************************** */
+
+/* Flex Combine  */
+.combine .flex-container {
+    display: flex;
+    flex-wrap: wrap;
+}
+
+.combine .box {
+    height: 100px;
+    /* flex: flex-grow flex-shrink flex-basis */
+    flex: 1 1 200px;
+}
+/* ***************************************************************************** */
+
+/* Flex Flow */
+.column .flex-container {
+    display: flex;
+    flex-flow: column;
+}
+
+.column .box {
+    flex-basis: 100px; 
+}
+/* ***************************************************************************** */
+
+/* Flex Equal Height */
+.eq-height .row {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-between;
+}
+
+.eq-height .col-md-8 {
+    flex: 0 1 60%;
+}
+
+.eq-height .col-md-4 {
+    flex: 0 1 40%;
+}
+/* ***************************************************************************** */
+
+/* Flex Ordering */
+.order .flex-container {
+    display: flex;
+    flex-wrap: wrap;
+}
+
+.order .box {
+    flex: 0 1 25%;
+    height: 100px;
+}
+
+.order .one {
+    order: 3;
+}
+
+.order .two {
+    order: 1;
+}
+
+.order .three {
+    order: 4;
+}
+
+.order .four {
+    order: 2;
+}
