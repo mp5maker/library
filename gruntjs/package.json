@@ -1,0 +1,26 @@
+{
+  "name": "gruntjs",
+  "version": "1.0.0",
+  "description": "",
+  "main": "main.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "keywords": [],
+  "author": "Shabuktagin Photon Khan",
+  "license": "MIT",
+  "dependencies": {
+    "bootstrap": "^4.1.3",
+    "g": "^2.0.1",
+    "grunt-cli": "^1.3.2",
+    "jquery": "^3.3.1",
+    "popper.js": "^1.14.6"
+  },
+  "devDependencies": {
+    "grunt": "^1.0.3",
+    "grunt-contrib-concat": "^1.0.1",
+    "grunt-contrib-uglify": "^4.0.0",
+    "grunt-sass": "^3.0.2",
+    "node-sass": "^4.10.0"
+  }
+}
