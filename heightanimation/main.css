@@ -1,0 +1,40 @@
+body, html {
+    height: 100%;
+    margin: 0;
+    padding: 0;
+    background-color: #2f3640;
+}
+
+ h4 {
+     color: white;
+ }
+
+.btn {
+    position: relative;
+    display: block;
+    background-color: white;
+    overflow: hidden;
+    transition-property: all;
+    transition-duration: 0.25s;
+    transition-timing-function: ease;
+}
+
+.btn::before {
+    background-color: firebrick;
+    content: "";
+    height: 500px;
+    position: absolute;
+    top: 50%;
+    left: 0;
+    transform: translateY(-50%);
+    transition-property: all;
+    transition-duration: 0.25s;
+    transition-timing-function: ease;
+    width: 5px;
+    height: 0;
+    z-index: 0;
+}
+
+.btn:hover::before {
+    height: 100%;
+}
