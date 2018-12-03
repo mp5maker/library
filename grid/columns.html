@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <title>Display Grid</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <style>
+        html, body {
+            margin: 0;
+            padding: 0;
+            height: 100%;
+        }
+        body {
+            background-color: rgba(20, 0, 0, 0.9);
+            color: white;
+            text-align: center;
+        }
+        #content {
+            margin-top: 50px;
+            max-width: 1440px;
+            margin: 0 auto;
+            display: grid;
+            /* grid-template-columns: 1fr 1fr 1fr; */
+            /* grid-template-columns: 1fr 2fr 1fr; */
+            grid-template-columns: repeat(3, 1fr);
+        }
+        #content div {
+            padding: 15px;
+        }
+        #content div:nth-child(even) {
+            background-color: lightgrey;
+        }
+        #content div:nth-child(odd) {
+            background-color: darkgrey;
+        }
+    </style>
+</head>
+<body>
+    <div id="content">
+        <div>1</div>
+        <div>2</div>
+        <div>3</div>
+        <div>4</div>
+        <div>5</div>
+        <div>6</div>
+        <div>7</div>
+        <div>8</div>
+        <div>9</div>
+    </div>
+</body>
+</html>

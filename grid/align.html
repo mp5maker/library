@@ -1,0 +1,89 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta charset="utf-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <title>Display Grid</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <style>
+        html,
+        body {
+            margin: 0;
+            padding: 0;
+            height: 100%;
+        }
+
+        body {
+            background-color: rgba(20, 0, 0, 0.9);
+            color: white;
+            text-align: center;
+        }
+
+        #content {
+            margin-top: 50px;
+            max-width: 1440px;
+            margin: 0 auto;
+            display: grid;
+            /* grid-template-columns: 1fr 1fr 1fr; */
+            /* grid-template-columns: 1fr 2fr 1fr; */
+            grid-template-columns: repeat(3, 1fr);
+
+            /* grid-auto-rows: 200px; */
+            /* grid-auto-rows: minmax(200px, auto); */
+            grid-template-rows: repeat(3, minmax(200px, auto));
+
+            /* grid-column-gap: 10px; */
+            /* grid-row-gap: 10px; */
+            grid-gap: 10px;
+            
+            /* align-items: start;
+            align-items: end; */
+            align-items: stretch;
+
+            /* justify-items: start;
+            justify-items: end; */
+            justify-items: stretch;
+        }
+
+        .one {
+            justify-self: end;
+            align-self: end;
+        }
+
+        .two {
+            justify-self: start;
+            align-self: start;
+        }
+
+        .three {
+            justify-self: center;
+            align-self: center;
+        }
+
+        #content div {
+            padding: 15px;
+        }
+
+        #content div:nth-child(even) {
+            background-color: lightgrey;
+        }
+
+        #content div:nth-child(odd) {
+            background-color: darkgrey;
+        }
+    </style>
+</head>
+
+<body>
+    <div id="content">
+        <div class="one">1</div>
+        <div class="two">2</div>
+        <div class="three">3</div>
+        <div class="four">4</div>
+        <div class="five">5</div>
+        <div class="six">6</div>
+    </div>
+</body>
+
+</html>

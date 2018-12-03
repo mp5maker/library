@@ -1,0 +1,75 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <title>Mozaic Grid</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <style>
+        * {
+            margin: 0;
+        }
+
+        body, html {
+            height: 100%;
+            margin: 0;
+            padding: 0;
+            text-align: center;
+            color: white;
+        }
+
+        .container {
+            margin-top: 12px;
+        }
+
+        #content {
+            max-width: 1440px;
+            margin: 0 auto;
+            display: grid;
+            grid-template-columns: repeat(4, 1fr);
+            grid-auto-rows: minmax(200px, auto);
+            grid-gap: 10px;
+            grid-template-areas:
+            "header  header  header  header"
+            ".    nav     nav     ."
+            "aside   aside   main    main"
+            "aside   aside   main    main"
+            "section section section section"
+            "footer  footer  footer  footer"
+        }
+        .header {
+            grid-area: header;
+        }
+        .main {
+            grid-area: main;
+        }
+        .section {
+            grid-area: section;
+        }
+        .aside {
+            grid-area: aside;
+        }
+        .footer {
+            grid-area: footer;
+        }
+        .nav {
+            grid-area: nav;
+        }
+        #content div {
+            background-color: rgba(20, 0, 0, 0.8);
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div id="content">
+           <div class="header">Header</div>
+           <div class="main">Main</div>
+           <div class="section">Section</div>
+           <div class="aside">Aside</div>
+           <div class="footer">Footer</div>
+           <div class="nav">Nav</div>
+        </div>
+    </div>
+</body>
+</html>
