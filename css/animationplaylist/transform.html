@@ -1,0 +1,98 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <title>Page Title</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <style>
+        * {
+            margin: 0;
+        }
+
+        body, html {
+            margin: 0;
+            height: 100%;
+            padding: 0;
+        }
+        body {
+            background-color: rgba(20, 20, 20, 0.8);
+            text-align: center;
+        }
+        .container {
+            margin-top: 50px;
+            margin-left: 50%;
+        }
+        .box {
+            width: 100px;
+            height: 100px;
+            background-image: radial-gradient(circle at 50% 120%, lime, firebrick);
+            border-radius: 50%;
+            margin-bottom: 50px;
+        }
+
+        .one {
+            transform: translateX(200px);
+        }
+
+        .two {
+            transform: translateY(-100px);
+        }
+
+        .three {
+            transform: translate(100px, -50px);
+        }
+
+        .four {
+            /* transform: scaleX(1.2); */
+            /* transform: scaleY(1.2); */
+            /* transform: scale(1.2); */
+            transform: scale(1.2, 1.1);
+        }
+        [class*='rotate-'] {
+            width: 100px;
+            height: 100px;
+            background-image: linear-gradient(violet, firebrick);
+            margin-bottom: 50px;
+        }
+        .rotate-1 {
+            transform: rotateX(120deg);
+        }
+
+        .rotate-2 {
+            transform: rotateY(120deg);
+        }
+
+        .rotate-3 {
+            transform: rotateZ(120deg);
+        }
+
+        .rotate-4 {
+            transform: translate(15px) scale(1.2) rotate(120deg)
+        }   
+
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="row">
+            <div class="col">
+                <div class="box one"></div>
+                <div class="box two"></div>
+                <div class="box three"></div>
+                <div class="box four"></div>
+            </div>
+        </div>
+    </div>
+    <div class="container">
+        <div class="row">
+            <div class="col">
+                <div class="rotate-1"></div>
+                <div class="rotate-2"></div>
+                <div class="rotate-3"></div>
+                <div class="rotate-4"></div>
+            </div>
+        </div>
+    </div>
+</body>
+</html>

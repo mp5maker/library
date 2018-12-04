@@ -1,0 +1,79 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta charset="utf-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <title>CSS Transition</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <style>
+        * {
+            margin: 0;
+        }
+
+        body,
+        html {
+            margin: 0;
+            height: 100%;
+            padding: 0;
+        }
+
+        body {
+            background-color: rgba(20, 20, 20, 0.8);
+            text-align: center;
+        }
+
+        .container {
+            margin-top: 50px;
+            margin-left: 50%;
+        }
+
+        .circle {
+            width: 100px;
+            height: 100px;
+            border-radius: 50%;
+            margin-bottom: 50px;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            color: white;
+        }
+        
+        .one {
+            background-color: firebrick;
+            transition: background 1s, transform 0.3s linear;
+        }
+
+        .one:hover {
+            background-color: pink;
+            transform: rotate(-360deg);
+        }
+
+        .two {
+            background-color: lightgrey;
+            transition: background 1s 0s ease-in-out, transform 0.3s 0s linear;
+        }
+
+        .two:hover {
+            background: grey;
+            transform: rotate(-360deg);
+        }
+    </style>
+</head>
+
+<body>
+    <div class="container">
+        <div class="row">
+            <div class="col">
+                <div class="circle one">
+                    <span> One </span>
+                </div>
+                <div class="circle two">
+                    <span> Two </span>
+                </div>
+            </div>
+        </div>
+    </div>
+</body>
+
+</html>
