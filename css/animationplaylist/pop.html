@@ -1,0 +1,78 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <title>Card Flip</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <style>
+        * {
+            margin: 0;
+        }
+
+        body, html {
+            margin: 0;
+            padding: 0;
+            height: 100%;
+        }
+
+        body {
+            background-color: rgba(20, 20, 20, 0.8);
+        }
+
+        .container {
+            margin-top: 50px;
+        }
+        
+        .container  .card {
+            position: relative;
+            top: -250px;
+            left: 40%;
+            width: 500px;
+            height: 200px;
+            background-color: white;
+            transform-origin: 10px 10px;
+            animation: drop 0.5s ease forwards, swing 2s 1s ease forwards;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        @keyframes drop {
+            0% {
+                opacity: 0;
+            } 70% {
+                transform: translateY(450px);
+            } 100% {
+                opacity: 1;
+                transform: translateY(425px);
+            }
+        }
+        
+        @keyframes swing {
+            0% {
+                transform: translateY(425px) rotateZ(0deg);
+            } 40% {
+                transform: translateY(425px) rotateZ(90deg);
+            } 70% {
+                transform: translateY(425px) rotateZ(70deg);
+            } 100% {
+                transform: translateY(425px) rotateZ(75deg);
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="row">
+            <div class="col">
+                <div class="card">
+                    <span>
+                        Card 
+                    </span>
+                </div>
+            </div>
+        </div>
+    </div>
+</body>
+</html>
