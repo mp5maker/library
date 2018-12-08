@@ -1,0 +1,44 @@
+@import 'sass/customgrid';
+
+* {
+    margin:0;
+}
+
+html, body {
+    margin: 0;
+    padding: 0;
+    height: 100%;
+}
+
+body {
+    background-color: rgba(20, 20, 20, 0.8);
+}
+
+.custom {
+    div {
+        height: 50px;
+        color: white;
+        background-color: grey;
+        text-align: center;
+        @include custom-equal-grid(3, 1%);
+    }
+}
+
+.custom-2 {
+    div {
+        height: 50px;
+        color: white;
+        border: 1px solid white;
+        background-color: grey;
+        text-align: center;
+        @include custom-row-grid(4, 3, 3, 2, 1%);
+    }
+}
+
+.equal-column {
+    color: white;
+    border: 1px solid white;
+    .col {
+        border: 1px solid lightgreen;
+    }
+}

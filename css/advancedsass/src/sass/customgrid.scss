@@ -1,0 +1,20 @@
+@mixin custom-equal-grid($columns, $margin) {
+    float: left;
+    margin-right: $margin;
+    margin-bottom: $margin;
+    width: (100% - (($columns - 1)*$margin))/$columns;
+    &:nth-child(#{$columns}n) {
+        margin-right: 0;
+    }
+}
+
+@mixin custom-row-grid($arguments...) {
+    @if(length($arguments) == 2) {
+        @include custom-equal-grid(nth($arguments, 1), nth($arguments, 2));
+    }
+    @if(length($arguments) > 2) {
+        @for $i from 1 through length($arguments) - 1 {
+            @include custom-equal-grid(nth($arguments, $i), nth($arguments, length($arguments)))
+        }
+    }
+}
