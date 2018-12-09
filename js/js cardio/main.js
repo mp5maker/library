@@ -16,6 +16,10 @@ function init () {
     // Sentence Reverse
     console.log("%c Sentence Reverse", "background-color: violet; color: white;");
     console.log(sentenceReverse("This is not yours"));
+
+    // Letter Changes
+    console.log("%c Letter Changes", "background-color: purple; color: white;");
+    console.log(sentenceReverse("Argument goes here!"));
 }
 
 /**
@@ -72,4 +76,36 @@ var sentenceReverse = (sentence) => {
         reverseSentenceArray.push(value.split('').reverse().join(''));
     });
     return reverseSentenceArray.reverse().join(' ');
+}
+
+/**
+ * Change the current position of the letter to next one
+ * Capitalize the vowels [aeiou]
+ * @param {string} sentence 
+ */
+var letterChanges = (sentence) => {
+    let lettersArray = 'abcdefghijklmnopqrstuvwxyz';
+    let vowelsArray = /[aeiou]+/;
+    let sentenceArray = sentence.toLowerCase().split(' ');
+    let newWordArray = [];
+    sentenceArray.forEach((word) => {
+        let wordSplit = word.split('');
+        let newWord = "";
+        wordSplit.forEach((alphabet) => {
+            let alphabetKey = parseInt(Object.keys(lettersArray).find((key) => lettersArray[key] == alphabet)) + 1;
+            if (alphabetKey) {
+                if (vowelsArray.test(lettersArray[alphabetKey])) {
+                    newWord += lettersArray[alphabetKey].toUpperCase();
+                } else {
+                    newWord += lettersArray[alphabetKey];
+                }
+            } else if (alphabetKey == 25) {
+                newWord += lettersArray[0]
+            } else {
+                newWord += alphabet;
+            }
+        });
+        newWordArray.push(newWord);
+    });
+    return newWordArray.join(' ');
 }
