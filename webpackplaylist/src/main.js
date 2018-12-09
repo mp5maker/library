@@ -1,5 +1,9 @@
+import './main.scss';
+
 window.onload = init
 
 function init() {
-    console.log("Webpack running....");
+    const checking = "Webpack Running...."
+    console.log(checking);
+    const great = checking;
 }

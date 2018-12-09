@@ -7,3 +7,7 @@
     
     npm install webpack -g
     npm install webpack-cli -g
+    
+    npm install --save-dev babel-core babel-loader babel-preset-env
+    npm install --save-dev style-loader css-loader
+    npm install --save-dev node-sass sass-loader
