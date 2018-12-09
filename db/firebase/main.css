@@ -1,0 +1,52 @@
+* {
+    margin: 0;
+}
+
+body, html {
+    padding: 0;
+    margin: 0;
+    height: 100%;
+}
+
+body {
+    background-color: rgba(20, 20, 20, 0.8);
+}
+
+.container {
+    margin-top: 5px;
+    text-align: center;
+    color: white;
+}
+
+.container .row {
+    margin-top: 5px;
+}
+
+.container .row .col {
+    margin-top: 5px;
+}
+
+.container .row .col ul {
+    list-style-type: none;
+}
+
+.container .row .col li {
+    border: 1px solid white;
+    margin-bottom: 25px;
+}
+
+.container .row .col li .cancel {
+    position: absolute;
+    width: 15px;
+    height: 15px;
+    background-color: firebrick;
+    border-radius: 50%;
+    right: 25px;
+    /* top: -5px; */
+    /* bottom: 90px;  */
+}
+
+.container .row .col ul li span {
+    text-align: left;
+    display: block;
+}

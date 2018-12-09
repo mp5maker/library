@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <title>Firebase Starter</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="stylesheet" type="text/css" media="screen" href="./node_modules/bootstrap/dist/css/bootstrap.css" />
+    <link rel="stylesheet" type="text/css" media="screen" href="main.css" />
+</head>
+<body>
+    <div class="container">
+        <div class="row">
+            <div class="col">
+                <h3>
+                    Firebase Starter Kit
+                </h3>
+            </div>
+        </div>
+    </div>
+    <div class="container">
+        <div class="row">
+            <div class="col">
+                <div class="cafe-header">
+                    <h4> <strong>Employee</strong></h4>
+                </div>
+                <ul class="cafe-body"></ul>
+            </div>
+        </div>
+    </div>
+    <div class="container">
+        <div class="row">
+            <div class="col">
+                <form id="create-cafe">
+                    <input type="text" name="name" placeholder="Name"/>
+                    <input type="number" name="age" placeholder="Age"/>
+                    <input type="number" name="salary" placeholder="Salary"/>
+                    <input type="date" name="created_on" placeholder="Date"/>
+                    <input type="submit" value="Confirm"/>
+                </form>
+            </div>
+        </div>
+    </div>
+
+
+    <!-- <script src="https://www.gstatic.com/firebasejs/5.7.0/firebase.js"></script> -->
+    <script src="https://www.gstatic.com/firebasejs/5.7.0/firebase-app.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/5.7.0/firebase-firestore.js"></script>
+    <script>
+        // Initialize Firebase
+        var config = {
+            apiKey: "AIzaSyBJm_boJbkbE5Su_UlUC0RER-UegYJpw78",
+            authDomain: "fir-basics-d7653.firebaseapp.com",
+            databaseURL: "https://fir-basics-d7653.firebaseio.com",
+            projectId: "fir-basics-d7653",
+            storageBucket: "fir-basics-d7653.appspot.com",
+            messagingSenderId: "149686433897"
+        };
+        firebase.initializeApp(config);
+        const db = firebase.firestore();
+        db.settings({timestampsInSnapshots: true})
+    </script>
+    <script src="main.js"></script>
+</body>
+</html>
