@@ -20,6 +20,22 @@ function init () {
     // Letter Changes
     console.log("%c Letter Changes", "background-color: purple; color: white;");
     console.log(sentenceReverse("Argument goes here!"));
+
+    // Simple Adding
+    console.log("%c Simple Add", "background-color: firebrick; color: white;");
+    console.log(simpleAdding(5));
+
+    // Letter Capitalize
+    console.log("%c Letter Capitalize", "background-color: brown; color: white");
+    console.log(letterCapitalize("welcome to the jungle!"));
+    
+    // Check for "+" symbols on both sides of the alphabets
+    console.log("%c Check for \"+\" besides alphabets", "background-color: red; color: white");
+    console.log(checkforPlusSymbolBesideAlphabets("+b++d++"));
+
+    // Compare Two Numbers
+    console.log("%c Compare Two Numbers", "background-color: orange; color: white");
+    console.log(compareTwoNumbers(5, 9));
 }
 
 /**
@@ -108,4 +124,63 @@ var letterChanges = (sentence) => {
         newWordArray.push(newWord);
     });
     return newWordArray.join(' ');
+}
+
+/**
+ * Simply Add the numbers
+ * @param {integer} num 
+ */
+var simpleAdding = (num) => {
+    let number = 0;
+    for(let i = 1; i <= num; i++) {
+        number += parseInt(i);
+    }
+    return number;
+}
+
+/**
+ * Letter Capitalize
+ * @param {string} sentence 
+ */
+var letterCapitalize = (sentence) => {
+    let sentenceArray = sentence.split(' ');
+    let newSentenceArray = [];
+    sentenceArray.forEach((word) => {
+        let newWord = word[0].toUpperCase() + word.slice(1).toLowerCase();
+        newSentenceArray.push(newWord);
+    })
+    return newSentenceArray.join(' ');
+}
+
+/**
+ * Check for "+" symbol on both sides of the alphabets +a++++b+ true, a++d++ false
+ * @param {string} sentence 
+ */
+var checkforPlusSymbolBesideAlphabets = (sentence) => {
+    let pattern = /[A-Za-z]+/;
+    let sentenceArray = sentence.split('');
+    let pass = true;
+    sentenceArray.forEach((alphabet, key) => {
+        if (pattern.test(alphabet)) {
+            if (sentence[parseInt(key) - 1] !== "+" || sentence[parseInt(key) + 1] !== "+") {
+                pass = false;
+            }
+        }
+    });
+    return pass;
+}
+
+/**
+ * Compare two numbers
+ * @param {integer} num1 
+ * @param {integer} num2 
+ */
+var compareTwoNumbers = (num1, num2) => {
+    if (num2 > num1) {
+        return true;
+    } else if (num1 > num2) {
+        return false;
+    } else if (num1 == num2) {
+        return -1;
+    }
 }
