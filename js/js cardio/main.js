@@ -36,6 +36,10 @@ function init () {
     // Compare Two Numbers
     console.log("%c Compare Two Numbers", "background-color: orange; color: white");
     console.log(compareTwoNumbers(5, 9));
+    
+    // Time Convert
+    console.log("%c Time Convert", "background-color: purple; color: white");
+    console.log(timeConvert(126));
 }
 
 /**
@@ -183,4 +187,14 @@ var compareTwoNumbers = (num1, num2) => {
     } else if (num1 == num2) {
         return -1;
     }
+}
+
+/**
+ * Convert Number into time eg 126 "2:6"
+ * @param {integer} num 
+ */
+var timeConvert = (num) => {
+    let hours = Math.floor(num / 60);
+    let minutes = num - (hours * 60);
+    return hours + ":" + minutes;
 }
