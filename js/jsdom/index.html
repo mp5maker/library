@@ -1,0 +1,156 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <title>Document Object Model</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="stylesheet" type="text/css" media="screen" href="./node_modules/bootstrap/dist/css/bootstrap.css" />
+    <link rel="stylesheet" type="text/css" media="screen" href="main.css" />
+</head>
+<body>
+    <div class="container-fluid">
+        <div class="row my-3" id="page-banner">
+            <div class="col py-5">
+                <h3 class="text-center">
+                    Hello
+                </h3>
+            </div>
+            
+        </div>
+        <div class="row my-3">
+            <div class="col">
+                <button type="button" class="btn btn-primary">
+                    <span>One</span>
+                    <span class="badge badge-light">3</span>
+                </button>
+            </div>
+        </div>
+        <div class="row my-3">
+            <div class="col">
+                <div class="btn-group">
+                    <button type="button" class="btn btn-primary">One</button>
+                    <button type="button" class="btn btn-primary">Two</button>
+                    <button type="button" class="btn btn-primary">Three</button>
+                </div>
+            </div>
+        </div>
+        <div class="row my-3">
+            <div class="col">
+                <div class="card">
+                    <div class="card-header">header</div>
+                    <div class="card-body">content</div> 
+                    <div class="card-footer">footer</div>
+                </div>
+            </div>
+        </div>
+        <div class="row my-3">
+            <div class="col">
+                <ul class="list-group">
+                    <li class="list-group-item d-flex justify-content-between align-items-center">
+                        first
+                        <span class="badge badge-primary badge-pill">numberOne</span>
+                    </li>
+                    <li class="list-group-item boom d-flex justify-content-between align-items-center">
+                        second
+                        <span class="badge badge-primary badge-pill">numberTwo</span>
+                    </li>
+                    <li class="list-group-item d-flex justify-content-between align-items-center">
+                        third
+                        <span class="badge badge-primary badge-pill">numberThree</span>
+                    </li>
+                </ul>
+            </div>
+        </div>
+    </div>
+    <div class="anchor-tag-collection px-3 my-3">
+        <a href="http://sphotonkhan.com"> Website One </a>
+        <a href="http://sphotonkhan.com"> Website Two </a>
+        <a href="http://sphotonkhan.com"> Website Three </a>
+    </div>
+    <div class="px-3 my-3" id="event-bubbling">
+        <button type="button">
+            <span>
+                Event Bubbling One
+            </span>
+            <span>
+                &times;
+            </span>
+        </button>
+        <button type="button">
+            <span>
+                Event Bubbling Two
+            </span>
+            <span>
+                &times;
+            </span>
+        </button>
+        <button type="button">
+            <span>
+                Event Bubbling Three
+            </span>
+            <span>
+                &times;
+            </span>
+        </button>
+        <button type="button">
+            <span>
+                Event Bubbling Four
+            </span>
+            <span>
+                &times;
+            </span>
+        </button>
+    </div>
+    <div class="my-3 px-3">
+        <form id="simple-form">
+            <input type="text" name="username"/>
+            <input type="text" name="password"/>
+            <input type="submit" value="Confirm"/>
+        </form>
+    </div>
+    <div class="my-3 px-3">
+        <form id="search">
+            <input type="text" name="search">
+            <input type="submit" value="Confirm"/>
+        </form>
+    </div>
+    <div class="my-3 px-3">
+        <div class="create-element-buttons">
+            <form id="create-element">
+                <input type="text" name="book"/>
+                <input type="submit" value="Add Book"/>
+            </form>
+        </div>
+        <ul class="create-elements"></ul>
+    </div>
+    <div class="my-3 px-3">
+        <div class="styling-elements">
+            <ul class="list-group">
+                <li class="list-group-item d-flex justify-content-between align-items-center">
+                    first
+                    <span class="badge badge-primary badge-pill">numberOne</span>
+                </li>
+                <li class="list-group-item d-flex justify-content-between align-items-center">
+                    second
+                    <span class="badge badge-primary badge-pill">numberTwo</span>
+                </li>
+                <li class="list-group-item d-flex justify-content-between align-items-center">
+                    third
+                    <span class="badge badge-primary badge-pill">numberThree</span>
+                </li>
+            </ul>
+        </div>
+    </div>
+    <div class="my-3 px-3">
+        <input type="checkbox" id="toggle">
+        <div id="show-me">
+            I am here forever => Toggle
+        </div>
+    </div>
+    <script src="./node_modules/popper/dist/umd/popper.js"></script>
+    <script src="./node_modules/jquery/dist/jquery.js"></script>
+    <script src="./node_modules/bootstrap/dist/js/bootstrap.js"></script>
+    <script src="main.js"></script>
+</body>
+</html>
