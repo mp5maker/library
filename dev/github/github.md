@@ -23,8 +23,9 @@ Starting
 Creating a Repository
 ---
     git init
-    git clone "Repository Link"
+    git clone repository-link
     git remote
+    git remote add repository-link
     git remote -v
 ---
 Checkout
@@ -59,11 +60,11 @@ Branch
 ---
 Pull
 ---
-    git pull upstream experimental {Pulls the updated version of the branch}
+    git pull upstream experimental | git pull origin master {Pulls the updated version of the branch}
 ---
 Push
 ---    
-    git push origin HEAD {Push the branch to remote}
+    git push origin HEAD | git push origin master {Push the branch to remote}
     git push --force origin HEAD {Push branch after rebase or reset}
 ---
 Reset
