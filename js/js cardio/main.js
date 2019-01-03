@@ -40,6 +40,10 @@ function init () {
     // Time Convert
     console.log("%c Time Convert", "background-color: purple; color: white");
     console.log(timeConvert(126));
+   
+    // Sort by alphabetical Order (Lowercase only)
+    console.log("%c Sort by Alphabetical Order", "background-color: red; color: white");
+    console.log(sortbyAlphabeticalOrder("gallion"));
 }
 
 /**
@@ -197,4 +201,24 @@ var timeConvert = (num) => {
     let hours = Math.floor(num / 60);
     let minutes = num - (hours * 60);
     return hours + ":" + minutes;
+}
+
+var sortbyAlphabeticalOrder = (str) => {
+    let charCodeArray = [];
+    str.split('').forEach((value) => {
+        charCodeArray.push({
+            alphabet: value,
+            code: value.charCodeAt(0)
+        })
+    })
+    let newWordArray = charCodeArray
+        .sort((a, b) => {
+            return a.code - b.code;
+        });
+
+    let newWord = "";
+    newWordArray.forEach((value) => {
+        newWord += value.alphabet;
+    })
+    return newWord;
 }
