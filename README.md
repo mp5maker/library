@@ -19,5 +19,8 @@
 
 All thanks to [Traversy Media](http://www.traversymedia.com)
 
+All thanks to [Net Ninja](http://www.netninja.com)
+
 For **Excellent Resources**, please go to his website or his youtube channel
 1) http://www.traversymedia.com
+2) http://netninja.com
