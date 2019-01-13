@@ -21,4 +21,5 @@ db.json
 *.png
 !vscodeextension/photonbs4/icon.png
 img
+images
 *.txt
