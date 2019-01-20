@@ -41,7 +41,7 @@ function logActivity(p=defaultPerson) {
 logActivity();
 
 // Arrow Function
-addition = (numOne, numTwo) => console.log(numOne + numTwo);
+const addition = (numOne, numTwo) => console.log(numOne + numTwo);
 addition(3,5)
 
 // Arrow Function and [this] // It works differently in arrow function
@@ -162,12 +162,11 @@ class Vacation {
     }
 }
 
-vacation = new Vacation('Mayu', 7)
+const vacation = new Vacation('Mayu', 7)
 vacation.print()
 
 // Expendition [ Vacaction ]
 class Expendition extends Vacation {
-    
     constructor(destination, length, gear) {
         super(destination, length);
         this.gear = gear;
@@ -179,10 +178,197 @@ class Expendition extends Vacation {
     }
 }
 
+let expendition = new Expendition('Himalayas', '8912', 'claw')
+expendition.print()
+
 // React Js Style
-import { HelloWorld } from './importTypes/importStyleThree'
+import { helloWorld } from './importTypes/importStyleThree'
 import World from './importTypes/importStyleTwo'
-import Hello from './importTypes/importStyleOne'
+import hello from './importTypes/importStyleOne'
+helloWorld()
+World()
+hello()
+
 
 // Common JS
-// const { testOne, testTwo } = require('./importTypes/importStyleFour') 
+const { testOne, testTwo } = require('./importTypes/importStyleFour') 
+testOne()
+testTwo()
+
+// Immutability
+const colorLawn = {
+    title: "lawn",
+    color: ["#00FF00"],
+    rating: 0
+}
+
+// Immutablily [Object Assign]
+function rateColor(colorLawn, rating) {
+    return Object.assign({}, colorLawn, {rating: rating})
+}
+
+console.log(rateColor(colorLawn, 5))
+console.log(colorLawn)
+
+// Immutablily using the es6 syntax [Spread Operator | Object]
+let rateColorTwo = (colorLawn, rating) => {
+    return ({
+        ...colorLawn,
+        rating
+    })
+}
+
+console.log(rateColorTwo(colorLawn, 2))
+console.log(colorLawn)
+
+// Immutability [X] Array Push [OK] Arrat Concat [Ok] Spread Operator
+let addColors = (colorLawn, color) => {
+    return ({ ...colorLawn, color: [...colorLawn.color, color]})
+}
+
+let addColorsTwo = (colorLawn, color) => {
+    return Object.assign({}, colorLawn, {color: colorLawn.color.concat(color)}) 
+}
+
+console.log(addColors(colorLawn, "#f#f#f"));
+console.log(addColorsTwo(colorLawn, "#f#f#f"));
+
+// Pure Functions
+const frederick = {
+    name: "Frederick Douglass",
+    canRead: false,
+    canWrite: false,
+}
+
+const selfEducation = (person) => {
+    return ({
+        ...person,
+        canRead: true,
+        canWrite: true
+    })
+}
+
+console.log(selfEducation(frederick))
+
+// Array Filter
+const schools = [
+    "Yorktown",
+    "Washington & Lee",
+    "Wakefield"
+]
+const WSchools = schools.filter((school) => school[0] == "W")
+console.log(WSchools)
+
+// Array Mep
+const newSchools = schools.map((school) => `${school} High School`)
+console.log(newSchools)
+
+
+// Object Changing using Map
+const buyers = [
+    {name: "Enamul", cash: "17"},
+    {name: "Samith", cash: "10"},
+    {name: "Erfan", cash: "20"},
+    {name: "Udoy", cash: "25"},
+]
+console.log(buyers.map((buyer) => (buyer.name == "Enamul") ? ({...buyer, name: "Mashrafy"}) : buyer ))
+
+// Transforming an object into an array [Using Object.keys]
+const points = {
+    "Gryfindor": 8,
+    "Scarlet": 5,
+    "Wick": 10
+}
+
+const pointTransform = Object.keys(points).map((key) => {
+    return ({
+        name: key,
+        points: points[key]
+    })
+})
+console.log(pointTransform)
+
+// Transforming an object using [Reduce && Reduce Right]
+const ages = [21, 18, 52, 40, 64, 63, 34]
+const maxAge = ages.reduce((current, age) => ((current > age) ? current : age), 0) 
+const maxAgeTwo = ages.reduceRight((current, age) => ((current > age) ? current : age), 0) 
+console.log(maxAge)
+console.log(maxAgeTwo)
+
+// Transforming an array into an object [Reduce && Reduce Right]
+const manyColors = [
+    {
+        id: 1,
+        slug: "firebrick",
+        title: "firebrick", 
+        rating: 5,
+    },
+    {
+        id: 2,
+        slug: "sand",
+        title: "sand",
+        rating: 3,
+    },
+    {
+        id: 3,
+        slug: "paleblue",
+        title: "paleblue",
+        rating: 2
+    },
+]
+
+const manyColorsObject = manyColors.reduce((create, {id, slug, title, rating}) => {
+    create[slug] = { id, title, rating }
+    return create 
+}, {})
+console.log(manyColorsObject)
+
+const differentColors = ['red', 'blue', 'red', 'green']
+const distinctColors = differentColors.reduce((distinct, color) => (distinct.indexOf(color) > -1 ? distinct : [...distinct, color]), [])
+console.log(distinctColors)
+
+// Higher Order Function
+const invokeIf = (condition, fnTrue, fnFalse) => condition ? fnTrue : fnFalse;
+const fnTrue = () => "True"
+const fnFalse = () => "False"
+console.log(invokeIf(true, fnTrue, fnFalse))
+
+// Recursion
+const countdown = (value, fn) => {
+    fn(value)
+    return (value > 0) ? countdown(value - 1, fn) : value
+}
+
+countdown(10, console.log)
+
+let dan = {
+    type: "person",
+    data: {
+        gender: "male",
+        info: {
+            id: 25,
+            fullname: {
+                first: "Dan",
+                last: "Daecon"
+            }
+        }
+    }
+}
+
+const deepPick = (obj) => {
+    let objProps = typeof (obj) == "object" ? Object.keys(obj) : Object.keys(obj[0])
+    
+    const inner = (obj) => {
+        Object.keys(obj).forEach((perProps) => {
+            if (typeof(obj[perProps]) == 'object') {
+                objProps = [...objProps, { [perProps] : Object.keys(obj[perProps]) }]
+                inner(perProps)
+            }
+        })
+    }
+
+    inner(obj)
+    return objProps
+    
+}
+console.log(deepPick(dan))

@@ -4,7 +4,7 @@ testOne = () => {
 }
 
 testTwo = () => {
-    console.log('test three')
+    console.log('test two')
 }
 
 module.exports = {
