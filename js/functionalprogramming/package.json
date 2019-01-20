@@ -19,6 +19,8 @@
     "webpack-cli": "^3.2.1"
   },
   "dependencies": {
-    "babel-polyfill": "^6.26.0"
+    "babel-polyfill": "^6.26.0",
+    "react": "^16.7.0",
+    "react-dom": "^16.7.0"
   }
 }

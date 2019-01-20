@@ -372,3 +372,33 @@ const deepPick = (obj) => {
     
 }
 console.log(deepPick(dan))
+
+//////////////////////////// React ////////////////////////////////////////
+ReactDOM.render(
+    React.createElement('h1', {className: 'ingredients'}, 'Baked Salmon'),
+    document.getElementById('root'),
+)
+
+
+// Use React Factory
+const IngredientList = ({ list}) => {
+    return React.createElement('ul', null, 
+        list.map((item, key) => React.createElement('li', {key: key}, item))
+    )
+}
+
+const Ingredients = React.createFactory(IngredientList)
+
+const list = [
+    '1 lb salmon',
+    '1 cup Pine Nuts',
+    '2 cups Butter Lettuce',
+    '1 Yellow Squash',
+    '1/2 cup Olive Oil',
+    '3 cloves of Garlic'
+]
+
+ReactDOM.render(
+    Ingredients({list}),
+    document.getElementById('factory')
+)
