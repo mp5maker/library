@@ -16,6 +16,7 @@
 15) Parallax
 16) Particles
 17) Sass
+18) Dev Ops
 
 All thanks to [Traversy Media](http://www.traversymedia.com)
 
