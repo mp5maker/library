@@ -1,0 +1,79 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/4.3.1/css/bootstrap.css">
+    <link rel="stylesheet" href="main.css">
+    <title>Simple Form</title>
+</head>
+<body ng-app="mainApp" ng-cloak>
+    <div class="container">
+        <div class="row">
+            <div class="col">
+                <form 
+                    class="container-fluid mainForm"
+                    ng-controller="formCtrl"
+                    name="simpleForm">
+                    <div class="row">
+                        <div class="col p-5 m-5">
+                            <div class="form-group">
+                                <form>
+                                    <div class="form-group">
+                                        <label for="exampleInputEmail1">
+                                            Email address
+                                        </label>
+                                        <input
+                                            ng-model="form.email"
+                                            type="text"
+                                            class="form-control"
+                                            id="exampleInputEmail1"
+                                            aria-describedby="emailHelp"
+                                            placeholder="Enter email">
+                                        <small id="emailHelp" class="form-text text-muted">
+                                            We'll never share your email with anyone else.
+                                        </small>
+                                        <small class="text-danger">
+                                            {{ errors.email.message }}
+                                        </small>
+                                    </div>
+                                    <div class="form-group">
+                                        <label for="exampleInputPassword1">
+                                            Password
+                                        </label>
+                                        <input
+                                            ng-model="form.password"
+                                            type="password"
+                                            class="form-control"
+                                            id="exampleInputPassword1"
+                                            placeholder="Password">
+                                        <small id="emailHelp" class="form-text text-muted">
+                                            Minimum 8 characters with at least one symbol and one number
+                                        </small>
+                                        <small class="text-danger">
+                                            {{ errors.password.message }}
+                                        </small>
+                                    </div>
+                                    <button
+                                        ng-disabled="formWithErrors && !busy"
+                                        ng-click="submit()"
+                                        type="submit"
+                                        class="btn btn-primary">
+                                        Submit
+                                    </button>
+                                </form>
+                            </div>
+                        </div>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/4.3.1/js/bootstrap.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/angular.js/1.7.8/angular.min.js"></script>
+    <script src="main.js"></script>
+</body>
+</html>
