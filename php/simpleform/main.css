@@ -4,6 +4,7 @@
     --darkgrey: #4c4c4c;
     --lightgreen: #e3eae2;
     --lightred: #c29f9f;
+    --white: #ffffff;
 }
 
 [ng\:cloak], [ng-cloak], [data-ng-cloak], [x-ng-cloak], .ng-cloak, .x-ng-cloak {
@@ -50,6 +51,8 @@ textarea {
     position: fixed !important;
     top: 5px !important;
     padding: 5px;
+    background-color: var(--white);
+    box-shadow: 0 1px 15px var(--lightgrey) !important;
 }
 
 .toast.green {
@@ -62,6 +65,10 @@ textarea {
 
 .toast-body small {
     font-size: 12px;
+}
+
+.language-select {
+    cursor: pointer;
 }
 
 @media only screen and (max-width: 767px) {

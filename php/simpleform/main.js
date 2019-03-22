@@ -15,7 +15,7 @@ app.constant('translation', {
         PHONE: 'Phone',
         PHONE_DESC: "Write your phone number so that our executive can contact you!",
         PACKAGE: "Package",
-        PACKAGE_DESC: "Chose which package you want to subscribe",
+        PACKAGE_DESC: "Choose which package you want to subscribe",
         HOSPITAL_MANAGEMENT_SYSTEM: 'Hospital Management System',
         PHARMACY_SOLUTION: 'Pharmacy Solution',
         DIAGNOSTIC_MANAGEMENT_SYSTEM: 'Diagnostic Management System',
@@ -37,9 +37,46 @@ app.constant('translation', {
         FORM_SUBMISSION: "Form Submission",
         FEW_SECONDS_AGO: "Few seconds ago",
         FORM_ERROR: "Please, check the errors in the field",
+        ENGLISH: "English",
+        BANGLA: "Bangla",
+        BACK_SLASH: "/",
     },
     bn: {
-
+        OMIS_SUBSCRIPTION_FORM: 'Omis সাবস্ক্রিপশন ফর্ম',
+        NAME: 'নাম',
+        YOUR_NAME: 'তোমার নাম',
+        FIRST_NAME: 'নামের প্রথম অংশ',
+        LAST_NAME: 'নামের শেষাংশ',
+        EMAIL: 'ই-মেইল',
+        EMAIL_OPTIONAL: 'আপনার ইমেইল ঠিকানা দিন (ঐচ্ছিক)',
+        PHONE: 'ফোন',
+        PHONE_DESC: "আপনার ফোন নম্বর লিখুন যাতে আমাদের নির্বাহী আপনার সাথে যোগাযোগ করতে পারে!",
+        PACKAGE: "প্যাকেজ",
+        PACKAGE_DESC: "আপনি সাবস্ক্রাইব করতে চান কোন প্যাকেজ চয়ন করুন",
+        HOSPITAL_MANAGEMENT_SYSTEM: 'হাসপাতাল ম্যানেজমেন্ট সিস্টেম',
+        PHARMACY_SOLUTION: 'ফার্মেসী সমাধান',
+        DIAGNOSTIC_MANAGEMENT_SYSTEM: 'ডায়গনিস্টিক ম্যানেজমেন্ট সিস্টেম',
+        ADDRESS: "ঠিকানা",
+        ADDRESS_OF_YOUR_ORGANIZATION: 'আপনার প্রতিষ্ঠানের ঠিকানা',
+        STREET_ADDRESS: 'রাস্তার ঠিকানা',
+        STREET_ADDRESS_LINE_2: 'রাস্তার ঠিকানা লাইন 2',
+        CITY: 'শহর',
+        REGION: 'এলাকা',
+        POSTAL: 'ডাক',
+        COUNTRY: 'দেশ',
+        SEND: 'পাঠান',
+        INVALID_EMAIL_ADDRESS: 'অকার্যকর ইমেইল ঠিকানা',
+        INVALID_PHONE_NUMBER: 'অচল ফোন নম্বর',
+        FIELD_CANNOT_BE_EMPTY: "ক্ষেত্র খালি হতে পারে না",
+        INVALID_PASSWORD_FIELD: "অবৈধ পাসওয়ার্ড ক্ষেত্র",
+        PLEASE_SELECT_ONE_OF_THE_CHOICE: "পছন্দ এক নির্বাচন করুন",
+        FORM_SUCCESSFULLY_SUBMITTED: "আপনার ফর্ম সফলভাবে জমা দেওয়া হয়েছে",
+        FORM_SUBMISSION: "ফর্ম জমা",
+        FEW_SECONDS_AGO: "কয়েক সেকেন্ড আগে",
+        FORM_ERROR: "ক্ষেত্রের ত্রুটি চেক করুন",
+        ENGLISH: "ইংরেজী",
+        BANGLA: "বাংলা",
+        BACK_SLASH: "/",
     }
 /**
  * Regular Expression Patterns
@@ -184,10 +221,16 @@ function ($scope, translation, formHelper, apiHelper) {
     $scope.translation = translation;
     $scope.success = null;
 
-    $scope.changeLanguage = (whichLanguage) => {
-        $scope.currentLanguage = whichLanguage;
+    /**
+     * Change Language of the current form
+     */
+    $scope.changeLanguage = (language) => {
+        $scope.currentLanguage = language;
     };
 
+    /**
+     * All the fields in the form
+     */
     $scope.form = {
         firstName: '',
         lastName: '',
@@ -220,6 +263,9 @@ function ($scope, translation, formHelper, apiHelper) {
         overall: false
     }
 
+    /**
+     * Validators for the field
+     */
     var fieldValidators = {
         firstName: 'notEmpty',
         lastName: 'notEmpty',
@@ -235,6 +281,9 @@ function ($scope, translation, formHelper, apiHelper) {
         overall: 'notRequired'
     }
 
+    /**
+     * Watches the form changes
+     */
     var watchGroup = Object.keys($scope.form).map((field) => `form.${field}`)
     $scope.$watchGroup(watchGroup, (newValue, oldValue) => {
         Object.keys($scope.form).forEach((value, index) => {
@@ -247,6 +296,9 @@ function ($scope, translation, formHelper, apiHelper) {
         })
     })
 
+    /**
+     * Packages
+     */
     $scope.packages = [
         {
             name: $scope.translation[$scope.currentLanguage].HOSPITAL_MANAGEMENT_SYSTEM,
@@ -262,6 +314,9 @@ function ($scope, translation, formHelper, apiHelper) {
         },
     ];
 
+    /**
+     * Form Submit
+     */
     $scope.submit = () => {
         $scope.busy = true;
         $scope.errors = Object.assign({}, formHelper.checkErrors($scope.form, fieldValidators), { overall: true });
@@ -295,6 +350,9 @@ function ($scope, translation, formHelper, apiHelper) {
         $scope.formWithErrors = true;
     }
 
+    /**
+     * Shows the success/failure message
+     */
     $scope.closeToast = () => {
         $scope.success = '';
         $scope.formWithErrors = false;

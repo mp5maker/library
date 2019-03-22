@@ -1,4 +1,10 @@
 <?php
+/**
+ * Create the Email Template
+ *
+ * @param object $request
+ * @return void
+ */
 function createEmailTemplate($request) {
     $visit_us = "omis.com";
     $website_name = "OMIS";
@@ -56,6 +62,15 @@ function createEmailTemplate($request) {
     ";
 }
 
+/**
+ * Sends the Email
+ *
+ * @param string $from
+ * @param string $to
+ * @param string $subject
+ * @param object $requestsObject
+ * @return void
+ */
 function sendEmail($from="khan.photon@gmail.com", $to="khan.photon@gmail.com", $subject="Customer Inquiry", $requestsObject) {
     $message = createEmailTemplate($requestsObject);
     $headers = "From:" . $from."\r\n";

@@ -1,25 +1,8 @@
 <?php
 header('Content-Type: application/json');
+require_once('settings.php');
 require_once('validation.php');
 require_once('email.php');
-
-/**
- * Packages Type
- */
-$packages = [
-    [
-        "name" => "Hotel Management System",
-        "enum" => 1
-    ],
-    [
-        "name" => "Pharmacy Solution",
-        "enum" => 2
-    ],
-    [
-        "name" => "Diagnostic Management System",
-        "enum" => 3
-    ],
-];
 
 /**
  * The validators needed for the validation
@@ -69,9 +52,6 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST'):
     if ($formWithNoErrors):
         $requestsObject->success = "The form has been successfully submitted";
         // Send Email
-        $from="khan.photon@gmail.com";
-        $to="khan.photon@gmail.com";
-        $subject="Customer Inquiry";
         if (sendEmail($from, $to, $subject, $requestsObject)):
             http_response_code(200);
             echo json_encode($requestsObject);

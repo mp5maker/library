@@ -25,6 +25,19 @@
                                     {{ translation[currentLanguage].OMIS_SUBSCRIPTION_FORM }}
                                 </h3>
                             </div>
+                            <div class="text-right">
+                                <small>
+                                    <span ng-click="changeLanguage('en')" class="language-select">
+                                        {{ translation[currentLanguage].ENGLISH }}
+                                    </span>
+                                    <span>
+                                        {{ translation[currentLanguage].BACK_SLASH }}
+                                    </span>
+                                    <span ng-click="changeLanguage('bn')" class="language-select">
+                                        {{ translation[currentLanguage].BANGLA }}
+                                    </span>
+                                </small>
+                            </div>
                         </div>
                     </div>
                     <div class="row">
@@ -251,12 +264,11 @@
                             </div>
                             <!-- Goes to the top -->
                             <div
-                                ng-class="success ? 'green' : 'red'"
                                 class="toast"
                                 data-autohide="false"
                                 ng-show="success || formWithErrors">
                                 <div class="toast-header">
-                                    <strong class="mr-auto text-primary">
+                                    <strong class="mr-auto text-secondary">
                                         {{ translation[currentLanguage].FORM_SUBMISSION }}
                                     </strong>
                                     <small class="text-muted">
@@ -271,7 +283,7 @@
                                     </button>
                                 </div>
                                 <div class="toast-body">
-                                    <small>
+                                    <small  ng-class="success ? 'text-success' : 'text-danger'">
                                         {{ success ? translation[currentLanguage].FORM_SUCCESSFULLY_SUBMITTED
                                             : translation[currentLanguage].FORM_ERROR }}
                                     </small>
