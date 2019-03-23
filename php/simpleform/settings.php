@@ -24,20 +24,3 @@ $packages = [
         "enumValue" => 3
     ],
 ];
-
-
-/**
- * Get the Enum Values converted to string
- *
- * @param array $collection
- * @param integer $enumValue
- * @return void
- */
-function getEnumValue($collection, $enumValue) {
-    foreach ($collection as $key => $item):
-        if ($item['enumValue'] == $enumValue):
-            return $item['name'];
-        endif;
-    endforeach;
-    return;
-}
