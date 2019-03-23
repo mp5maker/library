@@ -1,5 +1,5 @@
 <?php
-header('Content-Type: application/json');
+// header('Content-Type: application/json');
 require_once('settings.php');
 require_once('validation.php');
 require_once('email.php');
@@ -8,17 +8,39 @@ require_once('email.php');
  * The validators needed for the validation
  */
 $formValidators = [
-    "firstName" => 'notEmpty',
-    "lastName" => 'notEmpty',
-    "email" => 'notRequired',
-    "phone" => 'phone',
-    "package" => 'integer',
-    "addressOne" => 'notEmpty',
-    "addressTwo" => 'notRequired',
-    "city" => 'notEmpty',
-    "region" => 'notEmpty',
-    "postal" => 'notEmpty',
-    "country" => 'notEmpty',
+    "firstName" => [
+        "required" => "notEmpty"
+    ],
+    "lastName" => [
+        "required" => "notEmpty"
+    ],
+    "email" => [
+        "notRequired" => ["notEmpty", "email"]
+    ],
+    "phone" => [
+        "required" => "phone"
+    ],
+    "package" => [
+        "required" => "integer"
+    ],
+    "addressOne" => [
+        "required" => "notEmpty"
+    ],
+    "addressTwo" => [
+        "notRequired" => "notEmpty"
+    ],
+    "city" => [
+        "required" => "notEmpty"
+    ],
+    "region" => [
+        "required" => "notEmpty"
+    ],
+    "postal" => [
+        "required" => "notEmpty"
+    ],
+    "country" => [
+        "required" => "notEmpty"
+    ],
 ];
 
 /**
@@ -42,7 +64,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST'):
     $formWithNoErrors = true;
     $problematicFormFields = new stdClass();
     foreach($validationResult as $key => $value):
-        if ($value !== true):
+        if ($value !== false):
             $formWithNoErrors = false;
             $problematicFormFields->$key = $value;
         endif;
@@ -54,15 +76,15 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST'):
         // Send Email
         if (sendEmail($from, $to, $subject, $requestsObject)):
             http_response_code(200);
-            echo json_encode($requestsObject);
+            echo json_encode($requestsObject, JSON_PRETTY_PRINT);
             return;
         else:
             http_response_code(400);
             $problematicFormFields->overall = ["message" => "Email cannot be sent"];
-            echo json_encode($problematicFormFields);
+            echo json_encode($problematicFormFields, JSON_PRETTY_PRINT);
             return;
         endif;
     endif;
     http_response_code(400);
-    echo json_encode($problematicFormFields);
+    echo json_encode($problematicFormFields, JSON_PRETTY_PRINT);
 endif;

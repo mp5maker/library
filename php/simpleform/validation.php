@@ -18,7 +18,24 @@ class Validation {
         $this->requestsArray = $requestsArray;
         $this->formValidators = $formValidators;
         $this->performValidation();
-        return;
+    }
+
+    public function checkForSpecificErrors($requestsArray, $formValidators, $field, $type="required") {
+        $fieldErrors = [];
+        if (is_array($formValidators[$field][$type])):
+            $perFieldErrorArray = [];
+            foreach($formValidators[$field][$type] as $key => $type):
+                $perFieldErrorArray[] = $this->chooseValidators($type, $this->requestsArray[$field], $field);
+            endforeach;
+            $returnFirstError = [];
+            foreach($perFieldErrorArray as $key => $value):
+                if (is_array($value)):
+                    $returnFirstError[] = $value;
+                endif;
+            endforeach;
+            return $returnFirstError ? $returnFirstError : false;
+        endif;
+        return $this->chooseValidators($this->formValidators[$field][$type], $this->requestsArray[$field]);
     }
 
     /**
@@ -27,12 +44,26 @@ class Validation {
      * @return void
      */
     private function performValidation() {
-        $validationResult = [];
-        foreach($this->requestsArray as $field => $value):
-            $validationResult[$field] = $this->chooseValidators($this->formValidators[$field], $value, $field);
+        $errorFields = [];
+        foreach($this->formValidators as $field => $value):
+            // Required Fields
+            if (isset($this->formValidators[$field]['required'])):
+                $errorFields[$field] = $this->checkForSpecificErrors($this->requestsArray, $this->formValidators, $field, 'required');
+            endif;
+            // Not Required Fields
+            $formFieldArrayNotEmpty = is_array($this->requestsArray[$field]) && !empty($this->requestsArray[$field]) ? true : false;
+            $formFieldNotEmpty = !empty($this->requestsArray[$field]) ? true : false;
+            $showErrorsForNotRequired = $formFieldArrayNotEmpty || $formFieldNotEmpty;
+            if (isset($this->formValidators[$field]['notRequired']) && $showErrorsForNotRequired):
+                $errorFields[$field] = $this->checkForSpecificErrors($this->requestsArray, $this->formValidators, $field, 'notRequired');
+            endif;
+            // Default
+            if (!isset($this->formValidators[$field]['required']) && !isset($this->formValidators[$field]['notRequired'])):
+                $errorFields[$field] = false;
+            endif;
         endforeach;
-        $this->validationResult = $validationResult;
-        return;
+        $this->validationResult = $errorFields;
+        return $errorFields;
     }
 
     /**
@@ -43,20 +74,20 @@ class Validation {
      * @param string $field
      * @return void
      */
-    private function chooseValidators($type, $value, $field) {
+    private function chooseValidators($type, $value) {
         switch($type) {
             case 'email':
-                return $this->checkEmail($value, $field);
+                return $this->checkEmail($value);
             case 'phone':
-                return $this->checkPhone($value, $field);
+                return $this->checkPhone($value);
             case 'notEmpty':
-                return $this->checkNotEmpty($value, $field);
+                return $this->checkNotEmpty($value);
             case 'password':
-                return $this->checkPassword($value, $field);
+                return $this->checkPassword($value);
             case 'integer':
-                return $this->checkInteger($value, $field);
+                return $this->checkInteger($value);
             case 'notRequired':
-                return $this->checkNotRequired($value, $field);
+                return $this->checkNotRequired($value);
             default: return;
         }
     }
@@ -68,13 +99,13 @@ class Validation {
      * @param string $field
      * @return void
      */
-    public function checkEmail($value, $field) {
-        if (!filter_var($email, FILTER_VALIDATE_EMAIL)) {
+    public function checkEmail($value) {
+        if (!filter_var($value, FILTER_VALIDATE_EMAIL)) {
             return [
                 "message" => "Invalid email format"
             ];
         }
-        return true;
+        return false;
     }
 
     /**
@@ -84,13 +115,13 @@ class Validation {
      * @param string $field
      * @return void
      */
-    public function checkPhone($value, $field) {
+    public function checkPhone($value) {
         if (!preg_match("/^[0-9,.'-+]+$/", $value)) {
             return [
                 "message" => "Only numbers are allowed"
             ];
         }
-        return true;
+        return false;
     }
 
     /**
@@ -100,13 +131,13 @@ class Validation {
      * @param string $field
      * @return void
      */
-    public function checkNotEmpty($value, $field) {
-        if (!preg_match("/^[a-zA-Z ,.'-]+$/", $value)) {
+    public function checkNotEmpty($value) {
+        if (!preg_match("/^[@a-zA-Z ,.'-]+$/", $value)) {
             return [
                 "message" => "Only letters and white space allowed"
             ];
         }
-        return true;
+        return false;
     }
 
     /**
@@ -116,13 +147,13 @@ class Validation {
      * @param string $field
      * @return void
      */
-    public function checkPassword($value, $field) {
+    public function checkPassword($value) {
         if (!preg_match("/^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[#$^+=!*()@%&]).{8,16}$/", $value)) {
             return [
                 "message" => "Only letters and white space allowed"
             ];
         }
-        return true;
+        return false;
     }
 
     /**
@@ -132,13 +163,13 @@ class Validation {
      * @param string $field
      * @return void
      */
-    public function checkInteger($value, $field) {
+    public function checkInteger($value) {
         if (!is_int((int)$value)) {
             return [
                 "message" => "It cannot be empty"
             ];
         }
-        return true;
+        return false;
     }
 
     /**
@@ -148,8 +179,8 @@ class Validation {
      * @param string $field
      * @return void
      */
-    public function checkNotRequired($value, $field) {
-        return true;
+    public function checkNotRequired($value) {
+        return false;
     }
 
     /**
