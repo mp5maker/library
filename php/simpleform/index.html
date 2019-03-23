@@ -256,7 +256,7 @@
                         <div class="col text-right">
                             <div class="form-group">
                                 <input type="submit"
-                                    ng-disabled="formWithErrors && busy"
+                                    ng-disabled="formWithErrors || busy"
                                     ng-click="submit()"
                                     role="button"
                                     value="{{ translation[currentLanguage].SEND }}"
@@ -265,7 +265,6 @@
                             <!-- Goes to the top -->
                             <div
                                 class="toast"
-                                data-autohide="false"
                                 ng-show="success || formWithErrors">
                                 <div class="toast-header">
                                     <strong class="mr-auto text-secondary">

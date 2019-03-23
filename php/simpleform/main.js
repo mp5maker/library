@@ -5,7 +5,7 @@ var app = angular.module('omis-subscription', []);
  */
 app.constant('translation', {
     en: {
-        OMIS_SUBSCRIPTION_FORM: 'Omis Subscription Form',
+        OMIS_SUBSCRIPTION_FORM: 'OMIS Subscription Form',
         NAME: 'Name',
         YOUR_NAME: 'Your Name',
         FIRST_NAME: 'First Name',
@@ -43,7 +43,7 @@ app.constant('translation', {
         PLEASE_WAIT: "Please wait while we are processing your form submission",
     },
     bn: {
-        OMIS_SUBSCRIPTION_FORM: 'Omis সাবস্ক্রিপশন ফর্ম',
+        OMIS_SUBSCRIPTION_FORM: 'OMIS সাবস্ক্রিপশন ফর্ম',
         NAME: 'নাম',
         YOUR_NAME: 'তোমার নাম',
         FIRST_NAME: 'নামের প্রথম অংশ',
@@ -388,6 +388,7 @@ function ($scope, translation, formHelper, apiHelper, $window, languageSelector)
                     formHelper.clear($scope.form);
                     formHelper.clear($scope.errors, false);
                     $window.scrollTo(0, 0);
+                    $scope.formWithErrors = false;
                     $scope.success = $scope.translation[$scope.currentLanguage].FORM_SUCCESSFULLY_SUBMITTED;
                     return;
                 }
