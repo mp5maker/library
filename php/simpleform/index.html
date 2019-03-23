@@ -292,6 +292,9 @@
                             <small class="form-text text-danger text-center" ng-show="errors.overall">
                                 {{ errors.overall.message }}
                             </small>
+                            <small class="form-text text-info text-center" ng-show="busy">
+                                {{ translation[currentLanguage].PLEASE_WAIT }}
+                            </small>
                             <small class="form-text text-success text-center" ng-show="success">
                                 {{ success }}
                             </small>

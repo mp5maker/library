@@ -40,6 +40,7 @@ app.constant('translation', {
         ENGLISH: "English",
         BANGLA: "Bangla",
         BACK_SLASH: "/",
+        PLEASE_WAIT: "Please wait while we are processing your form submission",
     },
     bn: {
         OMIS_SUBSCRIPTION_FORM: 'Omis সাবস্ক্রিপশন ফর্ম',
@@ -77,6 +78,7 @@ app.constant('translation', {
         ENGLISH: "ইংরেজী",
         BANGLA: "বাংলা",
         BACK_SLASH: "/",
+        PLEASE_WAIT: "আমরা আপনার ফর্ম জমা প্রক্রিয়াকরণের সময় অনুগ্রহ করে অপেক্ষা করুন",
     }
 /**
  * Regular Expression Patterns
@@ -84,21 +86,22 @@ app.constant('translation', {
 }).constant('regexPatterns', {
     email: /^(([^<>()\[\]\\.,;:\s@"]+(\.[^<>()\[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/,
     phone: /^[+]*[(]{0,1}[0-9]{1,4}[)]{0,1}[-\s\./0-9]*$/,
-    notEmpty: /^[a-z ,.'-]+$/i,
+    notEmpty: /^[@a-z ,.'-]+$/i,
     password: /^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[#$^+=!*()@%&]).{8,16}$/
 /**
  *  Front end validation
  */
-}).factory('validation', ['regexPatterns', function (regexPatterns){
-
-    function isEmpty(obj) {
-        for (var key in obj) {
-            if (obj.hasOwnProperty(key))
-                return false;
+}).factory('utilities', [function() {
+    return {
+        isEmpty: function isEmpty(obj) {
+            for (var key in obj) {
+                if (obj.hasOwnProperty(key))
+                    return false;
+            }
+            return true;
         }
-        return true;
     }
-
+}]).factory('validation', ['regexPatterns', 'utilities', function (regexPatterns, utilities){
     var checkEmail = function (emailFormData, field) {
         if (regexPatterns.email.test(emailFormData)) {
             return false
@@ -139,7 +142,7 @@ app.constant('translation', {
     }
 
     var checkIsObjectEmpty = function (isObjectData, field) {
-        if (!isEmpty(isObjectData)) {
+        if (!utilities.isEmpty(isObjectData)) {
             return false
         }
         return {
@@ -175,7 +178,37 @@ app.constant('translation', {
 /**
  * Form Helper does the clean up, checks Error, checks if all the fields are valid or not
  */
-}]).factory('formHelper', ['validation', function(validation) {
+}]).factory('formHelper', ['validation', 'utilities', function (validation, utilities) {
+
+    function checkForSpecificErrors(form, fieldValidators, field, type='required') {
+        if (Array.isArray(fieldValidators[field][type])) {
+            var checkErrorsArray = fieldValidators[field][type].map((value, option) => {
+                return validation.validator(fieldValidators[field][type][option], form[field], field);
+            })
+            var findFirstError = checkErrorsArray.find((errorFieldValidation) => {
+                if (angular.isObject(errorFieldValidation)) {
+                    return errorFieldValidation;
+                }
+            })
+            return findFirstError ? findFirstError : false;
+        }
+        return validation.validator(fieldValidators[field][type], form[field], field);
+    }
+
+    function checkForErrors(form, fieldValidators, field) {
+        if (angular.isDefined(fieldValidators[field].required)) {
+            return checkForSpecificErrors(form, fieldValidators, field, 'required');
+        }
+        var formFieldObjectNotEmpty = angular.isObject(form[field]) && !utilities.isEmpty(form[field]) ? true: false;
+        var formFieldArrayNotEmpty = Array.isArray(form[field]) && form[field].length ? true : false;
+        var formFieldNotEmpty = form[field].length ? true : false;
+        var showErrorsForNotRequired = formFieldObjectNotEmpty || formFieldArrayNotEmpty || formFieldNotEmpty;
+        if (angular.isDefined(fieldValidators[field].notRequired) && showErrorsForNotRequired) {
+            return checkForSpecificErrors(form, fieldValidators, field, 'notRequired');
+        }
+        return false;
+    }
+
     return {
         clear: function(form, defaultValue) {
             return Object.keys(form).forEach((field) => {
@@ -185,7 +218,7 @@ app.constant('translation', {
         checkErrors: function(form, fieldValidators) {
             return Object.keys(form).reduce((newObj, field) => {
                 return Object.assign({}, newObj,
-                    { [field]: validation.validator(fieldValidators[field], form[field], field) })
+                    { [field]: checkForErrors(form, fieldValidators, field)})
             }, {})
         },
         checkIfAllTheFieldsAreFalse: function(errors) {
@@ -267,20 +300,40 @@ function ($scope, translation, formHelper, apiHelper, $window) {
      * Validators for the field
      */
     var fieldValidators = {
-        firstName: 'notEmpty',
-        lastName: 'notEmpty',
-        email: 'notRequired',
-        phone: 'phone',
-        package: 'isObjectEmpty',
-        addressOne: 'notEmpty',
-        addressTwo: 'notRequired',
-        city: 'notEmpty',
-        region: 'notEmpty',
-        postal: 'notEmpty',
-        country: 'notEmpty',
-        overall: 'notRequired'
+        firstName: {
+            required: 'notEmpty'
+        },
+        lastName: {
+            required: 'notEmpty'
+        },
+        email: {
+            'notRequired': ['notEmpty', 'email']
+        },
+        phone: {
+            'required': 'phone'
+        },
+        package: {
+            'required': "isObjectEmpty"
+        },
+        addressOne: {
+            'required': 'notEmpty'
+        },
+        addressTwo: {
+            'notRequired': 'notEmpty'
+        },
+        city: {
+            'required': 'notEmpty'
+        },
+        region: {
+            'required': 'notEmpty'
+        },
+        postal: {
+            'required': 'notEmpty'
+        },
+        country: {
+            'required': 'notEmpty'
+        },
     }
-
     /**
      * Watches the form changes
      */
@@ -319,8 +372,8 @@ function ($scope, translation, formHelper, apiHelper, $window) {
     $scope.submit = () => {
         $scope.busy = true;
         $scope.errors = Object.assign({}, formHelper.checkErrors($scope.form, fieldValidators), { overall: false });
-        var allTheFieldsAreFalse = formHelper.checkIfAllTheFieldsAreFalse($scope.errors);
-        if (allTheFieldsAreFalse) {
+        var allErrorFieldsAraFalse = formHelper.checkIfAllTheFieldsAreFalse($scope.errors);
+        if (allErrorFieldsAraFalse) {
             var onSuccess = (response) => {
                 if (response.success) {
                     $scope.busy = false;
