@@ -12,15 +12,32 @@ $subject="Customer Inquiry";
  */
 $packages = [
     [
-        "name" => "Hotel Management System",
-        "enum" => 1
+        "name" => "Hospital Management System",
+        "enumValue" => 1
     ],
     [
         "name" => "Pharmacy Solution",
-        "enum" => 2
+        "enumValue" => 2
     ],
     [
         "name" => "Diagnostic Management System",
-        "enum" => 3
+        "enumValue" => 3
     ],
 ];
+
+
+/**
+ * Get the Enum Values converted to string
+ *
+ * @param array $collection
+ * @param integer $enumValue
+ * @return void
+ */
+function getEnumValue($collection, $enumValue) {
+    foreach ($collection as $key => $item):
+        if ($item['enumValue'] == $enumValue):
+            return $item['name'];
+        endif;
+    endforeach;
+    return;
+}

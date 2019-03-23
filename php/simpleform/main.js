@@ -101,7 +101,7 @@ app.constant('translation', {
 
     var checkEmail = function (emailFormData, field) {
         if (regexPatterns.email.test(emailFormData)) {
-            return true
+            return false
         }
         return {
             field: field,
@@ -110,7 +110,7 @@ app.constant('translation', {
     }
     var checkPhone = function (phoneFormData, field) {
         if (regexPatterns.phone.test(phoneFormData)) {
-            return true
+            return false
         }
         return {
             field: field,
@@ -120,7 +120,7 @@ app.constant('translation', {
 
     var checkNotEmpty = function (notEmptyFormData, field) {
         if (regexPatterns.notEmpty.test(notEmptyFormData)) {
-            return true
+            return false
         }
         return {
             field: field,
@@ -130,7 +130,7 @@ app.constant('translation', {
 
     var checkPassword = function (passwordFormData, field) {
         if (regexPatterns.password.test(passwordFormData)) {
-            return true
+            return false
         }
         return {
             field: field,
@@ -140,7 +140,7 @@ app.constant('translation', {
 
     var checkIsObjectEmpty = function (isObjectData, field) {
         if (!isEmpty(isObjectData)) {
-            return true
+            return false
         }
         return {
             field: field,
@@ -149,7 +149,7 @@ app.constant('translation', {
     }
 
     var checkNotRequired = function(notRequiredData, field) {
-        return true
+        return false
     }
 
 
@@ -177,9 +177,9 @@ app.constant('translation', {
  */
 }]).factory('formHelper', ['validation', function(validation) {
     return {
-        clear: function(form) {
+        clear: function(form, defaultValue) {
             return Object.keys(form).forEach((field) => {
-                form[field] = ''
+                form[field] = angular.isDefined(defaultValue) ? defaultValue : '';
             })
         },
         checkErrors: function(form, fieldValidators) {
@@ -188,9 +188,9 @@ app.constant('translation', {
                     { [field]: validation.validator(fieldValidators[field], form[field], field) })
             }, {})
         },
-        checkIfAllTheFieldsAreTrue: function(errors) {
+        checkIfAllTheFieldsAreFalse: function(errors) {
             return Object.keys(errors).every((field) => {
-                return errors[field] == true;
+                return errors[field] == false;
             })
         }
     }
@@ -213,8 +213,8 @@ app.constant('translation', {
 /**
  * Subscription Form Controller
  */
-.controller('subscriptionFormCtrl', ['$scope', 'translation', 'formHelper', 'apiHelper',
-function ($scope, translation, formHelper, apiHelper) {
+.controller('subscriptionFormCtrl', ['$scope', 'translation', 'formHelper', 'apiHelper', '$window',
+function ($scope, translation, formHelper, apiHelper, $window) {
     $scope.currentLanguage = 'en';
     $scope.formWithErrors = false;
     $scope.busy = false;
@@ -291,7 +291,6 @@ function ($scope, translation, formHelper, apiHelper) {
                 $scope.errors[value] = false;
                 $scope.formWithErrors = false;
                 $scope.busy = false;
-                $scope.success = '';
             }
         })
     })
@@ -319,15 +318,18 @@ function ($scope, translation, formHelper, apiHelper) {
      */
     $scope.submit = () => {
         $scope.busy = true;
-        $scope.errors = Object.assign({}, formHelper.checkErrors($scope.form, fieldValidators), { overall: true });
-        var allTheFieldsAreTrue = formHelper.checkIfAllTheFieldsAreTrue($scope.errors);
-        if (allTheFieldsAreTrue) {
+        $scope.errors = Object.assign({}, formHelper.checkErrors($scope.form, fieldValidators), { overall: false });
+        var allTheFieldsAreFalse = formHelper.checkIfAllTheFieldsAreFalse($scope.errors);
+        if (allTheFieldsAreFalse) {
             var onSuccess = (response) => {
                 if (response.success) {
+                    $scope.busy = false;
+                    formHelper.clear($scope.form);
+                    formHelper.clear($scope.errors, false);
+                    $window.scrollTo(0, 0);
                     $scope.success = $scope.translation[$scope.currentLanguage].FORM_SUCCESSFULLY_SUBMITTED;
+                    return;
                 }
-                $scope.busy = false;
-                // formHelper.clear($scope.form)
             }
 
             var onError = (response) => {
@@ -346,8 +348,8 @@ function ($scope, translation, formHelper, apiHelper) {
             apiHelper.post('main.php', $scope.form).then(onSuccess).catch(onError);
             return;
         }
-        $scope.busy = false;
         $scope.formWithErrors = true;
+        $scope.busy = false;
     }
 
     /**

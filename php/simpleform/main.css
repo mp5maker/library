@@ -65,6 +65,11 @@ textarea {
 
 .toast-body small {
     font-size: 12px;
+    float: left;
+}
+
+.toast-body::after {
+    clear: both;
 }
 
 .language-select {

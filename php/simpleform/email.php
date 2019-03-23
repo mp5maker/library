@@ -6,6 +6,7 @@
  * @return void
  */
 function createEmailTemplate($request) {
+    global $packages;
     $visit_us = "omis.com";
     $website_name = "OMIS";
     $website_footer = date('Y').' Powered by OMIS Enterprise';
@@ -41,7 +42,7 @@ function createEmailTemplate($request) {
                         <td>{$request->lastName}</td>
                         <td>{$request->email}</td>
                         <td>{$request->phone}</td>
-                        <td>{$request->package}</td>
+                        <td>".getEnumValue($packages, $request->package)."</td>
                         <td>{$request->addressOne}</td>
                         <td>{$request->addressTwo}</td>
                         <td>{$request->city}</td>
@@ -60,6 +61,7 @@ function createEmailTemplate($request) {
         </body>
     </html>
     ";
+    return $mail_content;
 }
 
 /**
