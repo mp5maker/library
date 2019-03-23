@@ -91,7 +91,17 @@ app.constant('translation', {
 /**
  *  Front end validation
  */
-}).factory('utilities', [function() {
+}).factory('languageSelector', [function () {
+    var language = "en";
+    return {
+        getLanguage: function() {
+            return language;
+        },
+        setLanguage: function(chosenLanguage) {
+            language = chosenLanguage;
+        }
+    }
+}]).factory('utilities', [function() {
     return {
         isEmpty: function isEmpty(obj) {
             for (var key in obj) {
@@ -101,14 +111,15 @@ app.constant('translation', {
             return true;
         }
     }
-}]).factory('validation', ['regexPatterns', 'utilities', function (regexPatterns, utilities){
+}]).factory('validation', ['regexPatterns', 'utilities', 'languageSelector', 'translation',
+function (regexPatterns, utilities, languageSelector, translation){
     var checkEmail = function (emailFormData, field) {
         if (regexPatterns.email.test(emailFormData)) {
             return false
         }
         return {
             field: field,
-            message: "Invalid Email Address"
+            message: translation[languageSelector.getLanguage()].INVALID_EMAIL_ADDRESS
         }
     }
     var checkPhone = function (phoneFormData, field) {
@@ -117,7 +128,7 @@ app.constant('translation', {
         }
         return {
             field: field,
-            message: "Invalid Phone Number"
+            message: translation[languageSelector.getLanguage()].INVALID_PHONE_NUMBER
         }
     }
 
@@ -127,7 +138,7 @@ app.constant('translation', {
         }
         return {
             field: field,
-            message: "Field cannot be empty"
+            message: translation[languageSelector.getLanguage()].FIELD_CANNOT_BE_EMPTY
         }
     }
 
@@ -137,7 +148,7 @@ app.constant('translation', {
         }
         return {
             field: field,
-            message: "Invalid Password Field"
+            message: translation[languageSelector.getLanguage()].INVALID_PASSWORD_FIELD
         }
     }
 
@@ -147,7 +158,7 @@ app.constant('translation', {
         }
         return {
             field: field,
-            message: "Please select one of the choice"
+            message: translation[languageSelector.getLanguage()].PLEASE_SELECT_ONE_OF_THE_CHOICE
         }
     }
 
@@ -242,13 +253,9 @@ app.constant('translation', {
             return def.promise;
         }
     }
-}])
-/**
- * Subscription Form Controller
- */
-.controller('subscriptionFormCtrl', ['$scope', 'translation', 'formHelper', 'apiHelper', '$window',
-function ($scope, translation, formHelper, apiHelper, $window) {
-    $scope.currentLanguage = 'en';
+}]).controller('subscriptionFormCtrl', ['$scope', 'translation', 'formHelper', 'apiHelper', '$window', 'languageSelector',
+function ($scope, translation, formHelper, apiHelper, $window, languageSelector) {
+    $scope.currentLanguage = languageSelector.getLanguage();
     $scope.formWithErrors = false;
     $scope.busy = false;
     $scope.translation = translation;
@@ -259,6 +266,7 @@ function ($scope, translation, formHelper, apiHelper, $window) {
      */
     $scope.changeLanguage = (language) => {
         $scope.currentLanguage = language;
+        languageSelector.setLanguage(language);
     };
 
     /**
