@@ -141,12 +141,9 @@
                                     class="form-control"
                                     name="personPackage"
                                     id="personPackage"
-                                    ng-model="form.package">
-                                    <option
-                                        ng-repeat="item in packages track by $index"
-                                        value="{{ item.enum }}">
-                                        {{ item.name }}
-                                    </option>
+                                    ng-change="onChangePackage()"
+                                    ng-options="item.name for item in packages"
+                                    ng-model="selectedPackage">
                                 </select>
                                 <small class="form-text text-danger">
                                     {{ errors.package.message }}

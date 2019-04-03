@@ -86,7 +86,7 @@ app.constant('translation', {
 }).constant('regexPatterns', {
     email: /^(([^<>()\[\]\\.,;:\s@"]+(\.[^<>()\[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/,
     phone: /^[+]*[(]{0,1}[0-9]{1,4}[)]{0,1}[-\s\./0-9]*$/,
-    notEmpty: /^[@a-z ,.'-]+$/i,
+    notEmpty: /^[@a-z ,.'-A-Z0-9]+$/i,
     password: /^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[#$^+=!*()@%&]).{8,16}$/
 /**
  *  Front end validation
@@ -153,6 +153,7 @@ function (regexPatterns, utilities, languageSelector, translation){
     }
 
     var checkIsObjectEmpty = function (isObjectData, field) {
+        console.log(isObjectData)
         if (!utilities.isEmpty(isObjectData)) {
             return false
         }
@@ -253,21 +254,24 @@ function (regexPatterns, utilities, languageSelector, translation){
             return def.promise;
         }
     }
-}]).controller('subscriptionFormCtrl', ['$scope', 'translation', 'formHelper', 'apiHelper', '$window', 'languageSelector',
-function ($scope, translation, formHelper, apiHelper, $window, languageSelector) {
+}]).factory('enumHelper', [function() {
+    return {
+        get: function(collection, type, value) {
+            return collection.find(function(item) {
+                if (item[type] == value) {
+                    return item;
+                }
+            })
+        }
+    }
+}]).controller('subscriptionFormCtrl',
+['$scope', 'translation', 'formHelper', 'apiHelper', '$window', 'languageSelector', 'enumHelper',
+function ($scope, translation, formHelper, apiHelper, $window, languageSelector, enumHelper) {
     $scope.currentLanguage = languageSelector.getLanguage();
     $scope.formWithErrors = false;
     $scope.busy = false;
     $scope.translation = translation;
     $scope.success = null;
-
-    /**
-     * Change Language of the current form
-     */
-    $scope.changeLanguage = (language) => {
-        $scope.currentLanguage = language;
-        languageSelector.setLanguage(language);
-    };
 
     /**
      * All the fields in the form
@@ -285,7 +289,7 @@ function ($scope, translation, formHelper, apiHelper, $window, languageSelector)
         postal: '',
         country: '',
     };
-
+    $scope.selectedPackage = {}
     // false => Field hasn't been touched,
     // true => Validation passed
     // Object => Field error, didn't passed the validation
@@ -321,7 +325,7 @@ function ($scope, translation, formHelper, apiHelper, $window, languageSelector)
             'required': 'phone'
         },
         package: {
-            'required': "isObjectEmpty"
+            'required': "notEmpty"
         },
         addressOne: {
             'required': 'notEmpty'
@@ -342,9 +346,50 @@ function ($scope, translation, formHelper, apiHelper, $window, languageSelector)
             'required': 'notEmpty'
         },
     }
+
     /**
-     * Watches the form changes
+     * Packages
      */
+    $scope.packages = [
+        {
+            name: $scope.translation[$scope.currentLanguage].HOSPITAL_MANAGEMENT_SYSTEM,
+            slug: 'hospital-management-system',
+            enum: 1
+        },
+        {
+            name: $scope.translation[$scope.currentLanguage].PHARMACY_SOLUTION,
+            slug: 'pharmacy-solution',
+            enum: 2
+        },
+        {
+            name: $scope.translation[$scope.currentLanguage].DIAGNOSTIC_MANAGEMENT_SYSTEM,
+            slug: 'diagnostic-management-system',
+            enum: 3
+        },
+    ];
+
+    // Default package set from the url
+    var urlParams = new URLSearchParams(window.location.search);
+    var formType = urlParams.get('type');
+    if (formType !== null) {
+        const packageSlug = enumHelper.get($scope.packages, 'slug', formType)
+        if (packageSlug !== undefined) {
+            $scope.form.package  = enumHelper.get($scope.packages, 'slug', formType).enum;
+            $scope.selectedPackage = enumHelper.get($scope.packages, 'slug', formType)
+        }
+    }
+
+    /**
+     * Change Language of the current form
+     */
+    $scope.changeLanguage = (language) => {
+        $scope.currentLanguage = language;
+        languageSelector.setLanguage(language);
+    };
+
+    /**
+   * Watches the form changes
+   */
     var watchGroup = Object.keys($scope.form).map((field) => `form.${field}`)
     $scope.$watchGroup(watchGroup, (newValue, oldValue) => {
         Object.keys($scope.form).forEach((value, index) => {
@@ -357,22 +402,11 @@ function ($scope, translation, formHelper, apiHelper, $window, languageSelector)
     })
 
     /**
-     * Packages
+     * On Change Package
      */
-    $scope.packages = [
-        {
-            name: $scope.translation[$scope.currentLanguage].HOSPITAL_MANAGEMENT_SYSTEM,
-            enum: 1
-        },
-        {
-            name: $scope.translation[$scope.currentLanguage].PHARMACY_SOLUTION,
-            enum: 2
-        },
-        {
-            name: $scope.translation[$scope.currentLanguage].DIAGNOSTIC_MANAGEMENT_SYSTEM,
-            enum: 3
-        },
-    ];
+    $scope.onChangePackage = () => {
+        $scope.form.package = $scope.selectedPackage.enum;
+    }
 
     /**
      * Form Submit
@@ -386,10 +420,12 @@ function ($scope, translation, formHelper, apiHelper, $window, languageSelector)
                 if (response.success) {
                     $scope.busy = false;
                     formHelper.clear($scope.form);
+                    $scope.selectedPackage = {};
                     formHelper.clear($scope.errors, false);
                     $window.scrollTo(0, 0);
                     $scope.formWithErrors = false;
                     $scope.success = $scope.translation[$scope.currentLanguage].FORM_SUCCESSFULLY_SUBMITTED;
+                    window.location.href = "http://omisbd.com";
                     return;
                 }
             }
