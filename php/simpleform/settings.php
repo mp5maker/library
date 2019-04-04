@@ -24,3 +24,20 @@ $packages = [
         "enumValue" => 3
     ],
 ];
+
+$formTypes = [
+    'SUBSCRIPTION_FORM' => [
+        "name" => "Subscription Form",
+        "slug" => 'subscription-form'
+    ],
+    'DEMO_REQUEST_FORM' => [
+        "name" => "Subscription Form",
+        "slug" => "demo-request-form"
+    ],
+    'INQUIRIES' => [
+        "name" => "Inquiries",
+        "slug" => "inquiries"
+    ]
+];
+
+$isInquiryPage = false;

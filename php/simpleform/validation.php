@@ -132,7 +132,7 @@ class Validation {
      * @return void
      */
     public function checkNotEmpty($value) {
-        if (!preg_match("/^[@a-zA-Z ,.'-0-9]+$/", $value)) {
+        if (!preg_match("/^[0-9a-zA-Z@ ,.'-]+$/", $value)) {
             return [
                 "message" => "Only letters and white space allowed"
             ];

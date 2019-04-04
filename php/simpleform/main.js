@@ -6,6 +6,11 @@ var app = angular.module('omis-subscription', []);
 app.constant('translation', {
     en: {
         OMIS_SUBSCRIPTION_FORM: 'OMIS Subscription Form',
+        SUBSCRIPTION_FORM: 'Subscription Form',
+        DEMO_REQUEST_FORM: 'Demo Request Form',
+        INQUIRIES: "Inquiries",
+        DEMO_FOR: "Demo For",
+        DESCRIPTION: "Description",
         NAME: 'Name',
         YOUR_NAME: 'Your Name',
         FIRST_NAME: 'First Name',
@@ -16,11 +21,12 @@ app.constant('translation', {
         PHONE_DESC: "Write your phone number so that our executive can contact you!",
         PACKAGE: "Package",
         PACKAGE_DESC: "Choose which package you want to subscribe",
+        DEMO_DESC: "Choose which demo do you want to see",
         HOSPITAL_MANAGEMENT_SYSTEM: 'Hospital Management System',
         PHARMACY_SOLUTION: 'Pharmacy Solution',
         DIAGNOSTIC_MANAGEMENT_SYSTEM: 'Diagnostic Management System',
         ADDRESS: "Address",
-        ADDRESS_OF_YOUR_ORGANIZATION: 'Address of your Organization',
+        ADDRESS_OF_YOUR_ORGANIZATION: 'Address of your organization',
         STREET_ADDRESS: 'Street Address',
         STREET_ADDRESS_LINE_2: 'Street Address Line 2',
         CITY: 'City',
@@ -44,6 +50,11 @@ app.constant('translation', {
     },
     bn: {
         OMIS_SUBSCRIPTION_FORM: 'OMIS সাবস্ক্রিপশন ফর্ম',
+        SUBSCRIPTION_FORM: 'সাবস্ক্রিপশন ফর্ম',
+        DEMO_REQUEST_FORM: 'ডেমো অনুরোধ ফর্ম',
+        INQUIRIES: "অনুসন্ধান",
+        DEMO_FOR: "ডেমো",
+        DESCRIPTION: "বিবরণ",
         NAME: 'নাম',
         YOUR_NAME: 'তোমার নাম',
         FIRST_NAME: 'নামের প্রথম অংশ',
@@ -54,6 +65,7 @@ app.constant('translation', {
         PHONE_DESC: "আপনার ফোন নম্বর লিখুন যাতে আমাদের নির্বাহী আপনার সাথে যোগাযোগ করতে পারে!",
         PACKAGE: "প্যাকেজ",
         PACKAGE_DESC: "আপনি সাবস্ক্রাইব করতে চান কোন প্যাকেজ চয়ন করুন",
+        DEMO_DESC: "আপনি কোন ডেমোটি দেখতে চান তা চয়ন করুন",
         HOSPITAL_MANAGEMENT_SYSTEM: 'হাসপাতাল ম্যানেজমেন্ট সিস্টেম',
         PHARMACY_SOLUTION: 'ফার্মেসী সমাধান',
         DIAGNOSTIC_MANAGEMENT_SYSTEM: 'ডায়গনিস্টিক ম্যানেজমেন্ট সিস্টেম',
@@ -103,12 +115,20 @@ app.constant('translation', {
     }
 }]).factory('utilities', [function() {
     return {
-        isEmpty: function isEmpty(obj) {
+        isEmpty: function (obj) {
             for (var key in obj) {
                 if (obj.hasOwnProperty(key))
                     return false;
             }
             return true;
+        },
+        removeProperties: function(givenObj, removePropsArray) {
+            return Object.keys(givenObj).reduce(function(newObj, property) {
+                if (removePropsArray.includes(property)) {
+                    return newObj;
+                }
+                return Object.assign({}, newObj, {[property]: givenObj[property]})
+            }, {})
         }
     }
 }]).factory('validation', ['regexPatterns', 'utilities', 'languageSelector', 'translation',
@@ -265,18 +285,33 @@ function (regexPatterns, utilities, languageSelector, translation){
         }
     }
 }]).controller('subscriptionFormCtrl',
-['$scope', 'translation', 'formHelper', 'apiHelper', '$window', 'languageSelector', 'enumHelper',
-function ($scope, translation, formHelper, apiHelper, $window, languageSelector, enumHelper) {
+['$scope', 'translation', 'formHelper', 'apiHelper', '$window', 'languageSelector', 'enumHelper', 'utilities',
+function ($scope, translation, formHelper, apiHelper, $window, languageSelector, enumHelper, utilities) {
+    // Language Related Variables
     $scope.currentLanguage = languageSelector.getLanguage();
+    $scope.translation = translation;
+    $scope.formHeading = 'SUBSCRIPTION_FORM';
+    $scope.demoOrPackage = 'PACKAGE';
+    $scope.demoOrPackageDescription = 'PACKAGE_DESC';
+
+    // Form Related Variables
     $scope.formWithErrors = false;
     $scope.busy = false;
-    $scope.translation = translation;
     $scope.success = null;
+
+    // Page Types
+    $scope.pageType = {
+        SUBSCRIPTION_FORM: 'subscription-form',
+        DEMO_REQUEST_FORM: 'demo-request-form',
+        INQUIRIES: 'inquiries'
+    };
+    $scope.currentPageType = $scope.pageType.SUBSCRIPTION_FORM;
 
     /**
      * All the fields in the form
      */
     $scope.form = {
+        formType: $scope.pageType.SUBSCRIPTION_FORM,
         firstName: '',
         lastName: '',
         email: '',
@@ -290,10 +325,12 @@ function ($scope, translation, formHelper, apiHelper, $window, languageSelector,
         country: '',
     };
     $scope.selectedPackage = {}
+
     // false => Field hasn't been touched,
     // true => Validation passed
     // Object => Field error, didn't passed the validation
     $scope.errors = {
+        formType: false,
         firstName: false,
         lastName: false,
         email: false,
@@ -312,6 +349,9 @@ function ($scope, translation, formHelper, apiHelper, $window, languageSelector,
      * Validators for the field
      */
     var fieldValidators = {
+        formType: {
+            required: 'notEmpty'
+        },
         firstName: {
             required: 'notEmpty'
         },
@@ -368,16 +408,87 @@ function ($scope, translation, formHelper, apiHelper, $window, languageSelector,
         },
     ];
 
+    /**
+     * Sets default package
+     * @param {string} formType
+     */
+    var setDefaultPackage = function (formType) {
+        if (formType !== null) {
+            const packageSlug = enumHelper.get($scope.packages, 'slug', formType)
+            if (packageSlug !== undefined) {
+                $scope.form.package = enumHelper.get($scope.packages, 'slug', formType).enum;
+                $scope.selectedPackage = enumHelper.get($scope.packages, 'slug', formType)
+                return true;
+            }
+            return false;
+        }
+        return false;
+    }
+
+    /**
+     * Required Changes needed for demo request form
+     */
+    var changesForDemoRequestForm = function(formType) {
+        if (formType == $scope.pageType.DEMO_REQUEST_FORM) {
+            $scope.currentPageType = $scope.pageType.DEMO_REQUEST_FORM;
+            $scope.form.formType = $scope.pageType.DEMO_REQUEST_FORM;
+            $scope.formHeading = 'DEMO_REQUEST_FORM';
+            $scope.demoOrPackage = 'DEMO_FOR';
+            $scope.demoOrPackageDescription = 'DEMO_DESC';
+            return true;
+        }
+        return false;
+    }
+
+    /**
+     * Required Changes needed for inquires form
+     */
+    var changesForInquiriesForm = function(formType) {
+        if (formType == $scope.pageType.INQUIRIES) {
+            var fieldsRemovalList = [
+                'package',
+                'addressOne',
+                'addressTwo',
+                'city',
+                'region',
+                'postal',
+                'country',
+            ];
+            $scope.currentPageType = $scope.pageType.INQUIRIES;
+            $scope.form.formType = $scope.pageType.INQUIRIES;
+            $scope.formHeading = 'INQUIRIES';
+
+            fieldValidators = utilities.removeProperties(fieldValidators, fieldsRemovalList)
+            $scope.form = utilities.removeProperties($scope.form, fieldsRemovalList)
+            $scope.errors = utilities.removeProperties($scope.errors, fieldsRemovalList)
+
+            $scope.form.inquiry = '';
+            $scope.errors.inquiry = false;
+            fieldValidators.inquiry = { required: 'notEmpty' };
+            return true;
+        }
+        return false;
+    }
+
+    /**
+     * Takes the query string from the url and make the reuqired changes for  the form
+     * @param {string} formType
+     */
+    var pageRequestFromUrl = function(formType) {
+        switch(formType) {
+            case 'demo-request-form':
+                return changesForDemoRequestForm(formType);
+            case 'inquiries':
+                return changesForInquiriesForm(formType);
+            default:
+                return setDefaultPackage(formType);
+        }
+    }
+
     // Default package set from the url
     var urlParams = new URLSearchParams(window.location.search);
     var formType = urlParams.get('type');
-    if (formType !== null) {
-        const packageSlug = enumHelper.get($scope.packages, 'slug', formType)
-        if (packageSlug !== undefined) {
-            $scope.form.package  = enumHelper.get($scope.packages, 'slug', formType).enum;
-            $scope.selectedPackage = enumHelper.get($scope.packages, 'slug', formType)
-        }
-    }
+    pageRequestFromUrl(formType);
 
     /**
      * Change Language of the current form
