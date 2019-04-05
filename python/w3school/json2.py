@@ -29,4 +29,6 @@ z = {
     ]
 }
 print(json.dumps(z, indent=4, separators=(". ", "=")))
+
+""" Sorting the json dump """
 print(json.dumps(z, indent=4, sort_keys=True))
