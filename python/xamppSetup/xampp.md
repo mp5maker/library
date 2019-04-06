@@ -14,3 +14,7 @@
         home.php home.pl home.cgi home.asp home.shtml home.html home.htm index.py
     </IfModule>
 
+## Setup for MySql Python with Xampp Server ##
+
+    pip install mysql-connector
+    pip install pymysql
