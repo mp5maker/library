@@ -4,7 +4,7 @@ sqlCommand = " \
             SELECT users.name AS user, \
                 products.name AS fav \
                 FROM users \
-                INNER JOIN products \
+                RIGHT JOIN products \
                 ON users.fav = products.id \
             "
 pyCursor.execute(sqlCommand)
