@@ -25,3 +25,4 @@ images
 *.txt
 *.pyc
 __pycache__
+mongo
