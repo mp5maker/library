@@ -1,7 +1,6 @@
 var formidable = require('formidable');
 var http = require('http');
 var fs = require('fs');
-var path = require('path');
 
 http.createServer((request, response) => {
     var routes = {
@@ -22,7 +21,6 @@ http.createServer((request, response) => {
             })
         }
         if (request.url == routes.upload.location) {
-            console.log(path.resolve(__dirname))
             var form = new formidable.IncomingForm();
             form.parse(request, (error, fields, files) => {
                 var oldpath = files.fileupload.path;
