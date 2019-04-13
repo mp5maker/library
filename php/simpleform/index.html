@@ -1,0 +1,338 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>OMIS</title>
+    <link rel="shortcut icon" type="image/x-icon" href="http://omisbd.com/web_content/img/favicon.ico">
+    <link href="https://fonts.googleapis.com/css?family=Nunito" rel="stylesheet">
+    <link
+        rel="stylesheet"
+        href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css"
+        integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm"
+        crossorigin="anonymous"/>
+    <link rel="stylesheet" type="text/css" href="main.css"/>
+</head>
+<body ng-app="omis-subscription" ng-cloak>
+    <div class="container" ng-controller="subscriptionFormCtrl">
+        <div class="row">
+            <div class="col m-5 p-5 main-col">
+                <form class="border container-fluid">
+                    <input type="hidden" ng-model="form.formType"/>
+                    <div class="row form-header-row">
+                        <div class="col">
+                            <div class="text-center">
+                                <h3 class="form-header">
+                                    <div class="mb-2">
+                                        <img src="logo.png" height="32"/>
+                                    </div>
+                                    <div>
+                                        {{ translation[currentLanguage][formHeading] }}
+                                    </div>
+                                </h3>
+                            </div>
+                            <div class="text-right">
+                                <small>
+                                    <span ng-click="changeLanguage('en')" class="language-select">
+                                        {{ translation[currentLanguage].ENGLISH }}
+                                    </span>
+                                    <span>
+                                        {{ translation[currentLanguage].BACK_SLASH }}
+                                    </span>
+                                    <span ng-click="changeLanguage('bn')" class="language-select">
+                                        {{ translation[currentLanguage].BANGLA }}
+                                    </span>
+                                </small>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col">
+                            <div class="form-group">
+                                <label for="personFirstName">
+                                    {{ translation[currentLanguage].NAME }}
+                                </label>
+                                <small id="firstNameHelp" class="form-text text-muted">
+                                    {{ translation[currentLanguage].YOUR_NAME }}
+                                </small>
+                                <div>
+                                    <input
+                                        type="text"
+                                        class="form-control"
+                                        id="personFirstName"
+                                        ng-model="form.firstName"
+                                        aria-describedby="firstName"
+                                        placeholder="{{ translation[currentLanguage].FIRST_NAME }}"/>
+                                </div>
+                                <small class="form-text text-danger">
+                                    {{ errors.firstName.message }}
+                                </small>
+                            </div>
+                        </div>
+                        <div class="col">
+                            <div class="form-group">
+                                <label for="personLastName" class="d-none d-md-block">
+                                    &nbsp;
+                                </label>
+                                <small id="lastNameHelp" class="form-text text-muted d-none d-md-block">
+                                    &nbsp;
+                                </small>
+                                <input
+                                    type="text"
+                                    class="form-control"
+                                    id="personLastName"
+                                    ng-model="form.lastName"
+                                    aria-describedby="lastName"
+                                    placeholder="{{ translation[currentLanguage].LAST_NAME }}"/>
+                                <small class="form-text text-danger">
+                                    {{ errors.lastName.message }}
+                                </small>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col">
+                            <div class="form-group">
+                                <label for="personEmail">
+                                    {{ translation[currentLanguage].EMAIL }}
+                                </label>
+                                <small id="personEmailHelp" class="form-text text-muted">
+                                    {{ translation[currentLanguage].EMAIL_OPTIONAL }}
+                                </small>
+                                <input
+                                    type="text"
+                                    class="form-control"
+                                    id="personEmail"
+                                    ng-model="form.email"
+                                    aria-describedby="email"
+                                    placeholder="{{ translation[currentLanguage].EMAIL }}" />
+                                <small class="form-text text-danger">
+                                    {{ errors.email.message }}
+                                </small>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col">
+                            <div class="form-group">
+                                <label for="personPhone">
+                                    {{ translation[currentLanguage].PHONE }}
+                                </label>
+                                <small id="personePhoneHelp" class="form-text text-muted">
+                                    {{ translation[currentLanguage].PHONE_DESC }}
+                                </small>
+                                <input
+                                    type="text"
+                                    class="form-control"
+                                    id="personPhone"
+                                    ng-model="form.phone"
+                                    aria-describedby="phone"
+                                    placeholder="{{ translation[currentLanguage].PHONE }}" />
+                                <small class="form-text text-danger">
+                                    {{ errors.phone.message }}
+                                </small>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="row" ng-show="currentPageType !== pageType.INQUIRIES">
+                        <div class="col">
+                            <div class="form-group">
+                                <label for="personPackage">
+                                    {{ translation[currentLanguage][demoOrPackage] }}
+                                </label>
+                                <small id="personPackageHelp" class="form-text text-muted">
+                                    {{ translation[currentLanguage][demoOrPackageDescription] }}
+                                </small>
+                                <select
+                                    class="form-control"
+                                    name="personPackage"
+                                    id="personPackage"
+                                    ng-change="onChangePackage()"
+                                    ng-options="item.name for item in packages"
+                                    ng-model="selectedPackage">
+                                </select>
+                                <small class="form-text text-danger">
+                                    {{ errors.package.message }}
+                                </small>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="row" ng-show="currentPageType !== pageType.INQUIRIES">
+                        <div class="col">
+                            <div class="form-group">
+                                <label for="addressOne">
+                                    {{ translation[currentLanguage].ADDRESS }}
+                                </label>
+                                <small id="personAddressHelp" class="form-text text-muted">
+                                    {{ translation[currentLanguage].ADDRESS_OF_YOUR_ORGANIZATION }}
+                                </small>
+                                <textarea
+                                    placeholder="{{translation[currentLanguage].STREET_ADDRESS}}"
+                                    ng-model="form.addressOne"
+                                    class="form-control"
+                                    id="addressOne"
+                                    rows="3">
+                                </textarea>
+                                <small class="form-text text-danger">
+                                    {{ errors.addressOne.message }}
+                                </small>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="row" ng-show="currentPageType !== pageType.INQUIRIES">
+                        <div class="col">
+                            <div class="form-group">
+                                <textarea
+                                    placeholder="{{translation[currentLanguage].STREET_ADDRESS_LINE_2}}"
+                                    ng-model="form.addressTwo"
+                                    class="form-control"
+                                    id="addressTwo"
+                                    rows="3">
+                                </textarea>
+                                <small class="form-text text-danger">
+                                    {{ errors.addressTwo.message }}
+                                </small>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="row" ng-show="currentPageType !== pageType.INQUIRIES">
+                        <div class="col">
+                            <div class="form-group">
+                                <input
+                                    type="text"
+                                    class="form-control"
+                                    id="personCity"
+                                    ng-model="form.city"
+                                    aria-describedby="city"
+                                    placeholder="{{ translation[currentLanguage].CITY }}" />
+                                <small class="form-text text-danger">
+                                    {{ errors.city.message }}
+                                </small>
+                            </div>
+                        </div>
+                        <div class="col">
+                            <div class="form-group">
+                                <input
+                                    type="text"
+                                    class="form-control"
+                                    id="personRegion"
+                                    ng-model="form.region"
+                                    aria-describedby="region"
+                                    placeholder="{{ translation[currentLanguage].REGION }}" />
+                                <small class="form-text text-danger">
+                                    {{ errors.region.message }}
+                                </small>
+                            </div>
+                        </div>
+                        <div class="col">
+                            <div class="form-group">
+                                <input
+                                    type="text"
+                                    class="form-control"
+                                    id="personPostal"
+                                    ng-model="form.postal"
+                                    aria-describedby="postal"
+                                    placeholder="{{ translation[currentLanguage].POSTAL }}" />
+                                <small class="form-text text-danger">
+                                    {{ errors.postal.message }}
+                                </small>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="row" ng-show="currentPageType !== pageType.INQUIRIES">
+                        <div class="col">
+                            <div class="form-group">
+                                <input
+                                    type="text"
+                                    class="form-control"
+                                    id="personCountry"
+                                    ng-model="form.country"
+                                    aria-describedby="country"
+                                    placeholder="{{ translation[currentLanguage].COUNTRY }}" />
+                                <small class="form-text text-danger">
+                                    {{ errors.country.message }}
+                                </small>
+                            </div>
+                        </div>
+                    </div>
+                    <div
+                        class="row"
+                        ng-class="(currentPageType == pageType.INQUIRIES) ? 'inquiry' : ''"
+                        ng-show="currentPageType == pageType.INQUIRIES">
+                        <div class="col">
+                            <div class="form-group">
+                                <label for="personInquiry">
+                                    {{ translation[currentLanguage].INQUIRIES }}
+                                </label>
+                                <textarea
+                                    placeholder="{{translation[currentLanguage].DESCRIPTION}}"
+                                    ng-model="form.inquiry"
+                                    class="form-control"
+                                    id="personInquiry"
+                                    rows="10">
+                                </textarea>
+                                <small class="form-text text-danger">
+                                    {{ errors.inquiry.message }}
+                                </small>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col text-right">
+                            <div class="form-group">
+                                <input type="submit"
+                                    ng-disabled="formWithErrors || busy"
+                                    ng-click="submit()"
+                                    role="button"
+                                    value="{{ translation[currentLanguage].SEND }}"
+                                    class="btn form-control btn-secondary" />
+                            </div>
+                            <!-- Goes to the top -->
+                            <div
+                                class="toast"
+                                ng-show="success || formWithErrors">
+                                <div class="toast-header">
+                                    <strong class="mr-auto text-secondary">
+                                        {{ translation[currentLanguage].FORM_SUBMISSION }}
+                                    </strong>
+                                    <small class="text-muted">
+                                        {{ translation[currentLanguage].FEW_SECONDS_AGO }}
+                                    </small>
+                                    <button
+                                        ng-click="closeToast()"
+                                        type="button"
+                                        class="ml-2 mb-1 close"
+                                        data-dismiss="toast">
+                                        &times;
+                                    </button>
+                                </div>
+                                <div class="toast-body">
+                                    <small  ng-class="success ? 'text-success' : 'text-danger'">
+                                        {{ success ? translation[currentLanguage].FORM_SUCCESSFULLY_SUBMITTED
+                                            : translation[currentLanguage].FORM_ERROR }}
+                                    </small>
+                                </div>
+                            </div>
+                            <small class="form-text text-danger text-center" ng-show="errors.overall">
+                                {{ errors.overall.message }}
+                            </small>
+                            <small class="form-text text-info text-center" ng-show="busy">
+                                {{ translation[currentLanguage].PLEASE_WAIT }}
+                            </small>
+                            <small class="form-text text-success text-center" ng-show="success">
+                                {{ success }}
+                            </small>
+                        </div>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+    <!-- <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/4.3.1/js/bootstrap.min.js"></script> -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/angular.js/1.7.8/angular.min.js"></script>
+    <script src="main.js"></script>
+</body>
+</html>

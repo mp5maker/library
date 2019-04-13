@@ -23,3 +23,6 @@ db.json
 img
 images
 *.txt
+*.pyc
+__pycache__
+mongo
