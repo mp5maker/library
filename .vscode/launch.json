@@ -1,0 +1,11 @@
+{
+    "configurations": [
+        {
+            "type": "java",
+            "name": "CodeLens (Launch) - StringMod",
+            "request": "launch",
+            "mainClass": "StringMod",
+            "projectName": "library_1baba367"
+        }
+    ]
+}

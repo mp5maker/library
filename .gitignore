@@ -24,5 +24,6 @@ img
 images
 *.txt
 *.pyc
+*.class
 __pycache__
 mongo
