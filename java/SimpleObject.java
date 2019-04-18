@@ -27,6 +27,10 @@ public class SimpleObject {
         return mainValue;
     }
 
+    public int getYValue() {
+        return this.y;
+    }
+
     public static void main(String[] args) {
         SimpleObject simpleObject = new SimpleObject();
         System.out.println(simpleObject.x);
@@ -41,5 +45,6 @@ public class SimpleObject {
 
         SimpleObject simpleObjectTwo = new SimpleObject(20);
         System.out.println(simpleObjectTwo.x);
+        System.out.println(simpleObjectTwo.getYValue());
     }
 }
