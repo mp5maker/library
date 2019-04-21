@@ -11,6 +11,7 @@
   "license": "MIT",
   "dependencies": {
     "formidable": "^1.2.1",
+    "mysql": "^2.16.0",
     "nodemailer": "^6.1.0"
   }
 }
