@@ -4,6 +4,7 @@
 }
 
 .hide-show {
+  -webkit-transition: all linear 1s;
   transition: all linear 1s;
 }
 
@@ -16,6 +17,7 @@
 }
 
 .slide-up-down {
+  -webkit-transition: all linear 1s;
   transition: all linear 1s;
 }
 
@@ -24,6 +26,7 @@
 }
 
 .show.ng-enter {
+  -webkit-transition: all linear 1s;
   transition: all linear 1s;
   opacity: 0;
 }
@@ -33,6 +36,7 @@
 }
 
 .view-transition-container.ng-enter {
+  -webkit-transition: all linear 1s;
   transition: all linear 1s;
 }
 
@@ -47,7 +51,17 @@
 }
 
 .view-animation-container.ng-enter {
-  animation: view-animation linear 1s;
+  -webkit-animation: view-animation linear 1s;
+          animation: view-animation linear 1s;
+}
+
+@-webkit-keyframes view-animation {
+  from {
+    opacity: 0;
+  }
+  to {
+    opacity: 1;
+  }
 }
 
 @keyframes view-animation {
@@ -58,7 +72,9 @@
     opacity: 1;
   }
 }
+
 .repeat-transition {
+  -webkit-transition: all linear 1s;
   transition: all linear 1s;
 }
 
@@ -82,11 +98,22 @@
 
 .repeat-animation.ng-enter,
 .repeat-animation.ng-move {
-  animation: repeat-animation-enter linear 1s;
+  -webkit-animation: repeat-animation-enter linear 1s;
+          animation: repeat-animation-enter linear 1s;
 }
 
 .repeat-animation.ng-leave {
-  animation: repeat-animation-leave linear 1s;
+  -webkit-animation: repeat-animation-leave linear 1s;
+          animation: repeat-animation-leave linear 1s;
+}
+
+@-webkit-keyframes repeat-animation-enter {
+  0% {
+    opacity: 0;
+  }
+  100% {
+    opacity: 1;
+  }
 }
 
 @keyframes repeat-animation-enter {
@@ -97,6 +124,16 @@
     opacity: 1;
   }
 }
+
+@-webkit-keyframes repeat-animation-leave {
+  0% {
+    opacity: 1;
+  }
+  100% {
+    opacity: 0;
+  }
+}
+
 @keyframes repeat-animation-leave {
   0% {
     opacity: 1;
@@ -105,7 +142,9 @@
     opacity: 0;
   }
 }
+
 .show-transition-container.ng-hide-add {
+  -webkit-transition: all linear 1s;
   transition: all linear 1s;
 }
 
@@ -120,7 +159,17 @@
 }
 
 .show-animation-container.ng-hide-add {
-  animation: show-animation-toggle linear 1s;
+  -webkit-animation: show-animation-toggle linear 1s;
+          animation: show-animation-toggle linear 1s;
+}
+
+@-webkit-keyframes show-animation-toggle {
+  to {
+    opacity: 0;
+  }
+  from {
+    opacity: 1;
+  }
 }
 
 @keyframes show-animation-toggle {
@@ -131,12 +180,14 @@
     opacity: 1;
   }
 }
+
 .blackout {
   overflow-x: hidden;
   left: 0%;
 }
 
 .blackout-remove {
+  -webkit-transition: all linear 3s;
   transition: all linear 3s;
   left: 0%;
 }
@@ -146,6 +197,7 @@
 }
 
 .blackout-add {
+  -webkit-transition: all linear 3s;
   transition: all linear 3s;
   left: -100%;
 }
@@ -155,11 +207,22 @@
 }
 
 .blackout2-add {
-  animation: blackout-animation-add linear 3s;
+  -webkit-animation: blackout-animation-add linear 3s;
+          animation: blackout-animation-add linear 3s;
 }
 
 .blackout2-remove {
-  animation: blackout-animation-remove linear 3s;
+  -webkit-animation: blackout-animation-remove linear 3s;
+          animation: blackout-animation-remove linear 3s;
+}
+
+@-webkit-keyframes blackout-animation-add {
+  to {
+    left: 0%;
+  }
+  from {
+    left: -100%;
+  }
 }
 
 @keyframes blackout-animation-add {
@@ -170,7 +233,8 @@
     left: -100%;
   }
 }
-@keyframes blackout-animation-remove {
+
+@-webkit-keyframes blackout-animation-remove {
   to {
     left: -100%;
   }
@@ -179,4 +243,12 @@
   }
 }
 
+@keyframes blackout-animation-remove {
+  to {
+    left: -100%;
+  }
+  from {
+    left: 0%;
+  }
+}
 /*# sourceMappingURL=main.css.map */
