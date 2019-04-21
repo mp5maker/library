@@ -27,3 +27,4 @@ images
 *.class
 __pycache__
 mongo
+*.map
