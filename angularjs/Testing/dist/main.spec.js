@@ -1,7 +1,20 @@
 // Be descriptive with titles here. The describe and it titles combined read like a sentence.
-describe('Users factory', function () {
-    it('has a dummy spec to test 2 + 2', function () {
-        // An intentionally failing test. No code within expect() will never equal 4.
-        expect(4).toEqual(4);
-    });
+describe('mainController', function () {
+    beforeEach(module('simpleapp'));
+
+    var $controller, $rootScope;
+
+    beforeEach(inject(function(_$controller_, _$rootScope_) {
+        $controller = _$controller_;
+        $rootScope = _$rootScope_;
+    }))
+
+    describe('$scope.addition', function() {
+        it('It is just a testing comment', function() {
+            var $scope = $rootScope.$new();
+            var controller = $controller('mainController', {$scope: $scope});
+
+            expect($scope.addition([2,3])).toBe(5)
+        })
+    })
 });

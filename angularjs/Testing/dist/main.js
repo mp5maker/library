@@ -2,6 +2,10 @@ var app = angular.module('simpleapp', [])
 app.controller('mainController', ['$scope', Controller])
 
 function Controller($scope) {
-    $scope.test = "It is a test";
-    console.log($scope.test);
+    $scope.addition = (params) => {
+        return params.reduce((sumTotal, perItem) => {
+            return sumTotal + perItem;
+        }, 0)
+    }
+    console.log($scope.addition([2,3]));
 }
