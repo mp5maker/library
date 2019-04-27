@@ -75,20 +75,11 @@ gulp.task('html', () => {
 })
 
 /* Watch */
-const watchGroup = () => {
-    gulp.watch('./src/*.scss', ['css'])
-    gulp.watch('./src/*.js', ['javascript'])
-    gulp.watch('./src/*.html', ['html'])
-}
-
 gulp.task('watch', ['javascript', 'css', 'html'], () => {
-    watchGroup();
-})
-
-/* Serve */
-gulp.task('serve', ['javascript', 'css', 'html'], () => {
     browserSync.init({
         server: "./dist"
     })
-    watchGroup();
+    gulp.watch('./src/**/**/*.scss', ['css'])
+    gulp.watch('./src/**/**/*.js', ['javascript']).on('change', browserSync.reload);
+    gulp.watch('./src/**/**/*.html', ['html']).on('change', browserSync.reload);
 })
