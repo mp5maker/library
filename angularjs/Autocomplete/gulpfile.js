@@ -82,4 +82,5 @@ gulp.task('watch', ['javascript', 'css', 'html'], () => {
     gulp.watch('./src/**/**/*.scss', ['css'])
     gulp.watch('./src/**/**/*.js', ['javascript']).on('change', browserSync.reload);
     gulp.watch('./src/**/**/*.html', ['html']).on('change', browserSync.reload);
+    notify("File Changed: Browser Synced").write('');
 })
