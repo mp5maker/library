@@ -1,3 +1,10 @@
+$color: (
+    "red": firebrick,
+    "white": white,
+    "pink": #d65f5f,
+    "grey": #d6d6d6
+);
+
 body, html {
     margin: 0;
     padding: 0;
@@ -5,4 +12,35 @@ body, html {
 
 body {
     height: 100%;
+    background-color: map-get($color, 'red');
+    color: map-get($color, 'white');
+    .ui-select-bootstrap  {
+        &::after {
+            position: absolute;
+            top: 7px;
+            left: 13px;
+            content: attr(data-target);
+            color: map-get($color, 'grey');
+            opacity: 0.5;
+        }
+        .ui-select-match {
+            .btn {
+                background-color: map-get($color, 'white');
+                border-radius: 5px;
+            }
+        }
+        .ui-select-choices {
+            display: block;
+        }
+        .ui-select-search {
+            &::placeholder {
+                display: block !important;
+            }
+        }
+    }
+    .box-shadow {
+        border-radius: 5px;
+        box-shadow: 0 1px 15px 0 map-get($color, 'pink');
+    }
 }
+

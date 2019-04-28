@@ -9,8 +9,54 @@
 </head>
 <body ng-cloak>
     <div ng-controller="mainController">
-        <div class="test">
-            {{ test }}
+        <div class="container mt-5 p-5 box-shadow">
+            <div class="row">
+                <div class="col mx-auto">
+                    <div class="text-center ">
+                        <label>
+                            <h3>People</h3>
+                        </label>
+                        <ui-select
+                            uis-open-close="onOpenClose(isOpen)"
+                            ng-model="form.person"
+                            reset-search-input="false"
+                            id="people-ui-select"
+                            data-target="{{ suggestion }}"
+                            title="Choose an employee">
+                            <ui-select-match
+                                placeholder="Enter an employee ...name, email, country">
+                                <span>
+                                    {{ $select.selected.name }} -
+                                    {{ $select.selected.email }} -
+                                    {{ $select.selected.age }} -
+                                    {{ $select.selected.country }}
+                                </span>
+                            </ui-select-match>
+                            <ui-select-choices
+                                repeat="person in people track by $index"
+                                refresh="refreshPeople($select.search)"
+                                refresh-delay="0">
+                                <div class="container">
+                                    <div class="row">
+                                        <div class="col-md-3">
+                                            {{ person.name }}
+                                        </div>
+                                        <div class="col-md-3">
+                                            {{ person.email }}
+                                        </div>
+                                        <div class="col-md-3">
+                                            {{ person.age }}
+                                        </div>
+                                        <div class="col-md-3">
+                                            {{ person.country }}
+                                        </div>
+                                    </div>
+                                </div>
+                            </ui-select-choices>
+                        </ui-select>
+                    </div>
+                </div>
+            </div>
         </div>
     </div>
     <script src="./main.min.js"></script>

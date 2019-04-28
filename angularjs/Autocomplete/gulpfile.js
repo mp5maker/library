@@ -27,6 +27,7 @@ gulp.task('build', ['javascript', 'css', 'html'])
 
 /* Javascript */
 const javascriptIncludes = [
+    './node_modules/jquery/dist/jquery.slim.js',
     './node_modules/angular/angular.min.js',
     './node_modules/ui-select/dist/select.min.js',
     './node_modules/angular-sanitize/angular-sanitize.js'
@@ -45,13 +46,13 @@ gulp.task('javascript', () => {
         .pipe(debug({ title: 'Javascript Debug:' }))
         .pipe(gulp.dest('./dist'))
         .pipe(browserSync.stream())
-        .pipe(notify("Updated Javascript"));
 })
 
 /* Css */
 const cssIncludes = [
     './node_modules/angular/angular-csp.css',
-    './node_modules/bootstrap/dist/css/bootstrap.min.css'
+    './node_modules/bootstrap/dist/css/bootstrap.min.css',
+    './node_modules/ui-select/dist/select.min.css'
 ];
 gulp.task('css', () => {
     gulp.src([...cssIncludes, './src/**/**/*.scss'])
@@ -64,17 +65,20 @@ gulp.task('css', () => {
         .pipe(debug({ title: 'CSS Debug:' }))
         .pipe(gulp.dest('./dist'))
         .pipe(browserSync.stream())
-        .pipe(notify("Updated Css"));
 })
 
 /* Html */
+const htmlIncludes = [
+    './src/**/**/*.html',
+    './src/**/**/*.json',
+    './src/favicon.ico'
+]
 gulp.task('html', () => {
-    gulp.src(['./src/**/**/*.html', './src/favicon.ico'])
+    gulp.src([...htmlIncludes])
         .pipe(plumber({ errorHandler }))
         .pipe(debug({ title: 'Html Debug:' }))
         .pipe(gulp.dest('./dist'))
         .pipe(browserSync.stream())
-        .pipe(notify("Updated Html"));
 })
 
 /* Watch */
