@@ -4,5 +4,7 @@
 
     function mainController($scope) {
         $scope.test = "hello";
+        console.log('hello')
+        console.log('hello')
     }
 })();

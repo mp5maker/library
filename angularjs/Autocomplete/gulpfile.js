@@ -44,7 +44,8 @@ gulp.task('javascript', () => {
         .pipe(sourcemaps.write())
         .pipe(debug({ title: 'Javascript Debug:' }))
         .pipe(gulp.dest('./dist'))
-        .pipe(browserSync.stream());
+        .pipe(browserSync.stream())
+        .pipe(notify("Updated Javascript"));
 })
 
 /* Css */
@@ -62,7 +63,8 @@ gulp.task('css', () => {
         .pipe(sourcemaps.write())
         .pipe(debug({ title: 'CSS Debug:' }))
         .pipe(gulp.dest('./dist'))
-        .pipe(browserSync.stream());
+        .pipe(browserSync.stream())
+        .pipe(notify("Updated Css"));
 })
 
 /* Html */
@@ -71,16 +73,16 @@ gulp.task('html', () => {
         .pipe(plumber({ errorHandler }))
         .pipe(debug({ title: 'Html Debug:' }))
         .pipe(gulp.dest('./dist'))
-        .pipe(browserSync.stream());
+        .pipe(browserSync.stream())
+        .pipe(notify("Updated Html"));
 })
 
 /* Watch */
 gulp.task('watch', ['javascript', 'css', 'html'], () => {
     browserSync.init({
-        server: "./dist"
+        server: "./dist",
     })
-    gulp.watch('./src/**/**/*.scss', ['css'])
-    gulp.watch('./src/**/**/*.js', ['javascript']).on('change', browserSync.reload);
-    gulp.watch('./src/**/**/*.html', ['html']).on('change', browserSync.reload);
-    notify("File Changed: Browser Synced").write('');
+    gulp.watch('./src/**/**/*.scss', ['css']);
+    gulp.watch('./src/**/**/*.js', ['javascript']).on('change', () => browserSync.reload())
+    gulp.watch('./src/**/**/*.html', ['html']).on('change', () => browserSync.reload())
 })
