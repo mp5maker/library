@@ -29,7 +29,10 @@ router.post('/', (request, response) => {
     if (!newMember.name || !newMember.email) {
         response.status(400).json({ message: `Please include a name and an email`})
     }
-    response.json(request.body)
+    var showMembers = [...members];
+    showMembers.push(newMember)
+    response.json(showMembers)
+    response.redirect('/')
 })
 
 /* Update */
