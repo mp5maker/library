@@ -1,14 +1,19 @@
 const express = require('express');
 const path = require('path');
 const app = express();
+const expressHandlerbars = require('express-handlebars');
 
-const members = require('./backend/members')
 const PORT = process.env.PORT || 4000;
 
 // Logger Middlesware
-app.use(require('./backend/logger'))
+app.use(require('./backend/middleware/logger'))
 
-// Body Parser
+// Handlebars Middleware
+app.engine('handlebars', expressHandlerbars({ defaultLayout: 'main' }))
+app.set('view engine', 'handlebars');
+
+
+// Body Parser Middleware
 app.use(express.json());
 app.use(express.urlencoded({extended: false}));
 
