@@ -18,8 +18,43 @@
         }
     }
 
-    app.controller('mainController', ['$scope', 'apiHelper', '$log', mainController])
-    function mainController($scope, apiHelper, $log) {
+    app.factory('commonHelper', ['apiHelper', '$timeout', commonHelper])
+    function commonHelper(apiHelper, $timeout) {
+        return {
+            scrollUiSelect: ({id, isOpen, api, scope} = {}) => {
+                var timeout, onScrollUiSelectChoices;
+                const uiSelectChoices = angular.element(`#${id}`)
+                    .controller('uiSelect').$element
+                    .find('.ui-select-choices');
+                if (!isOpen) {
+                    uiSelectChoices[0].removeEventListener('scroll', onScrollUiSelectChoices);
+                    $timeout.cancel(timeout);
+                }
+                // const conditionHeight = (OffsetTopElement('load-next') - (ScrollY() + WindowHeight()) >= 200)
+                if (isOpen) {
+                    var busyWithApi = false;
+                    onScrollUiSelectChoices = (event) => {
+                        const scrollTop = event.target.scrollTop;
+                        const offsetHeight = event.target.offsetHeight;
+                        const scrollHeight = event.target.scrollHeight;
+                        const isAllowedToCallApi = (parseInt(offsetHeight) + parseInt(scrollTop) + 10 > parseInt(scrollHeight));
+                        if (isAllowedToCallApi && !busyWithApi) {
+                            busyWithApi = true;
+                            console.log(api)
+                            timeout = $timeout(() => {
+                                busyWithApi = false;
+                            }, 1000);
+                        }
+                    }
+                    uiSelectChoices[0].addEventListener('scroll', onScrollUiSelectChoices);
+                }
+                return scope;
+            }
+        }
+    }
+
+    app.controller('mainController', ['$scope', 'apiHelper', '$log', 'commonHelper', mainController])
+    function mainController($scope, apiHelper, $log, commonHelper) {
         $scope.form = { person: ""};
         $scope.people = [];
         $scope.peopeleSearch = [];
@@ -58,10 +93,16 @@
                 $scope.improvedPlaceholder = "";
             }
             const onErrorPeople = (error) => $log.debug(error);
-            apiHelper.get('people.json').then(onSuccessPeople).catch(onErrorPeople)
+            apiHelper.get('people.json').then(onSuccessPeople).catch(onErrorPeople);
         }
 
         $scope.onOpenClose = (isOpen) => {
+            commonHelper.scrollUiSelect({
+                id: 'people-ui-select',
+                isOpen,
+                api:'pharmarcy.items',
+                scope: $scope.people
+            });
             if (!isOpen) {
                 $scope.suggestion = "";
             }
