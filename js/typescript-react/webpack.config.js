@@ -75,10 +75,5 @@ module.exports = {
         new HtmlWebpackPlugin({
             template: path.join(__dirname, 'src', 'index.html')
         }),
-        new webpack.SourceMapDevToolPlugin({
-            filename: 'sourcemaps/main.bundle.js.map',
-            publicPath: path.resolve(__dirname, 'public'),
-            fileContext: 'public'
-        })
     ]
 };
