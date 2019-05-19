@@ -49,12 +49,23 @@ self.addEventListener('activate', (event) => {
 self.addEventListener('fetch', (event) => {
     event.respondWith(async function () {
         const cache = await caches.open(CACHE_NAME);
-        const cachedResponse = await cache.match(event.request);
-        const networkResponsePromise = fetch(event.request);
-
+        try {
+            var cachedResponse = await cache.match(event.request);
+        } catch(error) {
+            console.log(error);
+        }
+        try {
+            var networkResponsePromise = fetch(event.request);
+        } catch(error) {
+            console.log(error);
+        }
         event.waitUntil(async function () {
-            const networkResponse = await networkResponsePromise;
-            await cache.put(event.request, networkResponse.clone());
+            try {
+                const networkResponse = await networkResponsePromise;
+                await cache.put(event.request, networkResponse.clone());
+            } catch(error) {
+                console.log(error);
+            }
         }());
 
         return cachedResponse || networkResponsePromise;
