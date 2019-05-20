@@ -2,25 +2,15 @@ import * as React from 'react'
 
 import "./Content.scss";
 
-export interface contentProps {}
+export interface contentProps {
+    children: React.ReactNode
+}
 
-export const Content: React.SFC<contentProps> = () => (
+export const Content: React.SFC<contentProps> = (props) => (
     <div className="container-fluid">
         <div className="row">
             <div className="col mt-3">
-                <div>
-                    <h4>
-                        Home
-                    </h4>
-                </div>
-                <div className="common-header">
-                    <div>
-                        On the left
-                        </div>
-                    <div>
-                        On the right
-                    </div>
-                </div>
+                { props.children }
             </div>
         </div>
     </div>

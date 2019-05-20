@@ -1,5 +1,7 @@
 import * as React from 'react'
 
+import { NavLink, withRouter } from 'react-router-dom';
+
 import * as ReactBootstrap from 'react-bootstrap'
 
 export interface appProps {
@@ -17,12 +19,12 @@ export const NavigationBar:React.SFC<appProps> = ({compiler, framework}) => {
                 <ReactBootstrap.Navbar.Toggle aria-controls="basic-navbar-nav" />
                 <ReactBootstrap.Navbar.Collapse id="basic-navbar-nav">
                     <ReactBootstrap.Nav className="mr-auto">
-                        <ReactBootstrap.Nav.Link href="#home">
+                        <NavLink to="/" className="nav-link">
                             Home
-                        </ReactBootstrap.Nav.Link>
-                        <ReactBootstrap.Nav.Link href="#link">
+                        </NavLink>
+                        <NavLink to="/contact" className="nav-link">
                             Contact
-                        </ReactBootstrap.Nav.Link>
+                        </NavLink>
                     </ReactBootstrap.Nav>
                     <ReactBootstrap.Nav>
                         <ReactBootstrap.Nav.Link href="#login">
