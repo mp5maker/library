@@ -39,7 +39,7 @@ blkid | Bulk Id [Shows the hard drives]
 top | Shows the processes
 df | Available and Unavailable disk space
 lsusb | Shows devices
-lspci | Shows the PCI 
+lspci | Shows the PCI
 sudo apt-get install filezilla | Installs the filezilla
 sudo apt-get remove filezilla | Removes the filezilla
 

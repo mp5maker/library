@@ -3,6 +3,7 @@
         display: inline-block;
         &:nth-child(2) {
             float: right;
+            margin-right: 12px;
         }
     }
     &::before, &::after {
