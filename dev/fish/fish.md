@@ -10,3 +10,7 @@
 
 ## Integration in VS Code Terminal ##
     "terminal.integrated.shell.linux": "/usr/bin/fish" in settings.json
+
+
+## Customization ##
+    curl -L https://get.oh-my.fish | fish

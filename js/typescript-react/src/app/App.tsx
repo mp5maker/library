@@ -22,10 +22,10 @@ export const App: React.SFC<indexProps> = (props) => (
         <BrowserRouter>
             <NavigationBar {...props}/>
             <Content>
-                    <Switch>
-                        <Route exact path="/" component={Home} />
-                        <Route exact path="/contact" component={Contact} />
-                    </Switch>
+                <Switch>
+                    <Route exact path="/" component={Home} />
+                    <Route exact path="/contact" component={Contact} />
+                </Switch>
             </Content>
             <Footer/>
         </BrowserRouter>
