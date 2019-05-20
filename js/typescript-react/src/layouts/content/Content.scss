@@ -1,0 +1,13 @@
+.common-header {
+    div {
+        display: inline-block;
+        &:nth-child(2) {
+            float: right;
+        }
+    }
+    &::before, &::after {
+        clear: both;
+        display: block;
+        content: "";
+    }
+}
