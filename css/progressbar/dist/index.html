@@ -1,0 +1,80 @@
+<!DOCTYPE html>
+<html lang="en" ng-app="progressBarApp">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Progress Bar</title>
+    <link rel="shortcut icon" href="favicon.ico" type="image/x-icon">
+    <link
+        rel="stylesheet"
+        type="text/css"
+        href="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/4.3.1/css/bootstrap.min.css">
+    <link
+        rel="stylesheet"
+        type="text/css"
+        href="https://cdnjs.cloudflare.com/ajax/libs/angular.js/1.7.8/angular-csp.css">
+    <link rel="stylesheet" type="text/css" href="main.min.css">
+</head>
+<body ng-cloak>
+    <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
+        <a class="navbar-brand" href="javascript:void(0)">Logo</a>
+        <button class="navbar-toggler navbar-toggler-right" type="button" data-toggle="collapse" data-target="#navb">
+            <span class="navbar-toggler-icon"></span>
+        </button>
+        <div class="collapse navbar-collapse" id="navb">
+            <ul class="navbar-nav mr-auto">
+                <li class="nav-item">
+                    <a class="nav-link" href="javascript:void(0)">Link</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="javascript:void(0)">Link</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link disabled" href="javascript:void(0)">Disabled</a>
+                </li>
+            </ul>
+            <form class="form-inline my-2 my-lg-0">
+                <input class="form-control mr-sm-2" type="text" placeholder="Search">
+                <button class="btn btn-success my-2 my-sm-0" type="button">Search</button>
+            </form>
+        </div>
+    </nav>
+    <div class="container-fluid" ng-controller="mainController">
+        <div class="row">
+            <div class="col">
+                <div class="common-header">
+                    <div>
+                        Left
+                    </div>
+                    <div>
+                        Right
+                    </div>
+                </div>
+                <div class="progress-bar-container">
+                    <div class="container">
+                        <div class="row">
+                            <div class="col">
+                                <h4 class="text-center count">15%</h4>
+                                <div class="custom-progress-bar">
+                                    <div class="color"></div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <footer>
+        <div>
+            &copy; 2019 All Rights Reserved, Photon Enterprise
+        </div>
+    </footer>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.15.0/umd/popper.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/4.3.1/js/bootstrap.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/angular.js/1.7.8/angular.min.js"></script>
+    <script src="main.js"></script>
+</body>
+</html>
