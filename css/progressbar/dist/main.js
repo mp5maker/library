@@ -7,9 +7,9 @@
     function Factory($http, $q) {
         const PAGE_SIZE = 20;
 
-        function get(url, page) {
+        function get(url, params) {
             var defer = $q.defer();
-            var params = { _page: page ? page : 2, _limit: PAGE_SIZE };
+            var parameters;
 
             const onGet = (response) =>  {
                 if (response) {
@@ -40,35 +40,68 @@
                         previous,
                         next,
                         count,
-                        total
+                        total,
+                        next_page_number: next ? current + 1 : null,
+                        previous_page_number: previous ? current - 1: null,
                     });
                 }
                 defer.reject({error: "Something seems to be wrong"})
             }
-            $http.get(url, { params }).then(onGet);
+
+            if (!params) {
+                parameters = { _page: 1, _limit: PAGE_SIZE };
+            }
+
+            if (params) {
+                parameters = {
+                    _page: params.page,
+                    _limit: params.limit,
+                }
+            }
+
+            $http.get(url, { params: parameters }).then(onGet);
             return defer.promise;
         }
 
-        return { get: (url, page) => get(url, page) }
+        return { get: (url, params) => get(url, params) }
     }
 
 
     app.controller('mainController', ['$scope', 'apiHelper', Controller])
     function Controller($scope, apiHelper) {
-        const onSuccess = (response) => {
-            console.log(response)
+        $scope.posts = [];
+        $scope.completionPercentage = 0;
+        let progressBar = angular.element('.custom-progress-bar .color');
+
+        function keepOnRequestingUntilTheEnd(url, params=null) {
+
+            const onSuccess = (response) => {
+                $scope.posts = [...$scope.posts, ...response.data];
+                if (response.next) {
+                    keepOnRequestingUntilTheEnd(url, {
+                        page: response.next_page_number,
+                        limit: 20
+                    })
+                }
+                if (!response.next) {
+                    progressBar.css({ width: "101.3%" });
+                    $scope.completionPercentage = 100;
+                }
+            }
+
+            const onUpdate = (update) => {
+                let ratio = parseInt(update.count) / parseInt(update.total);
+                $scope.completionPercentage = Math.floor(ratio * 100);
+                progressBar.css({ width: $scope.completionPercentage + "%" });
+            }
+
+            const onError = (error) => console.log(error);
+
+            apiHelper.get(url, params)
+                .then(onSuccess, null, onUpdate)
+                .catch(onError)
         }
 
-        const onUpdate = (update) => {
-            console.log(update)
-        }
-
-        const onError = (error) => {
-            console.log(error)
-        }
-
-        apiHelper.get("http://jsonplaceholder.typicode.com/posts")
-            .then(onSuccess, null, onUpdate)
-            .catch(onError)
+        keepOnRequestingUntilTheEnd("http://jsonplaceholder.typicode.com/posts");
     }
 })();
