@@ -72,6 +72,7 @@
         $scope.posts = [];
         $scope.completionPercentage = 0;
         let progressBar = angular.element('.custom-progress-bar .color');
+        let progressCircle = angular.element('.progress-circle-section .progress-top-circle');
 
         function keepOnRequestingUntilTheEnd(url, params=null) {
 
@@ -85,6 +86,7 @@
                 }
                 if (!response.next) {
                     progressBar.css({ width: "101.3%" });
+                    progressCircle.css({border: "2px solid orange"});
                     $scope.completionPercentage = 100;
                 }
             }
@@ -93,6 +95,22 @@
                 let ratio = parseInt(update.count) / parseInt(update.total);
                 $scope.completionPercentage = Math.floor(ratio * 100);
                 progressBar.css({ width: $scope.completionPercentage + "%" });
+                if ($scope.completionPercentage > 25) {
+                    progressCircle.css({ borderRight: "2px solid orange" });
+                }
+                if ($scope.completionPercentage > 50) {
+                    progressCircle.css({
+                        borderRight: "2px solid orange",
+                        borderBottom: "2px solid orange"
+                    });
+                }
+                if ($scope.completionPercentage > 75) {
+                    progressCircle.css({
+                        borderRight: "2px solid orange",
+                        borderBottom: "2px solid orange",
+                        borderLeft: "2px solid orange",
+                    });
+                }
             }
 
             const onError = (error) => console.log(error);

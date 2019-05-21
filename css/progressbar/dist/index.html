@@ -43,33 +43,24 @@
     <div class="container-fluid" ng-controller="mainController">
         <div class="row">
             <div class="col">
-                <div class="common-header">
-                    <div>
-                        Progress
-                    </div>
-                    <div>
-                        Bar
-                    </div>
-                </div>
                 <div class="progress-bar-container">
                     <div class="container">
                         <div class="row">
-                            <div class="col">
-                                <h4 class="text-center count">
-                                    <span>
-                                        {{ completionPercentage }}
+                            <div class="col my-3">
+                                <div class="mb-3 text-center progress-circle-section">
+                                    <span class="progress-circle"></span>
+                                    <span class="progress-top-circle"></span>
+                                    <span class="progress-value">
+                                        {{ completionPercentage }} %
                                     </span>
-                                    <span>
-                                        %
-                                    </span>
-                                </h4>
+                                </div>
                                 <div class="custom-progress-bar">
                                     <div class="color"></div>
                                 </div>
                             </div>
                         </div>
                         <div class="row equal mt-3">
-                            <div class="col-sm-3 mb-3" ng-repeat="post in posts track by $index">
+                            <div class="col-md-3 mb-3" ng-repeat="post in posts track by $index">
                                 <div class="card">
                                     <div class="card-body">
                                         <div class="card-title">

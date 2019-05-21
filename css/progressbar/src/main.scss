@@ -68,6 +68,35 @@ body {
         border: 1px solid rebeccapurple;
         width: 0;
         transition: all ease 0.33s;
-        // width: 101.3%;
+    }
+}
+
+.progress-circle-section {
+    position: relative;
+    .progress-circle {
+        display: inline-block;
+        width: 100px;
+        height: 100px;
+        border-radius: 50%;
+        border: 2px solid lightgrey;
+    }
+    .progress-top-circle {
+        position: absolute;
+        top: 0;
+        left: 45.5%;
+        right: 0;
+        border-radius: 50%;
+        height: 100px;
+        width: 100px;
+        transition: all linear 0.25s;
+    }
+    .progress-value {
+        position: absolute;
+        font-size: 18px;
+        left: 1%;
+        right: 0;
+        top: 5%;
+        vertical-align: middle;
+        line-height: 90px;
     }
 }
