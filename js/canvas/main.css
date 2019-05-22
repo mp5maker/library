@@ -1,0 +1,57 @@
+body, html {
+    margin: 0;
+    padding: 0;
+}
+
+body {
+    height: 100%;
+}
+
+body > .container-fluid {
+    min-height: calc(100vh - 60px);
+}
+
+.container-fluid .common-header div {
+    display: inline-block;
+}
+
+.container-fluid .common-header div:last-child {
+    float: right;
+}
+
+.container-fluid .common-header::before,
+.container-fluid .common-header::after {
+    content: "";
+    clear: both;
+    display: block;
+}
+
+.box-shadow:hover {
+    transition: all linear 0.25s;
+    box-shadow: 0 1px 15px 0 lightgrey;
+}
+
+.box-shadow {
+    transition: all linear 0.25s;
+}
+
+.circle-container {
+    position: relative;
+}
+
+.circle-container div {
+    position: absolute;
+    top: 45%;
+    right: 0;
+    left: 4.5%;
+}
+
+footer {
+    min-height: 60px;
+    line-height: 60px;
+    border-top: 1px solid lightgrey;
+}
+
+footer div {
+    text-align: center;
+}
