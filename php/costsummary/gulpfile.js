@@ -8,7 +8,6 @@ gulp.task('default', ['css', 'js', 'html']);
 
 const cssIncludes = [
     './node_modules/bootstrap/dist/css/bootstrap.min.css',
-    './node_modules/font-awesome/css/font-awesome.min.css',
     './src/sass/**/**/*.scss'
 ]
 
@@ -34,7 +33,8 @@ gulp.task('js', () => {
 });
 
 const htmlIncludes = [
-    './src/html/**/**/*.html'
+    './src/html/**/**/*.html',
+    './src/images/**/**/*.ico'
 ]
 
 gulp.task('html', () => {
