@@ -1,0 +1,100 @@
+$colors: (
+    "grey-light-xs": #bdbdbd,
+    "grey-light-sm": #E0E3E5,
+    "grey-light-md": #F3F3F3,
+    "black": #343A40,
+);
+
+@function color($color) {
+    @return map-get($colors, $color);
+}
+
+body, html {
+    margin: 0;
+    padding: 0;
+}
+
+body {
+    height: 100%;
+    & > .container-fluid {
+        min-height: calc(100vh - 60px);
+    }
+    footer {
+        border-top: 1px solid color("grey-light-sm");
+        height: 60px;
+        line-height: 60px;
+        div {
+            text-align: center;
+        }
+    }
+    input {
+        &[type="number"] {
+            border: none;
+            width: 100%;
+            height: 36px;
+            line-height: 36px;
+            background-color: color("grey-light-md");
+            color: color("black");
+            padding: 5px;
+            text-indent: 10px;
+        }
+    }
+    .unit-price-container {
+        &::after {
+            position: absolute;
+            top: 20px;
+            right: -1%;
+            content: "=";
+            color: color("grey-light-xs");
+            font-weight: bold;
+            font-size: 1rem;
+        }
+    }
+    .btn {
+        &.circle {
+            border-radius: 50%;
+            font-size: 18px;
+            font-weight: bold;
+        }
+        &.submit-to-backend {
+            width: 100px;
+            padding: 8px;
+        }
+    }
+}
+
+@media only screen and (max-width: 1300px) {
+    .body {
+        .unit-price-container {
+            &::after {
+                right: -1.5%;
+            }
+        }
+    }
+}
+
+@media only screen and (max-width: 767px) {
+    body {
+        & > .container-fluid {
+            .row {
+                .col {
+                    flex-basis: unset;
+                }
+            }
+        }
+        .common-header {
+            display: none;
+        }
+        .btn {
+            &.circle {
+                width: 100%;
+                border-radius: unset;
+            }
+        }
+        .unit-price-container {
+            &::after {
+                content: "";
+            }
+        }
+    }
+}
