@@ -78,6 +78,7 @@
     }
     $('.add-cost').click(onClickAddCost)
 
+    // On Submit button sends the post request
     const onClickSubmitToBackend = (event) => {
         event.preventDefault();
         let transaction = [];

@@ -14,5 +14,5 @@
     gulp
     composer install
 
-    Go to the dist folder and run the xampp server or apache server
+### Other Instructions ###
     Check the console.log for the data-algorithm part
