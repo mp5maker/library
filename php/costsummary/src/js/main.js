@@ -12,6 +12,9 @@
         totalPrice: "Both quantity and unit price needs to be a number"
     };
 
+    const URL_TO_POST = '/costsummary/backend/main.php';
+
+    // Calculates the grand total
     const calculateGrandTotal = () => {
         allTotalPrice = 0;
         $('.total-price').each((key, perPrice) => {
@@ -22,6 +25,7 @@
         if (!Number.isNaN(parseFloat(allTotalPrice))) $("#grand-total-price").val(allTotalPrice);
     }
 
+    // Changes the value of the total price depending on the unit and quantity
     const onChangeQuantityUnitPrice = (event) => {
         let parent = $(event.target).closest('.row');
         quantity = parent.find('.quantity').val();
@@ -32,12 +36,14 @@
     }
     $('.quantity, .unit-price').on('input', onChangeQuantityUnitPrice)
 
+    // Removes the clone copy
     const onClickRemoveCost = (event) => {
         event.preventDefault();
         let parent = $(event.target).closest('.row');
         parent.remove();
     }
 
+    // When the form is added
     const onClickAddCost = (event) => {
         event.preventDefault();
         let parent = $(event.target).closest('.row');
@@ -45,19 +51,57 @@
         unitPrice = parseFloat(parent.find('.unit-price').val());
         totalPrice = quantity * unitPrice;
 
+        // Pass the Validation
         if (!(regexPattern.float).test(quantity)) console.log(errorMessage.quantity);
         if (!(regexPattern.float).test(unitPrice)) console.log(errorMessage.unitPrice);
         if ((regexPattern.float).test(totalPrice)) {
+            // Clone the form and add Classes and events to it
             let clone = parent.clone(true);
+            clone.find('.row').addClass('copy-version');
+            clone.find('.quantity').addClass('add-quantity');
+            clone.find('.unit-price').addClass('add-unit-price');
+            clone.find('.total-price').addClass('add-total-price');
             clone.find('.add-cost').val("x");
             clone.find('.add-cost').addClass('btn-danger').removeClass('btn-secondary');
             clone.find('.add-cost').addClass('remove-cost').removeClass('add-cost');
             clone.find('.remove-cost').off('click', onClickAddCost);
             $('#total-display-of-cost').append(clone);
             $('.remove-cost').on('click', onClickRemoveCost);
+
+            // Add Form go back old state
+            parent.find('.quantity').val(0);
+            parent.find('.unit-price').val(0);
+            parent.find('.quantity').focus();
         }else {
             console.log(errorMessage.totalPrice);
         }
     }
     $('.add-cost').click(onClickAddCost)
+
+    const onClickSubmitToBackend = (event) => {
+        event.preventDefault();
+        let transaction = [];
+        $('.add-quantity').each((key, perQuantity) => {
+            transaction.push({
+                quantity: perQuantity.value,
+                price: $('.add-unit-price')[key].value,
+                totalPrice: $('.add-total-price')[key].value,
+            });
+        });
+        let grandTotal = transaction.reduce((gTotal, payload) => {
+            return gTotal += parseFloat(payload.totalPrice);
+        }, 0);
+        let payload = { transaction, grandTotal };
+
+        const onPostSuccess = (response) => {
+            if (response) {
+                $('.remove-cost').off('click', onClickRemoveCost);
+                $('.remove-cost').remove();
+                $('.add-cost').closest('.row').find('.quantity').focus();
+            }
+        }
+        console.log(payload);
+        $.post(URL_TO_POST, payload, onPostSuccess);
+    }
+    $('.submit-to-backend').click(onClickSubmitToBackend);
 })();
