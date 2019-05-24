@@ -1,3 +1,3 @@
 #!/bin/bash
 
-cp -r * /opt/lampp/htdocs/costsummary/
+cp -r * /var/www/html/costsummary/
