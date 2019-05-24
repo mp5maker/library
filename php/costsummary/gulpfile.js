@@ -34,7 +34,7 @@ gulp.task('js', () => {
 
 const htmlIncludes = [
     './src/html/**/**/*.html',
-    './src/images/**/**/*.ico'
+    './src/images/**/**/*.ico',
 ]
 
 gulp.task('html', () => {
