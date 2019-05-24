@@ -14,6 +14,7 @@
     npm install
     gulp
     sudo apt-get install sqlite3
+    composer install
 
     Go to the dist folder and run the xampp server or apache server
     Check the console.log for the data-algorithm part
