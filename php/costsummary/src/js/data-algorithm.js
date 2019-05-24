@@ -6,9 +6,8 @@
 
     // Test Cases
     let testArray = [5, 7, 7, 8, 8, 10];
-    console.log(giveStartingAndEndingIndex(8, testArray));
-
+    console.log("TCL: giveStartingAndEndingIndex(8, testArray)", giveStartingAndEndingIndex(8, testArray))
     // Test Cases
     let testArrayTwo = [5, 7, 7, 8, 8, 10];
-    console.log(giveStartingAndEndingIndex(6, testArrayTwo))
+    console.log("TCL: giveStartingAndEndingIndex(6, testArrayTwo)", giveStartingAndEndingIndex(6, testArrayTwo))
 })();
