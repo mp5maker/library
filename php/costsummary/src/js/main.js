@@ -98,13 +98,24 @@
 
             // Clone the form and add Classes and events to it
             let clone = parent.clone(true);
+
+            // Replaces the classes
             clone.find('.row').addClass('copy-version');
             clone.find('.quantity').addClass('add-quantity');
             clone.find('.unit-price').addClass('add-unit-price');
             clone.find('.total-price').addClass('add-total-price');
+
+            // Replace the color and the icons
             clone.find('.add-cost').val("x");
             clone.find('.add-cost').addClass('btn-danger').removeClass('btn-secondary');
             clone.find('.add-cost').addClass('remove-cost').removeClass('add-cost');
+
+            // Remove the error display section
+            clone.find('.quantity-error').remove();
+            clone.find('.unit-error').remove();
+            clone.find('.total-error').remove();
+
+            // Adding/Removing events
             clone.find('.remove-cost').off('click', onClickAddCost);
             $('#total-display-of-cost').append(clone);
             $('.remove-cost').on('click', onClickRemoveCost);
@@ -163,6 +174,7 @@
 
         let cardTitle = document.createElement('div');
         cardTitle.textContent = `Grand Total: ${item.grandTotal}`;
+        cardTitle.classList.add('card-title');
 
         cardBody.appendChild(cardTitle);
         Object.keys(item.transactions).forEach((key) => {
@@ -172,6 +184,7 @@
                         Unit: ${item.transactions[key].unit}
                         Total: ${item.transactions[key].total}
                     `;
+            cardText.classList.add('card-text');
             cardBody.appendChild(cardText);
         });
 
