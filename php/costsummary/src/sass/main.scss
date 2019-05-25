@@ -50,6 +50,9 @@ body {
             font-size: 1rem;
         }
     }
+    [class*="error"]{
+        padding-left: 15px;
+    }
     .btn {
         &.circle {
             border-radius: 50%;
@@ -89,6 +92,9 @@ body {
             &.circle {
                 width: 100%;
                 border-radius: unset;
+            }
+            &.submit-to-backend {
+                width: 100%;
             }
         }
         .unit-price-container {

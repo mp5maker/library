@@ -7320,6 +7320,8 @@ body {
     color: #bdbdbd;
     font-weight: bold;
     font-size: 1rem; }
+  body [class*="error"] {
+    padding-left: 15px; }
   body .btn.circle {
     border-radius: 50%;
     font-size: 18px;
@@ -7340,5 +7342,7 @@ body {
   body .btn.circle {
     width: 100%;
     border-radius: unset; }
+  body .btn.submit-to-backend {
+    width: 100%; }
   body .unit-price-container::after {
     content: ""; } }

@@ -31,6 +31,9 @@
                         class="quantity"
                         type="number"
                         placeholder="Quantity"/>
+                    <div class="quantity-error text-danger">
+                        <small></small>
+                    </div>
                 </div>
             </div>
             <div class="col unit-price-container">
@@ -39,6 +42,9 @@
                         class="unit-price"
                         type="number"
                         placeholder="Unit Price"/>
+                    <div class="unit-error text-danger">
+                        <small></small>
+                    </div>
                 </div>
             </div>
             <div class="col total-grand-price-container">
@@ -48,6 +54,9 @@
                         type="number"
                         placeholder="Total Price"
                         readonly/>
+                    <div class="total-error text-danger">
+                        <small></small>
+                    </div>
                 </div>
             </div>
             <div class="col add-cost-container">
@@ -83,7 +92,7 @@
                         type="button"
                         id="submit-to-backend"
                         value="Submit"
-                        class="submit-to-backend btn btn-md btn-secondary"/>
+                        class="submit-to-backend btn btn-md btn-info"/>
                 </div>
             </div>
         </div>

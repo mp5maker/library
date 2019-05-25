@@ -29,6 +29,8 @@
     // Changes the value of the total price depending on the unit and quantity
     const onChangeQuantityUnitPrice = (event) => {
         let parent = $(event.target).closest('.row');
+        $(event.target).next('div').find('small').text("");
+        parent.find('.total-error').text("");
         quantity = parent.find('.quantity').val();
         unitPrice = parent.find('.unit-price').val();
         totalPrice = parseFloat(quantity) * parseFloat(unitPrice);
@@ -42,6 +44,41 @@
         event.preventDefault();
         let parent = $(event.target).closest('.row');
         parent.remove();
+        calculateGrandTotal();
+    }
+
+    const checkAndValidate = ({quantity, unitPrice, totalPrice} = {}) => {
+        let validationStatus = [];
+        const ZERO = 0;
+        if (!(regexPattern.float).test(quantity) || quantity == ""
+            || parseFloat(quantity) == ZERO || Number.isNaN(quantity)) {
+            validationStatus.push({ status: false, quantity: errorMessage.quantity });
+        }
+        if (!(regexPattern.float).test(unitPrice) || unitPrice == ""
+            || parseFloat(unitPrice) == ZERO || Number.isNaN(quantity)) {
+            validationStatus.push({ status: false, unit: errorMessage.unitPrice });
+        }
+        if (!(regexPattern.float).test(totalPrice) || totalPrice == ""
+            || parseFloat(totalPrice) == ZERO || Number.isNaN(totalPrice)) {
+            validationStatus.push({ status: false, total: errorMessage.totalPrice });
+        }
+        return validationStatus.length == ZERO
+            ? { overall: true } : { overall: false, validationStatus };
+    }
+
+    const showValidationMessage = (validationStatus) => {
+        let messages = validationStatus.validationStatus;
+        messages.forEach((message) => {
+            if (message.quantity) {
+                $('.quantity-error small').text(message.quantity);
+            }
+            if (message.unit) {
+                $('.unit-error small').text(message.unit);
+            }
+            if (message.total) {
+                $('.total-error small').text(message.total);
+            }
+        })
     }
 
     // When the form is added
@@ -53,9 +90,12 @@
         totalPrice = quantity * unitPrice;
 
         // Pass the Validation
-        if (!(regexPattern.float).test(quantity)) console.log(errorMessage.quantity);
-        if (!(regexPattern.float).test(unitPrice)) console.log(errorMessage.unitPrice);
-        if ((regexPattern.float).test(totalPrice)) {
+        let validationStatus = checkAndValidate({ quantity, unitPrice, totalPrice });
+        if (validationStatus.overall) {
+            $('.quantity-error small').text("");
+            $('.unit-error small').text("");
+            $('.total-error small').text("");
+
             // Clone the form and add Classes and events to it
             let clone = parent.clone(true);
             clone.find('.row').addClass('copy-version');
@@ -72,9 +112,11 @@
             // Add Form go back old state
             parent.find('.quantity').val(0);
             parent.find('.unit-price').val(0);
+            parent.find('.total-price').val(0);
+            parent.find('#grand-total-price').val(0);
             parent.find('.quantity').focus();
-        }else {
-            console.log(errorMessage.totalPrice);
+        } else {
+            showValidationMessage(validationStatus);
         }
     }
     $('.add-cost').click(onClickAddCost)
@@ -98,7 +140,7 @@
         const onPostSuccess = (response) => {
             if (response) {
                 $('.remove-cost').off('click', onClickRemoveCost);
-                $('.remove-cost').remove();
+                $('#total-display-of-cost .row').remove();
                 $('.add-cost').closest('.row').find('.quantity').focus();
                 $('#display-of-items .card').remove();
                 $.get(URL_TO_GET, onGetSuccess);
