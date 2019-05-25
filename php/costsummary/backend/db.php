@@ -15,12 +15,13 @@ class CostSummaryDatabase {
             $conn->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
             $sql = "CREATE DATABASE IF NOT EXISTS costsummary";
             $conn->exec($sql);
+            $conn = null;
         } catch(PDOException $error) {
             echo $error->getMessage();
         }
     }
 
-    public static function create($data=null) {
+    public static function createData($data=null) {
         try {
             $host = self::$host;
             $db = self::$db;
@@ -28,34 +29,53 @@ class CostSummaryDatabase {
             R::useFeatureSet('novice/latest');
             R::fancyDebug(TRUE);
 
+            $transactions = $data['transaction'];
+            $grand_total = $data['grandTotal'];
+
             R::commit();
-
-            $cost_summary_table =  R::dispense('cost');
-            $grand_table =  R::dispense('grand');
-
-            $cost_summary_table->quantity = 5;
-            $cost_summary_table->unit = 5;
-            $cost_summary_table->total = 25;
-            $id =  R::store($cost_summary_table);
-            $grand_table->first_transation_id = $id;
-
-            $cost_summary_table =  R::dispense('cost');
-            $cost_summary_table->quantity = 6;
-            $cost_summary_table->unit = 6;
-            $cost_summary_table->total = 36;
-            $id =  R::store($cost_summary_table);
-            $grand_table->last_transaction_id = $id;
-            $id = R::store($grand_table);
-
-            echo "<pre>";
-                $test =  R::load('cost', 2);
-                $test =  R::load('grand', 2);
-                var_dump($test);
-                var_dump($grand);
-            echo "</pre>";
+            if (!empty($transactions)) {
+                $grand_table =  R::dispense('grand');
+                foreach($transactions as $key => $transaction):
+                    $cost_summary_table =  R::dispense('cost');
+                    $cost_summary_table->quantity = $transaction['quantity'];
+                    $cost_summary_table->unit = $transaction['unit'];
+                    $cost_summary_table->total = $transaction['totalPrice'];
+                    $id =  R::store($cost_summary_table);
+                    if ($key == 0) {
+                        $grand_table->first_transaction_id = $id;
+                    }
+                    if ($key == (sizeOf($transactions) - 1)) {
+                        $grand_table->last_transaction_id = $id;
+                    }
+                endforeach;
+                $grand_table->amount = $grand_total;
+                $id = R::store($grand_table);
+            }
+            R::close();
+            return true;
         } catch(Exception $e) {
             R::rollback();
             echo $e->getMessage();
+            R::close();
+            return false;
         }
+    }
+
+    public static function fetchAll() {
+        $host = self::$host;
+        $db = self::$db;
+        R::setup("mysql:host=$host;dbname=$db", self::$user, self::$pwd);
+        R::useFeatureSet('novice/latest');
+        R::fancyDebug(TRUE);
+
+        $all_cost_summary = [];
+        $grand_tables = R::findAll('grand');
+        foreach($grand_tables as $grand_table):
+            $first_transaction_id = $grand_table['first_transaction_id'];
+            $last_transaction_id = $grand_table['last_transaction_id'];
+            $transactions = R::findAll("cost", "WHERE id BETWEEN $first_transaction_id and $last_transaction_id");
+            $all_cost_summary = ["transactions" => $transactions, "grandTotal" => $grand_table['amount']];
+        endforeach;
+        return !empty($all_cost_summary) ? $all_cost_summary : [];
     }
 }

@@ -12,7 +12,8 @@
         totalPrice: "Both quantity and unit price needs to be a number"
     };
 
-    const URL_TO_POST = '/costsummary/backend/main.php';
+    const URL_TO_POST = '/library/php/costsummary/backend/create.php';
+    const URL_TO_GET = '/library/php/costsummary/backend/read.php';
 
     // Calculates the grand total
     const calculateGrandTotal = () => {
@@ -85,7 +86,7 @@
         $('.add-quantity').each((key, perQuantity) => {
             transaction.push({
                 quantity: perQuantity.value,
-                price: $('.add-unit-price')[key].value,
+                unit: $('.add-unit-price')[key].value,
                 totalPrice: $('.add-total-price')[key].value,
             });
         });
@@ -95,14 +96,21 @@
         let payload = { transaction, grandTotal };
 
         const onPostSuccess = (response) => {
+            console.log(response);
             if (response) {
                 $('.remove-cost').off('click', onClickRemoveCost);
                 $('.remove-cost').remove();
                 $('.add-cost').closest('.row').find('.quantity').focus();
             }
         }
-        console.log(payload);
         $.post(URL_TO_POST, payload, onPostSuccess);
     }
     $('.submit-to-backend').click(onClickSubmitToBackend);
+
+    const onGetSuccess = (response) => {
+        if (response) {
+            console.log(response);
+        }
+    }
+    $.get(URL_TO_GET, onGetSuccess);
 })();
