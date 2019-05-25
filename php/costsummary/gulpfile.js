@@ -1,7 +1,7 @@
 const gulp = require('gulp');
 const sass = require('gulp-sass');
 const concat = require('gulp-concat');
-const shell = require('gulp-shell');
+// const shell = require('gulp-shell'); // Required to copy from one location to another
 const browserSync = require('browser-sync').create();
 
 gulp.task('default', ['css', 'js', 'html']);
@@ -42,11 +42,10 @@ gulp.task('html', () => {
         .pipe(gulp.dest('./dist'));
 });
 
-gulp.task('shell', shell.task('./copy-to-htdocs.sh'))
-
-gulp.task('watch', ['css', 'js', 'html', 'shell'], () => {
+// gulp.task('shell', shell.task('./copy-to-htdocs.sh'))
+gulp.task('watch', ['css', 'js', 'html'], () => {
     browserSync.init({ server: "./dist" })
-    gulp.watch(cssIncludes, ['css', 'shell']).on('change', () => browserSync.reload());
-    gulp.watch(jsIncludes, ['js', 'shell']).on('change', () => browserSync.reload());
-    gulp.watch(htmlIncludes, ['html', 'shell']).on('change', () => browserSync.reload());
+    gulp.watch(cssIncludes, ['css']).on('change', () => browserSync.reload());
+    gulp.watch(jsIncludes, ['js']).on('change', () => browserSync.reload());
+    gulp.watch(htmlIncludes, ['html']).on('change', () => browserSync.reload());
 });
