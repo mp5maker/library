@@ -64,6 +64,18 @@ body {
             padding: 8px;
         }
     }
+    .card {
+        transition: all linear 0.25s;
+        min-height: 200px;
+        vertical-align: top;
+        &:hover {
+            transition: all linear 0.25s;
+            box-shadow: 0 1px 15px color('grey-light-xs');
+        }
+    }
+    .card-title {
+        font-weight: 500;
+    }
 }
 
 @media only screen and (max-width: 1300px) {

@@ -6,13 +6,15 @@
     2. Jquery
     3. Popper.js
     4. Boostrap 4
-    6. NPM [JAVASCRIPT DEPENDENCY MANAGER]
+    6. NPM
+    7. Composer
 
 ### Run the Project ###
 
     npm install
-    gulp
     composer install
+    Change the database settings in config.ini file
+    gulp
 
 ### Other Instructions ###
     Check the console.log for the data-algorithm part

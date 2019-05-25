@@ -1,17 +1,13 @@
 <?php
 require_once '../vendor/autoload.php';
+require_once 'utils.php';
 use RedBeanPHP\Facade as R;
 
 class CostSummaryDatabase {
-    public static $host = "localhost";
-    public static $user = "root";
-    public static $pwd = "";
-    public static $db = "costsummary";
-
     public static function createDatabase() {
         try {
-            $host = self::$host;
-            $conn = new PDO("mysql:host=$host", self::$user, self::$pwd);
+            $host = config('host');
+            $conn = new PDO("mysql:host=$host", config('user'), config('pwd'));
             $conn->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
             $sql = "CREATE DATABASE IF NOT EXISTS costsummary";
             $conn->exec($sql);
@@ -23,9 +19,9 @@ class CostSummaryDatabase {
 
     public static function createData($data=null) {
         try {
-            $host = self::$host;
-            $db = self::$db;
-            R::setup("mysql:host=$host;dbname=$db", self::$user, self::$pwd);
+            $host = config('host');
+            $db = config('db');
+            R::setup("mysql:host=$host;dbname=$db", config('user'), config('pwd'));
             R::useFeatureSet('novice/latest');
             // R::fancyDebug(TRUE); // For Debugging
 
@@ -62,9 +58,9 @@ class CostSummaryDatabase {
     }
 
     public static function fetchAll() {
-        $host = self::$host;
-        $db = self::$db;
-        R::setup("mysql:host=$host;dbname=$db", self::$user, self::$pwd);
+        $host = config('host');
+        $db = config('db');
+        R::setup("mysql:host=$host;dbname=$db", config('user'), config('pwd'));
         R::useFeatureSet('novice/latest');
         // R::fancyDebug(TRUE); // For Debugging
 

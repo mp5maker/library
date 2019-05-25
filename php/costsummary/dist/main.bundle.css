@@ -7329,6 +7329,15 @@ body {
   body .btn.submit-to-backend {
     width: 100px;
     padding: 8px; }
+  body .card {
+    transition: all linear 0.25s;
+    min-height: 200px;
+    vertical-align: top; }
+    body .card:hover {
+      transition: all linear 0.25s;
+      box-shadow: 0 1px 15px #bdbdbd; }
+  body .card-title {
+    font-weight: 500; }
 
 @media only screen and (max-width: 1300px) {
   .body .unit-price-container::after {
