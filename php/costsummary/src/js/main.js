@@ -96,21 +96,49 @@
         let payload = { transaction, grandTotal };
 
         const onPostSuccess = (response) => {
-            console.log(response);
             if (response) {
                 $('.remove-cost').off('click', onClickRemoveCost);
                 $('.remove-cost').remove();
                 $('.add-cost').closest('.row').find('.quantity').focus();
+                $('#display-of-items .card').remove();
+                $.get(URL_TO_GET, onGetSuccess);
             }
         }
         $.post(URL_TO_POST, payload, onPostSuccess);
     }
     $('.submit-to-backend').click(onClickSubmitToBackend);
 
+    const createCardList = (item) => {
+        let listContainer = $('#display-of-items');
+        let cardDiv = document.createElement('div');
+        cardDiv.classList.add('card')
+        cardDiv.classList.add('d-inline-block')
+        cardDiv.classList.add('mr-2')
+        cardDiv.classList.add('my-2')
+
+        let cardBody = document.createElement('div');
+        cardBody.classList.add('card-body');
+
+        let cardTitle = document.createElement('div');
+        cardTitle.textContent = `Grand Total: ${item.grandTotal}`;
+
+        cardBody.appendChild(cardTitle);
+        Object.keys(item.transactions).forEach((key) => {
+            let cardText = document.createElement('div');
+            cardText.textContent = `
+                        Quantity: ${item.transactions[key].quantity}
+                        Unit: ${item.transactions[key].unit}
+                        Total: ${item.transactions[key].total}
+                    `;
+            cardBody.appendChild(cardText);
+        });
+
+        cardDiv.appendChild(cardBody);
+        listContainer.append(cardDiv);
+    }
+
     const onGetSuccess = (response) => {
-        if (response) {
-            console.log(response);
-        }
+        if (response) response.data.forEach((item) => createCardList(item));
     }
     $.get(URL_TO_GET, onGetSuccess);
 })();

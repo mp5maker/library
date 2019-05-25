@@ -27,7 +27,7 @@ class CostSummaryDatabase {
             $db = self::$db;
             R::setup("mysql:host=$host;dbname=$db", self::$user, self::$pwd);
             R::useFeatureSet('novice/latest');
-            R::fancyDebug(TRUE);
+            // R::fancyDebug(TRUE); // For Debugging
 
             $transactions = $data['transaction'];
             $grand_total = $data['grandTotal'];
@@ -66,7 +66,7 @@ class CostSummaryDatabase {
         $db = self::$db;
         R::setup("mysql:host=$host;dbname=$db", self::$user, self::$pwd);
         R::useFeatureSet('novice/latest');
-        R::fancyDebug(TRUE);
+        // R::fancyDebug(TRUE); // For Debugging
 
         $all_cost_summary = [];
         $grand_tables = R::findAll('grand');
@@ -74,7 +74,7 @@ class CostSummaryDatabase {
             $first_transaction_id = $grand_table['first_transaction_id'];
             $last_transaction_id = $grand_table['last_transaction_id'];
             $transactions = R::findAll("cost", "WHERE id BETWEEN $first_transaction_id and $last_transaction_id");
-            $all_cost_summary = ["transactions" => $transactions, "grandTotal" => $grand_table['amount']];
+            $all_cost_summary[] = ["transactions" => $transactions, "grandTotal" => $grand_table['amount']];
         endforeach;
         return !empty($all_cost_summary) ? $all_cost_summary : [];
     }
