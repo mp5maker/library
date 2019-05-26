@@ -1,95 +1,12 @@
 <!DOCTYPE html>
-<html>
+<html lang="en">
 <head>
-    <meta charset="utf-8" />
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <title>Page Title</title>
-    <meta name="viewport" content="width=device-width, initial-scale=1">
-    <link rel="shortcut icon" href="favicon.ico"/>
-    <link rel="stylesheet" type="text/css" media="screen" href="./node_modules/bootstrap/dist/css/bootstrap.css" />
-    <link rel="stylesheet" type="text/css" media="screen" href="main.css" />
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Redirect</title>
 </head>
 <body>
-    <div class="container">
-        <div class="row">
-            <div class="col text-left p-5 m-5">
-                <div>
-                    <h4>
-                        Testing the Service Worker
-                    </h4>
-                </div>
-                <div>
-                    <span>
-                        <strong>
-                            Service Worker Support: 
-                        </strong>
-                    </span>
-                    <span>
-                        <span id="service-worker-support"></span>
-                    </span>
-                </div>
-                <div>
-                    <span>
-                        <strong>
-                            Service Worker Registration: 
-                        </strong>
-                    </span>
-                    <span>
-                        <span id="service-worker-registration"></span>
-                    </span>
-                </div>
-            </div>
-        </div>
-    </div>
-    <div class="container">
-        <div class="row">
-            <div class="col text-left p-5 m-5">
-                <div>
-                    <h4>
-                        Testing the Indexed DB
-                    </h4>
-                </div>
-                <div>
-                    <span>
-                        <strong>
-                            Indexed Db: 
-                        </strong>
-                    </span>
-                    <span>
-                        <span id="indexed-db-support"></span>
-                    </span>
-                </div>
-                <div>
-                    <span>
-                        <button class="btn btn-success" id="create">
-                            CREATE
-                        </button>
-                        <button class="btn btn-primary" id="read">
-                            READ
-                        </button>
-                        <button class="btn btn-secondary" id="update">
-                            UPDATE
-                        </button>
-                        <button class="btn btn-danger" id="delete">
-                            DELETE
-                        </button>
-                    </span>
-                </div>
-                <div>
-                    <span>
-                        <strong>
-                            Employee Information 
-                        </strong>
-                    </span>
-                </div>
-                <div>
-                    <div id="employee-information"></div>
-                </div>
-            </div>
-        </div>
-    </div>
-    <script src="./node_modules/lodash/lodash.js"></script>
-    <script src="./node_modules/idb/lib/idb.js"></script>
-    <script src="main.js"></script>
+    <script src="redirect.js"></script>
 </body>
 </html>

@@ -1,0 +1,49 @@
+$colors: (
+    "lightgrey": lightgrey
+);
+
+@function colors($color) {
+    @return map-get($colors, $color);
+}
+
+.box-shadow {
+    transition: all linear 0.25s;
+    &:hover {
+        transition: all linear 0.25s;
+        box-shadow: 0 1px 15px colors("lightgrey");
+    }
+}
+
+body, html {
+    margin: 0;
+    padding: 0;
+}
+
+body {
+    height: 100%;
+    & > .container-fluid {
+        min-height: calc(100vh - 60px);
+    }
+    .container-fluid {
+        .common-header {
+            div {
+                display: inline-block;
+            }
+            div:first-child {
+                margin-top: 10px;
+            }
+            div:last-child {
+                float: right
+            }
+            &::before, &::after {
+                clear: both;
+                display: block;
+                content: "";
+            }
+        }
+    }
+    footer {
+        height: 60px;
+        margin: 1px solid colors("lightgrey");
+    }
+}

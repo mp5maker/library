@@ -17,8 +17,10 @@
 (function() {
     "use strict";
 
-    const giveStartingAndEndingIndex = (value, numbers) =>
-        [numbers.indexOf(parseInt(value)), numbers.lastIndexOf(parseInt(value))];
+    const giveStartingAndEndingIndex = (value, numbers) => {
+        numbers.sort((a, b) => a - b);
+        return [numbers.indexOf(parseInt(value)), numbers.lastIndexOf(parseInt(value))];
+    }
 
     // Test Cases
     let testArray = [5, 7, 7, 8, 8, 10];
@@ -42,8 +44,8 @@
         totalPrice: "Both quantity and unit price needs to be a number"
     };
 
-    const URL_TO_POST = '/library/php/costsummary/backend/create.php';
-    const URL_TO_GET = '/library/php/costsummary/backend/read.php';
+    const URL_TO_POST = 'costsummary/backend/create.php';
+    const URL_TO_GET = 'costsummary/backend/read.php';
 
     // Calculates the grand total
     const calculateGrandTotal = () => {
