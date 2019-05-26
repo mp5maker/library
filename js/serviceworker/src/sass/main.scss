@@ -41,9 +41,19 @@ body {
                 content: "";
             }
         }
+        .card {
+            display: inline-block;
+            min-width: 350px;
+            min-height: 200px;
+        }
     }
     footer {
+        border-top: 1px solid colors("lightgrey");
         height: 60px;
+        line-height: 60px;
         margin: 1px solid colors("lightgrey");
+        div {
+            text-align: center;
+        }
     }
 }

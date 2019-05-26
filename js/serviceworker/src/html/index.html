@@ -9,8 +9,9 @@
     <link rel="manifest" href="manifest.json">
     <link
         rel='stylesheet'
+        type="text/css"
         href='https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/4.3.1/css/bootstrap.min.css' />
-    <link rel="stylesheet" href="main.bundle.css">
+    <link rel="stylesheet" type="text/css" href="main.bundle.css">
 </head>
 <body>
     <nav class="navbar navbar-expand-sm bg-dark nav-dark">
@@ -25,10 +26,28 @@
             </li>
         </ul>
     </nav>
-    <div class="container-fluid mt-3">
-        <div class="row">
+    <div class="container-fluid">
+        <div class="row mt-3">
             <div class="col">
                 Offline Page testing
+            </div>
+        </div>
+        <div class="row mt-3">
+            <div class="col">
+                <div class="card">
+                    <div class="card-img-top">
+                        <img
+                            src="/dist/images/icons/icon-384x384.png"
+                            srcset="/dist/images/icons/icon-384x384.png 1x, /dist/images/icons/icon-512x512.png 2x"/>
+                    </div>
+                    <div class="card-body">
+                        <div class="card-text">
+                            <p>
+                                Just a seal
+                            </p>
+                        </div>
+                    </div>
+                </div>
             </div>
         </div>
     </div>

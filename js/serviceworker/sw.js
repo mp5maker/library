@@ -7,7 +7,9 @@ const src = [
     "/dist/index.html",
     "/dist/main.bundle.css",
     "/dist/main.js",
-    "/dist/fallback.html"
+    "/dist/fallback.html",
+    "/dist/images/icons/icon-384x384.png",
+    "/dist/images/icons/icon-512x512.png",
 ];
 
 const vendor = [
