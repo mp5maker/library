@@ -1,5 +1,5 @@
-const staticCacheName = 'site-static-v3';
-const dynamicCacheName = 'site-dynamic-v1';
+const CACHE_NAME = 'site-static-v3';
+const DYNAMIC_CACHE_NAME = 'site-dynamic-v1';
 
 const src = [
     "/",
@@ -21,20 +21,19 @@ const vendor = [
 
 const assets = src.concat(vendor);
 
-self.addEventListener('install', evt => {
-    evt.waitUntil(
-        caches.open(staticCacheName).then((cache) => {
-            console.log('caching shell assets');
+self.addEventListener('install', event => {
+    event.waitUntil(
+        caches.open(CACHE_NAME).then((cache) => {
             cache.addAll(assets);
         })
     );
 });
 
-self.addEventListener('activate', evt => {
-    evt.waitUntil(
+self.addEventListener('activate', event => {
+    event.waitUntil(
         caches.keys().then(keys => {
             return Promise.all(keys
-                .filter(key => key !== staticCacheName && key !== dynamicCacheName)
+                .filter(key => key !== CACHE_NAME && key !== DYNAMIC_CACHE_NAME)
                 .map(key => caches.delete(key))
             );
         })
@@ -42,12 +41,12 @@ self.addEventListener('activate', evt => {
 });
 
 // fetch event
-self.addEventListener('fetch', evt => {
-    evt.respondWith(
-        caches.match(evt.request).then(cacheRes => {
-            return cacheRes || fetch(evt.request).then(fetchRes => {
-                return caches.open(dynamicCacheName).then(cache => {
-                    cache.put(evt.request.url, fetchRes.clone());
+self.addEventListener('fetch', event => {
+    event.respondWith(
+        caches.match(event.request).then(cacheRes => {
+            return cacheRes || fetch(event.request).then(fetchRes => {
+                return caches.open(DYNAMIC_CACHE_NAME).then(cache => {
+                    cache.put(event.request.url, fetchRes.clone());
                     return fetchRes;
                 }).catch(() => caches.match('/dist/index.html'))
             });
