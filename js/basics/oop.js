@@ -4,10 +4,10 @@ function init() {
     // Array with wrapper {check (length)property and (_proto_) property method}
     var names = ['Photon', 'Erfan', 'Samith']
     console.log(names)
-    
-    // Window with wrapper {check properties} 
+
+    // Window with wrapper {check properties}
     console.log(window)
-    
+
     // String with wrapper {check (length)property and (_proto_) property method}
     var name2 = new String('photon')
     console.log(name2)
@@ -60,7 +60,7 @@ function init() {
     class AdminClass extends UserClass {
         deleteUser(user) {
             users = users.filter( (u) => {
-                return u.email != user.email; 
+                return u.email != user.email;
             })
         }
     }
@@ -79,7 +79,7 @@ function init() {
         }
     }
 
-    // Javascript Prototype Model (__proto__ property ==> method) 
+    // Javascript Prototype Model (__proto__ property ==> method)
     // {Only the class will have it}
     User.prototype.setName = function (name) {
         this.name = name
@@ -87,14 +87,13 @@ function init() {
     User.prototype.setEmail = function (email) {
         this.email = email
     }
-    
+
     var userThree = new User('Shahriar Sami', 'shahriar@inter.com')
     console.log(userThree.get('name'))
     userThree.setName('Damn Son')
     // console.log(userThree)
-    
-    
-    // Extending Javascript Prototype Model | Prototype Chain 
+
+    // Extending Javascript Prototype Model | Prototype Chain
     function Admin(...args) {
         console.log(args)
         User.apply(this, args)
