@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Blob</title>
+    <link rel='stylesheet' href='https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/4.3.1/css/bootstrap.min.css' />
+</head>
+<body>
+    <div class="container-fluid">
+        <div class="row">
+            <div class="col m-5 p-5">
+                <div>
+                    <h4>
+                        Blob As URL
+                    </h4>
+                </div>
+                <div>
+                    <a download="hello.txt" href="#" id="link">
+                        Download
+                    </a>
+                    <a download="hello.txt" href="#" id="wink">
+                        Download
+                    </a>
+                    <button type="button" class="btn btn-primary" role="button" onclick="downloadMe()">
+                        Simulate Click
+                    </button>
+                </div>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col m-5 p-5">
+                <div>
+                    <h4>
+                        Blob to Base64
+                    </h4>
+                </div>
+                <div>
+                    <button class="btn btn-primary" onclick="downloadAsBase64()">
+                        Download As Base 64
+                    </button>
+                </div>
+            </div>
+        </div>
+    </div>
+    <script src="blob.js"></script>
+</body>
+</html>
