@@ -4,6 +4,8 @@ import ThemeContextProvider from "../contexts/ThemeContext";
 
 import { useGet } from '../http/Get'
 
+import SideNote, { SideNoteAlternative } from '../layouts/sidenotes/sidenotes';
+
 interface homeProps {}
 
 export const Home: React.SFC<homeProps> = () => {
@@ -11,21 +13,21 @@ export const Home: React.SFC<homeProps> = () => {
 
     return (
         <ThemeContextProvider>
-            <React.Fragment>
+            <div>
+                <h4>
+                    Home
+                </h4>
+            </div>
+            <div className="common-header my-3">
                 <div>
-                    <h4>
-                        Home
-                    </h4>
-                </div>
-                <div className="common-header my-3">
-                    <div>
-                        On the left
-                    </div>
-                    <div>
-                        On the right
-                    </div>
+                    On the left
                 </div>
                 <div>
+                    On the right
+                </div>
+            </div>
+            <div className="row">
+                <div className="col-md-9">
                     <h5>Recent Comments</h5>
                     {
                         loading ?
@@ -70,7 +72,11 @@ export const Home: React.SFC<homeProps> = () => {
                         </span>
                     }
                 </div>
-            </React.Fragment>
+                <div className="col-md-3">
+                    <SideNote/>
+                    <SideNoteAlternative />
+                </div>
+            </div>
         </ThemeContextProvider>
     )
 }
