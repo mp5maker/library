@@ -29,3 +29,5 @@ __pycache__
 mongo
 *.map
 .next
+*.sqlite3
+public

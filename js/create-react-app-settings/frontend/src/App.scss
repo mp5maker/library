@@ -1,0 +1,29 @@
+$lightgrey: lightgrey;
+
+body, html {
+    margin: 0;
+    padding: 0;
+}
+
+body {
+    height: 100%;
+    .container-fluid {
+        min-height: calc(100vh - 60px);
+        & ~ footer {
+            border-top: 1px solid $lightgrey;
+            height: 60px;
+            line-height: 60px;
+            text-align: center;
+        }
+        .content {
+            .card {
+                &:first-child {
+                    margin-left: 0 !important;
+                }
+                &:last-child {
+                    margin-right: 0 !important;
+                }
+            }
+        }
+    }
+}
