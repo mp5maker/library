@@ -1,0 +1,26 @@
+{
+  "name": "next-settings",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "dev": "next",
+    "build": "next build",
+    "start": "next start"
+  },
+  "keywords": [],
+  "author": "Shabuktagin Photon Khan",
+  "license": "MIT",
+  "dependencies": {
+    "bootstrap": "^4.3.1",
+    "next": "^8.1.0",
+    "react": "^16.8.6",
+    "react-bootstrap-typeahead": "^3.4.5",
+    "react-dom": "^16.8.6"
+  },
+  "devDependencies": {
+    "@zeit/next-css": "^1.0.1",
+    "@zeit/next-sass": "^1.0.1",
+    "node-sass": "^4.12.0"
+  }
+}
