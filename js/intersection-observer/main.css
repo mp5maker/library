@@ -1,0 +1,27 @@
+:root {
+    --lightgrey: lightgrey;
+}
+
+body, html {
+    margin: 0;
+    padding: 0;
+}
+
+body {
+    height: 100%;
+}
+
+body > .container-fluid {
+    min-height: calc(100vh - 60px)
+}
+
+footer {
+    border-top: 1px solid var(--lightgrey);
+    min-height: 60px;
+    line-height: 60px;
+    text-align: center;
+}
+
+.section-one, .section-two {
+    transition: all linear 1s;
+}
