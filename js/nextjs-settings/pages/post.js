@@ -2,8 +2,7 @@ import React, { Fragment } from "react"
 
 import { withRouter } from "next/router";
 
-import Layout from "../components/Layout"
-
+import Layout from "../components/Layout";
 
 const Post = withRouter((props) => (
     <Fragment>
@@ -11,9 +10,16 @@ const Post = withRouter((props) => (
             <h4>
                 { props.router.query.id }
             </h4>
-            <p>
-                This is the blog content
-            </p>
+            <div className="markdown">
+                <p>
+                    This is our blog post.
+                </p>
+            </div>
+            <style jsx global>{`
+                p {
+                    color: firebrick;
+                }
+            `}</style>
         </Layout>
     </Fragment>
 ))

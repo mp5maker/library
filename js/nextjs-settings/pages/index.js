@@ -4,6 +4,8 @@ import Link from "next/link"
 
 import Layout from "../components/Layout"
 
+import indexStyle from "../styles/jsx/index"
+
 /* Route Masking */
 const PostLink = (props) => (
     <li>
@@ -35,14 +37,15 @@ class Index extends Component {
                             Blog
                         </h6>
                         <ul>
-                            <li>
-                                <PostLink id="hello-nextjs" title="Hello Next.js"/>
-                                <PostLink id="learn-nextjs" title="Learn Next.js is awesome"/>
-                                <PostLink id="deploy-nextjs" title="Deploy apps with Zeit"/>
-                            </li>
+                            <PostLink id="hello-nextjs" title="Hello Next.js"/>
+                            <PostLink id="learn-nextjs" title="Learn Next.js is awesome"/>
+                            <PostLink id="deploy-nextjs" title="Deploy apps with Zeit"/>
                         </ul>
                     </div>
                 </Layout>
+                <style jsx>
+                    { indexStyle }
+                </style>
             </Fragment>
         )
     }

@@ -17,7 +17,13 @@ app.prepare()
     // Custom Handling
     server.get("/post/:id", (request, response) => {
         const actualPage = "/post";
-        const queryParams = { title: request.params.id };
+        const queryParams = { id: request.params.id };
+        app.render(request, response, actualPage, queryParams);
+    });
+
+    server.get("/batman-tv-shows/:id", (request, response) => {
+        const actualPage = "/batman-tv-shows";
+        const queryParams = { id: request.params.id };
         app.render(request, response, actualPage, queryParams);
     });
 
