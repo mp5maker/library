@@ -6,9 +6,10 @@ import * as serviceWorker from './serviceWorker';
 
 import { Provider } from 'mobx-react'
 import BirdStore from "./stores/BirdStore"
+import PostStore from "./stores/PostStore"
 
 const Root = (
-    <Provider BirdStore={BirdStore}>
+    <Provider BirdStore={BirdStore} PostStore={PostStore}>
         <App />
     </Provider>
 )
