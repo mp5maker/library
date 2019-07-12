@@ -7,9 +7,30 @@ import './App.css';
 @inject('BirdStore')
 @observer
 class App extends Component {
+  constructor(props) {
+    super(props)
+    this.state = {
+      bird: ""
+    }
+  }
+
+  onChange = ({event}) => {
+    this.setState({
+      [event.target.name]: event.target.value
+    })
+  }
+
+  onSubmit = ({event} = {}) => {
+    event.preventDefault();
+    this.props.BirdStore.addBird(this.state.bird)
+  }
+
+  removeBird = ({event, bird} = {}) => {
+    this.props.BirdStore.removeBird(bird)
+  }
+
   render() {
     const { BirdStore } = this.props;
-    console.log(this.props)
 
     return (
       <Fragment>
@@ -29,6 +50,32 @@ class App extends Component {
             </a>
             {/* It does need have () parenthesis becuase it has accessor */}
             <div>You have {BirdStore.birdCount} birds</div>
+            <div>
+                <form onSubmit={(event) => this.onSubmit({event})}>
+                  <input
+                    onChange={(event) => this.onChange({event})}
+                    name="bird"
+                    type="text"
+                    placeholder="Add Bird"/>
+                  <button>
+                    Add Bird
+                  </button>
+                </form>
+                <ul>
+                  {
+                    BirdStore.birds.map((bird, index) => (
+                      <li key={index} >
+                        <span>
+                          { bird }
+                        </span>
+                        <button onClick={(event) => this.removeBird({event, bird})}>
+                          &times;
+                        </button>
+                      </li>
+                    ))
+                  }
+                </ul>
+            </div>
           </header>
         </div>
       </Fragment>

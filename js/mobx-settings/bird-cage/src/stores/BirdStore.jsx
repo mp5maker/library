@@ -7,6 +7,10 @@ class BirdStore {
         this.birds.push(bird)
     }
 
+    @action removeBird = (bir) => {
+        this.birds = this.birds.filter((bird) => bird !== bir )
+    }
+
     @computed get birdCount() {
         return this.birds.length
     }
