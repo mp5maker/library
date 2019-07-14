@@ -38,4 +38,19 @@ body {
         background-size: cover;
         color: transparent;
     }
+    .row {
+        &:first-child {
+            background-color: #ffd6d6;
+            clip-path: polygon(0% 0%, 100% 0%, 100% calc(100% - 1vw), 0% 100%);
+            margin-bottom: -1vw;
+        }
+        &:nth-child(2) {
+            background-color: #93ABD9;
+            clip-path: polygon(0% 0%, 100% 0%, 100% 100%, 0% calc(100% - 1vw));
+            margin-bottom: -1vw;
+        }
+        &:nth-child(3) {
+            background-color: #D198CD;
+        }
+    }
 }
