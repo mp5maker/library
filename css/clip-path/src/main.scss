@@ -1,0 +1,41 @@
+body, html {
+    margin: 0;
+    padding: 0;
+}
+
+body {
+    height: 100%;
+    .container-fluid {
+        min-height: calc(100vh - 60px);
+    }
+    footer {
+        border-top: 1px solid lightgrey;
+        height: 60px;
+        line-height: 60px;
+        text-align: center;
+    }
+    .circle {
+        clip-path: circle(50% at 50% 50%);
+    }
+    .semi-circle-top-left {
+        clip-path: circle(50% at 0% 0%);
+    }
+    .semi-circle-top-right {
+        clip-path: circle(50% at 100% 0%);
+    }
+    .inset {
+        clip-path: inset(5% 25% 5% 25%);
+    }
+    .triangle {
+        clip-path: polygon(50% 0%, 100% 100%, 0% 100%);
+    }
+    .letter {
+        text-align: center;
+        background-image: url("https://picsum.photos/500/500");
+        background-clip: text;
+        -webkit-background-clip: text;
+        font-size: 15vh;
+        background-size: cover;
+        color: transparent;
+    }
+}
