@@ -1,0 +1,41 @@
+body, html {
+  padding: 0;
+  margin: 0;
+}
+
+body {
+  position: relative;
+  height: 100%;
+}
+
+body .container-fluid {
+  height: calc(100vh - 60px);
+}
+
+.container-fluid .row .col {
+  margin: 25px;
+}
+
+.container-fluid  .row {
+  height: 100%;
+}
+
+.container-fluid .row .col {
+  height: 100%;
+}
+
+.card-container {
+  height: 96%;
+  overflow-y: auto;
+}
+
+.card {
+    display: block;
+}
+
+body footer {
+  border-top: 1px solid lightgrey;
+  height: 60px;
+  line-height: 60px;
+  text-align: center;
+}
