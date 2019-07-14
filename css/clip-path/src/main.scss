@@ -52,5 +52,27 @@ body {
         &:nth-child(3) {
             background-color: #D198CD;
         }
+        &:nth-child(4) {
+            background-color: #ffd6d6;
+            .col {
+                .shape-outside {
+                    position: relative;
+                    float: left;
+                    width: 200px;
+                    height: 100%;
+                    background-color: #93ABD9;
+                    clip-path: circle(50% at 0% 50%);
+                    shape-outside: circle(50% at 0% 50%);
+                    & ~ div {
+                        background-color: #ffd6d6;
+                    }
+                }
+            }
+            &::before, &::after {
+                content: "";
+                display: block;
+                clear: both;
+            }
+        }
     }
 }
