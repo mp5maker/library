@@ -1,0 +1,131 @@
+body, html {
+    margin: 0;
+    padding: 0;
+}
+
+body {
+    height: 100%;
+    &:fullscreen {
+        background-color: black;
+    }
+    .container-fluid {
+        min-height: calc(100vh - 60px);
+        .row {
+            .col {
+                margin: 25px;
+                padding: 25px;
+                /* Contains mix of p and div tag */
+                .lorem-container {
+                    /* Only selects the div */
+                    div:nth-of-type(n) {
+                        color: firebrick;
+                    }
+                    /* Selects the first of the div */
+                    div:first-of-type {
+                        color: burlywood;
+                    }
+                    /* Selects the first of the div */
+                    div:last-of-type {
+                        color: aqua;
+                    }
+                    /* No Effects */
+                    div:first-child { color: red; }
+                    div:last-child { color: red; }
+                    div:nth-child(3) { color: red; }
+                }
+                /* Contains only p type */
+                .lorem-container-two {
+                    p:first-child {
+                        color: firebrick;
+                    }
+                    p:last-child {
+                        color: burlywood;
+                    }
+                }
+                /* Containers with nested divs */
+                .lorem-container-three {
+                    /* Works only when :first-child == :last-child */
+                    div:only-child {
+                        background-color: yellow;
+                        div:only-child {
+                            background-color: green;
+                            div:only-child {
+                                background-color: yellow;
+                            }
+                        }
+                    }
+                }
+                /* Containers containing mix of div p i em */
+                .lorem-container-four {
+                    // Applies only if one p tag is present not more than that
+                    p:only-of-type {
+                        background-color: lime;
+                    }
+                }
+                .lorem-form {
+                    input[type='text'] {
+                        &:optional {
+                            background-color: lime;
+                        }
+                        &.placeholder {
+                            background-color: transparent;
+                            &:placeholder-shown {
+                                border: 2px solid firebrick;
+                            }
+                        }
+                        &.readonly {
+                            background-color: transparent;
+                            &:read-only {
+                                border: 5px solid violet;
+                            }
+                        }
+                        &.required {
+                            &:required {
+                                border: 5px solid brown;
+                            }
+                        }
+                    }
+                    input[type='radio'] {
+                        &:indeterminate {
+                            & ~ label {
+                                background-color: yellow;
+                            }
+                        }
+                    }
+                    input[type='number'] {
+                        &:in-range {
+                            background-color: yellowgreen;
+                        }
+                        // Same as out of range
+                        &:not(:in-range) {
+                            background-color: firebrick;
+                        }
+                        &:out-of-range {
+                            background-color: firebrick;
+                        }
+                    }
+                }
+            }
+        }
+        & ~ footer {
+            border: 1px solid lightgrey;
+            line-height: 60px;
+            height: 60px;
+            text-align: center;
+        }
+    }
+}
+
+@media only print {
+    display: none;
+    background-color: black;
+}
+
+@page {
+    &:right {
+        margin: 2in 3in;
+    }
+    &:left {
+        margin: 3in 2in;
+    }
+}
