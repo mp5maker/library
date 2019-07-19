@@ -40,6 +40,7 @@ INSTALLED_APPS = [
 
     # Apps
     'core',
+    'polls',
 
     # Third Party App
     'django_extensions',
