@@ -1,0 +1,2 @@
+html,body{margin:0;padding:0}body{height:100%}body .container-fluid{min-height:calc(100vh - 60px)}body .container-fluid .row .col{padding:25px;margin:25px}body .container-fluid ~ footer{border-top:1px solid lightgrey;height:60px;line-height:60px;text-align:center}
+/*# sourceMappingURL=main.min.css.map */
