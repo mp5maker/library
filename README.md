@@ -17,6 +17,7 @@
 16) Particles
 17) Sass
 18) Dev Ops
+19) CSS Grid vs CSS Flexbox
 
 All thanks to [Traversy Media](http://www.traversymedia.com)
 
