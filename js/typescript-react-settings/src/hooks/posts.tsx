@@ -1,6 +1,6 @@
 import * as React from 'react'
 
-export const usePosts = (url: string, dependencies: string[]) => {
+export const usePosts = (url: string, dependencies: Array<any>) => {
     const [ state, setState ] = React.useState({
         loading: true,
         error: false,
