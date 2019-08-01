@@ -28,6 +28,9 @@ export const NavigationBar:React.SFC<appProps> = ({compiler, framework}) => {
                         <NavLink to="/pure-component" className="nav-link">
                             Pure Component
                         </NavLink>
+                        <NavLink to="/hooks" className="nav-link">
+                            Hooks
+                        </NavLink>
                     </ReactBootstrap.Nav>
                     <ReactBootstrap.Nav>
                         <ReactBootstrap.Nav.Link href="#login">

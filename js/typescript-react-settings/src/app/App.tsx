@@ -9,6 +9,7 @@ import { Footer } from '../layouts/footer/Footer';
 import { Home } from '../pages/Home';
 import { Contact } from '../pages/Contact';
 import { PureComponentPage } from '../pages/PureComponentPage';
+import { HooksPage } from '../pages/HooksPage';
 
 import "bootstrap/scss/bootstrap.scss"
 import "./App.scss"
@@ -27,6 +28,7 @@ export const App: React.SFC<indexProps> = (props) => (
                     <Route exact path="/" component={Home} />
                     <Route exact path="/contact" component={Contact} />
                     <Route exact path="/pure-component" component={PureComponentPage} />
+                    <Route exact path="/hooks" component={HooksPage} />
                 </Switch>
             </Content>
             <Footer/>
