@@ -2,15 +2,23 @@ import * as React from 'react'
 
 import { usePosts } from '../hooks/posts'
 
+import { ThemeContext } from "../contexts/ThemeContext";
+
+import { CheckReducer } from "../components/CheckReducer"
 
 const url = "https://heroku-fake-rest-api.herokuapp.com/posts/";
 
 interface HomeProps {};
 
 const HooksPage: React.SFC<HomeProps> = () => {
-    const { loading, error, data } = usePosts(url, [])
+    /* Theme Context Values */
+    const themeContextValues = React.useContext(ThemeContext)
+    console.log('Theme Context Values')
+    console.log(themeContextValues)
 
+    console.log(':::::::::::::::::::::::::::::::::::::::::::::')
     /* Asynchronous */
+    const { loading, error, data } = usePosts(url, [])
     console.log('Use Posts')
     console.log(loading)
     console.log(error)
@@ -26,12 +34,15 @@ const HooksPage: React.SFC<HomeProps> = () => {
 
     return (
         <React.Fragment>
-            <button onClick={addCounter}>
+            <button onClick={addCounter} className="btn btn-primary my-3">
                 Add Counter
             </button>
-            <span>
+            <div>
                 Current Counter: { count }
-            </span>
+            </div>
+            <div>
+                <CheckReducer />
+            </div>
         </React.Fragment>
     )
 }
