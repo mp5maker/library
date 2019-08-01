@@ -1,6 +1,6 @@
 import * as React from 'react';
 
-import ThemeContextProvider from "../contexts/ThemeContext";
+import ThemeContextProvider, { ThemeContext } from "../contexts/ThemeContext";
 
 import { useGet } from '../http/Get'
 
@@ -71,6 +71,24 @@ export const Home: React.SFC<homeProps> = () => {
                             There is no data to show!
                         </span>
                     }
+                    <div>
+                        <ThemeContext.Consumer>{
+                            ({isLightTheme, light, dark}) => (
+                                <React.Fragment>
+                                    <div>
+                                        Is Light Theme: { isLightTheme }
+                                    </div>
+                                    <div>
+                                        Light: { light.syntax }
+                                    </div>
+                                    <div>
+                                        Dark: { dark.syntax }
+                                    </div>
+                                </React.Fragment>
+                            )
+                        }
+                        </ThemeContext.Consumer>
+                    </div>
                 </div>
                 <div className="col-md-3">
                     <SideNote/>
