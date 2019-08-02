@@ -1,0 +1,67 @@
+body, html {
+    height: 100%;
+}
+
+@mixin rectangle-preloaders($height) {
+    border-radius: 5px;
+    height: $height;
+    animation: shimmer 1s linear infinite;
+    will-change: background;
+    background: linear-gradient(to right, lighten(lightgrey, 10%) 5%, lightgrey 15%, lighten(lightgrey, 10%) 30%);
+}
+
+body > .container-fluid {
+    .row {
+        .col {
+            margin: auto;
+            padding: 25px;
+            .card {
+                .card-header {
+                    .rectangle {
+                        @include rectangle-preloaders(15px);
+                    }
+                }
+                .card-body {
+                    .rectangle {
+                        @include rectangle-preloaders(50px);
+                    }
+                }
+                .card-footer {
+                    .rectangle {
+                        @include rectangle-preloaders(15px);
+                    }
+                }
+            }
+            table {
+                thead {
+                    tr {
+                        th {
+                            .rectangle {
+                                border-radius: 5px;
+                                height: 15px;
+                                background: linear-gradient(lighten(lightgrey, 10%));
+                            }
+                        }
+                    }
+                }
+                tbody {
+                    tr {
+                        td {
+                            .rectangle {
+                                @include rectangle-preloaders(15px);
+                            }
+                        }
+                    }
+                }
+            }
+        }
+    }
+}
+
+@keyframes shimmer {
+    0% {
+        background-position: calc(100vw * (-26/100)) 0;
+    } 100% {
+        background-position: calc(100vw * (26/100) * 2) 0;
+    }
+}
