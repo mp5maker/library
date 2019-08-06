@@ -4,6 +4,8 @@ function init() {
     createLine();
     createSemiCircle();
     createSemiCircleUsingArcTo();
+    quadraticCurve();
+    bezierCurve();
 }
 
 /**
@@ -52,5 +54,17 @@ function quadraticCurve() {
     context.lineCap = "round";
     context.moveTo(50, 50);
     // control x, control y, x2, y2
-    context.quadraticCurveTo(50, 100, 50, 150);
+    context.quadraticCurveTo(50, 100, 150, 150);
+    context.stroke();
+}
+
+function bezierCurve() {
+    let canvas = document.getElementById('bezier-curve');
+    context = canvas.getContext('2d');
+    context.lineWidth = 5;
+    context.strokeStyle = "black";
+    context.moveTo(50, 50);
+    // control x1, control y1, control x2, control y2, x3, y3
+    context.bezierCurveTo(150, 10, 320, 10, 320, 180);
+    context.stroke();
 }
