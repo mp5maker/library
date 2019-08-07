@@ -7,6 +7,7 @@ function init() {
     quadraticCurve();
     bezierCurve();
     zigzag();
+    spiral();
 }
 
 /**
@@ -90,6 +91,30 @@ function zigzag() {
         } else {
             y = startY;
         }
+        context.lineTo(x, y)
+    }
+
+    context.stroke();
+}
+
+function spiral() {
+    let canvas = document.getElementById('spiral');
+    let context = canvas.getContext('2d');
+
+    let radius = 0;
+    let angle = 0;
+
+    context.lineWidth = 10;
+    context.strokeStyle = 'black';
+
+    context.beginPath();
+    context.moveTo(canvas.width / 2, canvas.height / 2);
+
+    for (let n = 0; n < 150; n++) {
+        radius += 0.75;
+        angle += (Math.PI * 2) / 50;
+        let x = (canvas.width / 2) + (radius * Math.cos(angle));
+        let y = (canvas.height / 2) + (radius * Math.sin(angle));
         context.lineTo(x, y)
     }
 
