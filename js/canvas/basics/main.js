@@ -6,6 +6,7 @@ function init() {
     createSemiCircleUsingArcTo();
     quadraticCurve();
     bezierCurve();
+    zigzag();
 }
 
 /**
@@ -66,5 +67,31 @@ function bezierCurve() {
     context.moveTo(50, 50);
     // control x1, control y1, control x2, control y2, x3, y3
     context.bezierCurveTo(150, 10, 320, 10, 320, 180);
+    context.stroke();
+}
+
+function zigzag() {
+    let canvas = document.getElementById('zigzag');
+    let context = canvas.getContext('2d');
+    let startX = 10;
+    let startY = 10;
+    let zigzagSpacing = 60;
+
+    context.lineWidth = 10;
+    context.strokeStyle = "blue";
+    context.beginPath();
+    context.moveTo(startX, startY);
+
+    for (let n = 0; n < 7; n++) {
+        let x = startX + ((n + 1) * zigzagSpacing);
+        let y;
+        if (n % 2 == 0) {
+            y = startY + 100;
+        } else {
+            y = startY;
+        }
+        context.lineTo(x, y)
+    }
+
     context.stroke();
 }
