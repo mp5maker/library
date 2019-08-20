@@ -5,5 +5,10 @@ from .models import (
     Profile
 )
 
-admin.site.register(CustomUser)
-admin.site.register(Profile)
+class ProfileInline(admin.StackedInline):
+    model = Profile
+
+class UserAdmin(admin.ModelAdmin):
+    inlines = [ProfileInline]
+
+admin.site.register(CustomUser, UserAdmin)
