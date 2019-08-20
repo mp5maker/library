@@ -4,8 +4,18 @@ from django.conf import settings
 
 from django.contrib.auth.models import AbstractUser
 
+from django.utils.functional import cached_property
+
 class CustomUser(AbstractUser):
-    pass
+    """ user.get_full_name_accessor() can be alternatively writter as user.get_full_name_accessor"""
+    """  Invisible to ORM """
+    @property
+    def get_full_name_accessor(self):
+        return self.first_name + " " + self.last_name
+
+    @cached_property
+    def get_full_name(self):
+        return self.first_name + " " + self.last_name
 
 class Profile(models.Model):
     user = models.OneToOneField(
@@ -13,6 +23,7 @@ class Profile(models.Model):
         primary_key=True,
         on_delete=models.CASCADE
     )
+
 
 class BaseProfile(models.Model):
     USER_TYPES = (
