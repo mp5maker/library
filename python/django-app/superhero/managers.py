@@ -1,8 +1,12 @@
 from django.db import models
 
-from .querysets import (
-    OriginQuerySet
+from common.enums import (
+    PUBLISHED
 )
+
+class OriginQuerySet(models.QuerySet):
+    def published(self):
+        return self.filter(status=PUBLISHED)
 
 class OriginManager(models.Manager):
     def get_queryset(self):
@@ -10,15 +14,3 @@ class OriginManager(models.Manager):
 
     def published(self):
         return self.get_queryset().published()
-
-    def on_hold(self):
-        return self.get_queryset().on_hold()
-
-    def in_review(self):
-        return self.get_queryset().in_review()
-
-    def draft(self):
-        return self.get_queryset().draft()
-
-    def status_count(self, keyword):
-        return   return self.get_queryset().status_count(keyword=keyword)

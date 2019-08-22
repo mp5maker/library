@@ -17,7 +17,7 @@ class Origin(Common):
         related_name="origins"
     )
     origin = models.CharField(max_length=100)
-    objects = OriginManager
+    state = OriginManager()
 
     def __str__(self):
         return self.origin[:50]
