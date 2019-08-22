@@ -1,3 +1,5 @@
+import datetime
+
 from django.db import models
 
 from django.contrib.auth.models import (
@@ -43,6 +45,11 @@ class CustomUser(AbstractBaseUser):
     @property
     def fullname(self):
         return "{} {}".format(self.first_name, self.last_name)
+
+    @property
+    def get_age(self):
+        today = datetime.date.today()
+        return today.year - self.date_of_birth.year
 
     @property
     def is_staff(self):
