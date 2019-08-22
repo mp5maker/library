@@ -6,6 +6,10 @@ from common.models import (
     Common
 )
 
+from .managers import (
+    OriginManager
+)
+
 class Origin(Common):
     superhero = models.ForeignKey(
         settings.AUTH_USER_MODEL,
@@ -13,6 +17,7 @@ class Origin(Common):
         related_name="origins"
     )
     origin = models.CharField(max_length=100)
+    objects = OriginManager
 
     def __str__(self):
         return self.origin[:50]
