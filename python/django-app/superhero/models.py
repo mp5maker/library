@@ -2,15 +2,9 @@ from django.db import models
 
 from django.conf import settings
 
-class Common(models.Model):
-    title = models.CharField(blank=True, null=True, max_length=200)
-    created = models.DateTimeField(auto_now_add=True)
-    updated = models.DateTimeField(auto_now=True)
-    description = models.TextField(blank=True, null=True)
-
-    class Meta:
-        abstract = True
-
+from common.models import (
+    Common
+)
 
 class Origin(Common):
     superhero = models.ForeignKey(

@@ -40,6 +40,7 @@ INSTALLED_APPS = [
 
     # My App
     'core',
+    'common',
     'superhero',
 
     # Third Party App
