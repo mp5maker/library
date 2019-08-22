@@ -13,6 +13,7 @@
   "author": "",
   "license": "ISC",
   "dependencies": {
+    "@types/node": "^12.7.1",
     "@types/node-sass": "^4.11.0",
     "@types/react": "^16.8.17",
     "@types/react-dom": "^16.8.4",
@@ -22,7 +23,8 @@
     "react-bootstrap": "^1.0.0-beta.8",
     "react-dom": "^16.8.6",
     "react-router-dom": "^5.0.0",
-    "webpack": "^4.31.0"
+    "webpack": "^4.31.0",
+    "xstate": "^4.6.7"
   },
   "devDependencies": {
     "awesome-typescript-loader": "^5.2.1",
