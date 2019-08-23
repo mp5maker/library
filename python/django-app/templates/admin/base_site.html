@@ -1,0 +1,25 @@
+{% extends "admin/base.html" %}
+
+{% block title %}{{ title }} | {{ site_title|default:_('Django site admin') }}{% endblock %}
+
+{% block branding %}
+<h1 id="site-name">
+    <a href="{% url 'admin:index' %}">
+        {{ site_header|default:_('Django administration') }} Administration
+    </a>
+</h1>
+{% endblock %}
+
+{% block extrastyle %}
+    <link
+        href="https://fonts.googleapis.com/css?family=Fira+Sans&display=swap"
+        rel="stylesheet">
+    <style type="text/css">
+        body, html {
+            font-family: 'Fira Sans', sans-serif;
+        }
+    </style>
+{% endblock %}
+
+{% block nav-global %}
+{% endblock %}
