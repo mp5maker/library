@@ -13,6 +13,8 @@ from .forms import (
     UserChangeForm
 )
 
+admin.site.site_header = "Superhero"
+
 @admin.register(CustomUser)
 class UserAdmin(BaseUserAdmin):
     form = UserChangeForm
