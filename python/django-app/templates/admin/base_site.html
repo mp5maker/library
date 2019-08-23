@@ -25,8 +25,6 @@
 {% endblock %}
 
 {% block extrahead %}
-    <script>
-        window.CKEDITOR_BASEPATH = '/static/ckeditor/ckeditor/';
-    </script>
+    <script src='https://cdnjs.cloudflare.com/ajax/libs/ckeditor/4.12.1/ckeditor.js'></script>
     {{ block.super }}
 {% endblock %}
