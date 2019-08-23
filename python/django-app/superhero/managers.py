@@ -1,16 +1,21 @@
 from django.db import models
 
 from common.enums import (
-    PUBLISHED
+    PUBLISHED,
+    ON_HOLD,
+    IN_REVIEW,
+    DRAFT
 )
 
-class OriginQuerySet(models.QuerySet):
+class OriginManager(models.Manager):
     def published(self):
         return self.filter(status=PUBLISHED)
 
-class OriginManager(models.Manager):
-    def get_queryset(self):
-        return OriginQuerySet(self.model, using=self._db)
+    def in_review(self):
+        return self.filter(status=IN_REVIEW)
 
-    def published(self):
-        return self.get_queryset().published()
+    def on_hold(self):
+        return self.filter(status=ON_HOLD)
+
+    def draft(self):
+        return self.filter(status=DRAFT)
