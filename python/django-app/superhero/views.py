@@ -61,7 +61,10 @@ class OriginUpdate(UpdateAPIView):
 
     def patch(self, request):
         instance = self.get_object()
-        origin = OriginSerializer(instance, data=request.data, partial=True)
+        origin = OriginSerializer(instance, data=request.data, partial=True, context={
+            'user_id': self.request.user.id,
+            'item_id': self.kwargs.get('id')
+        })
         if origin.is_valid():
             origin.save()
             return Response(origin.data, status=status.HTTP_200_OK)

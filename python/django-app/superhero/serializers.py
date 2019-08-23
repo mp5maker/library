@@ -9,9 +9,23 @@ from .models import (
 )
 
 class OriginSerializer(serializers.ModelSerializer):
+    query_params = serializers.SerializerMethodField()
+
+    def get_query_params(self, obj):
+        return self.context['request'].query_params
+
     class Meta:
         model = Origin
-        fields = "__all__"
+        fields = (
+            'id',
+            'title',
+            'created',
+            'updated',
+            'description',
+            'origin',
+            'superhero',
+            'query_params'
+        )
 
 class LocationSerializer(serializers.ModelSerializer):
     class Meta:
