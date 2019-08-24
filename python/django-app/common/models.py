@@ -10,7 +10,7 @@ class Common(models.Model):
     created = models.DateTimeField(auto_now_add=True)
     updated = models.DateTimeField(auto_now=True)
     description = models.TextField(blank=True, null=True)
-    status = models.CharField(max_length=2, choices=STATUS, default=PUBLISHED)
+    status = models.IntegerField(choices=STATUS, default=PUBLISHED)
 
     class Meta:
         abstract = True

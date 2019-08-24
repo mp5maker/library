@@ -1,5 +1,9 @@
 from django.db import models
 
+# Audit Log
+from auditlog.models import AuditlogHistoryField
+from auditlog.registry import auditlog
+
 from django.conf import settings
 
 from common.models import (
@@ -11,6 +15,7 @@ from .managers import (
 )
 
 class Origin(Common):
+    history = AuditlogHistoryField()
     superhero = models.ForeignKey(
         settings.AUTH_USER_MODEL,
         on_delete=models.CASCADE,
@@ -21,6 +26,8 @@ class Origin(Common):
 
     def __str__(self):
         return self.origin[:50]
+
+auditlog.register(Origin)
 
 class Location(Common):
     latitude = models.FloatField()

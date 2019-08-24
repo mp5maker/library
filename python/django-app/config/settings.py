@@ -46,7 +46,8 @@ INSTALLED_APPS = [
     # Third Party App
     'rest_framework',
     'django_extensions',
-    'ckeditor'
+    'auditlog',
+    # 'ckeditor'
 ]
 
 MIDDLEWARE = [
@@ -57,6 +58,9 @@ MIDDLEWARE = [
     'django.contrib.auth.middleware.AuthenticationMiddleware',
     'django.contrib.messages.middleware.MessageMiddleware',
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
+
+    # Third Party Middleware
+    'auditlog.middleware.AuditlogMiddleware',
 ]
 
 ROOT_URLCONF = 'config.urls'
