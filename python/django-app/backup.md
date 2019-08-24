@@ -1,3 +1,5 @@
+Files that do not go through the requirements.txt
+
 Django==2.2.4
 django-auditlog==0.4.5
 django-extensions==2.2.1
