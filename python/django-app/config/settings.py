@@ -48,6 +48,7 @@ INSTALLED_APPS = [
     'django_extensions',
     'auditlog',
     'debug_toolbar',
+    'silk',
     # 'django_faker',
     # 'ckeditor'
 ]
@@ -57,6 +58,7 @@ MIDDLEWARE = [
     # Third Party Middleware
     'auditlog.middleware.AuditlogMiddleware',
     'debug_toolbar.middleware.DebugToolbarMiddleware',
+    'silk.middleware.SilkyMiddleware',
 
     'django.middleware.security.SecurityMiddleware',
     'django.contrib.sessions.middleware.SessionMiddleware',
