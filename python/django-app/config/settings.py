@@ -47,8 +47,10 @@ INSTALLED_APPS = [
     'rest_framework',
     'django_extensions',
     'auditlog',
+    # 'django_faker',
     # 'ckeditor'
 ]
+
 
 MIDDLEWARE = [
     'django.middleware.security.SecurityMiddleware',
@@ -128,6 +130,26 @@ USE_I18N = True
 USE_L10N = True
 
 USE_TZ = True
+
+
+LOGGING = {
+    'version': 1,
+    'disable_existing_loggers': False,
+    'handlers': {
+        'file': {
+            'level': 'DEBUG',
+            'class': 'logging.FileHandler',
+            'filename': os.path.join(BASE_DIR, 'debug.log'),
+        },
+    },
+    'loggers': {
+        'django': {
+            'handlers': ['file'],
+            'level': 'DEBUG',
+            'propagate': True,
+        },
+    },
+}
 
 
 # Static files (CSS, JavaScript, Images)
