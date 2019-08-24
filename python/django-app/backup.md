@@ -1,11 +1,16 @@
-Files that do not go through the requirements.txt
+Installation
+python manage.py graph_models -a -g -o my_project_visualized.png
+pip install pyparsing pydot
 
+Requirements
 Django==2.2.4
 django-auditlog==0.4.5
 django-extensions==2.2.1
 django-jsonfield==1.3.1
 djangorestframework==3.10.2
 Pillow==6.1.0
+pydot==1.4.1
+pyparsing==2.4.2
 python-dateutil==2.6.0
 pytz==2019.2
 six==1.12.0
