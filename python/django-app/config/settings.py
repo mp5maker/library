@@ -47,12 +47,17 @@ INSTALLED_APPS = [
     'rest_framework',
     'django_extensions',
     'auditlog',
+    'debug_toolbar',
     # 'django_faker',
     # 'ckeditor'
 ]
 
 
 MIDDLEWARE = [
+    # Third Party Middleware
+    'auditlog.middleware.AuditlogMiddleware',
+    'debug_toolbar.middleware.DebugToolbarMiddleware',
+
     'django.middleware.security.SecurityMiddleware',
     'django.contrib.sessions.middleware.SessionMiddleware',
     'django.middleware.common.CommonMiddleware',
@@ -61,8 +66,6 @@ MIDDLEWARE = [
     'django.contrib.messages.middleware.MessageMiddleware',
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
 
-    # Third Party Middleware
-    'auditlog.middleware.AuditlogMiddleware',
 ]
 
 ROOT_URLCONF = 'config.urls'
