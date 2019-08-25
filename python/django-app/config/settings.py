@@ -46,6 +46,7 @@ INSTALLED_APPS = [
     # Third Party App
     'rest_framework',
     'django_extensions',
+    'django_filters',
     'auditlog',
     'debug_toolbar',
     'silk',
@@ -54,9 +55,16 @@ INSTALLED_APPS = [
 ]
 
 # REST_FRAMEWORK = {
+#     'DEFAULT_AUTHENTICATION_CLASSES': [
+#         'rest_framework.authentication.BasicAuthentication',
+#         'rest_framework.authentication.SessionAuthentication',
+#     ],
 #     'DEFAULT_PERMISSION_CLASSES': [
 #         'rest_framework.permissions.IsAuthenticated',
-#     ]
+#     ],
+#     'DEFAULT_FILTER_BACKENDS': (
+#         'django_filters.rest_framework.DjangoFilterBackend',
+#     ),
 # }
 
 

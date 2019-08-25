@@ -9,9 +9,12 @@ from rest_framework.generics  import (
     UpdateAPIView,
     RetrieveUpdateDestroyAPIView,
 )
-
 from rest_framework.response import Response
 from rest_framework import status
+
+from django_filters.rest_framework import (
+    DjangoFilterBackend
+)
 
 from .models import (
     Origin,
@@ -29,11 +32,17 @@ from .permissions import (
     OriginPermission
 )
 
+from .filters import (
+    OriginFilter
+)
+
 
 class OriginList(ListAPIView):
     queryset = Origin.objects.all()
     serializer_class = OriginSerializer
     permission_classes = (OriginPermission, )
+    filter_backends = (DjangoFilterBackend, )
+    filterset_class = OriginFilter
 
     def get_queryset(self, *args, **kwargs):
         sort = self.request.query_params.get('sort', None)
