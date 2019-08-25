@@ -25,19 +25,25 @@ from .serializers import (
     SightingSerializer
 )
 
+from .permissions import (
+    OriginPermission
+)
+
 
 class OriginList(ListAPIView):
     queryset = Origin.objects.all()
     serializer_class = OriginSerializer
+    permission_classes = (OriginPermission, )
 
     def get_queryset(self, *args, **kwargs):
         sort = self.request.query_params.get('sort', None)
-        origin = Origin.objects.order_by('-origin') if sort == 'desc' else Origin.objects.order_by('origin')
+        origin = Origin.objects.order_by('-origin').filter(owner=self.request.user) if sort == 'desc' else Origin.objects.order_by('origin').filter(owner=self.request.user)
         return origin
 
 class OriginDetail(RetrieveAPIView):
     queryset = Origin.objects.all()
     serializer_class = OriginSerializer
+    permission_classes = (OriginPermission, )
     lookup_field = 'id'
 
     def get_queryset(self):

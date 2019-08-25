@@ -1,10 +1,13 @@
 from rest_framework import permissions
 
-class OriginPermission(permission.BasePermission):
+class OriginPermission(permissions.BasePermission):
     message = "You are not allowed to perform any operation on Origin"
 
     def has_permission(self, request, view):
-        return True
+        if request.method == 'GET':
+            return True
 
     def has_object_permission(self, request, view, obj):
-        return True
+        if request.method == 'GET':
+            return request.user == obj.owner
+
