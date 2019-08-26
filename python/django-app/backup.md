@@ -21,6 +21,7 @@ idna==2.8
 Jinja2==2.10.1
 MarkupSafe==1.1.1
 Pillow==6.1.0
+psycopg2==2.8.3
 pycodestyle==2.5.0
 pydot==1.4.1
 Pygments==2.4.2
