@@ -43,6 +43,7 @@ INSTALLED_APPS = [
     'core',
     'common',
     'superhero',
+    'movie',
 
     # Third Party App
     'rest_framework',
