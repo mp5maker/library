@@ -17,6 +17,11 @@ class MovieManager(models.Manager):
         )
         return queryset
 
+    def top_movies(self, limit=10):
+        queryset = self.all_with_select_prefect_related_and_score()
+        queryset = queryset.annotate(vote_sum=Sum('number_of_votes__value'))
+        return queryset.order_by('-vote_sum')[:int(limit)]
+
 class MovieImageManager(models.Manager):
     def all_select_prefetch_related(self):
         return self.get_queryset().select_related('movie', 'user')

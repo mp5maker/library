@@ -27,9 +27,18 @@ class MovieList(ListAPIView):
     serializer_class = MovieSerializer
     queryset = Movie.objects.all_with_select_prefect_related_and_score()
 
+class MovieTopList(ListAPIView):
+    serializer_class = MovieSerializer
+    queryset = Movie.objects.top_movies()
+
+    def get_queryset(self):
+        limit = self.request.query_params.get('limit', None)
+        return Movie.objects.top_movies(limit=limit)
+
 class MovieImageList(ListAPIView):
     serializer_class = MovieImageSerializer
     queryset = MovieImage.objects.all_select_prefetch_related()
+
 
 class MovieImageCreate(CreateAPIView):
     serializer_class = MovieImageSerializer
