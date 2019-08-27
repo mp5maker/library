@@ -10,3 +10,11 @@ RATINGS = (
     (RATED_PG, 'PG Parental Guidance'),
     (RATED_R, 'R - Restricted'),
 )
+
+VOTE_UP = -1
+VOTE_DOWN = 1
+
+VOTES = (
+    (VOTE_UP, 'Vote up'),
+    (VOTE_DOWN, 'Vote down')
+)

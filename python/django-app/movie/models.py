@@ -7,10 +7,15 @@ from common.models import (
 from .enums import (
     RATINGS,
     NOT_RATED,
+    VOTES,
 )
 
 from .managers import (
     MovieManager
+)
+
+from django.conf import (
+    settings
 )
 
 class Movie(Common):
@@ -93,3 +98,27 @@ class Role(Common):
 
     class Meta:
         unique_together = ('movie', 'person', 'name', )
+
+class Vote(models.Model):
+    value = models.IntegerField(choices=VOTES)
+    movie = models.ForeignKey(
+        Movie,
+        on_delete=models.CASCADE,
+        related_name='number_of_votes'
+    )
+    voted_on = models.DateTimeField(auto_now=True)
+    user = models.ForeignKey(
+        settings.AUTH_USER_MODEL,
+        on_delete=models.CASCADE,
+        related_name="movie_vote_on"
+    )
+
+    def __str__(self):
+        return self.movie.title
+
+    class Meta:
+        ordering: ('-created')
+
+
+    class Meta:
+        unique_together = ('user', 'movie')

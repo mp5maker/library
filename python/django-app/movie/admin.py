@@ -3,7 +3,8 @@ from django.contrib import admin
 from .models import (
     Movie,
     Person,
-    Role
+    Role,
+    Vote
 )
 
 @admin.register(Movie)
@@ -16,4 +17,8 @@ class PersonAdmin(admin.ModelAdmin):
 
 @admin.register(Role)
 class RoleAdmin(admin.ModelAdmin):
+    pass
+
+@admin.register(Vote)
+class VoteAdmin(admin.ModelAdmin):
     pass
