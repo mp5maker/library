@@ -6,6 +6,7 @@ from rest_framework.serializers import (
 
 from .models import (
     Movie,
+    MovieImage,
     Person,
     Role
 )
@@ -45,6 +46,25 @@ class MovieSerializer(ModelSerializer):
             'actors_name',
             'score',
             'number_of_votes',
+        )
+
+class MovieImageSerializer(ModelSerializer):
+    movie_name = CharField(source='get_movie_name', read_only=True)
+    user_name = CharField(source='get_user_name', read_only=True)
+
+    class Meta:
+        model = MovieImage
+        fields = (
+            'title',
+            'description',
+            'created',
+            'updated',
+            'image',
+            'uploaded',
+            'movie',
+            'movie_name',
+            'user_name',
+            'user',
         )
 
 class PersonSerializer(ModelSerializer):

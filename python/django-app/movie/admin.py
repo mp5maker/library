@@ -2,13 +2,18 @@ from django.contrib import admin
 
 from .models import (
     Movie,
+    MovieImage,
     Person,
     Role,
-    Vote
+    Vote,
 )
 
 @admin.register(Movie)
 class MovieAdmin(admin.ModelAdmin):
+    pass
+
+@admin.register(MovieImage)
+class MovieImageAdmin(admin.ModelAdmin):
     pass
 
 @admin.register(Person)

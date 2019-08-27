@@ -11,11 +11,16 @@ from .enums import (
 )
 
 from .managers import (
-    MovieManager
+    MovieManager,
+    MovieImageManager
 )
 
 from django.conf import (
     settings
+)
+
+from .utilities import (
+    movie_directory_path_with_uuid
 )
 
 class Movie(Common):
@@ -70,6 +75,29 @@ class Movie(Common):
 
     class Meta:
         ordering = ('-year', 'title')
+
+class MovieImage(Common):
+    image = models.ImageField(upload_to=movie_directory_path_with_uuid)
+    uploaded = models.DateTimeField(auto_now=True)
+    movie = models.ForeignKey(
+        Movie,
+        on_delete=models.CASCADE,
+        related_name='movie_images'
+    )
+    user = models.ForeignKey(
+        settings.AUTH_USER_MODEL,
+        on_delete=models.CASCADE,
+        related_name='uploaded_movie_images'
+    )
+
+    objects = MovieImageManager()
+
+    def get_movie_name(self):
+        return self.movie.title
+
+    def get_user_name(self):
+        return '{} {}'.format(self.user.first_name, self.user.last_name)
+
 
 class Person(Common):
     first_name = models.CharField(max_length=100)

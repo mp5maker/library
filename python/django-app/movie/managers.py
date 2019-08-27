@@ -16,3 +16,7 @@ class MovieManager(models.Manager):
             count=Count('number_of_votes')
         )
         return queryset
+
+class MovieImageManager(models.Manager):
+    def all_select_prefetch_related(self):
+        return self.get_queryset().select_related('movie', 'user')
