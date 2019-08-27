@@ -5,14 +5,20 @@ from rest_framework.generics import (
 )
 
 from .models import (
-    Movie
+    Movie,
+    Person,
 )
 
 from .serializers import (
-    MovieSerializer
+    MovieSerializer,
+    PersonSerializer,
 )
 
 
 class MovieList(ListAPIView):
     serializer_class = MovieSerializer
-    queryset = Movie.objects.all()
+    queryset = Movie.objects.all_select_prefetch_related()
+
+class PersonList(ListAPIView):
+    serializer_class = PersonSerializer
+    queryset = Person.objects.all()

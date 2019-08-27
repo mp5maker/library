@@ -4,7 +4,9 @@ from rest_framework.serializers import (
 )
 
 from .models import (
-    Movie
+    Movie,
+    Person,
+    Role
 )
 
 from .enums import (
@@ -13,7 +15,10 @@ from .enums import (
 
 class MovieSerializer(ModelSerializer):
     rating_name = CharField(source='get_rating', read_only=True)
-    rating_display = CharField(source='get_rating_display')
+    rating_display = CharField(source='get_rating_display', read_only=True)
+    director_name = CharField(source='get_director_name', read_only=True)
+    writers_name = CharField(source='get_writers_name', read_only=True)
+    actors_name = CharField(source='get_actors_name', read_only=True)
 
     class Meta:
         model = Movie
@@ -28,5 +33,39 @@ class MovieSerializer(ModelSerializer):
             'runtime',
             'website',
             'rating_name',
-            'rating_display'
+            'rating_display',
+            'director',
+            'writers',
+            'actors',
+            'director_name',
+            'writers_name',
+            'actors_name'
         )
+
+class PersonSerializer(ModelSerializer):
+    directed = CharField(source='get_directed_movie_names', read_only=True)
+    writing_credits = CharField(source='get_writing_credit_movies_names', read_only=True)
+    acting_credits = CharField(source='get_actor_credit_movies_name', read_only=True)
+
+    class Meta:
+        model = Person
+        fields = (
+            "id",
+            "title",
+            "created",
+            "updated",
+            "description",
+            "status",
+            "first_name",
+            "last_name",
+            "born",
+            "died",
+            'directed',
+            'writing_credits',
+            'acting_credits'
+        )
+
+class RoleSerializer(ModelSerializer):
+    class Meta:
+        model = Role
+        fields = "__all__"
