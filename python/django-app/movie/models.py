@@ -62,6 +62,12 @@ class Movie(Common):
     def get_actors_name(self):
         return ['{} {}'.format(actor.first_name, actor.last_name) for actor in self.actors.all()]
 
+    def get_score(self):
+        return self.score
+
+    def get_total_count(self):
+        return self.count
+
     class Meta:
         ordering = ('-year', 'title')
 

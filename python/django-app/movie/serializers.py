@@ -1,6 +1,7 @@
 from rest_framework.serializers import (
     ModelSerializer,
-    CharField
+    CharField,
+    IntegerField
 )
 
 from .models import (
@@ -19,6 +20,8 @@ class MovieSerializer(ModelSerializer):
     director_name = CharField(source='get_director_name', read_only=True)
     writers_name = CharField(source='get_writers_name', read_only=True)
     actors_name = CharField(source='get_actors_name', read_only=True)
+    score = IntegerField(source='get_score', read_only=True)
+    number_of_votes = IntegerField(source='get_total_count', read_only=True)
 
     class Meta:
         model = Movie
@@ -39,7 +42,9 @@ class MovieSerializer(ModelSerializer):
             'actors',
             'director_name',
             'writers_name',
-            'actors_name'
+            'actors_name',
+            'score',
+            'number_of_votes',
         )
 
 class PersonSerializer(ModelSerializer):

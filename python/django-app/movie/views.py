@@ -17,7 +17,7 @@ from .serializers import (
 
 class MovieList(ListAPIView):
     serializer_class = MovieSerializer
-    queryset = Movie.objects.all_select_prefetch_related()
+    queryset = Movie.objects.all_with_select_prefect_related_and_score()
 
 class PersonList(ListAPIView):
     serializer_class = PersonSerializer
