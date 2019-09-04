@@ -1,32 +1,36 @@
 ## Flex Box ##
 
+To make it start
+
+        <div class="flex-container">
+            <div>1</div>
+            <div>2</div>
+            <div>3</div>
+        <div>
+
+.flex container(parent) needs to have **display: flex**
+
+**Parent Container Property**
+
     display: flex;
     flex-wrap: wrap;
+    flex-direction: row | column | row-reverse | columne-reverse
+    flex-flow: row wrap; | Short hand property for flex-wrap and flex-direction
+    justify-content: center | flex-start | flex-end | space-between | space-around
+    align-items: center | flex-start | flex-end | baseline | stretch
+    align-content: center | flex-start | flex-end
 
-    flex-grow: 1;
-    flex-shrink: 1;
-    flex-basis: 200px;
-    flex: 1 1 200px;
+**Child Property**
 
-    justify-content: flex-start;
-    justify-content: space-around;
-    justify-content: space-between;
-    justify-content: center;
-    justify-content: flex-end;
-    
-    align-items: flex-start;
-    align-items: space-around;
-    align-items: space-between;
-    align-items: center;
-    align-items: flex-end;
-
-    flex-flow: column;
-    flex-flow: row;
-    flex-flow: row-reverse;
-    flex-flow: column-reverse;
+    align-self: center | flex-start | flex-end
+    order: (any integer number) eg: 1
+    flex-grow: 0 | 1 or above
+    flex-shrink: 0 | 1 or above
+    flex-basis: length eg: 200px
+    flex: 0 0 200px | shorthand property for flex-shrink and flex-grow
 
 **Justify Content**
-* It is the main axis
+* It is the main axis (x-axis)
 
 **Align Items**
-* It is the cross axis
+* It is the cross axis (y-axis)
