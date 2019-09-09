@@ -34,6 +34,9 @@ export const NavigationBar:React.SFC<appProps> = ({compiler, framework}) => {
                         <NavLink to="/state" className="nav-link">
                             State
                         </NavLink>
+                        <NavLink to="/documentation" className="nav-link">
+                            Documentation
+                        </NavLink>
                     </ReactBootstrap.Nav>
                     <ReactBootstrap.Nav>
                         <ReactBootstrap.Nav.Link href="#login">
