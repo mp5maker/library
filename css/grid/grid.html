@@ -1,0 +1,357 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <link rel='stylesheet' href='https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/4.3.1/css/bootstrap.min.css' />
+    <title>Grid</title>
+</head>
+<body>
+    <div class="container-fluid">
+        <div class="row">
+            <div class="col m-5 p-5">
+                <div>
+                    <h4>
+                        Display Grid
+                    </h4>
+                    <p>
+                        Grid layout with rows and columns, making it easier to design web pages without having to use floats and positioning
+                        <br />
+                        Grid needs to have a display: grid to its parent
+                        The vertical lines of grid items are called columns
+                        The horizontal lines of grid items are called rows.
+                        The spaces between each column/row are called gaps.
+                        The lines between columns are called column lines.
+                        The lines between rows are called row lines.
+                        Grid-template-columns property defines the number of columns in your grid layout, and it can define the width of each column.
+                        The grid-column property defines on which column(s) to place an item.
+                    </p>
+                </div>
+                <div class="mt-5">
+                    <p>
+                        <em>Simple Grid</em>
+                    </p>
+                </div>
+                <div class="grid-container">
+                    <div class="grid-item">1</div>
+                    <div class="grid-item">2</div>
+                    <div class="grid-item">3</div>
+                </div>
+                <div class="mt-5">
+                    <p>
+                        <em>Simple Inline Grid</em>
+                    </p>
+                </div>
+                <div class="grid-container inline">
+                    <div class="grid-item">1</div>
+                    <div class="grid-item">2</div>
+                    <div class="grid-item">3</div>
+                </div>
+                <div class="mt-5">
+                    <p>
+                        <em>Grid Line</em>
+                    </p>
+                </div>
+                <div class="grid-container random-grid-line">
+                    <div class="grid-item">1</div>
+                    <div class="grid-item">2</div>
+                    <div class="grid-item">3</div>
+                </div>
+                <div class="mt-5">
+                    <p>
+                        <em>Grid Columns Auto</em>
+                    </p>
+                </div>
+                <div class="grid-container columns-auto">
+                    <div class="grid-item">1</div>
+                    <div class="grid-item">2</div>
+                    <div class="grid-item">3</div>
+                </div>
+                <div class="mt-5">
+                    <p>
+                        <em>Grid Rows Auto</em>
+                    </p>
+                </div>
+                <div class="grid-container rows-auto">
+                    <div class="grid-item">1</div>
+                    <div class="grid-item">2</div>
+                    <div class="grid-item">3</div>
+                </div>
+                <div class="mt-5">
+                    <p>
+                        <em>Grid Justify Content Space Evenly</em>
+                    </p>
+                </div>
+                <div class="grid-container justify-content space-evenly">
+                    <div class="grid-item">1</div>
+                    <div class="grid-item">2</div>
+                    <div class="grid-item">3</div>
+                </div>
+                <div class="mt-5">
+                    <p>
+                        <em>Grid Justify Content Space Around</em>
+                    </p>
+                </div>
+                <div class="grid-container justify-content space-around">
+                    <div class="grid-item">1</div>
+                    <div class="grid-item">2</div>
+                    <div class="grid-item">3</div>
+                </div>
+                <div class="mt-5">
+                    <p>
+                        <em>Grid Justify Content Space Between</em>
+                    </p>
+                </div>
+                <div class="grid-container justify-content space-between">
+                    <div class="grid-item">1</div>
+                    <div class="grid-item">2</div>
+                    <div class="grid-item">3</div>
+                </div>
+                <div class="mt-5">
+                    <p>
+                        <em>Grid Justify Content Center</em>
+                    </p>
+                </div>
+                <div class="grid-container justify-content center">
+                    <div class="grid-item">1</div>
+                    <div class="grid-item">2</div>
+                    <div class="grid-item">3</div>
+                </div>
+                <div class="mt-5">
+                    <p>
+                        <em>Grid Justify Content Start</em>
+                    </p>
+                </div>
+                <div class="grid-container justify-content start">
+                    <div class="grid-item">1</div>
+                    <div class="grid-item">2</div>
+                    <div class="grid-item">3</div>
+                </div>
+                <div class="mt-5">
+                    <p>
+                        <em>Grid Justify Content End</em>
+                    </p>
+                </div>
+                <div class="grid-container justify-content end">
+                    <div class="grid-item">1</div>
+                    <div class="grid-item">2</div>
+                    <div class="grid-item">3</div>
+                </div>
+                <div class="mt-5">
+                    <p>
+                        <em>Grid Align Content Space Evenly</em>
+                    </p>
+                </div>
+                <div class="grid-container align-content space-evenly">
+                    <div class="grid-item">1</div>
+                    <div class="grid-item">2</div>
+                    <div class="grid-item">3</div>
+                </div>
+                <div class="mt-5">
+                    <p>
+                        <em>Grid Align Content Space Around</em>
+                    </p>
+                </div>
+                <div class="grid-container align-content space-around">
+                    <div class="grid-item">1</div>
+                    <div class="grid-item">2</div>
+                    <div class="grid-item">3</div>
+                </div>
+                <div class="mt-5">
+                    <p>
+                        <em>Grid Align Content Space Between</em>
+                    </p>
+                </div>
+                <div class="grid-container align-content space-between">
+                    <div class="grid-item">1</div>
+                    <div class="grid-item">2</div>
+                    <div class="grid-item">3</div>
+                </div>
+                <div class="mt-5">
+                    <p>
+                        <em>Grid Align Content Center</em>
+                    </p>
+                </div>
+                <div class="grid-container align-content center">
+                    <div class="grid-item">1</div>
+                    <div class="grid-item">2</div>
+                    <div class="grid-item">3</div>
+                </div>
+                <div class="mt-5">
+                    <p>
+                        <em>Grid Align Content Start</em>
+                    </p>
+                </div>
+                <div class="grid-container align-content start">
+                    <div class="grid-item">1</div>
+                    <div class="grid-item">2</div>
+                    <div class="grid-item">3</div>
+                </div>
+                <div class="mt-5">
+                    <p>
+                        <em>Grid Align Content End</em>
+                    </p>
+                </div>
+                <div class="grid-container align-content end">
+                    <div class="grid-item">1</div>
+                    <div class="grid-item">2</div>
+                    <div class="grid-item">3</div>
+                </div>
+                <div class="mt-5">
+                    <p>
+                        <em>Grid Column</em>
+                    </p>
+                </div>
+                <div class="grid-container random-grid-column">
+                    <div class="grid-item">1</div>
+                    <div class="grid-item">2</div>
+                    <div class="grid-item">3</div>
+                </div>
+                <div class="mt-5">
+                    <p>
+                        <em>Grid Row</em>
+                    </p>
+                </div>
+                <div class="grid-container random-grid-row">
+                    <div class="grid-item">1</div>
+                    <div class="grid-item">2</div>
+                    <div class="grid-item">3</div>
+                </div>
+                <div class="mt-5">
+                    <p>
+                        <em>Grid Area</em>
+                    </p>
+                </div>
+                <div class="grid-container random-grid-area">
+                    <div class="grid-item">1</div>
+                    <div class="grid-item">2</div>
+                    <div class="grid-item">3</div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <style>
+        /* Grid, Grid Gap, Grid Row Gap, Grid Column Gap */
+        .grid-container {
+            display: grid;
+            /* grid-row-gap: 5px;
+            grid-column-gap: 5px; */
+            grid-gap: 5px;
+            grid-template-columns: auto auto auto;
+        }
+        .grid-container.inline {
+            display: inline-grid;
+        }
+        .grid-container > div {
+            font-size: 30px;
+            color: white;
+            background-color: firebrick;
+        }
+        .grid-container > .grid-item {
+            font-size: 30px;
+            color: white;
+            background-color: firebrick;
+        }
+        /* Grid Lines  */
+        .grid-container.random-grid-line > .grid-item:first-child {
+            grid-column-start: 1;
+            grid-column-end: 2;
+            grid-row-start: 1;
+            grid-row-end: 3;
+        }
+        .grid-container.random-grid-line > .grid-item:nth-child(2) {
+            grid-column-start: 2;
+            grid-column-end: 3;
+            grid-row-start: 1;
+            grid-row-end: 2;
+        }
+        .grid-container.random-grid-line > .grid-item:last-child {
+            grid-row-start: 2;
+            grid-row-end: 3;
+            grid-column-start: 2;
+            grid-column-end: 3;
+        }
+        /* Columns Auto */
+        .grid-container.columns-auto {
+            grid-template-columns: auto auto auto;
+        }
+        /* Rows Auto */
+        .grid-container.rows-auto {
+            grid-template-rows: 80px 10px auto;
+        }
+        /* Justify Content */
+        .grid-container.justify-content.space-evenly {
+            justify-content: space-evenly;
+        }
+        .grid-container.justify-content.space-around {
+            justify-content: space-around;
+        }
+        .grid-container.justify-content.space-between {
+            justify-content: space-between;
+        }
+        .grid-container.justify-content.center {
+            justify-content: center;
+        }
+        .grid-container.justify-content.start {
+            justify-content: start;
+        }
+        .grid-container.justify-content.end {
+            justify-content: end;
+        }
+        /* Align Content */
+        .grid-container.align-content.space-evenly {
+            align-content: space-evenly;
+        }
+        .grid-container.align-content.space-around {
+            align-content: space-around;
+        }
+        .grid-container.align-content.space-between {
+            align-content: space-between;
+        }
+        .grid-container.align-content.center {
+            align-content: center;
+        }
+        .grid-container.align-content.start {
+            align-content: start;
+        }
+        .grid-container.align-content.end {
+            align-content: end;
+        }
+        .grid-container.align-content.end {
+            align-content: end;
+        }
+        /* Grid Column */
+        .grid-container.random-grid-column > .grid-item:first-child {
+            grid-column: 1/3;
+        }
+        .grid-container.random-grid-column > .grid-item:nth-child(2) {
+            grid-column: 1/ span 2;
+        }
+        .grid-container.random-grid-column > .grid-item:last-child {
+            grid-column: 2 span / 3;
+
+        }
+        /* Grid Row */
+        .grid-container.random-grid-row > .grid-item:first-child {
+            grid-row: 1/3;
+        }
+        .grid-container.random-grid-row > .grid-item:nth-child(2) {
+            grid-row: 1/ span 2;
+        }
+        .grid-container.random-grid-row > .grid-item:last-child {
+            grid-row: 2 span / 3;
+        }
+        /* Grid Area */
+        .grid-container.random-grid-area > .grid-item:first-child {
+            grid-area: 1/3;
+        }
+        .grid-container.random-grid-area > .grid-item:nth-child(2) {
+            grid-area: 1/ span 2;
+        }
+        .grid-container.random-grid-area > .grid-item:last-child {
+            grid-area: 2 span / 3;
+        }
+    </style>
+</body>
+</html>

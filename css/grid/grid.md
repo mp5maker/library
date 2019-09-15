@@ -10,27 +10,26 @@
     grid-template-columns: 33.3% 33.3% 33.3%;
     grid-template-columns: 1fr 1fr 1fr;
     grid-template-columns: repeat(3, 1fr);
-    
-    
+
 **Columns [Unequal]**
- 
+
     grid-template-columns: 1fr 2fr 1fr;
     grid-template-columns: repeat(9, 1fr);
 
 
 **Fixed Row Heights**
 > Cuts of any content if it exceeds 200px
-    
+
     grid-auto-rows: 200px;
 
 
 **MinMax**
 > Dynamically decides if there is content it will increase the height
-    
+
     grid-auto-rows: minmax(200px, auto);
 
 **Rows**
-    
+
     grid-template-rows: repeat(3, minmax(200px, auto));
 
 **Grid Column Gap**
@@ -45,7 +44,7 @@
 
 **Grid Gap**
 > Applies gap in both columns and rows
-    
+
     grid-gap: 10px;
 
 **Lines**
@@ -89,7 +88,7 @@
 
 **Grid Areas**
 > Give names to the grid area
-    
+
     grid-area: header;
     grid-area: section;
     grid-area: aside;
