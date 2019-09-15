@@ -1,0 +1,146 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Hexagon</title>
+    <link rel='stylesheet' href='https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/4.3.1/css/bootstrap.min.css' />
+</head>
+<body>
+    <div class="container-fluid">
+        <div class="row">
+            <div class="col m-5 p-5">
+                <div class="p-5 m-5">
+                    <div class="hexagon-container">
+                        <div class="hexagon"></div>
+                        <div class="hexagon-text">
+                            <div>
+                                <h2 class="display-4">123</h2>
+                                <p>
+                                    <strong>
+                                        Sold
+                                    </strong>
+                                </p>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="hexagon-container two">
+                        <div class="hexagon"></div>
+                        <div class="hexagon-text">
+                            <div>
+                                <h2 class="display-4">123</h2>
+                                <p>
+                                    <strong>
+                                        Sold
+                                    </strong>
+                                </p>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="hexagon-container three">
+                        <div class="hexagon"></div>
+                        <div class="hexagon-text">
+                            <div>
+                                <h2 class="display-4">123</h2>
+                                <p>
+                                    <strong>
+                                        Sold
+                                    </strong>
+                                </p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+<style>
+    .hexagon-container {
+        position: relative;
+        width: 150px;
+        height: 200px;
+    }
+
+    .hexagon {
+        position: relative;
+        width: 150px;
+        height: 75px;
+        background-color: firebrick;
+        transition: all linear 0.25s;
+    }
+
+    .hexagon:before,
+    .hexagon:after {
+        content: "";
+        position: absolute;
+        width: 0;
+        border-top: 75px solid firebrick;
+        border-bottom: 75px solid firebrick;
+        border-left: 75px solid transparent;
+        border-right: 75px solid transparent;
+    }
+
+    .hexagon:before {
+        transition: all linear 0.25s;
+        bottom: 100%;
+        border-top: 0 solid transparent;
+        border-bottom: 50px solid firebrick;
+    }
+
+    .hexagon:after {
+        transition: all linear 0.25s;
+        top: 100%;
+        width: 0;
+        border-top: 50px solid firebrick;
+        border-bottom: 0 solid transparent;
+    }
+
+    .hexagon-container .hexagon-text {
+        position: absolute;
+        top: 0;
+        width: 100%;
+    }
+
+    .hexagon-container .hexagon-text div {
+        text-align: center;
+        color: white;
+    }
+
+    .hexagon-container:hover .hexagon {
+        transition: all linear 0.25s;
+        opacity: 0.8;
+        background-color: #14182D;
+    }
+    .hexagon-container:hover .hexagon::before {
+        transition: all linear 0.25s;
+        border-bottom-color: #14182D;
+    }
+    .hexagon-container:hover .hexagon::after  {
+        transition: all linear 0.25s;
+        border-top-color: #14182D;
+    }
+    .two {
+        margin-left: 78px;
+        margin-top: -72px;
+    }
+    .three {
+        margin-top: -72px;
+    }
+    .hexagon-container:hover ~ .hexagon-container .hexagon {
+        background-color: #14182D;
+        transition: all linear 2s;
+    }
+    .hexagon-container:hover ~ .hexagon-container .hexagon::before  {
+        opacity: 0.8;
+        border-bottom-color: #14182D;
+        transition: all linear 2s;
+    }
+    .hexagon-container:hover ~ .hexagon-container .hexagon::after  {
+        opacity: 0.8;
+        border-top-color: #14182D;
+        transition: all linear 2s;
+    }
+</style>
+</body>
+</html>
