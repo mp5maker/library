@@ -7,7 +7,8 @@
     "start-webpack": "webpack-dev-server --open --mode development",
     "dev": "nodemon server.js",
     "start": "node server.js",
-    "build": "webpack --mode production"
+    "build": "webpack --mode production",
+    "storybook": "start-storybook"
   },
   "keywords": [],
   "author": "",
@@ -27,6 +28,9 @@
     "xstate": "^4.6.7"
   },
   "devDependencies": {
+    "@storybook/addon-actions": "^5.2.3",
+    "@storybook/react": "^5.2.3",
+    "@types/storybook__react": "^4.0.2",
     "awesome-typescript-loader": "^5.2.1",
     "compression-webpack-plugin": "^2.0.0",
     "css-loader": "^2.1.1",

@@ -7,6 +7,11 @@
         "target": "es6",
         "jsx": "react"
     },
+    "awesomeTypescriptLoaderOptions": {
+        "ignoreDiagnostics": [
+            1192
+        ]
+    },
     "include": [
         "./src/**/*"
     ]
