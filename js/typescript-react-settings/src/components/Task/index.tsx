@@ -6,4 +6,4 @@ const Task = ({ task: {id, title, state}, onArchiveTask, onPinTask }: any) => (
     </div>
 )
 
-export default Task
+export default Task;

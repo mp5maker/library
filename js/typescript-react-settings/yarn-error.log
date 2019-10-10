@@ -1,5 +1,5 @@
 Arguments: 
-  /usr/bin/node /usr/share/yarn/bin/yarn.js add --dev @types/storybook @types/storybook__react
+  /usr/bin/node /usr/share/yarn/bin/yarn.js add --dev react-docgen-typescript-loade
 
 PATH: 
   /home/photon/.local/bin:/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin:/usr/games:/usr/local/games:/snap/bin
@@ -14,7 +14,7 @@ Platform:
   linux x64
 
 Trace: 
-  Error: https://registry.yarnpkg.com/@types%2fstorybook: Not found
+  Error: https://registry.yarnpkg.com/react-docgen-typescript-loade: Not found
       at Request.params.callback [as _callback] (/usr/share/yarn/lib/cli.js:66091:18)
       at Request.self.callback (/usr/share/yarn/lib/cli.js:129590:22)
       at Request.emit (events.js:198:13)
@@ -58,7 +58,11 @@ npm manifest:
     },
     "devDependencies": {
       "@storybook/addon-actions": "^5.2.3",
+      "@storybook/addon-console": "^1.2.1",
+      "@storybook/addon-links": "^5.2.3",
+      "@storybook/addons": "^5.2.3",
       "@storybook/react": "^5.2.3",
+      "@types/storybook__react": "^4.0.2",
       "awesome-typescript-loader": "^5.2.1",
       "compression-webpack-plugin": "^2.0.0",
       "css-loader": "^2.1.1",
@@ -1177,7 +1181,28 @@ Lockfile:
       react-inspector "^3.0.2"
       uuid "^3.3.2"
   
-  "@storybook/addons@5.2.3":
+  "@storybook/addon-console@^1.2.1":
+    version "1.2.1"
+    resolved "https://registry.yarnpkg.com/@storybook/addon-console/-/addon-console-1.2.1.tgz#f338401661b4636118b13839848061e996d4e104"
+    integrity sha512-2iDbDTipWonvRpIqLLntfhCGvawFFvoG1xyErpyL7K/HRdQ1zzIvR1Qm83S7TK8Vg+RzZWm4wcDbxx7WOsFCNg==
+    dependencies:
+      global "^4.3.2"
+  
+  "@storybook/addon-links@^5.2.3":
+    version "5.2.3"
+    resolved "https://registry.yarnpkg.com/@storybook/addon-links/-/addon-links-5.2.3.tgz#1c4ec8c2432f1b710e9df4b1cc3f933b79dba105"
+    integrity sha512-HuMG2WPldOjF4LvMrwzllpNjLwgwzXeMviTs82ijtRDrNUWHtyfxNaI53MTilpQwdosExPyHvtpWBeiHbrsATg==
+    dependencies:
+      "@storybook/addons" "5.2.3"
+      "@storybook/core-events" "5.2.3"
+      "@storybook/router" "5.2.3"
+      common-tags "^1.8.0"
+      core-js "^3.0.1"
+      global "^4.3.2"
+      prop-types "^15.7.2"
+      qs "^6.6.0"
+  
+  "@storybook/addons@5.2.3", "@storybook/addons@^5.2.3":
     version "5.2.3"
     resolved "https://registry.yarnpkg.com/@storybook/addons/-/addons-5.2.3.tgz#02e35fad3ed4101625896e43e0a1e20215f6be38"
     integrity sha512-LTkUJB8ZDc4++yt9acNHNjlnGWCyNtP+NVYPDvg7zFOaMip21Pj4T0pg9UwYxdqrFBWz9tVz7DJeXroS3egXxg==
@@ -1679,7 +1704,15 @@ Lockfile:
       "@types/prop-types" "*"
       csstype "^2.2.0"
   
-  "@types/webpack-env@^1.13.7":
+  "@types/storybook__react@^4.0.2":
+    version "4.0.2"
+    resolved "https://registry.yarnpkg.com/@types/storybook__react/-/storybook__react-4.0.2.tgz#f36fb399574c662e79c1a0cf6e429b6ff730da40"
+    integrity sha512-U/+J5qccRdKFryvHkk1a0IeZaSIZLCmTwAQhTSDGeC3SPNIYPus+EtunBqP49r870l8czbfxtjeC3IL9P66ngQ==
+    dependencies:
+      "@types/react" "*"
+      "@types/webpack-env" "*"
+  
+  "@types/webpack-env@*", "@types/webpack-env@^1.13.7":
     version "1.14.0"
     resolved "https://registry.yarnpkg.com/@types/webpack-env/-/webpack-env-1.14.0.tgz#8edfc5f8e6eae20eeed3ca0d02974ed4ee5e4efc"
     integrity sha512-Fv+0gYJzE/czLoRKq+gnXWr4yBpPM3tO3C8pDLFwqVKlMICQUq5OsxwwFZYDaVr7+L6mgNDp16iOcJHEz3J5RQ==
