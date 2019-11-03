@@ -71,7 +71,7 @@
                         New way to download
                     </h4>
                 </header>
-                <a href="https://picsum.photos/200/300" download="lorem-random">
+                <a href="https://picsum.photos/200/300" download="lorem-random" crossorigin="anonymous">
                     [DOWNLOAD ATTRIBUTE]
                 </a>
                 <span translate="no">
@@ -167,6 +167,8 @@
                     preload="auto"
                     loop
                     controls
+                    crossorigin="anonymous"
+                    id="video-chapters"
                     poster="https://picsum.photos/200/300">
                     <source src="media/Photon - End Of Time.mp4" type="video/mp4"/>
                     <span> MP4 is not supported </span>
@@ -177,6 +179,13 @@
                         lang="en"
                         srclang="en"
                         default />
+                    <track
+                        id="chapters"
+                        src="media/chapters.vtt"
+                        kind="chapters"
+                        label="Chapters"
+                        lang="en"
+                        srclang="en"/>
                     <a href="media/Photon - End Of Time.mp4"> MP4 </a>
                 </video>
             </div>
@@ -207,5 +216,6 @@
             color: firebrick;
         }
     </style>
+    <script src="index.js"></script>
 </body>
 </html>
