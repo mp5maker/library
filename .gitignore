@@ -31,3 +31,5 @@ mongo
 .next
 *.sqlite3
 public
+*.mp3
+*.mp4
