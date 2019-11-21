@@ -1,15 +1,15 @@
 CACHE MANIFEST
 
-# Cache
 CACHE:
+
+# Third Party
 https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/4.3.1/css/bootstrap.min.css
+
+# CSS
 style.css
 
-# Network
 NETWORK:
+*
 
-
-# Fallback
 FALLBACK:
-
 offline.html
