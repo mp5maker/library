@@ -1,0 +1,76 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+    <link
+            rel='stylesheet'
+            href='https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/4.3.1/css/bootstrap.min.css' />
+</head>
+<body>
+    <div class="container-fluid">
+        <div class="row">
+            <div class="col">
+                <div class="circle-container">
+                    <canvas id="circle"></canvas>
+                </div>
+            </div>
+        </div>
+    </div>
+    <footer>
+        <div>
+            &copy; 2019 All Rights Reserved. Photon Enterprise
+        </div>
+    </footer>
+    <script src="./main.js"></script>
+</body>
+<style>
+    body, html {
+        margin: 0;
+        padding: 0;
+    }
+
+    body {
+        height: 100%;
+    }
+
+    body > .container-fluid {
+        min-height: calc(100vh - 60px);
+    }
+
+    .common-header div {
+        display: inline-block;
+        height: 40px;
+        line-height: 40px;
+    }
+
+    .common-header div:first-child {
+        float: left;
+    }
+
+    .common-header div:last-child {
+        float: right;
+    }
+
+    .common-header::before, .common-header::after {
+        content: "";
+        clear: both;
+        display: block;
+    }
+
+    .circle-container {
+        display: block;
+        width: 100%;
+        height: 100%;
+    }
+
+    footer {
+        border-top: 1px solid lightgrey;
+        height: 60px;
+        line-height: 60px;
+        text-align: center;
+    }
+</style>
+</html>
