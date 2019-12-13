@@ -1,11 +1,13 @@
 (function() {
     /* DOM */
-    CANVAS = ""
-    FPS = ""
+    var CANVAS = ""
+    var FPS = ""
 
-    /* Move */
+    /* Position */
     var currentPosition = { x: 100, y: 100 }
-    function move(event) {
+
+    /* Keyboard */
+    function keyboardPressed(event) {
         const LEFT = 37
         const UP = 38
         const RIGHT = 39
@@ -24,10 +26,31 @@
         }
     }
 
+    function keyboard() {
+        window.addEventListener('keyup', keyboardPressed, false)
+        window.addEventListener('keydown', keyboardPressed, false)
+    }
+
+
+    /* Mouse */
+    function mouseMoving(event) {
+        const rect = CANVAS.getBoundingClientRect();
+        currentPosition = {
+            x: event.clientX - rect.left,
+            y: event.clientY - rect.top
+        }
+    }
+
+    function mouse() {
+        CANVAS.addEventListener('mousemove', mouseMoving, false)
+        CANVAS.addEventListener('mouseup', mouseMoving, false)
+        CANVAS.addEventListener('mousedown', mouseMoving, false)
+    }
+
     /* Controls */
     function addControls() {
-        window.addEventListener('keyup', move, false)
-        window.addEventListener('keydown', move, false)
+        keyboard();
+        mouse();
     }
 
     /* Game Framework */
