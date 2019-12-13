@@ -1,14 +1,55 @@
 (function() {
     /* DOM */
-    var GAME = document.querySelector('#game')
-    var FPS = document.querySelector('#framePerSecond')
+    CANVAS = ""
+    FPS = ""
+
+    /* Game Framework */
+    var width = "";
+    var height = "";
+    var context = "";
+    var gameFramework = function () {
+        var requestAnimationFrame = window.requestAnimationFrame
+
+        var mainLoop = function (time) {
+            clearCanvas();
+            drawBall();
+            measureFramePerSecond(time);
+            requestAnimationFrame(mainLoop);
+        }
+
+        var start = function () {
+            CANVAS = document.querySelector('#game')
+            width = CANVAS.width
+            height = CANVAS.height
+            context = CANVAS.getContext('2d')
+
+            FPS = document.querySelector('#framePerSecond')
+            requestAnimationFrame(mainLoop);
+        }
+
+        return {
+            start
+        }
+    }
+
+    /* Canvas */
+    function clearCanvas() {
+        context.clearRect(0, 0, width, height)
+    }
+
+    function drawBall() {
+        context.save()
+        context.beginPath()
+        context.arc(100, 100, 10, 0, 2 * Math.PI)
+        context.fill()
+    }
 
 
+    /* Measure Framer Per Second */
     var frameCount = 0;
     var lastTime;
     var framePerSecond;
 
-    /* Measure Framer Per Second */
     var measureFramePerSecond = function(newTime) {
         if (lastTime == undefined) return lastTime = newTime;
 
@@ -22,26 +63,6 @@
 
         FPS.innerHTML = 'FPS: ' + framePerSecond;
         frameCount++;
-    }
-
-
-    /* Game Framework */
-    var gameFramework = function() {
-        var requestAnimationFrame = window.requestAnimationFrame
-
-        var mainLoop = function(time) {
-            GAME.innerHTML = Math.random();
-            measureFramePerSecond(time);
-            requestAnimationFrame(mainLoop);
-        }
-
-        var start = function() {
-            requestAnimationFrame(mainLoop);
-        }
-
-        return {
-            start
-        }
     }
 
     /* After window load */
