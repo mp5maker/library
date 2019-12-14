@@ -1,0 +1,15 @@
+body, html {
+    margin: 0;
+    padding: 0;
+}
+
+body > .container-fluid {
+    min-height: calc(100vh - 35px);
+}
+
+body > footer {
+    height: 35px;
+    line-height: 35px;
+    text-align: center;
+    border-top: 1px solid lightgrey;
+}
