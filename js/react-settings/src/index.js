@@ -4,21 +4,21 @@ import React, { Fragment } from 'react';
 import { render } from 'react-dom';
 
 /* X State */
-import { useMachine } from '@xstate/react';
-import { Machine } from 'xstate';
+// import { useMachine } from '@xstate/react';
+// import { Machine } from 'xstate';
 
 /* Select Field Text */
 import 'react-bootstrap-typeahead/css/Typeahead.css';
-// import { Typeahead } from 'react-bootstrap-typeahead';
+import { Typeahead } from 'react-bootstrap-typeahead';
 
 /* Styling */
 import './index.scss';
 import 'bootstrap/dist/css/bootstrap.css';
 
 /* Apollo Setup */
-import ApolloClient from 'apollo-boost';
-import gql from 'graphql-tag'
-import { ApolloProvider, ApolloConsumer, Query, Mutation } from 'react-apollo'
+// import ApolloClient from 'apollo-boost';
+// import gql from 'graphql-tag'
+// import { ApolloProvider, ApolloConsumer, Query, Mutation } from 'react-apollo'
 
 
 
