@@ -1,0 +1,19 @@
+:root {
+    --border-color: lightgrey;
+}
+
+body, html {
+    padding: 0;
+    margin: 0;
+}
+
+body > .container-fluid {
+    min-height: calc(100vh - 60px);
+}
+
+body > footer  {
+    min-height: 60px;
+    height: 60px;
+    text-align: center;
+    border-top: 1px solid var(--border-color);
+}

@@ -1,0 +1,10 @@
+{
+  "name": "p5-settings",
+  "version": "1.0.0",
+  "main": "index.js",
+  "author": "Shabuktagin Photon Khan",
+  "license": "MIT",
+  "dependencies": {
+    "p5": "^0.10.2"
+  }
+}
