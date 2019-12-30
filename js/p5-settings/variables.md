@@ -29,10 +29,13 @@
 > rectMode()
 > background()
 > beginShape()
+> endShape()
 > vertex()
+> translate()
 
 # Constants
 > CENTER (rectMode)
 > CHORD (arc)
 > PIE (arc)
 > LINES (beginShape)
+> CLOSE (endShape)
