@@ -7,7 +7,7 @@ function setup() {
 
 function draw() {
     /* Clear Rect */
-    // background(255);
+    background(255);
 
     /* Point */
     point(0, 0)
