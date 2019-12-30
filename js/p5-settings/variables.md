@@ -13,3 +13,26 @@
 > mouseButton (LEFT, RIGHT, CENTER)
 > mouseX
 > mouseY
+
+# Already defined functions
+> random(paramOne, paramsTwo)
+> noStroke()
+> noFill()
+> rect()
+> triangle()
+> ellipse()
+> arc()
+> line()
+> quad()
+> point()
+> createCanvas();
+> rectMode()
+> background()
+> beginShape()
+> vertex()
+
+# Constants
+> CENTER (rectMode)
+> CHORD (arc)
+> PIE (arc)
+> LINES (beginShape)
