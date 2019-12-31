@@ -1,0 +1,65 @@
+:root {
+    --border-color: lightgrey;
+    --box-shadow: rgba(0, 0, 0, 0.1);
+    --white-sheet: firebrick;
+}
+
+body, html {
+    margin: 0;
+    padding: 0;
+}
+
+body {
+    height: 100%;
+}
+
+body > .container-fluid {
+    min-height: calc(100vh - 60px);
+}
+
+body > footer {
+    height: 60px;
+    min-height: 60px;
+    line-height: 60px;
+    text-align: center;
+    border-top: 1px solid var(--border-color);
+}
+
+.isometric-container {
+    margin: 50px auto;
+    position: relative;
+    /* border: 1px solid var(--border-color); */
+    width: 40px;
+    height: 32px;
+}
+
+.isometric-container > .left-container {
+    position: absolute;
+    background-color: var(--box-shadow);
+    left: 1px;
+    top: 0px;
+    width: 20px;
+    height: 40px;
+    transform: rotate(90deg) skew(-38deg) scale(0.4);
+}
+
+.isometric-container > .right-container {
+    position: absolute;
+    top: 4px;
+    right: 4px;
+    background-color: var(--box-shadow);
+    width: 20px;
+    height: 35px;
+    transform: rotate(90deg) skew(35deg) scale(0.4);
+}
+
+.isometric-container > .top-container {
+    position: absolute;
+    background-color: var(--white-sheet);
+    top: -9px;
+    left: -7px;
+    width: 50px;
+    height: 40px;
+    border-radius: 1px;
+    transform: rotate(39deg) skew(162deg) scale(0.4);
+}
