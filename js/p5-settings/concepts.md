@@ -65,6 +65,7 @@
 > HSB (colorMode)
 > LEFT (text)
 > RIGHT (text)
+> key
 
 # Color Concepts
 > Triadic [Hue, Saturation, Brightness] (0, 100, 100), (135, 100, 100), (270, 0, 0)
