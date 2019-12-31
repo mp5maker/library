@@ -1,7 +1,8 @@
 :root {
     --border-color: lightgrey;
     --box-shadow: rgba(0, 0, 0, 0.1);
-    --white-sheet: firebrick;
+    --red: firebrick;
+    --white-sheet: white;
 }
 
 body, html {
@@ -28,7 +29,7 @@ body > footer {
 .isometric-container {
     margin: 50px auto;
     position: relative;
-    /* border: 1px solid var(--border-color); */
+    transition: transform 0.25s ease-in-out;
     width: 40px;
     height: 32px;
 }
@@ -55,11 +56,24 @@ body > footer {
 
 .isometric-container > .top-container {
     position: absolute;
-    background-color: var(--white-sheet);
+    background-color: var(--red);
     top: -9px;
     left: -7px;
     width: 50px;
     height: 40px;
     border-radius: 1px;
     transform: rotate(39deg) skew(162deg) scale(0.4);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    color: var(--white-sheet);
+}
+
+.isometric-container:hover {
+    transform: translateY(-20px);
+    transition: transform 0.25s ease-in-out;
+}
+
+.isometric-container > .top-container i {
+    color: var(--white-sheet);
 }
