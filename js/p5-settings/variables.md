@@ -39,6 +39,9 @@
 > blue()
 > colorMode()
 > noLoop()
+> lerpColor()
+> map()
+
 
 # Main Functions
 > setup()
