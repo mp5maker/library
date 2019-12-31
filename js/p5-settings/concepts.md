@@ -41,13 +41,20 @@
 > noLoop()
 > lerpColor()
 > map()
+> text()
+> textAlign()
+> randomBool()
+> mousePressed()
+> mouseClicked()
+> mouseMove()
+> keyTyped()
 
 
 # Main Functions
 > setup()
 > draw()
 > redraw()
-> keypressed()
+> keyPressed()
 
 # Constants
 > CENTER (rectMode)
@@ -56,6 +63,8 @@
 > LINES (beginShape)
 > CLOSE (endShape)
 > HSB (colorMode)
+> LEFT (text)
+> RIGHT (text)
 
 # Color Concepts
 > Triadic [Hue, Saturation, Brightness] (0, 100, 100), (135, 100, 100), (270, 0, 0)
