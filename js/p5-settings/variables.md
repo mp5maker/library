@@ -32,6 +32,19 @@
 > endShape()
 > vertex()
 > translate()
+> fill()
+> color()
+> red()
+> green()
+> blue()
+> colorMode()
+> noLoop()
+
+# Main Functions
+> setup()
+> draw()
+> redraw()
+> keypressed()
 
 # Constants
 > CENTER (rectMode)
@@ -39,3 +52,10 @@
 > PIE (arc)
 > LINES (beginShape)
 > CLOSE (endShape)
+> HSB (colorMode)
+
+# Color Concepts
+> Triadic [Hue, Saturation, Brightness] (0, 100, 100), (135, 100, 100), (270, 0, 0)
+> Complementary [Hue, Saturation, Brightness] (0, 100, 100), (360, 100, 100)
+> Analogous [Hue, Saturation, Brightness] (75, 100, 100), (90, 100, 100), (120, 100, 100)
+> Monochromatic (Same color with variations)
