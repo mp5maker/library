@@ -31,7 +31,6 @@
 > beginShape()
 > endShape()
 > vertex()
-> translate()
 > fill()
 > color()
 > red()
@@ -48,7 +47,13 @@
 > mouseClicked()
 > mouseMove()
 > keyTyped()
-
+> translate()
+> rotate()
+> radians()
+> degrees()
+> angleMode()
+> push()
+> pop()
 
 # Main Functions
 > setup()
@@ -66,6 +71,8 @@
 > LEFT (text)
 > RIGHT (text)
 > key
+> DEGREES (angleMode)
+> RADIANS (angleMode)
 
 # Color Concepts
 > Triadic [Hue, Saturation, Brightness] (0, 100, 100), (135, 100, 100), (270, 0, 0)
