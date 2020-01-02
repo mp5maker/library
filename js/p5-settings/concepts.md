@@ -59,6 +59,8 @@
 * curveVertex()
 * floor()
 * noise()
+* strokeWeight()
+* stroke()
 
 
 # Main Functions
@@ -81,6 +83,7 @@
 * DEGREES (angleMode)
 * RADIANS (angleMode)
 * LINE_STRIP (beginShape)
+* TWO_PI
 
 # Color Concepts
 * Triadic [Hue, Saturation, Brightness] (0, 100, 100), (135, 100, 100), (270, 0, 0)
