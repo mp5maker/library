@@ -1,0 +1,92 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+    <link
+        crossorigin="anonymous"
+        rel='stylesheet'
+        href='https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/4.4.1/css/bootstrap.min.css' />
+    <style>
+        :root {
+            --background-color: #f3f3f3;
+            --border-color: lightgrey;
+            --input-background-color: #efefef;
+            --box-shadow-dark-color: rgba(148, 148, 148, 0.26);
+            --box-shadow-light-color: white;
+            --box-shadow-dark-border: rgba(181, 181, 181, 0.26);
+            --box-shadow-light-border: white;
+            --box-shadow-inset-dark-color: rgba(125, 125, 125, 0.26)
+        }
+
+        body, html {
+            margin: 0;
+            padding: 0;
+        }
+
+        body {
+            background: var(--background-color);
+            height: 100%;
+        }
+
+        body > .container-fluid {
+            min-height: calc(100vh - 60px);
+        }
+
+        body > .container-fluid > .row {
+            height: 100%;
+        }
+
+        body > .container-fluid > .row > .col {
+            height: 100%;
+        }
+
+        body > .container-fluid > .row > .col > div {
+            height: 500px;
+        }
+
+        input {
+            width: 200px;
+            outline: none;
+            border: none;
+            padding: 12px;
+            border-radius: 5px;
+            background-color: var(--input-background-color);
+            border-top: 2px solid var(--box-shadow-dark-border);
+            border-left: 2px solid var(--box-shadow-dark-border);
+            border-right: 2px solid var(--box-shadow-light-border);
+            border-bottom: 2px solid var(--box-shadow-light-border);
+            box-shadow: 12px 12px 12px 0 var(--box-shadow-dark-color),
+                -12px -12px 12px 0 var(--box-shadow-light-color),
+                inset 1px 2px 5px var(--box-shadow-inset-dark-color),
+                inset -1px -2px 5px var(--box-shadow-light-color);
+        }
+
+
+        footer {
+            border-top: 1px solid var(--border-color);
+            height: 60px;
+            line-height: 60px;
+            text-align: center;
+        }
+    </style>
+</head>
+<body>
+    <div class="container-fluid">
+        <div class="row">
+            <div class="col">
+                <div class="d-flex justify-content-center align-items-center">
+                    <input
+                        placeholder="Your name"
+                        type="text">
+                </div>
+            </div>
+        </div>
+    </div>
+    <footer>
+        2018 Neomorphism ?
+    </footer>
+</body>
+</html>
