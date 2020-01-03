@@ -61,6 +61,7 @@
 * noise()
 * strokeWeight()
 * stroke()
+* createVector()
 
 
 # Main Functions
