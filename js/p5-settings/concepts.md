@@ -69,18 +69,20 @@
 * createImg()
 * createSlider()
 * createElement()
-* dragOver()
-* mousePressed()
-* mouseOver()
-* drop()
-* drag()
 * textWidth()
+* loadStrings()
 
 # Main Functions
 * setup()
 * draw()
 * redraw()
 * keyPressed()
+* mousePressed()
+* mouseOver()
+* preload()
+* dragOver()
+* drop()
+* drag()
 
 # Constants
 * CENTER (rectMode)
@@ -123,3 +125,4 @@ sin(theta)| 0 | -0.5 | -1 | -0.5 | 0 | 0.5 | 1 | 0.5 | 0
 * RiTa.getStresses()
 * RiTa.posTags()
 * RiTa.getWordCount()
+* lexicon.randomWord()

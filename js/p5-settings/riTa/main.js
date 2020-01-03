@@ -30,10 +30,14 @@ function setup() {
     }
     text(RiTa.getWordCount(sentence), 0, 400, 200, 200)
     pop()
+
+    push()
+    let lexicon = new RiLexicon();
+    text(lexicon.randomWord('jj'), width / 2, height / 4)
+    pop()
 }
 
 function draw() {
     /* Clear Rect */
     // background(255);
-
 }
