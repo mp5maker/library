@@ -71,6 +71,8 @@
 * createElement()
 * textWidth()
 * loadStrings()
+* loadTable()
+* loadJSON()
 
 # Main Functions
 * setup()
