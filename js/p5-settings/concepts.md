@@ -128,3 +128,12 @@ sin(theta)| 0 | -0.5 | -1 | -0.5 | 0 | 0.5 | 1 | 0.5 | 0
 * RiTa.posTags()
 * RiTa.getWordCount()
 * lexicon.randomWord()
+
+# Ben Fry's Stages of visualizing data
+* Acquire
+* Parse
+* Filter
+* Mine
+* Represent
+* Refine
+* Interact
