@@ -62,7 +62,19 @@
 * strokeWeight()
 * stroke()
 * createVector()
-
+* createCanvas()
+* createDiv()
+* createP()
+* createButton()
+* createImg()
+* createSlider()
+* createElement()
+* dragOver()
+* mousePressed()
+* mouseOver()
+* drop()
+* drag()
+* textWidth()
 
 # Main Functions
 * setup()
@@ -104,3 +116,10 @@ x  % 3| 0 | 1 | 2 | 0 | 1 | 2 | 0 | 1 | 2
 x | 0 | 1/4 * PI | 1 / 2 * PI | 3 / 4 * PI | PI | 5 PI / 4| 3 PI / 4 | 7  PI / 4 |  2 PI
 -- | - | - | - | - | - | - | - | - | - | -
 sin(theta)| 0 | -0.5 | -1 | -0.5 | 0 | 0.5 | 1 | 0.5 | 0
+
+# RiTa
+* RiTa.tokenize()
+* RiTa.getPhonemes()
+* RiTa.getStresses()
+* RiTa.posTags()
+* RiTa.getWordCount()
