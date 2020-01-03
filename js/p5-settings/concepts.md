@@ -130,10 +130,10 @@ sin(theta)| 0 | -0.5 | -1 | -0.5 | 0 | 0.5 | 1 | 0.5 | 0
 * lexicon.randomWord()
 
 # Ben Fry's Stages of visualizing data
-* Acquire
-* Parse
-* Filter
-* Mine
-* Represent
-* Refine
-* Interact
+* Acquire: Obtain the data, whether from a file on a disk or soruce over a network
+* Parse: Provide some structure for the data's meaning, and order it into categories
+* Filter: Remove all but the data of interest
+* Mine: Apply methods from statistics or data mining as a way to discern patterns or place the data in mathematical process
+* Represent: Choose a visual model, such as bar graph, list, or tree
+* Refine: Improve the basic representation to make it clearer and more visually engaging
+* Interact: Add methods for manipulating the data or controlling which features are available
