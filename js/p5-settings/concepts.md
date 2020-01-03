@@ -73,6 +73,11 @@
 * loadStrings()
 * loadTable()
 * loadJSON()
+* loadImage()
+* image()
+* filter()
+* tint()
+* imageCopy()
 
 # Main Functions
 * setup()
@@ -101,6 +106,8 @@
 * RADIANS (angleMode)
 * LINE_STRIP (beginShape)
 * TWO_PI
+* POSTERIZE (filter)
+* THRESHOLD (filter)
 
 # Color Concepts
 * Triadic [Hue, Saturation, Brightness] (0, 100, 100), (135, 100, 100), (270, 0, 0)
