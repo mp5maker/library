@@ -50,14 +50,14 @@ const Query = new GraphQLObjectType({
             type: BookType,
             args: { id: { type: GraphQLID } },
             resolve: (parent, args) => {
-                return Book.findById(id)
+                return Book.findById(args.id)
             }
         },
         author: {
             type: AuthorType,
             args: { id: { type: GraphQLID }},
             resolve: (parent, args) => {
-                return Author.findById(id)
+                return Author.findById(args.id)
             }
         },
         books: {

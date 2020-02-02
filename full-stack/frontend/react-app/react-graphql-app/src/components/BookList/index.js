@@ -19,7 +19,7 @@ export class BookList extends Component {
                     data.books.map((book, key) => {
                         return (
                             <Fragment key={key}>
-                                <li>
+                                <li onClick={() => this.props.selected && this.props.selected({ id: book.id })}>
                                     { book.name }
                                 </li>
                             </Fragment>
@@ -31,7 +31,6 @@ export class BookList extends Component {
     }
 
     render() {
-        console.log(this.props)
         return (
             <div>
                 <ul id="book-list">
