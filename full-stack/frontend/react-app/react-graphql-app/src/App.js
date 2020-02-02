@@ -6,6 +6,7 @@ import { client } from './Client'
 
 /* Components */
 import BookList from './components/BookList'
+import AddBook from './components/AddBook'
 
 function App() {
   return (
@@ -15,6 +16,7 @@ function App() {
           Ninja's Reading List
         </h1>
         <BookList />
+        <AddBook />
       </div>
     </ApolloProvider>
   );
