@@ -33,3 +33,4 @@ mongo
 public
 *.mp3
 *.mp4
+.env
