@@ -4,8 +4,8 @@
   "description": "",
   "main": "index.js",
   "scripts": {
-    "dev": "nodemon -r esm app",
-    "start": "node -r esm app"
+    "dev": "nodemon -r esm -r module-alias/register app",
+    "start": "node -r esm -r module-alias/register app"
   },
   "keywords": [],
   "author": "Shabuktagin Photon Khan",

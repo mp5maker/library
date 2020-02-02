@@ -1,13 +1,10 @@
-require('module-alias/register')
 import express from 'express'
 import graphqlHTTP from 'express-graphql'
 import mongoose from 'mongoose'
 import dotenv from 'dotenv'
 
-
 /* Schema */
-import { schema } from './schema'
-
+import { schema } from '@schema'
 
 const PORT = 8000
 const app = express()
