@@ -1,0 +1,90 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+    <link
+        rel='stylesheet'
+        href='https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/4.4.1/css/bootstrap.min.css' />
+    <style>
+        @import url('https://fonts.googleapis.com/css?family=Fira+Sans&display=swap');
+
+        :root {
+            --lightgrey: lightgrey;
+            --box-shadow: rgba(0, 0, 0, 0.26);
+            --green: #26a69a;
+            --white: white;
+            --whiteblue: #eee;
+        }
+
+        body, html {
+            padding: 0;
+            margin: 0;
+        }
+
+        body {
+            font-family: 'Fira Sans', sans-serif;
+        }
+
+        body > .container-fluid {
+            min-height: calc(100vh - 60px);
+        }
+
+        footer {
+            border-top: 1px solid var(--lightgrey);
+            height: 60px;
+            line-height: 60px;
+            text-align: center;
+        }
+
+        .new-btn {
+            border: none;
+            box-shadow: 0 1px 15px 0 var(--box-shadow);
+            padding: 6px;
+            border-radius: 3px;
+            background-color: var(--green);
+            color: var(--white);
+            position: relative;
+            overflow: hidden;
+        }
+
+        .new-btn::before {
+            content: "";
+            position: absolute;
+            background-color: var(--whiteblue);
+            padding: 50%;
+            border-radius: 50%;
+            opacity: 0;
+            transition: 0.25s ease-in-out opacity, 0.25s ease-in-out transform;
+            top: calc(100% * var(--ripple-y));
+            left: calc(100% * var(--ripple-x));
+            transform: translate(-50%, -50%) scale(1);
+        }
+
+        .new-btn:active::before {
+            transition: 0;
+            transform: translate(-50%, -50%) scale(0);
+            opacity: 1;
+        }
+    </style>
+</head>
+<body>
+    <div class="container-fluid">
+        <div class="row">
+            <div class="col my-3">
+                <button
+                    type="button"
+                    class='new-btn'>
+                    Waves Buttons
+                </button>
+            </div>
+        </div>
+    </div>
+    <footer>
+        2020 &copy; Photon Enterprise
+    </footer>
+    <script src="main.js"></script>
+</body>
+</html>
