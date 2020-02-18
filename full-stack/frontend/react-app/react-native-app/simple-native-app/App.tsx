@@ -8,10 +8,12 @@ import {
   SafeAreaView,
   FlatList,
   TextInput,
-  Button
+  Button,
+  ScrollView
 } from 'react-native';
 
 import { v4 } from 'uuid';
+import get from 'lodash/get'
 
 import employeeList from './server/employee.json'
 
@@ -21,7 +23,11 @@ interface AppPropsInterface {}
 interface AppStateInterface {
   liked: number,
   employee: Array<any>,
-  name: string
+  form: {
+    name: string,
+    about: string
+    age: string
+  }
 }
 
 export default class App extends React.Component<AppPropsInterface, AppStateInterface> {
@@ -30,7 +36,11 @@ export default class App extends React.Component<AppPropsInterface, AppStateInte
     this.state = {
       liked: 0,
       employee: employeeList,
-      name: ``
+      form: {
+        name: ``,
+        about: ``,
+        age: ``
+      }
     }
     this.onPress = this.onPress.bind(this)
     this.onChange = this.onChange.bind(this)
@@ -39,21 +49,34 @@ export default class App extends React.Component<AppPropsInterface, AppStateInte
 
   onChange({ event }: any) {
     this.setState({
-      [event.target.name]: event.target.value
+      form: {
+        ...this.state.form,
+        [event.target.name]: event.target.value
+      }
     } as Pick<AppStateInterface, keyof AppStateInterface>)
   }
 
   addEmployee(props: any) {
-    if (this.state.name) {
+    const name = get(this.state, 'form.name', '')
+    const about = get(this.state, 'form.about', '')
+    const age = get(this.state, 'form.age', '')
+
+    if (name && about && age) {
       this.setState({
         employee: [
           {
-            name: this.state.name,
+            name,
+            about,
+            age,
             guid: v4()
           },
           ...this.state.employee,
         ],
-        name: ``
+        form: {
+          name: ``,
+          about: ``,
+          age: ``
+        }
       })
     }
   }
@@ -68,51 +91,69 @@ export default class App extends React.Component<AppPropsInterface, AppStateInte
 
     return (
       <View style={styles.container}>
-        <View style={styles.innerContainer}>
-          <Text style={styles.logo}>
-            <Image source={logo} style={styles.icon} />
-          </Text>
-          <Text style={styles.title}>
-            {name}
-          </Text>
-          <View style={styles.heart}>
-            <TouchableHighlight
-              underlayColor={'firebrick'}
-              onPress={this.onPress}
-              style={styles.btn}>
-              <Text style={styles.btnText}>
-                ❤ {this.state.liked && this.state.liked}
-              </Text>
-            </TouchableHighlight>
-          </View>
-        </View>
-        <View style={styles.form}>
-          <TextInput
-              style={styles.input}
-              placeholder={`Name`}
-              placeholderTextColor={`firebrick`}
-              value={this.state.name}
-              onChangeText={(text) => this.onChange({ event: { target: { name: `name`, value: text }}})}
-            />
-            <View style={styles.buttonContainer}>
-                <Button
-                    onPress={this.addEmployee}
-                    title={`Add Employee`} />
-            </View>
-        </View>
-        <SafeAreaView>
-          <FlatList
-            data={this.state.employee}
-            keyExtractor={(item: any, index: number) => item.guid + index}
-            renderItem={({ item }: any) => (
-              <View style={styles.card}>
-                <Text>
-                  {item.name}
+        <ScrollView>
+          <View style={styles.innerContainer}>
+            <Text style={styles.logo}>
+              <Image source={logo} style={styles.icon} />
+            </Text>
+            <Text style={styles.title}>
+              {name}
+            </Text>
+            <View style={styles.heart}>
+              <TouchableHighlight
+                underlayColor={'firebrick'}
+                onPress={this.onPress}
+                style={styles.btn}>
+                <Text style={styles.btnText}>
+                  ❤ {this.state.liked && this.state.liked}
                 </Text>
+              </TouchableHighlight>
+            </View>
+          </View>
+          <View style={styles.form}>
+            <TextInput
+                style={styles.input}
+                placeholder={`Name`}
+                placeholderTextColor={`firebrick`}
+                value={this.state.form.name}
+                onChangeText={(text) => this.onChange({ event: { target: { name: `name`, value: text }}})}
+              />
+            <TextInput
+                multiline
+                style={styles.input}
+                placeholder={`About`}
+                placeholderTextColor={`firebrick`}
+                value={this.state.form.about}
+                onChangeText={(text) => this.onChange({ event: { target: { name: `about`, value: text }}})}
+              />
+            <TextInput
+                keyboardType={`numeric`}
+                style={styles.input}
+                placeholder={`Age`}
+                placeholderTextColor={`firebrick`}
+                value={this.state.form.age}
+                onChangeText={(text) => this.onChange({ event: { target: { name: `age`, value: text }}})}
+              />
+              <View style={styles.buttonContainer}>
+                  <Button
+                      onPress={this.addEmployee}
+                      title={`Add Employee`} />
               </View>
-            )}
-          />
-        </SafeAreaView>
+          </View>
+          <SafeAreaView>
+            <FlatList
+              data={this.state.employee}
+              keyExtractor={(item: any, index: number) => item.guid + index}
+              renderItem={({ item }: any) => (
+                <View style={styles.card}>
+                  <Text>
+                    {item.name}
+                  </Text>
+                </View>
+              )}
+            />
+          </SafeAreaView>
+        </ScrollView>
       </View>
     );
   }
@@ -175,6 +216,7 @@ const styles = StyleSheet.create({
     marginRight: 2
   },
   input: {
+    marginTop: 12,
     borderWidth: 1,
     borderColor: `firebrick`,
     borderStyle: `solid`,
@@ -182,6 +224,7 @@ const styles = StyleSheet.create({
     height: 50
   },
   buttonContainer: {
-    marginTop: 10
+    marginTop: 10,
+    backgroundColor: `firebrick`
   }
 });
