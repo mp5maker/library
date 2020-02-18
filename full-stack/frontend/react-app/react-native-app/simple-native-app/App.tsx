@@ -8,7 +8,10 @@ import {
   SafeAreaView,
   FlatList,
   TextInput,
+  Button
 } from 'react-native';
+
+import { v4 } from 'uuid';
 
 import employeeList from './server/employee.json'
 
@@ -18,7 +21,7 @@ interface AppPropsInterface {}
 interface AppStateInterface {
   liked: number,
   employee: Array<any>,
-  name: string|number
+  name: string
 }
 
 export default class App extends React.Component<AppPropsInterface, AppStateInterface> {
@@ -40,8 +43,19 @@ export default class App extends React.Component<AppPropsInterface, AppStateInte
     } as Pick<AppStateInterface, keyof AppStateInterface>)
   }
 
-  addEmployee() {
-
+  addEmployee(props: any) {
+    if (this.state.name) {
+      this.setState({
+        employee: [
+          {
+            name: this.state.name,
+            guid: v4()
+          },
+          ...this.state.employee,
+        ],
+        name: ``
+      })
+    }
   }
 
   onPress() {
@@ -50,7 +64,7 @@ export default class App extends React.Component<AppPropsInterface, AppStateInte
   }
 
   render() {
-    const name = `Simple React Native App`
+    const name = `Employee Add`
 
     return (
       <View style={styles.container}>
@@ -77,8 +91,14 @@ export default class App extends React.Component<AppPropsInterface, AppStateInte
               style={styles.input}
               placeholder={`Name`}
               placeholderTextColor={`firebrick`}
+              value={this.state.name}
               onChangeText={(text) => this.onChange({ event: { target: { name: `name`, value: text }}})}
             />
+            <View style={styles.buttonContainer}>
+                <Button
+                    onPress={this.addEmployee}
+                    title={`Add Employee`} />
+            </View>
         </View>
         <SafeAreaView>
           <FlatList
@@ -160,5 +180,8 @@ const styles = StyleSheet.create({
     borderStyle: `solid`,
     padding: 10,
     height: 50
+  },
+  buttonContainer: {
+    marginTop: 10
   }
 });
