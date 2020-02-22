@@ -8,6 +8,7 @@ import { Navigation } from './components/Navigation'
 
 /* Screens */
 import { EmployeeStack } from './routes/EmployeeStack'
+import { CompanyStack } from './routes/CompanyStack'
 
 interface AppPropsInterface {}
 interface AppStateInterface {

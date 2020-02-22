@@ -15,21 +15,16 @@ import { CommonHeader } from '../../components/CommonHeader'
 import { CardCollection } from '../../components/CardCollection'
 
 /* Forms */
-import { EmployeeForm } from '../../forms/Employee'
+import { CompanyForm } from '../../forms/Company'
 
 export const employees = [...new Array(20)].map(() => {
-    const maxAge = Math.floor(90) ;
-    const minAge = Math.ceil(18)
-
     return {
         alias: Faker.random.uuid(),
-        name: `${Faker.name.firstName()} ${Faker.name.lastName()}`,
-        email: Faker.internet.email(),
-        age: Math.floor(Math.random() * (maxAge - maxAge) + minAge),
+        name: Faker.company.companyName()
     }
 })
 
-export default class Employee extends Base {
+export default class Company extends Base {
     constructor(props: any) {
         super(props)
         this.state = {
@@ -54,50 +49,34 @@ export default class Employee extends Base {
             <View style={styles.container}>
                 {
                     showForm ? (
-                        <EmployeeForm
+                        <CompanyForm
                             onChange={this.add} />
                     ) : <React.Fragment></React.Fragment>
                 }
                 <CommonHeader
-                    title={`Employee List`}
+                    title={`Company List`}
                     onRowPress={() => this.changeView({ displayMode: `row` })}
                     onColumnPress={() => this.changeView({ displayMode: `column` })}
                     onFormHideShowPress={this.toggleHideShowForm}
                     list={[
                         'row',
                         'column',
-                        ...(showForm ? ['subtract'] :  ['add'])
+                        ...(showForm ? ['subtract'] : ['add'])
                     ]} />
                 <View style={styles.cardContainer}>
                     <CardCollection
                         list={list}
                         itemLayout={({ item }) => {
                             const name = get(item, 'name', '')
-                            const email = get(item, 'email', '')
-                            const age = get(item, 'age', '')
 
                             return (
                                 <TouchableOpacity
-                                    onPress={() => this.goToDetails({ item, path: `EmployeeDetails` })}
+                                    onPress={() => this.goToDetails({ item, path: `CompanyDetails` })}
                                     style={styles.cardItemContainer}>
                                     {
                                         name && (
                                             <Text style={styles.textHeading}>
-                                                { name }
-                                            </Text>
-                                        )
-                                    }
-                                    {
-                                        email && (
-                                            <Text style={styles.textDescription}>
-                                                { email }
-                                            </Text>
-                                        )
-                                    }
-                                    {
-                                        age && (
-                                            <Text style={styles.textDescription}>
-                                                Age: { age }
+                                                {name}
                                             </Text>
                                         )
                                     }

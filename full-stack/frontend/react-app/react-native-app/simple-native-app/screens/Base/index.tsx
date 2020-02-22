@@ -31,12 +31,9 @@ export default class Base extends React.Component<BasePropsInterface, BaseStateI
     }
 
     goToDetails({ item, path }) {
-        const destination = get(item, path, '')
-        if (destination) {
-            this.props.navigation.navigate('EmployeeDetails', {
-                ...item
-            })
-        }
+        this.props.navigation.navigate(path, {
+            ...item
+        })
     }
 
     toggleHideShowForm() {
