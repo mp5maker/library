@@ -1,5 +1,6 @@
 import React from 'react';
 import { StyleSheet, View, TouchableWithoutFeedback, Keyboard } from 'react-native'
+import * as Font from 'expo-font';
 
 /* Components */
 import { Navigation } from './components/Navigation'
@@ -14,6 +15,13 @@ export default class App extends React.Component<AppPropsInterface, AppStateInte
   constructor(props: AppPropsInterface) {
     super(props)
     this.state = {}
+  }
+
+  componentDidMount() {
+    Font.loadAsync({
+      'fira-sans': require(`./assets/fonts/FiraSans/FiraSans-Regular.ttf`),
+      'fira-sans-bold': require('./assets/fonts/FiraSans/FiraSans-Bold.ttf'),
+    })
   }
 
   render() {

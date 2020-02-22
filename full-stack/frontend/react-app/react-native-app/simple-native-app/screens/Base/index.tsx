@@ -4,6 +4,7 @@ import { StyleSheet } from 'react-native'
 
 /* Styles */
 import { Colors } from '../../styles/Colors'
+import { Fonts } from '../../styles/Fonts'
 
 interface BasePropsInterface {}
 interface BaseStateInterface {
@@ -65,11 +66,13 @@ export const styles = StyleSheet.create({
     },
     textHeading: {
         color: Colors.darkGreen,
-        fontSize: 18
+        fontSize: 18,
+        fontFamily: Fonts.fontFamily,
     },
     textDescription: {
         color: Colors.green,
         fontSize: 14,
+        fontFamily: Fonts.fontFamily,
     }
 })
 

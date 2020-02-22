@@ -3,6 +3,7 @@ import { StyleSheet, View, Text } from 'react-native'
 
 /* Styles */
 import { Colors } from '../../styles/Colors'
+import { Fonts } from '../../styles/Fonts'
 
 interface NavigationPropsInterface {}
 interface NavigationStateInterface {}
@@ -31,6 +32,7 @@ const styles = StyleSheet.create({
     },
     heading: {
         textAlign: `center`,
-        color: Colors.khaki
+        color: Colors.khaki,
+        fontFamily: Fonts.fontFamily,
     }
 })

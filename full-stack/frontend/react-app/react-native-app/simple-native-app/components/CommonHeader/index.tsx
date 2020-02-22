@@ -5,6 +5,7 @@ import { MaterialCommunityIcons, AntDesign } from '@expo/vector-icons';
 
 /* Styles */
 import { Colors } from '../../styles/Colors'
+import { Fonts } from '../../styles/Fonts'
 
 
 interface CommonHeaderPropsInterface {
@@ -127,7 +128,8 @@ const styles = StyleSheet.create({
         color: Colors.green,
         fontSize: 24,
         height: 40,
-        fontWeight: "700"
+        fontWeight: "700",
+        fontFamily: Fonts.fontFamily,
     },
     commonHeaderRight: {
         marginRight: 18,

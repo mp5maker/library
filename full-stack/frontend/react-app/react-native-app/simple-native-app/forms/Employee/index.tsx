@@ -5,6 +5,7 @@ import v4 from 'uuid'
 
 /* Styles */
 import { Colors } from '../../styles/Colors'
+import { Fonts } from '../../styles/Fonts'
 
 interface EmployeeFormPropsInterface {
     onChange: (params: any) => any,
@@ -211,7 +212,8 @@ const styles = StyleSheet.create({
         color: Colors.green,
         fontSize: 24,
         height: 40,
-        fontWeight: "700"
+        fontWeight: "700",
+        fontFamily: Fonts.fontFamily,
     },
     textInput: {
         borderWidth: 1,
@@ -221,9 +223,11 @@ const styles = StyleSheet.create({
         marginBottom: 6,
         padding: 5,
         color: Colors.darkGreen,
+        fontFamily: Fonts.fontFamily,
     },
     errorMessage: {
-        color: Colors.danger
+        color: Colors.danger,
+        fontFamily: Fonts.fontFamily,
     },
     submitButton: {
         backgroundColor: Colors.darkGreen,
@@ -235,6 +239,7 @@ const styles = StyleSheet.create({
         justifyContent: `center`
     },
     submitButtonText:{
-        color: Colors.khaki
+        color: Colors.khaki,
+        fontFamily: Fonts.fontFamily,
     }
 })

@@ -2,7 +2,6 @@ import React from 'react';
 import {
     Text,
     View,
-    TouchableOpacity,
 } from 'react-native'
 import Faker from 'faker'
 import get from 'lodash/get'
