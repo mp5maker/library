@@ -1,9 +1,12 @@
 import React from 'react'
-import { StyleSheet, View, Text } from 'react-native'
+import { StyleSheet, View, Text, Image } from 'react-native'
 
 /* Styles */
 import { Colors } from '../../styles/Colors'
 import { Fonts } from '../../styles/Fonts'
+
+/* Image */
+const Logo = require('../../assets/img/icon.png')
 
 interface NavigationPropsInterface {}
 interface NavigationStateInterface {}
@@ -17,7 +20,13 @@ export class Navigation extends React.Component<NavigationPropsInterface, Naviga
         return (
             <View style={styles.container}>
                 <Text style={styles.heading}>
-                    Employee Management
+                    <Image
+                        style={styles.image}
+                        source={Logo} />
+                        <Text>  </Text>
+                        <Text style={styles.appName}>
+                            Employee Management
+                        </Text>
                 </Text>
             </View>
         )
@@ -30,9 +39,17 @@ const styles = StyleSheet.create({
         height: 50,
         backgroundColor: Colors.darkGreen,
     },
+    image: {
+        width: 15,
+        height: 15,
+        marginRight: 10
+    },
     heading: {
         textAlign: `center`,
         color: Colors.khaki,
         fontFamily: Fonts.fontFamily,
+    },
+    appName: {
+        marginLeft: 5
     }
 })
