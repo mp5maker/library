@@ -7,7 +7,7 @@ import { AppLoading } from 'expo'
 import { Navigation } from './components/Navigation'
 
 /* Screens */
-import Home from './screens/Home'
+import { EmployeeStack } from './routes/EmployeeStack'
 
 interface AppPropsInterface {}
 interface AppStateInterface {
@@ -32,7 +32,7 @@ export default class App extends React.Component<AppPropsInterface, AppStateInte
         <TouchableWithoutFeedback onPress={() => Keyboard.dismiss()}>
           <View style={styles.container}>
             <Navigation />
-            <Home />
+            <EmployeeStack />
           </View>
         </TouchableWithoutFeedback>
       )

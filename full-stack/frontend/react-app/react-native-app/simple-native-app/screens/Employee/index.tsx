@@ -28,7 +28,7 @@ export const employees = [...new Array(20)].map(() => {
     }
 })
 
-export default class Home extends Base {
+export default class Employee extends Base {
     constructor(props: any) {
         super(props)
         this.state = {
