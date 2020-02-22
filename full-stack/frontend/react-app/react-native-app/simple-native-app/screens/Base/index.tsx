@@ -31,42 +31,6 @@ export const styles = StyleSheet.create({
         flex: 1,
         backgroundColor: Colors.khaki
     },
-    commonHeader: {
-        display: `flex`,
-        flexDirection: `row`,
-        justifyContent: `space-between`,
-        backgroundColor: Colors.khaki,
-        alignItems: `center`
-    },
-    commonHeaderLeft: {
-        marginLeft: 8,
-        marginTop: 12,
-    },
-    commonHeaderRight: {
-        marginRight: 18,
-        display: `flex`,
-        flexDirection: `row`,
-        justifyContent: `flex-start`,
-    },
-    commonHeaderButton: {
-        height: 40,
-        width: 40,
-        borderWidth: 1,
-        borderRadius: 100,
-        backgroundColor: Colors.darkGreen,
-        marginLeft: 8,
-        display: `flex`,
-        alignItems: `center`,
-        justifyContent: `center`
-    },
-    commonHeaderButtonText: {
-        color: Colors.khaki
-    },
-    heading: {
-        color: Colors.green,
-        fontSize: 16,
-        height: 40,
-    },
     cardContainer: {
         flex: 1,
         backgroundColor: Colors.khaki

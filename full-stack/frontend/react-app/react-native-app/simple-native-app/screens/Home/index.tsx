@@ -11,6 +11,7 @@ import get from 'lodash/get'
 import Base, { styles } from '../Base'
 
 /* Component */
+import { CommonHeader } from '../../components/CommonHeader'
 import { CardCollection } from '../../components/CardCollection'
 
 export const employees = [...new Array(20)].map(() => {
@@ -46,29 +47,11 @@ export default class Home extends Base {
 
         return (
             <View style={styles.container}>
-                <View style={styles.commonHeader}>
-                    <View style={styles.commonHeaderLeft}>
-                        <Text style={styles.heading}>
-                            Home
-                        </Text>
-                    </View>
-                    <View style={styles.commonHeaderRight}>
-                        <TouchableOpacity
-                            style={styles.commonHeaderButton}
-                            onPress={() => this.changeView({ displayMode: `column` })}>
-                            <Text style={styles.commonHeaderButtonText}>
-                                C
-                            </Text>
-                        </TouchableOpacity>
-                        <TouchableOpacity
-                            style={styles.commonHeaderButton}
-                            onPress={() => this.changeView({ displayMode: `row` })}>
-                            <Text style={styles.commonHeaderButtonText}>
-                                R
-                            </Text>
-                        </TouchableOpacity>
-                    </View>
-                </View>
+                <CommonHeader
+                    title={`Home`}
+                    onRowPress={() => this.changeView({ displayMode: `row` })}
+                    onColumnPress={() => this.changeView({ displayMode: `column` })}
+                    list={['row', 'column']} />
                 <View style={styles.cardContainer}>
                     <CardCollection
                         list={list}
