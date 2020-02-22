@@ -1,4 +1,5 @@
 import React from 'react'
+import { StyleSheet } from 'react-native'
 import { NavigationContainer } from '@react-navigation/native'
 import { createDrawerNavigator } from '@react-navigation/drawer';
 
@@ -9,6 +10,9 @@ import { CompanyStack } from './CompanyStack'
 
 /* Component */
 import { Drawer as CustomDrawer } from '../components/Drawer'
+
+/* Styles */
+import { Colors } from '../styles/Colors';
 
 interface RoutesPropsInterface {}
 interface RoutesStateInterface {}
@@ -29,6 +33,7 @@ export class Routes extends React.Component<RoutesPropsInterface, RoutesStateInt
                             <CustomDrawer {...props} />
                         )
                     }}
+                    drawerStyle={styles.drawer}
                     initialRouteName={`Employee`}>
                     <Drawer.Screen
                         name="Employee"
@@ -41,3 +46,9 @@ export class Routes extends React.Component<RoutesPropsInterface, RoutesStateInt
         )
     }
 }
+
+const styles = StyleSheet.create({
+    drawer: {
+        backgroundColor: Colors.khaki
+    }
+})

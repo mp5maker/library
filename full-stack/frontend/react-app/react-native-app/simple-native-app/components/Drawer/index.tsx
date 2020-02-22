@@ -24,12 +24,18 @@ export class Drawer extends React.Component<DrawerPropsInterface, DrawerStateInt
         const { props }: any = this
 
         return (
-            <DrawerContentScrollView {...props}>
+            <DrawerContentScrollView
+                {...props}>
                 <DrawerItem
                     style={styles.drawerItem}
                     label={`Close`}
                     onPress={() => this.props.navigation.closeDrawer()} />
-                <DrawerItemList { ...props} />
+                <DrawerItemList
+                    inactiveTintColor={Colors.darkGreen}
+                    activeTintColor={Colors.khaki}
+                    activeBackgroundColor={Colors.darkGreen}
+                    inactiveBackgroundColor={Colors.khaki}
+                    { ...props} />
             </DrawerContentScrollView>
         )
     }
@@ -39,6 +45,6 @@ const styles = StyleSheet.create({
     drawerItem: {
         borderColor: Colors.danger,
         borderWidth: 1,
-        borderStyle: `solid`
+        borderStyle: `solid`,
     }
 })
