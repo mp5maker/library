@@ -25,13 +25,22 @@ export const styles = StyleSheet.create({
         backgroundColor: Colors.khaki
     },
     commonHeader: {
+        display: `flex`,
+        flexDirection: `row`,
+        justifyContent: `space-between`,
         backgroundColor: Colors.khaki,
+        alignItems: `center`
+    },
+    commonHeaderLeft: {
+        marginLeft: 8,
+        marginTop: 12,
+    },
+    commonHeaderRight: {
+        marginRight: 18,
     },
     heading: {
         color: Colors.green,
         fontSize: 16,
-        marginLeft: 8,
-        marginTop: 12,
         height: 40,
     },
     cardContainer: {
@@ -46,6 +55,7 @@ export const styles = StyleSheet.create({
         borderStyle: `dashed`,
         borderRadius: 5,
         marginBottom: 12,
+        marginRight: 12,
         padding: 5
     },
     textHeading: {

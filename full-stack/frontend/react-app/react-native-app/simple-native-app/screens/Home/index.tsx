@@ -1,9 +1,7 @@
 import React from 'react';
 import {
-    StyleSheet,
     Text,
     View,
-    ScrollView,
 } from 'react-native'
 import Faker from 'faker'
 import get from 'lodash/get'
@@ -42,9 +40,14 @@ export default class Home extends Base {
         return (
             <View style={styles.container}>
                 <View style={styles.commonHeader}>
-                    <Text style={styles.heading}>
-                        Home
-                    </Text>
+                    <View style={styles.commonHeaderLeft}>
+                        <Text style={styles.heading}>
+                            Home
+                        </Text>
+                    </View>
+                    <View style={styles.commonHeaderRight}>
+                        <Text>Hello</Text>
+                    </View>
                 </View>
                 <View style={styles.cardContainer}>
                     <CardCollection
