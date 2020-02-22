@@ -6,35 +6,13 @@ import {
 } from 'react-native'
 import get from 'lodash/get'
 
+/* Screens */
+import Base, { styles } from '../../Base/Details'
+
 /* Component */
 import { CommonHeader } from '../../../components/CommonHeader'
 
-/* Styles */
-import { Colors } from '../../../styles/Colors';
-import { Fonts } from '../../../styles/Fonts';
-
-interface CompanyDetailsPropsInterface {
-    navigation: any,
-    route: any
-}
-
-interface CompanyDetailsStateInterface {}
-
-export default class EmployeeDetails extends React.Component<CompanyDetailsPropsInterface, CompanyDetailsStateInterface> {
-    constructor(props: any) {
-        super(props)
-        this.goBack = this.goBack.bind(this)
-        this.openDrawer = this.openDrawer.bind(this)
-    }
-
-    openDrawer() {
-        this.props.navigation.openDrawer();
-    }
-
-    goBack() {
-        this.props.navigation.goBack();
-    }
-
+export default class EmployeeDetails extends Base {
     render() {
         const {
             navigation,
@@ -66,22 +44,3 @@ export default class EmployeeDetails extends React.Component<CompanyDetailsProps
         )
     }
 }
-
-const styles = StyleSheet.create({
-    container: {
-        flex: 1,
-        backgroundColor: Colors.khaki,
-    },
-    detailsContent: {
-        backgroundColor: Colors.khaki,
-        flex: 1,
-        marginLeft: 8,
-        display: `flex`,
-        alignItems: `flex-start`,
-        justifyContent: `flex-start`
-    },
-    detailsText: {
-        fontSize: 16,
-        fontFamily: Fonts.fontFamily,
-    }
-})

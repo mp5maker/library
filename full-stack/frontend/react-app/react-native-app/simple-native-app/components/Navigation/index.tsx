@@ -1,5 +1,5 @@
 import React from 'react'
-import { StyleSheet, View, Text, Image } from 'react-native'
+import { StyleSheet, View, Text, Image, ImageBackground } from 'react-native'
 
 /* Styles */
 import { Colors } from '../../styles/Colors'
@@ -42,7 +42,6 @@ const styles = StyleSheet.create({
     image: {
         width: 15,
         height: 15,
-        marginRight: 10
     },
     heading: {
         textAlign: `center`,

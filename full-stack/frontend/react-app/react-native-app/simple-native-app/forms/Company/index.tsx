@@ -11,7 +11,9 @@ interface CompanyFormPropsInterface {
     onChange: (params: any) => any,
     defaultValue?: any,
     setValue?: any,
-    clear?: boolean
+    clear?: boolean,
+    title?: string,
+    submitValue?: string
 }
 
 interface CompanyFormStateInterface {
@@ -105,11 +107,16 @@ export class CompanyForm extends React.Component<CompanyFormPropsInterface, Comp
             error
         } = this.state
 
+        const {
+            title,
+            submitValue
+        } = this.props
+
         return (
             <View style={styles.container}>
                 <View>
                     <Text style={styles.heading}>
-                        Add Employee
+                        { title }
                     </Text>
                 </View>
                 <View>
@@ -138,7 +145,7 @@ export class CompanyForm extends React.Component<CompanyFormPropsInterface, Comp
                         style={styles.submitButton}
                         onPress={this.submit}>
                         <Text style={styles.submitButtonText}>
-                            Add
+                            { submitValue }
                         </Text>
                     </TouchableOpacity>
                 </View>

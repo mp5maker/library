@@ -8,7 +8,7 @@ import Faker from 'faker'
 import get from 'lodash/get'
 
 /* Screens */
-import Base, { styles } from '../Base'
+import Base, { styles } from '../Base/List'
 
 /* Component */
 import { CommonHeader } from '../../components/CommonHeader'
@@ -55,6 +55,8 @@ export default class Employee extends Base {
                 {
                     showForm ? (
                         <EmployeeForm
+                            title={`Add Employee`}
+                            submitValue={`Add`}
                             onChange={this.add} />
                     ) : <React.Fragment></React.Fragment>
                 }

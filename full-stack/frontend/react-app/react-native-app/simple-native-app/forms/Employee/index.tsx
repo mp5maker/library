@@ -11,7 +11,9 @@ interface EmployeeFormPropsInterface {
     onChange: (params: any) => any,
     defaultValue?: any,
     setValue?: any,
-    clear?: boolean
+    clear?: boolean,
+    title?: string,
+    submitValue?: string,
 }
 
 interface EmployeeFormStateInterface {
@@ -117,11 +119,16 @@ export class EmployeeForm extends React.Component<EmployeeFormPropsInterface, Em
             error
         } = this.state
 
+        const {
+            title,
+            submitValue
+        } = this.props
+
         return (
             <View style={styles.container}>
                 <View>
                     <Text style={styles.heading}>
-                        Add Employee
+                        { title }
                     </Text>
                 </View>
                 <View>
@@ -192,7 +199,7 @@ export class EmployeeForm extends React.Component<EmployeeFormPropsInterface, Em
                         style={styles.submitButton}
                         onPress={this.submit}>
                         <Text style={styles.submitButtonText}>
-                            Add
+                            { submitValue }
                         </Text>
                     </TouchableOpacity>
                 </View>

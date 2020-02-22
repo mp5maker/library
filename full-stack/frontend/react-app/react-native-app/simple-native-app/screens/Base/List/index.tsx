@@ -3,8 +3,8 @@ import { StyleSheet } from 'react-native'
 import  get from 'lodash/get'
 
 /* Styles */
-import { Colors } from '../../styles/Colors'
-import { Fonts } from '../../styles/Fonts'
+import { Colors } from '../../../styles/Colors'
+import { Fonts } from '../../../styles/Fonts'
 
 interface BasePropsInterface {
     navigation?: any,
