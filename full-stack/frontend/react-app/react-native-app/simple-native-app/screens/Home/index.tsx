@@ -59,7 +59,7 @@ export default class Home extends Base {
                     ) : <React.Fragment></React.Fragment>
                 }
                 <CommonHeader
-                    title={`Home`}
+                    title={`Employee List`}
                     onRowPress={() => this.changeView({ displayMode: `row` })}
                     onColumnPress={() => this.changeView({ displayMode: `column` })}
                     onFormHideShowPress={this.toggleHideShowForm}

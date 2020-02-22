@@ -208,8 +208,10 @@ const styles = StyleSheet.create({
         marginBottom: 8,
     },
     heading: {
-        fontSize: 18,
         color: Colors.green,
+        fontSize: 24,
+        height: 40,
+        fontWeight: "700"
     },
     textInput: {
         borderWidth: 1,
