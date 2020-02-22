@@ -14,6 +14,9 @@ import Base, { styles } from '../Base'
 import { CommonHeader } from '../../components/CommonHeader'
 import { CardCollection } from '../../components/CardCollection'
 
+/* Forms */
+import { EmployeeForm } from '../../forms/Employee'
+
 export const employees = [...new Array(20)].map(() => {
     const maxAge = Math.floor(90) ;
     const minAge = Math.ceil(18)
@@ -52,6 +55,8 @@ export default class Home extends Base {
                     onRowPress={() => this.changeView({ displayMode: `row` })}
                     onColumnPress={() => this.changeView({ displayMode: `column` })}
                     list={['row', 'column']} />
+                <EmployeeForm
+                    onChange={this.add} />
                 <View style={styles.cardContainer}>
                     <CardCollection
                         list={list}

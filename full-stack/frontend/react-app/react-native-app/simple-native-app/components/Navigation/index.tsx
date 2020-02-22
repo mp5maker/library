@@ -16,7 +16,7 @@ export class Navigation extends React.Component<NavigationPropsInterface, Naviga
         return (
             <View style={styles.container}>
                 <Text style={styles.heading}>
-                    TODO
+                    Employee Management
                 </Text>
             </View>
         )

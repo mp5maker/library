@@ -19,6 +19,16 @@ export default class Base extends React.Component<BasePropsInterface, BaseStateI
             displayMode: `row`
         }
         this.changeView = this.changeView.bind(this)
+        this.add = this.add.bind(this)
+    }
+
+    add({ item }: any) {
+        this.setState({
+            list: [
+                item,
+                ...this.state.list
+            ]
+        })
     }
 
     changeView({ displayMode }: any) {
