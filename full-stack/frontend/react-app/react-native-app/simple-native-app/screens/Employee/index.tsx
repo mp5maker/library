@@ -63,6 +63,7 @@ export default class Employee extends Base {
                     onRowPress={() => this.changeView({ displayMode: `row` })}
                     onColumnPress={() => this.changeView({ displayMode: `column` })}
                     onFormHideShowPress={this.toggleHideShowForm}
+                    onDrawerPress={this.openDrawer}
                     list={[
                         'row',
                         'column',

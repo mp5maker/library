@@ -24,6 +24,11 @@ export default class EmployeeDetails extends React.Component<CompanyDetailsProps
     constructor(props: any) {
         super(props)
         this.goBack = this.goBack.bind(this)
+        this.openDrawer = this.openDrawer.bind(this)
+    }
+
+    openDrawer() {
+        this.props.navigation.openDrawer();
     }
 
     goBack() {
@@ -43,6 +48,7 @@ export default class EmployeeDetails extends React.Component<CompanyDetailsProps
                 <CommonHeader
                     title={`Company Details`}
                     onBackPress={this.goBack}
+                    onDrawerPress={this.openDrawer}
                     list={[
                         'back',
                         'drawer'

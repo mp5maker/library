@@ -1,5 +1,4 @@
 import React from 'react'
-import { NavigationContainer } from '@react-navigation/native'
 import { createStackNavigator } from '@react-navigation/stack'
 
 import { Company, CompanyDetails } from '../../screens'
@@ -16,16 +15,14 @@ export class CompanyStack extends React.Component<CompanyStackPropsInterface, Co
 
     render() {
         return (
-            <NavigationContainer>
-                <Stack.Navigator headerMode={`none`}>
-                    <Stack.Screen
-                        name="Company"
-                        component={Company} />
-                    <Stack.Screen
-                        name="CompanyDetails"
-                        component={CompanyDetails} />
-                </Stack.Navigator>
-            </NavigationContainer>
+            <Stack.Navigator headerMode={`none`}>
+                <Stack.Screen
+                    name="Company"
+                    component={Company} />
+                <Stack.Screen
+                    name="CompanyDetails"
+                    component={CompanyDetails} />
+            </Stack.Navigator>
         )
     }
 }

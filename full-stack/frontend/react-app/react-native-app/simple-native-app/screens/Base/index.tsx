@@ -32,7 +32,7 @@ export default class Base extends React.Component<BasePropsInterface, BaseStateI
     }
 
     openDrawer() {
-        console.log(`drawer`)
+        this.props.navigation.openDrawer();
     }
 
     goToDetails({ item, path }) {
