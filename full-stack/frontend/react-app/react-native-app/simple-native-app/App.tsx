@@ -1,5 +1,5 @@
 import React from 'react';
-import { StyleSheet, View } from 'react-native'
+import { StyleSheet, View, TouchableWithoutFeedback, Keyboard } from 'react-native'
 
 /* Components */
 import { Navigation } from './components/Navigation'
@@ -18,10 +18,12 @@ export default class App extends React.Component<AppPropsInterface, AppStateInte
 
   render() {
     return (
-      <View style={styles.container}>
-        <Navigation />
-        <Home />
-      </View>
+      <TouchableWithoutFeedback onPress={() => Keyboard.dismiss()}>
+        <View style={styles.container}>
+          <Navigation />
+          <Home />
+        </View>
+      </TouchableWithoutFeedback>
     )
   }
 }
