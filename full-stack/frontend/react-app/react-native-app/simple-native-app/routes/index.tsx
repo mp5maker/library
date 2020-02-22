@@ -1,16 +1,14 @@
 import React from 'react'
 import { NavigationContainer } from '@react-navigation/native'
-import {
-    createDrawerNavigator,
-    DrawerContentScrollView,
-    DrawerItemList,
-    DrawerItem,
-} from '@react-navigation/drawer';
+import { createDrawerNavigator } from '@react-navigation/drawer';
 
 /* Screens */
 import { EmployeeStack } from './EmployeeStack'
 import { CompanyStack } from './CompanyStack'
 
+
+/* Component */
+import { Drawer as CustomDrawer } from '../components/Drawer'
 
 interface RoutesPropsInterface {}
 interface RoutesStateInterface {}
@@ -25,7 +23,13 @@ export class Routes extends React.Component<RoutesPropsInterface, RoutesStateInt
     render() {
         return (
             <NavigationContainer>
-                <Drawer.Navigator initialRouteName={`Employee`}>
+                <Drawer.Navigator
+                    drawerContent={(props) => {
+                        return (
+                            <CustomDrawer {...props} />
+                        )
+                    }}
+                    initialRouteName={`Employee`}>
                     <Drawer.Screen
                         name="Employee"
                         component={EmployeeStack} />
