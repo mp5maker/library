@@ -14,13 +14,23 @@ interface BaseDetailsPropsInterface {
     route: any
 }
 
-interface BaseDetailsStateInterface { }
+interface BaseDetailsStateInterface {
+    showEditForm: boolean
+}
 
 export default class Base extends React.Component<BaseDetailsPropsInterface, BaseDetailsStateInterface> {
     constructor(props: any) {
         super(props)
         this.goBack = this.goBack.bind(this)
         this.openDrawer = this.openDrawer.bind(this)
+        this.showEdit = this.showEdit.bind(this)
+        this.state = {
+            showEditForm: false
+        }
+    }
+
+    showEdit() {
+        this.setState({ showEditForm: !this.state.showEditForm })
     }
 
     openDrawer() {

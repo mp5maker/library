@@ -1,7 +1,7 @@
 import React from 'react'
 import PropTypes from 'prop-types'
 import { View, Text, TouchableOpacity, StyleSheet } from 'react-native'
-import { MaterialCommunityIcons, AntDesign, Feather, SimpleLineIcons } from '@expo/vector-icons';
+import { MaterialCommunityIcons, AntDesign, Feather, SimpleLineIcons, Foundation } from '@expo/vector-icons';
 
 /* Styles */
 import { Colors } from '../../styles/Colors'
@@ -16,6 +16,7 @@ interface CommonHeaderPropsInterface {
     onFormHideShowPress?: (params: any) => any,
     onBackPress?: (params: any) => any,
     onDrawerPress?: (params: any) => any,
+    onEditPress?: (params: any) => any,
 }
 
 interface CommonHeaderStateInterface {}
@@ -39,6 +40,7 @@ export class CommonHeader extends React.Component<CommonHeaderPropsInterface, Co
             onFormHideShowPress,
             onBackPress,
             onDrawerPress,
+            onEditPress,
             title,
         } = this.props
 
@@ -102,6 +104,18 @@ export class CommonHeader extends React.Component<CommonHeaderPropsInterface, Co
                                 )
                             }
                             {
+                                list.includes('edit') && (
+                                    <TouchableOpacity
+                                        style={styles.commonHeaderButton}
+                                        onPress={onEditPress}>
+                                        <Foundation
+                                            name="pencil"
+                                            size={16}
+                                            color={Colors.khaki} />
+                                    </TouchableOpacity>
+                                )
+                            }
+                            {
                                 list.includes('drawer') && (
                                     <TouchableOpacity
                                         style={styles.commonHeaderButton}
@@ -125,7 +139,10 @@ CommonHeader.defaultProps = {
     list: [],
     onColumnPress: () => {},
     onRowPress: () => {},
-    onFormHideShowPress: () => {}
+    onFormHideShowPress: () => {},
+    onBackPress: () => {},
+    onDrawerPress: () => {},
+    onEditPress: () => {},
 }
 
 CommonHeader.propTypes = {
@@ -133,7 +150,11 @@ CommonHeader.propTypes = {
     list: PropTypes.array,
     onColumnPress: PropTypes.func,
     onRowPress: PropTypes.func,
-    onFormHideShowPress: PropTypes.func
+    onFormHideShowPress: PropTypes.func,
+    onBackPress: PropTypes.func,
+    onDrawerPress: PropTypes.func,
+    onEditPress: PropTypes.func,
+
 }
 
 
