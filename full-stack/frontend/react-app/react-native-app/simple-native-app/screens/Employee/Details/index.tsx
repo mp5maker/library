@@ -33,6 +33,7 @@ export default class EmployeeDetails extends Base {
         return (
             <View style={styles.container}>
                 <Modal
+                    animationType={`slide`}
                     visible={showEditForm}>
                     <EmployeeForm
                         title={`Edit Employee`}

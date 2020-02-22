@@ -31,6 +31,7 @@ export default class CompanyDetails extends Base {
         return (
             <View style={styles.container}>
                 <Modal
+                    animationType={`slide`}
                     visible={showEditForm}>
                     <CompanyForm
                         title={`Edit Company`}
