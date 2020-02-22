@@ -1,6 +1,7 @@
 import React from 'react'
 import PropTypes from 'prop-types'
 import { View, Text, TouchableOpacity, StyleSheet } from 'react-native'
+import { MaterialCommunityIcons } from '@expo/vector-icons';
 
 /* Styles */
 import { Colors } from '../../styles/Colors'
@@ -49,9 +50,10 @@ export class CommonHeader extends React.Component<CommonHeaderPropsInterface, Co
                                     <TouchableOpacity
                                         style={styles.commonHeaderButton}
                                         onPress={onColumnPress}>
-                                        <Text style={styles.commonHeaderButtonText}>
-                                            C
-                                        </Text>
+                                        <MaterialCommunityIcons
+                                            name="table-row"
+                                            size={16}
+                                            color={Colors.khaki} />
                                     </TouchableOpacity>
                                 )
                             }
@@ -60,9 +62,10 @@ export class CommonHeader extends React.Component<CommonHeaderPropsInterface, Co
                                     <TouchableOpacity
                                         style={styles.commonHeaderButton}
                                         onPress={onRowPress}>
-                                        <Text style={styles.commonHeaderButtonText}>
-                                            R
-                                        </Text>
+                                        <MaterialCommunityIcons
+                                            name="table-column"
+                                            size={16}
+                                            color={Colors.khaki} />
                                     </TouchableOpacity>
                                 )
                             }
@@ -125,8 +128,5 @@ const styles = StyleSheet.create({
         display: `flex`,
         alignItems: `center`,
         justifyContent: `center`
-    },
-    commonHeaderButtonText: {
-        color: Colors.khaki
     },
 })
