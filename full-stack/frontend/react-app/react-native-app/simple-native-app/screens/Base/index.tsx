@@ -71,9 +71,22 @@ export const styles = StyleSheet.create({
     cardItemContainer: {
         flex: 1,
         backgroundColor: Colors.khaki,
-        borderWidth: 1,
-        borderColor: Colors.darkGrey,
-        borderStyle: `dashed`,
+
+        /* Shadow */
+        shadowOffset: {
+            width: 1,
+            height: 1
+        },
+        shadowColor: Colors.darkGrey,
+        shadowOpacity: 0.3,
+        shadowRadius: 2,
+        elevation: 2,
+
+        /* Border */
+        // borderWidth: 1,
+        // borderColor: Colors.darkGrey,
+        // borderStyle: `dashed`,
+
         borderRadius: 5,
         marginBottom: 12,
         marginRight: 12,
