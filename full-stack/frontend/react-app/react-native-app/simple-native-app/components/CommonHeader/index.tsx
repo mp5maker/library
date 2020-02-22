@@ -1,7 +1,7 @@
 import React from 'react'
 import PropTypes from 'prop-types'
 import { View, Text, TouchableOpacity, StyleSheet } from 'react-native'
-import { MaterialCommunityIcons, AntDesign, Feather } from '@expo/vector-icons';
+import { MaterialCommunityIcons, AntDesign, Feather, SimpleLineIcons } from '@expo/vector-icons';
 
 /* Styles */
 import { Colors } from '../../styles/Colors'
@@ -15,6 +15,7 @@ interface CommonHeaderPropsInterface {
     onRowPress?: (params: any) => any,
     onFormHideShowPress?: (params: any) => any,
     onBackPress?: (params: any) => any,
+    onDrawerPress?: (params: any) => any,
 }
 
 interface CommonHeaderStateInterface {}
@@ -37,6 +38,7 @@ export class CommonHeader extends React.Component<CommonHeaderPropsInterface, Co
             onRowPress,
             onFormHideShowPress,
             onBackPress,
+            onDrawerPress,
             title,
         } = this.props
 
@@ -94,6 +96,18 @@ export class CommonHeader extends React.Component<CommonHeaderPropsInterface, Co
                                         onPress={onBackPress}>
                                         <Feather
                                             name="arrow-left-circle"
+                                            size={16}
+                                            color={Colors.khaki} />
+                                    </TouchableOpacity>
+                                )
+                            }
+                            {
+                                list.includes('drawer') && (
+                                    <TouchableOpacity
+                                        style={styles.commonHeaderButton}
+                                        onPress={onDrawerPress}>
+                                        <SimpleLineIcons
+                                            name="drawer"
                                             size={16}
                                             color={Colors.khaki} />
                                     </TouchableOpacity>

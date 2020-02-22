@@ -66,6 +66,7 @@ export default class Employee extends Base {
                     list={[
                         'row',
                         'column',
+                        'drawer',
                         ...(showForm ? ['subtract'] :  ['add'])
                     ]} />
                 <View style={styles.cardContainer}>

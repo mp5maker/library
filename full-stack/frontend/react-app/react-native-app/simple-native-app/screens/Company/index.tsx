@@ -58,9 +58,11 @@ export default class Company extends Base {
                     onRowPress={() => this.changeView({ displayMode: `row` })}
                     onColumnPress={() => this.changeView({ displayMode: `column` })}
                     onFormHideShowPress={this.toggleHideShowForm}
+                    onDrawerPress={this.openDrawer}
                     list={[
                         'row',
                         'column',
+                        'drawer',
                         ...(showForm ? ['subtract'] : ['add'])
                     ]} />
                 <View style={styles.cardContainer}>

@@ -28,6 +28,11 @@ export default class Base extends React.Component<BasePropsInterface, BaseStateI
         this.add = this.add.bind(this)
         this.toggleHideShowForm = this.toggleHideShowForm.bind(this)
         this.goToDetails = this.goToDetails.bind(this)
+        this.openDrawer = this.openDrawer.bind(this)
+    }
+
+    openDrawer() {
+        console.log(`drawer`)
     }
 
     goToDetails({ item, path }) {

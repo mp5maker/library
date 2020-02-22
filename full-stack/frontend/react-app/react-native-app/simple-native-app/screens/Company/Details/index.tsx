@@ -43,7 +43,10 @@ export default class EmployeeDetails extends React.Component<CompanyDetailsProps
                 <CommonHeader
                     title={`Company Details`}
                     onBackPress={this.goBack}
-                    list={['back']} />
+                    list={[
+                        'back',
+                        'drawer'
+                    ]} />
                 <View style={styles.detailsContent}>
                     {
                         name ? (

@@ -6,8 +6,8 @@ import { Company, CompanyDetails } from '../../screens'
 
 const Stack = createStackNavigator()
 
-interface CompanyStackPropsInterface { }
-interface CompanyStackStateInterface { }
+interface CompanyStackPropsInterface {}
+interface CompanyStackStateInterface {}
 
 export class CompanyStack extends React.Component<CompanyStackPropsInterface, CompanyStackStateInterface> {
     constructor(props: CompanyStackPropsInterface) {
