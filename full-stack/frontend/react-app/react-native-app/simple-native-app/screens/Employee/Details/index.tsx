@@ -9,9 +9,15 @@ import get from 'lodash/get'
 /* Component */
 import { CommonHeader } from '../../../components/CommonHeader'
 
+/* Styles */
+import { Colors } from '../../../styles/Colors';
+import { Fonts } from '../../../styles/Fonts';
+
 interface EmployeeDetailsPropsInterface {
-    navigation: any
+    navigation: any,
+    route: any
 }
+
 interface EmployeeDetailsStateInterface {}
 
 export default class EmployeeDetails extends React.Component<EmployeeDetailsPropsInterface, EmployeeDetailsStateInterface> {
@@ -25,12 +31,44 @@ export default class EmployeeDetails extends React.Component<EmployeeDetailsProp
     }
 
     render() {
+        const {
+            navigation,
+            route
+        } = this.props
+
+        const name = get(route, 'params.name', '')
+        const email = get(route, 'params.email', '')
+        const age = get(route, 'params.age', '')
+
         return (
             <View style={styles.container}>
                 <CommonHeader
-                        title={`Employee Details`}
-                        onBackPress={this.goBack}
-                        list={['back']} />
+                    title={`Employee Details`}
+                    onBackPress={this.goBack}
+                    list={['back']} />
+                <View style={styles.detailsContent}>
+                    {
+                        name ? (
+                            <Text style={styles.detailsText}>
+                                Name: { name }
+                            </Text>
+                        ) : <React.Fragment></React.Fragment>
+                    }
+                    {
+                        email ? (
+                            <Text style={styles.detailsText}>
+                                Email: { email }
+                            </Text>
+                        ) : <React.Fragment></React.Fragment>
+                    }
+                    {
+                        age ? (
+                            <Text style={styles.detailsText}>
+                                Age: { age }
+                            </Text>
+                        ) : <React.Fragment></React.Fragment>
+                    }
+                </View>
             </View>
         )
     }
@@ -38,6 +76,19 @@ export default class EmployeeDetails extends React.Component<EmployeeDetailsProp
 
 const styles = StyleSheet.create({
     container: {
-        flex: 1
+        flex: 1,
+        backgroundColor: Colors.khaki,
+    },
+    detailsContent: {
+        backgroundColor: Colors.khaki,
+        flex: 1,
+        marginLeft: 8,
+        display: `flex`,
+        alignItems: `flex-start`,
+        justifyContent: `flex-start`
+    },
+    detailsText: {
+        fontSize: 16,
+        fontFamily: Fonts.fontFamily,
     }
 })
