@@ -7,15 +7,22 @@ import { Colors } from '../../styles/Colors'
 
 interface BasePropsInterface {}
 interface BaseStateInterface {
-    list: Array<any>
+    list: Array<any>,
+    displayMode: string
 }
 
 export default class Base extends React.Component<BasePropsInterface, BaseStateInterface> {
     constructor(props: BasePropsInterface) {
         super(props)
         this.state = {
-            list: []
+            list: [],
+            displayMode: `row`
         }
+        this.changeView = this.changeView.bind(this)
+    }
+
+    changeView({ displayMode }: any) {
+        this.setState({ displayMode })
     }
 }
 
@@ -37,6 +44,23 @@ export const styles = StyleSheet.create({
     },
     commonHeaderRight: {
         marginRight: 18,
+        display: `flex`,
+        flexDirection: `row`,
+        justifyContent: `flex-start`,
+    },
+    commonHeaderButton: {
+        height: 40,
+        width: 40,
+        borderWidth: 1,
+        borderRadius: 100,
+        backgroundColor: Colors.darkGreen,
+        marginLeft: 8,
+        display: `flex`,
+        alignItems: `center`,
+        justifyContent: `center`
+    },
+    commonHeaderButtonText: {
+        color: Colors.khaki
     },
     heading: {
         color: Colors.green,

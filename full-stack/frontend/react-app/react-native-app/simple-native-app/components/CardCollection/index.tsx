@@ -37,9 +37,12 @@ export class CardCollection extends React.Component<CardCollectionPropsInterface
             ...(numColumns ? { numColumns } : {})
         }
 
+        const rowClass = numColumns ? `column` : `row`
+
         return (
             <View style={styles.container}>
                 <FlatList
+                    key={rowClass}
                     keyExtractor={(item: any) => item.alias}
                     renderItem={itemLayout ? itemLayout : ({ item }) => {
                         <Text>

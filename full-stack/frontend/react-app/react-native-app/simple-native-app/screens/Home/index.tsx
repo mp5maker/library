@@ -2,6 +2,7 @@ import React from 'react';
 import {
     Text,
     View,
+    TouchableOpacity,
 } from 'react-native'
 import Faker from 'faker'
 import get from 'lodash/get'
@@ -28,14 +29,20 @@ export default class Home extends Base {
     constructor(props: any) {
         super(props)
         this.state = {
-            list: employees
+            list: employees,
+            displayMode: `row`
         }
     }
 
     render() {
         const {
-            list
+            list,
+            displayMode
         } = this.state
+
+        const cardCollectionProps = {
+            ...(displayMode == 'column' ? { numColumns: 2 } : {})
+        }
 
         return (
             <View style={styles.container}>
@@ -46,7 +53,20 @@ export default class Home extends Base {
                         </Text>
                     </View>
                     <View style={styles.commonHeaderRight}>
-                        <Text>Hello</Text>
+                        <TouchableOpacity
+                            style={styles.commonHeaderButton}
+                            onPress={() => this.changeView({ displayMode: `column` })}>
+                            <Text style={styles.commonHeaderButtonText}>
+                                C
+                            </Text>
+                        </TouchableOpacity>
+                        <TouchableOpacity
+                            style={styles.commonHeaderButton}
+                            onPress={() => this.changeView({ displayMode: `row` })}>
+                            <Text style={styles.commonHeaderButtonText}>
+                                R
+                            </Text>
+                        </TouchableOpacity>
                     </View>
                 </View>
                 <View style={styles.cardContainer}>
@@ -83,7 +103,7 @@ export default class Home extends Base {
                                 </View>
                             )
                         }}
-                    />
+                        {...cardCollectionProps} />
                 </View>
             </View>
         )
