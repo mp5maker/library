@@ -1,16 +1,19 @@
 import React from 'react'
-
 import { StyleSheet } from 'react-native'
+import  get from 'lodash/get'
 
 /* Styles */
 import { Colors } from '../../styles/Colors'
 import { Fonts } from '../../styles/Fonts'
 
-interface BasePropsInterface {}
+interface BasePropsInterface {
+    navigation?: any,
+}
+
 interface BaseStateInterface {
-    list: Array<any>,
-    displayMode: string,
-    showForm: boolean
+    list?: Array<any>,
+    displayMode?: string,
+    showForm?: boolean,
 }
 
 export default class Base extends React.Component<BasePropsInterface, BaseStateInterface> {
@@ -24,6 +27,12 @@ export default class Base extends React.Component<BasePropsInterface, BaseStateI
         this.changeView = this.changeView.bind(this)
         this.add = this.add.bind(this)
         this.toggleHideShowForm = this.toggleHideShowForm.bind(this)
+        this.goToDetails = this.goToDetails.bind(this)
+    }
+
+    goToDetails({ item, path }) {
+        const destination = get(item, path, '')
+        if (destination) this.props.navigation.navigate('EmployeeDetails')
     }
 
     toggleHideShowForm() {

@@ -2,6 +2,7 @@ import React from 'react';
 import {
     Text,
     View,
+    TouchableOpacity
 } from 'react-native'
 import Faker from 'faker'
 import get from 'lodash/get'
@@ -76,7 +77,9 @@ export default class Employee extends Base {
                             const age = get(item, 'age', '')
 
                             return (
-                                <View style={styles.cardItemContainer}>
+                                <TouchableOpacity
+                                    onPress={() => this.goToDetails({ item, path: `alias` })}
+                                    style={styles.cardItemContainer}>
                                     {
                                         name && (
                                             <Text style={styles.textHeading}>
@@ -98,7 +101,7 @@ export default class Employee extends Base {
                                             </Text>
                                         )
                                     }
-                                </View>
+                                </TouchableOpacity>
                             )
                         }}
                         {...cardCollectionProps} />

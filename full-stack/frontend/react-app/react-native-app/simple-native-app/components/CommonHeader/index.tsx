@@ -1,7 +1,7 @@
 import React from 'react'
 import PropTypes from 'prop-types'
 import { View, Text, TouchableOpacity, StyleSheet } from 'react-native'
-import { MaterialCommunityIcons, AntDesign } from '@expo/vector-icons';
+import { MaterialCommunityIcons, AntDesign, Feather } from '@expo/vector-icons';
 
 /* Styles */
 import { Colors } from '../../styles/Colors'
@@ -14,6 +14,7 @@ interface CommonHeaderPropsInterface {
     onColumnPress?: (params: any) => any,
     onRowPress?: (params: any) => any,
     onFormHideShowPress?: (params: any) => any,
+    onBackPress?: (params: any) => any,
 }
 
 interface CommonHeaderStateInterface {}
@@ -35,6 +36,7 @@ export class CommonHeader extends React.Component<CommonHeaderPropsInterface, Co
             onColumnPress,
             onRowPress,
             onFormHideShowPress,
+            onBackPress,
             title,
         } = this.props
 
@@ -75,11 +77,23 @@ export class CommonHeader extends React.Component<CommonHeaderPropsInterface, Co
                             {
                                 (list.includes('add') || list.includes('subtract')) && (
                                     <TouchableOpacity
-                                        style={styles.commonHeaderButton}
-                                        onPress={onFormHideShowPress}>
+                                    style={styles.commonHeaderButton}
+                                    onPress={onFormHideShowPress}>
                                         <AntDesign
                                             key={list.includes('add') ? `add` : `subtract`}
                                             name={list.includes('add') ? `pluscircleo` : `minuscircleo`}
+                                            size={16}
+                                            color={Colors.khaki} />
+                                    </TouchableOpacity>
+                                )
+                            }
+                            {
+                                list.includes('back') && (
+                                    <TouchableOpacity
+                                        style={styles.commonHeaderButton}
+                                        onPress={onBackPress}>
+                                        <Feather
+                                            name="arrow-left-circle"
                                             size={16}
                                             color={Colors.khaki} />
                                     </TouchableOpacity>
