@@ -34,14 +34,16 @@ export default class Home extends Base {
         super(props)
         this.state = {
             list: employees,
-            displayMode: `row`
+            displayMode: `row`,
+            showForm: false
         }
     }
 
     render() {
         const {
             list,
-            displayMode
+            displayMode,
+            showForm
         } = this.state
 
         const cardCollectionProps = {
@@ -50,13 +52,22 @@ export default class Home extends Base {
 
         return (
             <View style={styles.container}>
+                {
+                    showForm ? (
+                        <EmployeeForm
+                            onChange={this.add} />
+                    ) : <React.Fragment></React.Fragment>
+                }
                 <CommonHeader
                     title={`Home`}
                     onRowPress={() => this.changeView({ displayMode: `row` })}
                     onColumnPress={() => this.changeView({ displayMode: `column` })}
-                    list={['row', 'column']} />
-                <EmployeeForm
-                    onChange={this.add} />
+                    onFormHideShowPress={this.toggleHideShowForm}
+                    list={[
+                        'row',
+                        'column',
+                        ...(showForm ? ['subtract'] :  ['add'])
+                    ]} />
                 <View style={styles.cardContainer}>
                     <CardCollection
                         list={list}

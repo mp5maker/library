@@ -1,7 +1,7 @@
 import React from 'react'
 import PropTypes from 'prop-types'
 import { View, Text, TouchableOpacity, StyleSheet } from 'react-native'
-import { MaterialCommunityIcons } from '@expo/vector-icons';
+import { MaterialCommunityIcons, AntDesign } from '@expo/vector-icons';
 
 /* Styles */
 import { Colors } from '../../styles/Colors'
@@ -10,8 +10,9 @@ import { Colors } from '../../styles/Colors'
 interface CommonHeaderPropsInterface {
     list: Array<string>,
     title: string,
-    onColumnPress: (params: any) => any,
-    onRowPress: (params: any) => any
+    onColumnPress?: (params: any) => any,
+    onRowPress?: (params: any) => any,
+    onFormHideShowPress?: (params: any) => any,
 }
 
 interface CommonHeaderStateInterface {}
@@ -32,6 +33,7 @@ export class CommonHeader extends React.Component<CommonHeaderPropsInterface, Co
             list,
             onColumnPress,
             onRowPress,
+            onFormHideShowPress,
             title,
         } = this.props
 
@@ -69,6 +71,19 @@ export class CommonHeader extends React.Component<CommonHeaderPropsInterface, Co
                                     </TouchableOpacity>
                                 )
                             }
+                            {
+                                (list.includes('add') || list.includes('subtract')) && (
+                                    <TouchableOpacity
+                                        style={styles.commonHeaderButton}
+                                        onPress={onFormHideShowPress}>
+                                        <AntDesign
+                                            key={list.includes('add') ? `add` : `subtract`}
+                                            name={list.includes('add') ? `pluscircleo` : `minuscircleo`}
+                                            size={16}
+                                            color={Colors.khaki} />
+                                    </TouchableOpacity>
+                                )
+                            }
                         </View>
                     )
                 }
@@ -80,14 +95,16 @@ export class CommonHeader extends React.Component<CommonHeaderPropsInterface, Co
 CommonHeader.defaultProps = {
     list: [],
     onColumnPress: () => {},
-    onRowPress: () => {}
+    onRowPress: () => {},
+    onFormHideShowPress: () => {}
 }
 
 CommonHeader.propTypes = {
     title: PropTypes.string,
     list: PropTypes.array,
     onColumnPress: PropTypes.func,
-    onRowPress: PropTypes.func
+    onRowPress: PropTypes.func,
+    onFormHideShowPress: PropTypes.func
 }
 
 

@@ -8,7 +8,8 @@ import { Colors } from '../../styles/Colors'
 interface BasePropsInterface {}
 interface BaseStateInterface {
     list: Array<any>,
-    displayMode: string
+    displayMode: string,
+    showForm: boolean
 }
 
 export default class Base extends React.Component<BasePropsInterface, BaseStateInterface> {
@@ -16,10 +17,16 @@ export default class Base extends React.Component<BasePropsInterface, BaseStateI
         super(props)
         this.state = {
             list: [],
-            displayMode: `row`
+            displayMode: `row`,
+            showForm: false
         }
         this.changeView = this.changeView.bind(this)
         this.add = this.add.bind(this)
+        this.toggleHideShowForm = this.toggleHideShowForm.bind(this)
+    }
+
+    toggleHideShowForm() {
+        this.setState({ showForm: !this.state.showForm })
     }
 
     add({ item }: any) {
