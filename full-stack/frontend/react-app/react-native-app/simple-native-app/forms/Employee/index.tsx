@@ -1,6 +1,7 @@
 import * as React from 'react'
 import { StyleSheet, View, Text, TextInput, TouchableOpacity, Alert } from 'react-native'
 import get from 'lodash/get'
+import v4 from 'uuid'
 
 /* Styles */
 import { Colors } from '../../styles/Colors'
@@ -68,7 +69,10 @@ export class EmployeeForm extends React.Component<EmployeeFormPropsInterface, Em
 
         if (name && email && age) {
             if (this.props.onChange) this.props.onChange({
-                item: this.state.form
+                item: {
+                    alias: v4(),
+                    ...this.state.form
+                }
             })
             this.clear()
         } else {
@@ -121,6 +125,7 @@ export class EmployeeForm extends React.Component<EmployeeFormPropsInterface, Em
                 </View>
                 <View>
                     <TextInput
+                        value={this.state.form.name}
                         style={styles.textInput}
                         placeholderTextColor={Colors.darkGreen}
                         placeholder={`Name`}
@@ -141,6 +146,7 @@ export class EmployeeForm extends React.Component<EmployeeFormPropsInterface, Em
                             ) : <React.Fragment></React.Fragment>
                         }
                     <TextInput
+                        value={this.state.form.email}
                         style={styles.textInput}
                         placeholderTextColor={Colors.darkGreen}
                         placeholder={`Email`}
@@ -161,6 +167,7 @@ export class EmployeeForm extends React.Component<EmployeeFormPropsInterface, Em
                             ) : <React.Fragment></React.Fragment>
                         }
                     <TextInput
+                        value={this.state.form.age}
                         style={styles.textInput}
                         placeholderTextColor={Colors.darkGreen}
                         placeholder={`Age`}
