@@ -1,112 +1,34 @@
 import * as React from 'react'
-import { StyleSheet, View, Text, TextInput, TouchableOpacity, Alert } from 'react-native'
+import { StyleSheet, View, Text, TextInput, TouchableOpacity, Alert, Keyboard } from 'react-native'
 import get from 'lodash/get'
 import v4 from 'uuid'
+import { Formik } from 'formik'
+import * as yup from 'yup'
 
 /* Styles */
 import { Colors } from '../../styles/Colors'
 import { Fonts } from '../../styles/Fonts'
 
+export const validationSchema = yup.object({
+    name: yup.string().required()
+})
+
 interface CompanyFormPropsInterface {
     onChange: (params: any) => any,
     defaultValue?: any,
     setValue?: any,
-    clear?: boolean,
     title?: string,
     submitValue?: string
 }
 
-interface CompanyFormStateInterface {
-    form: {
-        name: string,
-    },
-    error: {
-        name: string,
-    },
-}
-
-const defaultState = {
-    form: {
-        name: ``,
-    },
-    error: {
-        name: ``,
-    }
-}
+interface CompanyFormStateInterface {}
 
 export class CompanyForm extends React.Component<CompanyFormPropsInterface, CompanyFormStateInterface> {
     constructor(props: CompanyFormPropsInterface) {
         super(props)
-        this.setDefault = this.setDefault.bind(this)
-        this.clear = this.clear.bind(this)
-        this.submit = this.submit.bind(this)
-        this.onChange = this.onChange.bind(this)
-        this.state = { ...defaultState }
-    }
-
-    onChange({ event }: any) {
-        this.setState({
-            form: {
-                ...this.state.form,
-                [event.target.name]: event.target.value
-            },
-            error: {
-                ...this.state.error,
-                [event.target.name]: ``
-            }
-        } as Pick<CompanyFormStateInterface, keyof CompanyFormStateInterface>)
-    }
-
-    submit() {
-        const name = get(this.state, 'form.name', '').trim()
-
-        if (name) {
-            if (this.props.onChange) this.props.onChange({
-                item: {
-                    alias: v4(),
-                    ...this.state.form
-                }
-            })
-            this.clear()
-        } else {
-            this.setState({
-                error: {
-                    ...this.state.error,
-                    ...(name ? {} : { name: `Field is required` }),
-                }
-            })
-            Alert.alert('OOPS!', 'Something seems to be wrong', [
-                {
-                    text: `Understood`,
-                    onPress: () => console.log(`Alert Closed`)
-                }
-            ])
-        }
-
-    }
-
-    clear() {
-        this.setState({ ...defaultState })
-    }
-
-    setDefault(form: any) {
-        this.setState({ form })
-    }
-
-    componentDidUpdate(prevProps: any) {
-        if (this.props.clear !== prevProps.clear) this.clear()
-        if (this.props.setValue !== prevProps.setValue) this.setDefault(this.props.setValue)
-    }
-
-    componentDidMount() {
-        if (this.props.defaultValue) this.setDefault(this.props.defaultValue)
     }
 
     render() {
-        const {
-            error
-        } = this.state
-
         const {
             title,
             submitValue
@@ -114,41 +36,82 @@ export class CompanyForm extends React.Component<CompanyFormPropsInterface, Comp
 
         return (
             <View style={styles.container}>
-                <View>
-                    <Text style={styles.heading}>
-                        { title }
-                    </Text>
-                </View>
-                <View>
-                    <TextInput
-                        value={this.state.form.name}
-                        style={styles.textInput}
-                        placeholderTextColor={Colors.darkGreen}
-                        placeholder={`Name`}
-                        autoCompleteType={`off`}
-                        onChangeText={(value) => this.onChange({
-                            event: {
-                                target: {
-                                    name: `name`,
-                                    value
-                                }
+                <Formik
+                    validationSchema={validationSchema}
+                    initialValues={{ name : "" }}
+                    onSubmit={(values, actions) => {
+                        const name = get(values, 'name', '')
+                        if (name) {
+                            if (this.props.onChange) {
+                                const item = { name, alias: v4() }
+                                this.props.onChange({ item })
                             }
-                        })} />
-                        {
-                            error.name ?  (
-                                <Text style={styles.errorMessage}>
-                                    { error.name }
-                                </Text>
-                            ) : <React.Fragment></React.Fragment>
+                            actions.resetForm()
+                            Keyboard.dismiss()
+                        } else {
+                            Alert.alert('OOPS!', 'Something seems to be wrong', [
+                                {
+                                    text: `Understood`,
+                                    onPress: () => console.log(`Alert Closed`)
+                                }
+                            ])
                         }
-                    <TouchableOpacity
-                        style={styles.submitButton}
-                        onPress={this.submit}>
-                        <Text style={styles.submitButtonText}>
-                            { submitValue }
-                        </Text>
-                    </TouchableOpacity>
-                </View>
+                    }}>
+                    {
+                        ({ errors, handleBlur, handleChange, handleSubmit, values, touched }) => {
+
+                            const Title = (
+                                <View>
+                                    <Text style={styles.heading}>
+                                        {title}
+                                    </Text>
+                                </View>
+                            )
+
+                            const Name = (
+                                <React.Fragment>
+                                    <TextInput
+                                        value={values.name}
+                                        style={styles.textInput}
+                                        placeholderTextColor={Colors.darkGreen}
+                                        placeholder={`Name`}
+                                        autoCompleteType={`off`}
+                                        onChangeText={handleChange('name')} />
+                                        {
+                                            errors.name && touched.name ? (
+                                                <Text style={styles.errorMessage}>
+                                                    {errors.name}
+                                                </Text>
+                                            ) : <React.Fragment></React.Fragment>
+                                        }
+                                </React.Fragment>
+                            )
+
+                            const Submit = (
+                                <TouchableOpacity
+                                    style={styles.submitButton}
+                                    onPress={() => handleSubmit()}>
+                                    <Text style={styles.submitButtonText}>
+                                        { submitValue }
+                                    </Text>
+                                </TouchableOpacity>
+                            )
+
+                            return (
+                                <React.Fragment>
+                                    <View style={styles.container}>
+                                        { Title }
+                                    </View>
+                                    <View>
+                                        { Name }
+                                        { Submit }
+                                    </View>
+                                </React.Fragment>
+                            )
+                        }
+                    }
+                </Formik>
+
             </View>
         )
     }
