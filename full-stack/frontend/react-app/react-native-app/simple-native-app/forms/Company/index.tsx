@@ -31,14 +31,18 @@ export class CompanyForm extends React.Component<CompanyFormPropsInterface, Comp
     render() {
         const {
             title,
-            submitValue
+            submitValue,
+            setValue,
+            defaultValue,
         } = this.props
+
+        const name = get(setValue, 'name', get(defaultValue, 'name', ''))
 
         return (
             <View style={styles.container}>
                 <Formik
                     validationSchema={validationSchema}
-                    initialValues={{ name : "" }}
+                    initialValues={{ name }}
                     onSubmit={(values, actions) => {
                         const name = get(values, 'name', '')
                         if (name) {

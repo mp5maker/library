@@ -33,14 +33,20 @@ export class EmployeeForm extends React.Component<EmployeeFormPropsInterface, Em
     render() {
         const {
             title,
-            submitValue
+            submitValue,
+            setValue,
+            defaultValue
         } = this.props
+
+        const name = get(setValue, 'name', get(defaultValue, 'name', ''))
+        const email = get(setValue, 'email', get(defaultValue, 'email', ''))
+        const age = get(setValue, 'age', get(defaultValue, 'age', ''))
 
         return (
             <View style={styles.container}>
                 <Formik
                     validationSchema={validationSchema}
-                    initialValues={{ name: "", email: "", age: "" }}
+                    initialValues={{ name, email, age }}
                     onSubmit={(values, actions) => {
                         const name = get(values, 'name', '').trim()
                         const email = get(values, 'email', '').trim()
