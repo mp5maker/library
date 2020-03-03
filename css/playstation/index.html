@@ -1,0 +1,82 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <link rel='stylesheet' href='https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/4.4.1/css/bootstrap.css' />
+</head>
+
+<body>
+    <div class="container-fluid">
+        <div class="row">
+            <div class="col">
+                <div class="circle-1"></div>
+                <div class="circle-2"></div>
+                <div class="circle-3"></div>
+            </div>
+        </div>
+    </div>
+    <footer>
+        2020 &copy; All Rights Reserved, Photon Enterprise
+    </footer>
+    <style>
+        body,
+        html {
+            margin: 0;
+            padding: 0;
+        }
+
+        body>.container-fluid {
+            height: calc(100vh - 60px);
+        }
+
+        .container-fluid~footer {
+            border-top: 1px solid lightgrey;
+            height: 60px;
+            line-height: 60px;
+            text-align: center;
+        }
+
+        [class|='circle'] {
+            position: fixed;
+            background: linear-gradient(to right, firebrick, black);
+            border-radius: 50%;
+            display: block;
+            height: 500px;
+            width: 500px;
+            z-index: -1;
+            opacity: 0.1;
+            transform-origin: 50% 48%;
+        }
+
+
+        .circle-1 {
+            top: -250px;
+            left: -250px;
+            animation: drift 12s infinite ease-in-out;
+        }
+
+        .circle-2 {
+            top: -250px;
+            left: -240px;
+            animation: drift 10s infinite ease-in-out;
+        }
+
+        .circle-3 {
+            top: -250px;
+            left: -260px;
+            animation: drift 8s infinite ease-in-out;
+        }
+
+        @keyframes drift {
+            100% {
+                transform: rotate(359deg);
+            }
+        }
+
+    </style>
+</body>
+
+</html>
