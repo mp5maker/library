@@ -2,6 +2,7 @@ import React from 'react'
 
 import get from 'lodash/get'
 import { axiosInstance as axios } from '../../axios'
+import { history } from '../../history'
 
 export class Login extends React.Component {
     constructor(props) {
@@ -34,6 +35,7 @@ export class Login extends React.Component {
                 const token = get(response, 'data.token', '')
                 axios.defaults.headers['Authorization'] = `JWT ${token}`;
                 localStorage.setItem('token', token);
+                history.push('/')
             }
 
             const onError = () => console.log('error')
