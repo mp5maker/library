@@ -16,22 +16,20 @@ axiosInstance.interceptors.response.use(
         const originalRequest = error.config
 
         if (error.response.status === 401 && error.response.statusText === 'Unauthorized') {
-            const refresh_token = window.localStorage.getItem('refresh_token')
+            const token = window.localStorage.getItem('token')
 
             const onSuccessTokenRefresh = (response) => {
                 if (response) {
-                    localStorage.setItem('access_token', response.data.access)
-                    localStorage.setItem('refresh_token', response.data.refresh)
-
-                    axiosInstance.defaults.headers['Authorization'] = "JWT " + response.data.access;
-                    originalRequest.headers['Authorization'] = "JWT " + response.data.access;
+                    localStorage.setItem('token', response.data.token)
+                    axiosInstance.defaults.headers['Authorization'] = "JWT " + response.data.token;
+                    originalRequest.headers['Authorization'] = "JWT " + response.data.token;
                     return axiosInstance(originalRequest);
                 }
             }
 
             return axiosInstance.post(
-                '/token/refresh/',
-                { refresh: refresh_token }
+                '/token-refresh/',
+                { token }
             ).then(onSuccessTokenRefresh)
         }
     }

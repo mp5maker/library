@@ -37,6 +37,7 @@ export class Login extends React.Component {
                 axios.defaults.headers['Authorization'] = `JWT ${token}`;
                 localStorage.setItem('token', token);
                 history.push('/')
+                window.location.reload()
             }
 
             const onError = () => console.log('error')

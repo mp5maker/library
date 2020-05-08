@@ -46,6 +46,7 @@ class App extends React.Component {
   logout() {
     window.localStorage.removeItem('token')
     auth().signout(() => {})
+    window.location.reload()
   }
 
   render() {
