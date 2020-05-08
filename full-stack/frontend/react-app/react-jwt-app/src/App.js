@@ -19,7 +19,7 @@ function PrivateRoute({ children, ...rest }) {
     <Route
       {...rest}
       render={({ location }) => {
-        return auth.isAuthenticated ? (
+        return auth().isAuthenticated ? (
           children
         ) : (
           <Redirect
@@ -40,23 +40,49 @@ class App extends React.Component {
     this.state = {
       token: window.localStorage.getItem('token'),
     }
+    this.logout = this.logout.bind(this)
+  }
+
+  logout() {
+    window.localStorage.removeItem('token')
+    auth().signout(() => {})
   }
 
   render() {
+    const isAuthenticated = auth().isAuthenticated
+
     return (
       <Router history={history}>
         <div>
           <nav>
             <ul>
-              <li>
-                <Link to="/">Login</Link>
-              </li>
+              {
+                !isAuthenticated && (
+                  <li>
+                    <Link to="/">Login</Link>
+                  </li>
+
+                )
+              }
+              {
+                isAuthenticated && (
+                  <li>
+                    <button onClick={this.logout}>
+                      Logout
+                    </button>
+                  </li>
+                )
+              }
             </ul>
           </nav>
           <Switch>
-            <Route path="/login">
-              <Login />
-            </Route>
+                {
+                  !auth().isAuthenticated && (
+                    <Route path="/login">
+                      <Login />
+                    </Route>
+                  )
+                }
             <PrivateRoute>
               <EmployeeList />
             </PrivateRoute>

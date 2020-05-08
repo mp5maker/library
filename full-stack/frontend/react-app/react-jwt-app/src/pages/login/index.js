@@ -3,6 +3,7 @@ import React from 'react'
 import get from 'lodash/get'
 import { axiosInstance as axios } from '../../axios'
 import { history } from '../../history'
+import { auth } from '../../auth'
 
 export class Login extends React.Component {
     constructor(props) {
@@ -43,6 +44,12 @@ export class Login extends React.Component {
             axios.post('token-auth/', { ...this.state.form })
                 .then(onSuccess)
                 .catch(onError)
+        }
+    }
+
+    componentDidMount() {
+        if (window.localStorage.getItem('token')) {
+            console.log(auth())
         }
     }
 

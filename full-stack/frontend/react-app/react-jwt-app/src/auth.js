@@ -1,11 +1,7 @@
-export const auth = {
-    isAuthenticated: false,
-    authenticate(callbackFunction) {
-        auth.isAuthenticated = window.locationStorage.getItem('token') ? true : false
-        setTimeout(callbackFunction, 100);
-    },
+export const auth = () => ({
+    isAuthenticated: window.localStorage.getItem('token') ? true : false,
     signout(callbackFunction) {
         auth.isAuthenticated = false
         setTimeout(callbackFunction, 100);
     }
-}
+})
