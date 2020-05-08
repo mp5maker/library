@@ -41,6 +41,10 @@ INSTALLED_APPS = [
     # Third Party App
     'rest_framework',
     'corsheaders',
+
+    # My App
+    'common',
+    'employee',
 ]
 
 MIDDLEWARE = [
