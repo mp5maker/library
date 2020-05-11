@@ -10,7 +10,7 @@ const javascriptSource = `./js/scripts/**/*.js`
 const buildLocation = `./build`
 
 const thirdPartyCSS = [
-    './node_modules/bootstrap/dist/css/boostrap.css',
+    './node_modules/bootstrap/dist/css/bootstrap.css',
     './node_modules/angular/angular-csp.css',
 ]
 
