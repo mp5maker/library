@@ -81,6 +81,7 @@ CORS_ORIGIN_WHITELIST = (
     'http://localhost:3000',
     'http://localhost:8080',
     'http://localhost:8000',
+    'http://localhost:5500',
 )
 # CORS_ORIGIN_REGEX_WHITELIST = [
 #     'http://localhost:3030',

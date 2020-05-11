@@ -8,8 +8,20 @@
     <link rel="stylesheet" href="./build/css/my-app.css" type="text/css">
 </head>
 <body ng-controller="appController">
-    <div class="container-fluid">
-        {{ hello }}
+    <div class="container-fluid w-100">
+        <form class="p-5 m-5">
+            <div>
+                <input type="text" ng-model="form.username" />
+            </div>
+            <div>
+                <input type="password" ng-model="form.password" />
+            </div>
+            <div>
+                <button ng-click="formSubmit()">
+                    Login
+                </button>
+            </div>
+        </form>
     </div>
     <footer>
         2020 &copy; All Rights Reserved, Photon Enterprise

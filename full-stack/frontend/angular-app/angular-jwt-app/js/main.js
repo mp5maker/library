@@ -13,6 +13,7 @@ function Run($http) {
 
 app.config(['$httpProvider', Config])
 function Config($httpProvider) {
+    $httpProvider.defaults.withCredentials = true;
     $httpProvider.interceptors.push(function($q) {
         return {
             request: function(config) {
@@ -24,8 +25,8 @@ function Config($httpProvider) {
             requestError: function(rejection) {
                 return rejection
             },
-            responseError: function(rejection) {
-                console.log(rejection)
+            responseError: function(rejection, hello) {
+                return rejection
             }
         }
     })

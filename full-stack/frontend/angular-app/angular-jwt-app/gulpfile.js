@@ -5,8 +5,8 @@ const concat = require('gulp-concat')
 sass.compiler = require('node-sass')
 
 /* My App */
-const styleSheetSource = `./scss/**/*.scss`
-const javascriptSource = `./js/scripts/**/*.js`
+const styleSheetSource = './scss/**/**/*.scss'
+const javascriptSource = './js/scripts/**/**/*.js'
 const buildLocation = `./build`
 
 const thirdPartyCSS = [
@@ -60,7 +60,7 @@ gulp.task('myAppJS', () => {
         .pipe(gulp.dest(`${buildLocation}/js`))
 })
 
-gulp.task('watch', () => {
+gulp.task('watch', ['myAppCSS', 'myAppJS'], () => {
     gulp.watch('myAppCSS', ['myAppCSS'])
     gulp.watch('myAppJS', ['myAppJS'])
 })

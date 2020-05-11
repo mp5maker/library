@@ -3,6 +3,7 @@ var app = angular.module('jwt')
 
 app.run(['$http', Run])
 function Run($http) {
+    $httpProvider.defaults.withCredentials = true;
     $http.defaults.headers.common = {
         'Authorization': `JWT ${localStorage.getItem('token')}`,
         'Content-Type': 'application/json',
@@ -24,8 +25,8 @@ function Config($httpProvider) {
             requestError: function(rejection) {
                 return rejection
             },
-            responseError: function(rejection) {
-                console.log(rejection)
+            responseError: function(rejection, hello) {
+                return rejection
             }
         }
     })
