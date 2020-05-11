@@ -5,44 +5,70 @@ const concat = require('gulp-concat')
 sass.compiler = require('node-sass')
 
 /* My App */
-const styleSheetSource = `./src/scss/**/*.scss`
-const javascriptSource = `./src/js/**/*.js`
+const styleSheetSource = `./scss/**/*.scss`
+const javascriptSource = `./js/scripts/**/*.js`
 const buildLocation = `./build`
 
-const cssIncludes = [
-    styleSheetSource,
-
-    // './node_modules/lodash/lodash.min.js',
+const thirdPartyCSS = [
     './node_modules/bootstrap/dist/css/boostrap.css',
-    './node_modules/angular/angular-csp.css'
+    './node_modules/angular/angular-csp.css',
 ]
 
-const jsIncludes = [
-    javascriptSource,
-
+const thirdPartyJS = [
     './node_modules/lodash/lodash.min.js',
     './node_modules/bootstrap/dist/js/boostrap.js',
     './node_modules/angular/angular.min.js',
 ]
 
-gulp.task('default', ['css', 'js'])
+gulp.task('default', [
+    'thirdPartyCSS',
+    'myAppCSS',
+    'thirdPartyJS',
+    'myAppStartJS',
+    'myAppJS'
+])
 
-gulp.task('css', () => {
-    return gulp.src(cssIncludes)
+gulp.task('thirdPartyCSS', () => {
+    return gulp.src(thirdPartyCSS)
         .pipe(sass().on('error', sass.logError))
-        .pipe(concat('app.css'))
+        .pipe(concat('third-party-app.css'))
         .pipe(gulp.dest(`${buildLocation}/css`))
 })
 
-gulp.task('js', () => {
-    return gulp.src(jsIncludes)
-    .pipe(concat('app.js'))
+gulp.task('thirdPartyJS', () => {
+    return gulp.src(thirdPartyJS)
+    .pipe(concat('third-party-app.js'))
     .pipe(gulp.dest(`${buildLocation}/js`))
 })
 
-gulp.task('watch', () => {
-    gulp.watch(cssIncludes, ['css'])
-    gulp.watch(jsIncludes, ['default'])
+gulp.task('myAppCSS', () => {
+    return gulp.src(styleSheetSource)
+        .pipe(sass().on('error', sass.logError))
+        .pipe(concat('my-app.css'))
+        .pipe(gulp.dest(`${buildLocation}/css`))
 })
 
-gulp.task('build', ['css', 'js'])
+gulp.task('myAppStartJS', () => {
+    return gulp.src(`./js/main.js`)
+        .pipe(concat('my-app-start.js'))
+        .pipe(gulp.dest(`${buildLocation}/js`))
+})
+
+gulp.task('myAppJS', () => {
+    return gulp.src(javascriptSource)
+        .pipe(concat('my-app.js'))
+        .pipe(gulp.dest(`${buildLocation}/js`))
+})
+
+gulp.task('watch', () => {
+    gulp.watch('myAppCSS', ['myAppCSS'])
+    gulp.watch('myAppJS', ['myAppJS'])
+})
+
+gulp.task('build', [
+    'thirdPartyCSS',
+    'myAppCSS',
+    'thirdPartyJS',
+    'myAppStartJS',
+    'myAppJS'
+])
