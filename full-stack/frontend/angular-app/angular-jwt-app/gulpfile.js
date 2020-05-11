@@ -61,8 +61,8 @@ gulp.task('myAppJS', () => {
 })
 
 gulp.task('watch', ['myAppCSS', 'myAppJS'], () => {
-    gulp.watch('myAppCSS', ['myAppCSS'])
-    gulp.watch('myAppJS', ['myAppJS'])
+    gulp.watch('./scss/**/**/*.scss', ['myAppCSS'])
+    gulp.watch('./js/**/**/*.js', ['myAppJS', 'myAppStartJS'])
 })
 
 gulp.task('build', [

@@ -13,7 +13,6 @@ function Run($http) {
 
 app.config(['$httpProvider', Config])
 function Config($httpProvider) {
-    $httpProvider.defaults.withCredentials = true;
     $httpProvider.interceptors.push(function($q) {
         return {
             request: function(config) {

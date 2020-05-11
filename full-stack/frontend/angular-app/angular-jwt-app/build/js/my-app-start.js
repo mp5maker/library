@@ -3,7 +3,6 @@ var app = angular.module('jwt')
 
 app.run(['$http', Run])
 function Run($http) {
-    $httpProvider.defaults.withCredentials = true;
     $http.defaults.headers.common = {
         'Authorization': `JWT ${localStorage.getItem('token')}`,
         'Content-Type': 'application/json',
