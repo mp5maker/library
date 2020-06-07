@@ -87,7 +87,7 @@ export const AboutUs = () => {
                     variants={childrenVariants}>
                     Lorem ipsum dolor sit amet.
                 </motion.div>
-                 <Link to={`/`}>
+                <Link to={`/`}>
                     <motion.button
                         variants={buttonVariants}
                         initial={`hidden`}

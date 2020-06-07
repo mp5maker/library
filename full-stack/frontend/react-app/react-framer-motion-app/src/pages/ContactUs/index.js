@@ -42,8 +42,8 @@ export const ContactUs = () => {
     const [showTitle, setTitle ] = useState(true)
 
     useEffect(() => {
-       setTimeout(() => setTitle(false), 4000)
-       return () => {}
+        setTimeout(() => setTitle(false), 4000)
+        return () => {}
     }, [])
 
     return (
@@ -59,9 +59,9 @@ export const ContactUs = () => {
                         showTitle && (
                             <motion.div
                                 exit={{
-                                   delay: 0.5,
-                                   opacity: 0,
-                                   y: -20
+                                    delay: 0.5,
+                                    opacity: 0,
+                                    y: -20
                                 }}>
                                 Contact Us
                             </motion.div>
