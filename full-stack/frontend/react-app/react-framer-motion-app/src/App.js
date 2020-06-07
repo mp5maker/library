@@ -15,7 +15,7 @@ function App() {
   return (
     <Fragment>
       <Header />
-      <AnimatePresence>
+      <AnimatePresence exitBeforeEnter>
         <Switch
           key={location.key}
           location={location}>
