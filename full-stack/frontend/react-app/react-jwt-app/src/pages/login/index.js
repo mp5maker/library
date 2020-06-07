@@ -52,6 +52,13 @@ export class Login extends React.Component {
         if (window.localStorage.getItem('token')) {
             console.log(auth())
         }
+
+        const onSuccess = (response) => console.log(response)
+        const onError = (error) => console.log(error.response)
+
+        axios.get('employee/')
+            .then(onSuccess)
+            .catch(onError)
     }
 
     render() {
