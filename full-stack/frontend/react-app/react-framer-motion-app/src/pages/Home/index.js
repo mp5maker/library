@@ -10,6 +10,13 @@ export const Home = () => {
                         y: `-100vh`,
                         opacity: 0,
                     }}
+                    transition={{
+                        delay: 0.25,
+                        duration: 0.25,
+                        type: `spring`,
+                        /* Works for spring only */
+                        stiffness: 50
+                    }}
                     animate={{
                         opacity: 1,
                         fontSize: 50,
