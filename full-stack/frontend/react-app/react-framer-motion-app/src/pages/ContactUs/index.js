@@ -25,16 +25,12 @@ const buttonVariants = {
         scale: 1.1,
         originX: 0,
         x: [-1, 1, -1, 1, 0],
-        color: `white`,
-        border: `1px solid white`
     },
     /* Testing two */
     hoverTwo: {
         boxShadow: `0 1px 15px 0 ligthgrey`,
         scale: 1.1,
         originX: 0,
-        color: `white`,
-        border: `1px solid white`,
         transition: {
             yoyo: Infinity
         }
@@ -47,11 +43,16 @@ export const ContactUs = () => {
 
     useEffect(() => {
        setTimeout(() => setTitle(false), 4000)
+       return () => {}
     }, [])
 
     return (
         <Fragment>
             <motion.div
+                exit={{
+                    x: `-100vw`,
+                    transition: `easeInOut`
+                }}
                 className={`page-contact-us-container`}>
                 <AnimatePresence>
                     {
@@ -60,7 +61,7 @@ export const ContactUs = () => {
                                 exit={{
                                    delay: 0.5,
                                    opacity: 0,
-                                   y: -100
+                                   y: -20
                                 }}>
                                 Contact Us
                             </motion.div>
@@ -69,6 +70,7 @@ export const ContactUs = () => {
                 </AnimatePresence>
                 <Link to={`/`}>
                     <motion.button
+                        style={{ border: `1px solid white` }}
                         variants={buttonVariants}
                         initial={`hidden`}
                         animate={`visible`}
@@ -79,7 +81,8 @@ export const ContactUs = () => {
                 <Link to={`/contact-us`}>
                     <motion.button
                         style={{
-                            marginLeft: `12px`
+                            marginLeft: `12px`,
+                            border: `1px solid white`
                         }}
                         variants={buttonVariants}
                         initial={`hidden`}

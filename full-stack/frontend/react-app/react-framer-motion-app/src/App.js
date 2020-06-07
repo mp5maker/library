@@ -1,5 +1,6 @@
 import React, { Fragment } from 'react';
-import { BrowserRouter as Router, Switch, Route } from 'react-router-dom'
+import { Switch, Route, useLocation } from 'react-router-dom'
+import { AnimatePresence } from 'framer-motion'
 import './App.css';
 
 import { Header } from './components/Header'
@@ -9,16 +10,20 @@ import { AboutUs } from './pages/AboutUs'
 import { ContactUs } from './pages/ContactUs'
 
 function App() {
+  const location = useLocation();
+
   return (
     <Fragment>
-      <Router>
-        <Header />
-        <Switch>
+      <Header />
+      <AnimatePresence>
+        <Switch
+          key={location.key}
+          location={location}>
           <Route exact path="/" component={Home} />
-          <Route path="/about-us" component={AboutUs} />
-          <Route path="/contact-us" component={ContactUs} />
+          <Route exact path="/about-us" component={AboutUs} />
+          <Route exact path="/contact-us" component={ContactUs} />
         </Switch>
-      </Router>
+      </AnimatePresence>
     </Fragment>
   );
 }

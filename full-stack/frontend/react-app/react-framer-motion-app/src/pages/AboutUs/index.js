@@ -18,6 +18,10 @@ const containerVariants = {
             when: `beforeChildren`,
             staggerChildren: 0.4
         }
+    },
+    exit: {
+        x: `-100vw`,
+        transition: `easeInOut`
     }
 }
 
@@ -53,20 +57,16 @@ const buttonVariants = {
     },
     /* Testing One */
     hover: {
-        boxShadow: `0 1px 15px 0 ligthgrey`,
+        boxShadow: `0 1px 15px 0 lightgrey`,
         scale: 1.1,
         originX: 0,
         x: [-1, 1, -1, 1, 0],
-        color: `white`,
-        border: `1px solid white`
     },
     /* Testing two */
     hoverTwo: {
-        boxShadow: `0 1px 15px 0 ligthgrey`,
+        boxShadow: `0 1px 15px 0 lightgrey`,
         scale: 1.1,
         originX: 0,
-        color: `white`,
-        border: `1px solid white`,
         transition: {
             yoyo: Infinity
         }
@@ -80,6 +80,7 @@ export const AboutUs = () => {
                 variants={containerVariants}
                 initial={`hidden`}
                 animate={`visible`}
+                exit={`exit`}
                 className={`page-about-us-container`}>
                 About Us
                 <motion.div

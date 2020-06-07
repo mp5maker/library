@@ -22,6 +22,10 @@ export const Home = () => {
                     height: `100vh`,
                     backgroundColor: `lightgrey`
                 }}
+                exit={{
+                    x: `-100vw`,
+                    transition: `easeInOut`
+                }}
                 className={`page-home-container`}>
                 <motion.h2
                     initial={{
