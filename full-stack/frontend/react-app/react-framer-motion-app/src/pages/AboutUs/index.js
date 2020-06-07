@@ -17,6 +17,20 @@ const containerVariants = {
     }
 }
 
+const childrenVariants = {
+    hidden: {
+        opacity: 0,
+        fontSize: `12px`
+    },
+    visible: {
+        opacity: 1,
+        transition: {
+            type: `spring`,
+            delay: 1
+        }
+    }
+}
+
 export const AboutUs = () => {
     return (
         <Fragment>
@@ -26,6 +40,10 @@ export const AboutUs = () => {
                 animate={`visible`}
                 className={`page-about-us-container`}>
                 About Us
+                <motion.div
+                    variants={childrenVariants}>
+                    Lorem ipsum dolor sit amet.
+                </motion.div>
             </motion.div>
         </Fragment>
     )
