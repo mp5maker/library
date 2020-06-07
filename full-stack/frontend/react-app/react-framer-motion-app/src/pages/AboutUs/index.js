@@ -51,6 +51,7 @@ const buttonVariants = {
             stiffness: 150
         }
     },
+    /* Testing One */
     hover: {
         boxShadow: `0 1px 15px 0 ligthgrey`,
         scale: 1.1,
@@ -58,6 +59,17 @@ const buttonVariants = {
         x: [-1, 1, -1, 1, 0],
         color: `white`,
         border: `1px solid white`
+    },
+    /* Testing two */
+    hoverTwo: {
+        boxShadow: `0 1px 15px 0 ligthgrey`,
+        scale: 1.1,
+        originX: 0,
+        color: `white`,
+        border: `1px solid white`,
+        transition: {
+            yoyo: Infinity
+        }
     }
 }
 
@@ -91,7 +103,7 @@ export const AboutUs = () => {
                         variants={buttonVariants}
                         initial={`hidden`}
                         animate={`visible`}
-                        whileHover={`hover`}>
+                        whileHover={`hoverTwo`}>
                         Contact Us
                     </motion.button>
                 </Link>
