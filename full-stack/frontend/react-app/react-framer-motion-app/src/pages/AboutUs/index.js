@@ -1,4 +1,5 @@
 import React, { Fragment } from 'react'
+import { Link } from 'react-router-dom'
 import { motion } from 'framer-motion'
 
 const containerVariants = {
@@ -33,6 +34,33 @@ const childrenVariants = {
     }
 }
 
+const buttonVariants = {
+    hidden: {
+        border: `none`,
+        padding: `12px`,
+        outline: `none`,
+        borderRadius: `5px`
+    },
+    visible: {
+        border: `none`,
+        padding: `12px`,
+        outline: `none`,
+        borderRadius: `5px`,
+        transition: {
+            type: `spring`,
+            stiffness: 150
+        }
+    },
+    hover: {
+        boxShadow: `0 1px 15px 0 ligthgrey`,
+        scale: 1.1,
+        originX: 0,
+        x: [-1, 1, -1, 1, 0],
+        color: `white`,
+        border: `1px solid white`
+    }
+}
+
 export const AboutUs = () => {
     return (
         <Fragment>
@@ -46,6 +74,27 @@ export const AboutUs = () => {
                     variants={childrenVariants}>
                     Lorem ipsum dolor sit amet.
                 </motion.div>
+                 <Link to={`/`}>
+                    <motion.button
+                        variants={buttonVariants}
+                        initial={`hidden`}
+                        animate={`visible`}
+                        whileHover={`hover`}>
+                        Home
+                    </motion.button>
+                </Link>
+                <Link to={`/contact-us`}>
+                    <motion.button
+                        style={{
+                            marginLeft: `12px`
+                        }}
+                        variants={buttonVariants}
+                        initial={`hidden`}
+                        animate={`visible`}
+                        whileHover={`hover`}>
+                        Contact Us
+                    </motion.button>
+                </Link>
             </motion.div>
         </Fragment>
     )
