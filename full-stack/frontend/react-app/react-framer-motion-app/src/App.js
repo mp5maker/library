@@ -5,6 +5,7 @@ import './App.css';
 
 import { Header } from './components/Header'
 import { Policy } from './components/Policy'
+import { Loader } from './components/Loader'
 
 import { Home } from './pages/Home'
 import { AboutUs } from './pages/AboutUs'
@@ -26,6 +27,7 @@ function App() {
         </Switch>
       </AnimatePresence>
       <Policy />
+      <Loader />
     </Fragment>
   );
 }
