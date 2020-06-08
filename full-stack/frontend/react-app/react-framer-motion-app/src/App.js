@@ -4,6 +4,7 @@ import { AnimatePresence } from 'framer-motion'
 import './App.css';
 
 import { Header } from './components/Header'
+import { Policy } from './components/Policy'
 
 import { Home } from './pages/Home'
 import { AboutUs } from './pages/AboutUs'
@@ -24,6 +25,7 @@ function App() {
           <Route exact path="/contact-us" component={ContactUs} />
         </Switch>
       </AnimatePresence>
+      <Policy />
     </Fragment>
   );
 }
