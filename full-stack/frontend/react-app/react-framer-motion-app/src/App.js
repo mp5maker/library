@@ -3,6 +3,8 @@ import { Switch, Route, useLocation } from 'react-router-dom'
 import { AnimatePresence } from 'framer-motion'
 import './App.css';
 
+import { Package } from './svg/Package'
+
 import { Header } from './components/Header'
 import { Policy } from './components/Policy'
 import { Loader } from './components/Loader'
@@ -16,6 +18,7 @@ function App() {
 
   return (
     <Fragment>
+      <Package />
       <Header />
       <AnimatePresence exitBeforeEnter>
         <Switch
