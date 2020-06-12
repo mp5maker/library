@@ -1,0 +1,20 @@
+body, html {
+    margin: 0;
+    padding: 0;
+}
+
+body {
+    height: 100%;
+    background-color: rgba(0, 0, 0, 0.5);
+}
+
+body > .container-fluid {
+    min-height: cal(100vh - 60px);
+}
+
+body > .container-fluid ~ footer {
+    border-top: 1px solid lightgrey;
+    height: 60px;
+    line-height: 60px;
+    text-align: text;
+}
