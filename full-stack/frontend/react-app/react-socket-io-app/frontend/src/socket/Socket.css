@@ -1,8 +1,9 @@
 .chatroom {
-    height: 500px;
+    height: 300px;
 }
 
 .chatroom > .messages {
     overflow-y: scroll;
-    height: 300px;
+    height: 200px;
+    max-height: 200px;
 }
