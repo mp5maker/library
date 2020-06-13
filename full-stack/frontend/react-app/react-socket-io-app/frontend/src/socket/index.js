@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from "react"
 import socketIO from 'socket.io-client'
-import SERVER from '../socket'
+import { SERVER } from '../constants/Routes'
 
 export const Socket = () => {
     const [message, setMessage] = useState("")
