@@ -20,14 +20,16 @@ app.get('/', (request, response) => response.sendFile(indexFile))
 
 /* Socket IO */
 io.on('connection', (socket) => {
-    console.log('A user is connected')
+    console.log("New Web socket Connection....")
 
-    /* Broadcast */
+    /* Fires of the only to the connected user */
+    socket.emit('information', 'Welcome to Chatroom')
+
+    /* Broadcast everyone except the user connected */
     socket.broadcast.emit('A user has entered a room')
-    io.emit('information', 'A user has entered a room')
 
     /* Custom */
-    socket.on('chat', (message) => console.log('meessage: ' + message))
+    socket.on('chat', (message) => io.emit("chat", message))
 
     /* Disconnect */
     socket.on('disconnect', () => console.log('A user is disconnected'))
