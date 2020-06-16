@@ -3,25 +3,25 @@ class CustomSet {
         this.collection = []
     }
 
-    has(element) {
-        return this.collection.includes(element)
-    }
-
     values() {
         return this.collection
     }
 
+    has(element) {
+        return this.collection.includes(element)
+    }
+
     add(element) {
-        if (!this.has(element)) {
+        if (this.has(element)) return false
+        else {
             this.collection.push(element)
             return true
         }
-        return false
     }
 
     remove(element) {
         if (this.has(element)) {
-            let index = this.collection.indexOf(element)
+            const index = this.collection.indexOf(element)
             this.collection.splice(index, 1)
             return true
         }
@@ -33,8 +33,7 @@ class CustomSet {
     }
 
     union(otherSet) {
-        let unionSet = new CustomSet();
-
+        const unionSet = new CustomSet()
         const firstSet = this.values()
         const secondSet = otherSet.values()
 
@@ -45,24 +44,24 @@ class CustomSet {
     }
 
     intersection(otherSet) {
-        let intersectionSet = new CustomSet()
-
+        const intersectionSet = new CustomSet()
         const firstSet = this.values()
+        const secondSet = otherSet
 
         firstSet.forEach((element) => {
-            if (otherSet.has(element)) intersectionSet.add(element)
+            if (secondSet.has(element)) intersectionSet.add(element)
         })
 
         return intersectionSet
     }
 
     difference(otherSet) {
-        let differenceSet = new CustomSet()
-
+        const differenceSet = new CustomSet();
         const firstSet = this.values()
+        const secondSet = otherSet
 
         firstSet.forEach((element) => {
-            if (!otherSet.has(element)) differenceSet.add(element)
+            if (!secondSet.has(element)) differenceSet.add(element)
         })
 
         return differenceSet
@@ -70,27 +69,25 @@ class CustomSet {
 
     subset(otherSet) {
         const firstSet = this.values()
-        return firstSet.every((element) => otherSet.has(element))
+        const secondSet = otherSet
+
+        return firstSet.every((element) => secondSet.has(element))
     }
 }
 
-const firstArray = [1, 2, 3, 4, 5]
-const secondArray = [2, 4, 5, 6, 7]
-// const secondArray = [1, 2, 3, 4, 5, 6]
+const setA = new CustomSet()
+const setB = new CustomSet()
+setA.add('a');
+setB.add('a');
+setB.add('b');
+setB.add('c');
+setB.add('d');
 
-const firstSet = new CustomSet()
-firstArray.forEach((element) => firstSet.add(element))
-console.log(firstSet.values())
-console.log(firstSet.size())
+console.log(setA.union(setB))
+console.log(setA.intersection(setB))
+console.log(setA.difference(setB))
+console.log(setB.difference(setA))
+console.log(setA.subset(setB))
 
-const secondSet = new CustomSet()
-secondArray.forEach((element) => secondSet.add(element))
-console.log(secondSet.values())
-console.log(secondSet.size())
-console.log(secondSet.remove(7))
-console.log(secondSet.values())
-
-console.log(firstSet.union(secondSet))
-console.log(firstSet.intersection(secondSet))
-console.log(firstSet.difference(secondSet))
-console.log(firstSet.subset(secondSet))
+setB.remove('d');
+console.log(setB.values())

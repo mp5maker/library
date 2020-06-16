@@ -1,15 +1,11 @@
-/* Stacks */
-
-// functions: push, pop, peek, length
-
 class Stack {
     constructor() {
-        this.count = 0;
+        this.count = 0
         this.storage = {}
     }
 
-    push(value) {
-        this.storage[this.count] = value
+    push(element) {
+        this.storage[this.count] = element
         this.count++;
     }
 
@@ -18,7 +14,7 @@ class Stack {
         this.count--;
         const result = this.storage[this.count]
         delete this.storage[this.count]
-        return result;
+        return result
     }
 
     size() {
@@ -30,16 +26,9 @@ class Stack {
     }
 }
 
-const stack = new Stack()
-/* Push */
-stack.push('H')
-stack.push('e')
-stack.push('l')
-stack.push('l')
-stack.push('o')
-console.log(stack.peek()) // o
-console.log(stack.size()) // 5
-console.log(stack.pop())  // o
-console.log(stack.size()) // 4
-console.log(stack.peek()) // l
-console.log(stack.size()) // 4
+const myStack = new Stack()
+myStack.push(1)
+myStack.push(2)
+console.log(myStack.peek())
+console.log(myStack.pop())
+console.log(myStack.peek())
