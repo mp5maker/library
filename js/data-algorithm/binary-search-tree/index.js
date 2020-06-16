@@ -1,8 +1,8 @@
 class Node {
     constructor(data, left = null, right = null) {
         this.data = data,
-        this.left = left
-        this.right = right
+        this.left = left;
+        this.right = right;
     }
 }
 
@@ -12,129 +12,102 @@ class BinarySearchTree {
         this.root = null
     }
 
+    print() {
+        return this.root
+    }
+
     add(data) {
         const node = this.root;
-        if (node === null) {
-            this.root = new Node(data);
-            return;
-        } else {
-            const searchTree = function (node) {
-                if (data < node.data) {
-                    if (node.left === null) {
-                        node.left = new Node(data);
-                        return;
-                    } else if (node.left !== null) {
-                        return searchTree(node.left);
-                    }
-                } else if (data > node.data) {
-                    if (node.right === null) {
-                        node.right = new Node(data);
-                        return;
-                    } else if (node.right !== null) {
-                        return searchTree(node.right);
-                    }
-                } else {
-                    return null;
-                }
-            };
-            return searchTree(node);
+
+        const searchTree = (point) => {
+            if (data < point.data) {
+                if (point.left == null) return point.left = new Node(data)
+                else if (point.left !== null) return searchTree(point.left)
+            } else if (data > point.data) {
+                if (point.right == null) return point.right = new Node(data)
+                else if (point.right !== null) return searchTree(point.right)
+            } else return null
         }
+
+        if (node == null) return this.root = new Node(data)
+        else return searchTree(node)
     }
 
     findMin() {
-        let current = this.root;
+        let current = this.root
         while (current.left !== null) {
-            current = current.left;
+            current = current.left
         }
-        return current.data;
+        return current.data
     }
 
     findMax() {
-        let current = this.root;
+        let current = this.root
         while (current.right !== null) {
-            current = current.right;
+            current = current.right
         }
-        return current.data;
+        return current.data
     }
 
     find(data) {
-        let current = this.root;
-        while (current.data !== data) {
-            if (data < current.data) {
-                current = current.left;
-            } else {
-                current = current.right;
-            }
-            if (current === null) {
-                return null;
-            }
+        let current = this.root
+        while (current) {
+            if (data == current.data) return current.data
+            if (data < current.data) current = current.left
+            if (data > current.data) current = current.right
         }
-        return current;
+        return current
     }
 
     isPresent(data) {
-        let current = this.root;
-        while (current) {
-            if (data === current.data) {
-                return true;
-            }
-            if (data < current.data) {
-                current = current.left;
-            } else {
-                current = current.right;
-            }
+        let current = this.root
+        while(current) {
+            if (data == current.data) return true
+            if (data < current.data) current = current.left
+            if (data > current.data) current = current.right
         }
-        return false;
+        return false
     }
 
     remove(data) {
-        const removeNode = function (node, data) {
-            if (node == null) {
-                return null;
-            }
+        const removeNode = function(node, data) {
+            if (node == null) return null
             if (data == node.data) {
-                // node has no children
-                if (node.left == null && node.right == null) {
-                    return null;
-                }
-                // node has no left child
-                if (node.left == null) {
-                    return node.right;
-                }
-                // node has no right child
-                if (node.right == null) {
-                    return node.left;
-                }
-                // node has two children
-                var tempNode = node.right;
+                if (node.left == null && node.right == null) return null
+                if (node.left == null ) return node.right
+                if (node.right == null) return node.left
+
+                let tempNode = node.right;
                 while (tempNode.left !== null) {
-                    tempNode = tempNode.left;
+                    tempNode = tempNode.left
                 }
-                node.data = tempNode.data;
-                node.right = removeNode(node.right, tempNode.data);
-                return node;
+                node.data = tempNode.data
+                node.right = removeNode(node.right, tempNode.data)
+                return node
             } else if (data < node.data) {
-                node.left = removeNode(node.left, data);
-                return node;
-            } else {
-                node.right = removeNode(node.right, data);
-                return node;
+                node.left = removeNode(node.left, data)
+                return node
+            } else if (data > node.data) {
+                node.right = removeNode(node.right, data)
+                return node
             }
         }
-        this.root = removeNode(this.root, data);
+        this.root = removeNode(this.root, data)
     }
 }
 
-const bst =  new BinarySearchTree()
-bst.add(4);
+const bst = new BinarySearchTree()
+bst.add(4)
 bst.add(2)
 bst.add(6)
 bst.add(1)
 bst.add(3)
+bst.add(5)
 bst.add(7)
 bst.remove(4)
+console.log(bst.print())
 console.log(bst.findMin())
-console.log(bst.findMax())
 bst.remove(7)
 console.log(bst.findMax())
-console.log(bst.isPresent(4))
+console.log(bst.find(5))
+console.log(bst.isPresent(5))

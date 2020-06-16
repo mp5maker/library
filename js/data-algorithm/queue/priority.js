@@ -1,4 +1,4 @@
-class PriorityQueue {
+class Priority {
     constructor() {
         this.collection = []
     }
@@ -7,24 +7,29 @@ class PriorityQueue {
         return this.collection
     }
 
-    isEmpty() {
+    empty() {
         return this.collection.length == 0
     }
 
-    enqueue(element) {
-        if (this.isEmpty()) return this.collection.push(element)
-        const priority = element[1]
+    size() {
+        return this.collection.length
+    }
 
-        let added = false;
-        for (let i = 0; i < this.collection.length; i++) {
-            const collectionPriority = this.collection[i][1]
-            if (priority < collectionPriority) {
-                this.collection.splice(i, 0, element)
-                added = true
-                break;
+    enqueue(element) {
+        if (this.empty()) {
+            this.collection.push(element)
+        } else {
+            let added = false
+            const elementQueue = element[1]
+            for (let i = 0; i < this.size(); i++) {
+                const collectionQueue = this.collection[i][1]
+                if (elementQueue < collectionQueue) {
+                    this.collection.splice(i, 0, element)
+                    added = true
+                }
             }
+            if (!added) this.collection.push(element)
         }
-        if (!added) this.collection.push(element)
     }
 
     dequeue() {
@@ -34,21 +39,4 @@ class PriorityQueue {
     front() {
         return this.collection[0]
     }
-
-    size() {
-        return this.collection.length
-    }
 }
-
-const pq = new PriorityQueue();
-const firstArray = [
-    ['Photon Khan', 2],
-    ['Erfan Mahmud', 1],
-    ['Samith Zaman', 3]
-]
-firstArray.forEach((element) => pq.enqueue(element))
-console.log(pq.print())
-console.log(pq.front())
-console.log(pq.size())
-console.log(pq.dequeue())
-console.log(pq.print())
