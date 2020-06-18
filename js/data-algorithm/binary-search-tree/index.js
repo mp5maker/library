@@ -94,6 +94,82 @@ class BinarySearchTree {
         }
         this.root = removeNode(this.root, data)
     }
+
+    findMinHeight(node = this.root) {
+        console.log('i run')
+        if (node == null) return -1
+        let left = this.findMinHeight(node.left)
+        let right = this.findMinHeight(node.right)
+        console.log("BinarySearchTree -> findMinHeight -> left", left)
+        console.log("BinarySearchTree -> findMinHeight -> right", right)
+
+        if (left < right) return left + 1
+        else return right + 1
+    }
+
+    findMaxHeight(node = this.root) {
+        if (node == null) return -1
+        let left = this.findMaxHeight(node.left)
+        let right = this.findMaxHeight(node.right)
+
+        if (left > right) return left + 1
+        else return right + 1
+    }
+
+    isBalanced() {
+        return this.findMinHeight() >= this.findMaxHeight() - 1
+    }
+
+    inOrder() {
+        if (this.root == null) return null
+        else {
+            let result = []
+
+            const traverseInOrder = (node) => {
+                node.left && traverseInOrder(node.left);
+                result.push(node.data)
+                node.right && traverseInOrder(node.right)
+            }
+
+            traverseInOrder(this.root)
+
+            return result
+        }
+    }
+
+    preOrder() {
+        if (this.root == null) return null
+        else {
+            let result = []
+
+            const traverseInOrder = (node) => {
+                result.push(node.data)
+                node.left && traverseInOrder(node.left);
+                node.right && traverseInOrder(node.right)
+            }
+
+            traverseInOrder(this.root)
+
+            return result
+        }
+    }
+
+    postOrder() {
+        if (this.root == null) return null
+        else {
+            let result = []
+
+            const traverseInOrder = (node) => {
+                result.push(node.data)
+                node.left && traverseInOrder(node.left);
+                node.right && traverseInOrder(node.right)
+            }
+
+            traverseInOrder(this.root)
+
+            return result
+        }
+    }
 }
 
 const bst = new BinarySearchTree()
@@ -104,10 +180,13 @@ bst.add(1)
 bst.add(3)
 bst.add(5)
 bst.add(7)
-bst.remove(4)
-console.log(bst.print())
-console.log(bst.findMin())
-bst.remove(7)
-console.log(bst.findMax())
-console.log(bst.find(5))
-console.log(bst.isPresent(5))
+// bst.remove(4)
+// console.log(bst.print())
+// console.log(bst.findMin())
+// bst.remove(7)
+// console.log(bst.findMax())
+// console.log(bst.find(5))
+// console.log(bst.isPresent(5))
+console.log(bst.findMinHeight())
+// console.log(bst.findMaxHeight())
+// console.log(bst.isBalanced())
