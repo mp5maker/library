@@ -1,0 +1,21 @@
+// @ts-ignore
+import { {{ upperCase name }}_CHANGE } from "ReduxConstants/ActionType";
+
+const DefaultState = {
+    type: "",
+    status: ""
+};
+
+interface DefaultStateInterface {
+    type: any,
+    status: any
+}
+
+export const {{ name }}Reducer = (state = DefaultState, action: DefaultStateInterface) => {
+    switch (action.type) {
+        case {{ upperCase name }}_CHANGE:
+            return { ...state, ...action };
+        default:
+            return state;
+    }
+}

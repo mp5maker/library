@@ -1,0 +1,13 @@
+import { Dispatch } from 'redux';
+
+// @ts-ignore
+import { {{ upperCase name }}_CHANGE } from "ReduxConstants/ActionType";
+
+export const {{ name }}Action = (params: object) => (dispatch: Dispatch<any>) => {
+    const { status }: any = params;
+
+    dispatch({
+        type: {{ upperCase name }}_CHANGE,
+        status
+    });
+}
