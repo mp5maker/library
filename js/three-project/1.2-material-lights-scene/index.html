@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>THREE</title>
+    <link
+        rel="stylesheet"
+        href="../node_modules/bootstrap/dist/css/bootstrap.css" />
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            overflow: hidden;
+        }
+
+        body {
+            height: 100%;
+        }
+
+        body .container-fluid {
+            min-height: calc(100vh - 60px);
+            padding-left: 0;
+            padding-right: 0;
+        }
+
+        body footer {
+            min-height: 60px;
+            line-height: 60px;
+            border-top: 1px solid lightgrey;
+        }
+        canvas {
+            background: transparent;
+        }
+    </style>
+</head>
+<body>
+    <div class="container-fluid">
+        <div class="row">
+            <div class="col">
+                <div id="webgl-output"></div>
+                <div id="stats-output"></div>
+            </div>
+        </div>
+    </div>
+    <script src="../node_modules/three/build/three.min.js"></script>
+    <script src="../node_modules/three/examples/js/libs/stats.min.js"></script>
+    <script src="../node_modules/jquery/dist/jquery.min.js"></script>
+    <script src="./main.js"></script>
+</body>
+</html>
