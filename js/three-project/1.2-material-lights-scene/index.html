@@ -11,11 +11,11 @@
         * {
             margin: 0;
             padding: 0;
-            overflow: hidden;
         }
 
         body {
             height: 100%;
+            overflow-x: hidden;
         }
 
         body .container-fluid {
@@ -24,13 +24,22 @@
             padding-right: 0;
         }
 
+        body .container-fluid .row .col {
+            padding: 0;
+        }
+
         body footer {
+            text-align: center;
             min-height: 60px;
             line-height: 60px;
             border-top: 1px solid lightgrey;
         }
         canvas {
             background: transparent;
+            z-index: -1;
+        }
+        .dg.main.a {
+            right: 25px;
         }
     </style>
 </head>
@@ -42,10 +51,11 @@
                 <div id="stats-output"></div>
             </div>
         </div>
+        <footer>
+            2020 &copy; Photon Enterprise
+        </footer>
     </div>
-    <script src="../node_modules/three/build/three.min.js"></script>
-    <script src="../node_modules/three/examples/js/libs/stats.min.js"></script>
     <script src="../node_modules/jquery/dist/jquery.min.js"></script>
-    <script src="./main.js"></script>
+    <script type="module" src="./main.js"></script>
 </body>
 </html>
