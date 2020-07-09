@@ -86,5 +86,17 @@
 > gui.addFolder
 
 ## 2.4 Basic Camera Types ##
-<!-- Camera -->
+<!-- Perspective -->
+> THREE.PerspectiveCamera
+  ==> fov (field of view) Humans (180 degree view) ==> computer screen small (60 to 90 for games) default(45)
+  ==> aspect (aspect ration width / height)
+  ==> near (default 0.1)
+  ==> far (default 1000)
+<!-- Orthographic -->
 > THREE.Orthographic
+  ==> left
+  ==> right
+  ==> top
+  ==> bottom
+  ==> near
+  ==> far
