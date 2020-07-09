@@ -10,7 +10,7 @@ import { GUI } from '../node_modules/three/examples/jsm/libs/dat.gui.module.js'
  * overrideMaterial
  *
  * SCENE METHODS
- * getChildByName(string)
+ * getObjectByName(string)
  * remove(object)
  * tranverse(function)
  */
@@ -51,7 +51,7 @@ var planeGeometryHeight = 20
 var planeGeometry = new THREE.PlaneGeometry(planeGeometryWidth, planeGeometryHeight, 1, 1)
 var planeMaterial = new THREE.MeshLambertMaterial({ color: colors.whiteShade })
 var plane = new THREE.Mesh(planeGeometry, planeMaterial)
-plane.rotation.x = -0.5 * Math.PI
+
 plane.position.set(15, 0, 0)
 plane.receiveShadow = true
 scene.add(plane)

@@ -2,19 +2,6 @@ import * as THREE from '../node_modules/three/build/three.module.js'
 import Stats from '../node_modules/three/examples/jsm/libs/stats.module.js'
 import { GUI } from '../node_modules/three/examples/jsm/libs/dat.gui.module.js'
 
-/**
- * SCENE PROPERTIES
- * add
- * children
- * fog
- * overrideMaterial
- *
- * SCENE METHODS
- * getChildByName(string)
- * remove(object)
- * tranverse(function)
- */
-
 /* Colors */
 const colors = {
     white: 0xEEEEEE,
@@ -23,6 +10,8 @@ const colors = {
     blue: 0x7777ff,
     whiteShade: 0xffffff,
     ambientLight: 0x0c0c0c,
+    random: 0x44ff44,
+    anotherRandom: 0x000000
 }
 
 /* Renderer */
@@ -42,45 +31,17 @@ var camera = new THREE.PerspectiveCamera(
     0.1,
     1000
 )
-camera.position.set(-30, 40, 30)
+camera.position.set(120, 60, 180)
 camera.lookAt(scene.position)
 
+var planeGeometry = new THREE.PlaneGeometry(60, 20, 1,)
+var planeMaterial = new THREE.MeshLambertMaterial({ color: colors.blue })
+var plane = new THREE.Mesh(planeGeometry, planeMaterial)
+plane.rotation.x = -0.5 * Math.PI
+plane.position.set(15, 0, 0)
+scene.add(plane)
 
-/* Custom Geometry */
-var vertices = [
-    new THREE.Vector3(-1, -1, 1), // 0
-    new THREE.Vector3(1, -1, 1), // 1
-    new THREE.Vector3(-1, 1, 1), // 2
-    new THREE.Vector3(1, 1, 1), // 3
-    new THREE.Vector3(-1, -1, -1), // 4
-    new THREE.Vector3(1, -1, -1), // 5
-    new THREE.Vector3(-1, 1, -1), // 6
-    new THREE.Vector3(1, 1, -1), // 7
-]
-
-var faces = [
-    new THREE.Face3(0, 3, 2), // Front
-    new THREE.Face3(0, 1, 3), // Front
-    new THREE.Face3(1, 5, 3), // Right
-    new THREE.Face3(1, 7, 3), // Right
-    new THREE.Face3(5, 7, 6), // Back
-    new THREE.Face3(5, 6, 4), // Back
-    new THREE.Face3(4, 6, 2), // Left
-    new THREE.Face3(4, 2, 0), // Left
-    new THREE.Face3(3, 6, 2), // Top
-    new THREE.Face3(3, 7, 6), // Top
-    new THREE.Face3(0, 5, 4), // Bottom
-    new THREE.Face3(0, 1, 5), // Bottom
-]
-var geometry = new THREE.Geometry()
-geometry.vertices = vertices
-geometry.faces = faces
-geometry.computeFaceNormals();
-geometry.computeVertexNormals();
-var material = new THREE.MeshLambertMaterial({ color: colors.red })
-var shape = new THREE.Mesh(geometry, material)
-scene.add(shape)
-
+/* Ambient Light */
 var ambientLight = new THREE.AmbientLight(colors.ambientLight)
 scene.add(ambientLight)
 
@@ -106,11 +67,38 @@ var stats = prepareStats()
 
 /* Dat GUI */
 var controls = {
-    rotationSpeed: 0.03,
-    numberOfObjects: scene.children.length,
+    perspective: 'Perspective',
+    switchCamera: function() {
+        if (camera instanceof THREE.PerspectiveCamera) {
+            camera = new THREE.OrthographicCamera(
+                window.innerWidth / - 16,
+                window.innerWidth / 16,
+                window.innerHeight / 16,
+                window.innerHeight / -16,
+                -200,
+                500
+            )
+            camera.position.set(2, 1, 3)
+            camera.lookAt(scene.position.x, scene.position.y, scene.position.z)
+            this.perspective = 'Orthographic'
+        } else {
+            camera = new THREE.PerspectiveCamera(
+                45,
+                window.innerWidth / window.innerHeight,
+                0.1,
+                1000
+            )
+            camera.position.set(120, 60, 180)
+            camera.lookAt(scene.position.x, scene.position.y, scene.position.z)
+            this.perspective = 'Perspective'
+        }
+    }
 }
 var gui = new GUI()
-gui.add(controls, 'rotationSpeed').min(0).max(0.5).step(0.01).name('Rotation Speed')
+const cameraGUI = gui.addFolder('Camera')
+cameraGUI.add(controls, 'perspective').name('Current Camera')
+cameraGUI.add(controls, 'switchCamera').name('Switch Camera')
+
 gui.domElement.style.position = 'absolute';
 gui.domElement.style.right = '0px'
 gui.domElement.style.top = '0px'
@@ -119,7 +107,6 @@ gui.domElement.style.top = '0px'
 /* Render/Animate */
 const animate = () => {
     stats.update()
-    shape.geometry.verticesNeedUpdate = true;
     renderer.render(scene, camera)
     requestAnimationFrame(animate)
 }
