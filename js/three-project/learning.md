@@ -165,14 +165,23 @@
 > directional.shadow.darkness
 > directional.shadow.mapSize.width
 > directional.shadow.mapSize.height
+
+### 3.2 Hemisphere Lights ###
 <!-- Advanced Lights -->
 <!-- Hemisphere Light (Natural Light Outdoor Scenes) -->
 > hemisphere.color
 > hemisphere.groundColor
 > hemisphere.intensity
-<!-- RectAreaLight -->
+
+### 3.3 Rect Area Lights ###
 > renderer.setSize
 > renderer.shadowMap.enabled
 > renderer.setPixelRatio
 > renderer.shadowMap.type = THREE.PCFSoftShadowMap
 > renderer.outputEncoding = THREE.sRGBEncoding
+<!-- Material -->
+> THREE.MeshStandardMaterial
+
+### 3.4 Light Flare ###
+> Lensflare
+> LensflareElement
