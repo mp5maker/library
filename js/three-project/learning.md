@@ -40,9 +40,6 @@
 ## 2.1 Basic of Scene ##
 <!-- Light -->
 > THREE.AmbientLight
-<!-- Fog (used for Scene) -->
-> THREE.Fog
-> THREE.FogExp2
 <!-- Scene -->
 > scene.traverse(function)
 > scene.add(object)
@@ -50,7 +47,8 @@
 > scene.getObjectByName(string)
 > scene.children
 > scene.overrideMaterial
-> scene.fog
+> scene.fog = THREE.Fog
+> scene.for THREE.FogExp2
 
 ## 2.2 Vector 3 Face 3 ##
 <!-- Geometry -->
@@ -100,3 +98,81 @@
   ==> bottom
   ==> near
   ==> far
+
+## 3.1 Explore the lights ###
+<!-- GUI -->
+> gui.addColor
+<!-- Colors -->
+> THREE.Colors
+> colors.set(value)
+> colors.setHex(value)
+> setRGB(r, g, b)
+> setHSV(h, s, v)
+> setStyle(style)
+> copy(color)
+> copyGammaToLinear(color)
+> copyLinearToGamma(color)
+> convertGammaToLinear()
+> convertLinearToGamma()
+> getHex()
+> getHexString()
+> getStyle()
+> getHSV()
+> add(color)
+> addColors(color1, color2)
+> addScalar(s)
+> multiply(color)
+> multiplyScalar(s)
+> lerp(color, alpha)
+> clone()
+<!-- Ambient Light (Atmosphere)-->
+> ambient.color
+<!-- Point Light (Light Bulb)-->
+> point.color
+> point.intensity
+> point.distance
+> point.position
+> point.visible
+<!-- Spot Light (Cone) -->
+> spot.color
+> spot.intensity
+> spot.distance
+> spot.position
+> spot.visible
+> spot.castShadow
+> spot.shadow.camera.near
+> spot.shadow.camera.far
+> spot.shadow.camera.fov
+> spot.shadow.bias
+> spot.angle
+> spot.exponent
+> spot.shadow.darkness
+> spot.shadow.mapSize.width
+> spot.shadow.mapSize.height
+<!-- Directional Light (Sun)-->
+> directional.color
+> directional.intensity
+> directional.distance
+> directional.position
+> directional.visible
+> directional.castShadow
+> directional.shadow.camera.near
+> directional.shadow.camera.far
+> directional.shadow.camera.fov
+> directional.shadow.bias
+> directional.angle
+> directional.exponent
+> directional.shadow.darkness
+> directional.shadow.mapSize.width
+> directional.shadow.mapSize.height
+<!-- Advanced Lights -->
+<!-- Hemisphere Light (Natural Light Outdoor Scenes) -->
+> hemisphere.color
+> hemisphere.groundColor
+> hemisphere.intensity
+<!-- RectAreaLight -->
+> renderer.setSize
+> renderer.shadowMap.enabled
+> renderer.setPixelRatio
+> renderer.shadowMap.type = THREE.PCFSoftShadowMap
+> renderer.outputEncoding = THREE.sRGBEncoding

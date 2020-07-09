@@ -2,25 +2,18 @@ import * as THREE from '../node_modules/three/build/three.module.js'
 import Stats from '../node_modules/three/examples/jsm/libs/stats.module.js'
 import { GUI } from '../node_modules/three/examples/jsm/libs/dat.gui.module.js'
 
+
 /* Colors */
 const colors = {
     white: 0xEEEEEE,
     gray: 0xcccccc,
     red: 0xff0000,
     blue: 0x7777ff,
+    whiteShade: 0xffffff,
+    ambientLight: 0x0c0c0c,
+    random: 0x44ff44,
+    anotherRandom: 0x000000,
 }
-
-/* Dat GUI */
-var controls = {
-    rotationSpeed: 0.03,
-    bouncingSpeed: 0.03
-}
-var gui = new GUI()
-gui.add(controls, 'rotationSpeed').min(0).max(0.5).step(0.01).name('Rotation Speed')
-gui.add(controls, 'bouncingSpeed').min(0).max(0.5).step(0.01).name('Bouncing Speed')
-gui.domElement.style.position = 'absolute';
-gui.domElement.style.right = '0px'
-gui.domElement.style.top = '0px'
 
 /* Renderer */
 var renderer = new THREE.WebGLRenderer({ antialias: true })
@@ -39,49 +32,56 @@ var camera = new THREE.PerspectiveCamera(
     0.1,
     1000
 )
-camera.position.set(-30, 40, 30)
+camera.position.set(-40, 60, 40)
 camera.lookAt(scene.position)
 
-/* Axes */
-var axes = new THREE.AxesHelper(20)
-scene.add(axes)
-
-/* Plane */
 var planeGeometry = new THREE.PlaneGeometry(60, 20, 1, 1)
 var planeMaterial = new THREE.MeshLambertMaterial({ color: colors.gray })
 var plane = new THREE.Mesh(planeGeometry, planeMaterial)
 plane.rotation.x = -0.5 * Math.PI
-plane.position.set(15, 0, 0)
 plane.receiveShadow = true
 scene.add(plane)
 
-/* Cube */
-var cubeGeometry = new THREE.CubeGeometry(4, 4, 4)
-var cubeMaterial = new THREE.MeshLambertMaterial({
-    color: colors.red,
-})
-var cube = new THREE.Mesh(cubeGeometry, cubeMaterial)
-cube.position.set(-4, 3, 0)
-cube.castShadow = true
-scene.add(cube)
-
-/* Sphere */
-var sphereGeometry = new THREE.SphereGeometry(4, 20, 20)
-var sphereMaterial = new THREE.MeshLambertMaterial({
-    color: colors.blue,
-})
+var sphereGeometry = new THREE.SphereGeometry(4, 20, 20);
+var sphereMaterial = new THREE.MeshLambertMaterial({ color: colors.blue })
 var sphere = new THREE.Mesh(sphereGeometry, sphereMaterial)
+sphere.position.set(5, 7, 2)
 sphere.castShadow = true
-sphere.position.set(5, 5, 5)
 scene.add(sphere)
 
-/* SpotLight */
-var spotLight = new THREE.SpotLight(colors.white)
-spotLight.position.set(-20, 50, -5)
-spotLight.castShadow = true
-spotLight.shadow.mapSize.width = 1024 * 5;
-spotLight.shadow.mapSize.height = 1024 * 5;
-scene.add(spotLight)
+var boxGeometry = new THREE.BoxGeometry(5, 5, 5)
+var boxMaterial = new THREE.MeshLambertMaterial({ color: colors.red })
+var box = new THREE.Mesh(boxGeometry, boxMaterial)
+box.position.set(-20, 5, 0)
+box.castShadow = true
+scene.add(box)
+
+/* Hemisphere Light */
+var hemisphereLight = new THREE.HemisphereLight(0xffffbb, 0x080820, 1)
+scene.add(hemisphereLight)
+
+/* Dat GUI */
+var controls = {
+    color: 0xffffbb,
+    groundColor: 0x080820,
+    intensity: 1
+}
+var gui = new GUI()
+var hemisphereGUI = gui.addFolder('Hemisphere')
+hemisphereGUI.addColor(controls, 'color').name('Sky').onChange((color) => {
+    hemisphereLight.color = new THREE.Color(color)
+})
+hemisphereGUI.addColor(controls, 'groundColor').name('Ground').onChange((color) => {
+    hemisphereLight.groundColor = new THREE.Color(color)
+})
+hemisphereGUI.add(controls, 'intensity').min(0).max(1000).onChange((value) => {
+    hemisphereLight.intensity = value
+})
+
+
+gui.domElement.style.position = 'absolute';
+gui.domElement.style.right = '0px'
+gui.domElement.style.top = '0px'
 
 /* Stats */
 const prepareStats = () => {
@@ -96,21 +96,10 @@ const prepareStats = () => {
 var stats = prepareStats()
 
 /* Render/Animate */
-var step = 0;
 const animate = () => {
     stats.update()
-
-    /* Cube */
-    cube.rotation.x += controls.rotationSpeed
-    cube.rotation.y += controls.rotationSpeed
-    cube.rotation.z += controls.rotationSpeed
-
-    step += controls.bouncingSpeed
-    sphere.position.x = 20 + (10 * Math.cos(step))
-    sphere.position.y = 2 + (10 * Math.abs(Math.sin(step)))
-
-    requestAnimationFrame(animate)
     renderer.render(scene, camera)
+    requestAnimationFrame(animate)
 }
 requestAnimationFrame(animate)
 
