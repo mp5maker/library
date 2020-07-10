@@ -185,3 +185,38 @@
 ### 3.4 Light Flare ###
 > Lensflare
 > LensflareElement
+
+### 4.1 Simple Mesh Materials ###
+<!-- Material -->
+> MeshBasicMaterial
+> MeshDepthMaterial
+> MeshNormalMaterial
+> MeshFaceMaterial
+> MeshLambertMaterial
+> MeshPhongMaterial
+> ShaderMaterial
+> LineBasicMaterial
+> LineDashedMaterial
+<!-- Basic Material Properties -->
+> material.ID
+> material.name
+> material.opacity
+> material.transparent
+> material.overdraw
+> material.visible
+> material.side
+> material.needsUpdate
+<!-- Blending Material Properties -->
+> material.blending
+> material.blendsrc
+> material.blenddst
+> material.blendequation
+<!-- Mesh Basic Material -->
+> wireframeLinewidth  [will always be one due to limitations]
+> wireframeLinejoin (for 2d)
+> color
+> wireframeLinecap
+> shading
+> vertexColors
+> fog
+> visible
