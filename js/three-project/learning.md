@@ -288,9 +288,66 @@
 > geometry.height
 > geometry.widthSegements
 > geometry.heightSegments
+<!-- Circle Geometry -->
+> geometry.radius
+> geometry.segments
+> geometry.thetaStart
+> geometry.thetaLength
+<!-- Shape Geometry -->
+> THREE.Shape
+> THREE.Path
+> geometry.makeGeometry
+> geometry.createPointsGeometry
+> geometry.createSpacedPointsGeometry
+<!-- Box Geometry -->
+> geometry.width
+> geometry.height
+> geometry.depth
+> geometry.widthSegments
+> geometry.heightSegments
+> geometry.depthSegments
+<!-- Cylinder Geometry -->
+> geometry.radiusTop
+> geometry.radiusBottom
+> geometry.height
+> geometry.segmentX
+> geometry.segmentY
+> geometry.openEnded
+<!-- Torus Geometry -->
+> geometry.radius
+> geometry.tube
+> geometry.radialSegments
+> geometry.tubularSegments
+> geometry.arc
+<!-- Torus Knot Geometry -->
+> geometry.radius
+> geometry.tube
+> geometry.radialSegments
+> geometry.tubularSegments
+> geometry.p
+> geometry.q
+> geometry.heightScale
+<!-- Icosahedron Geometry -->
+> geometry.radius
+> geometry.detail
+<!-- Shape -->
+> shape.moveTo()
+> shape.lineTo(x, y)
+> shape.quadraticCurveTo()
+> shape.bezierCurveTo()
+> shape.splineTo()
+> arc()
+> aStartAngle()
+> aEndAngle()
+> AClockwise()
+> absArc()
+> absArc()
+> ellipse()
+> absEllipse()
 <!-- Geomtery -->
 > THREE.WireframeGeometry
 > THREE.PlaneGeometry
 > THREE.CircleGeometry
+> THREE.ShapeGeometry
 <!--  Material -->
 > THREE.LineBasicMaterial

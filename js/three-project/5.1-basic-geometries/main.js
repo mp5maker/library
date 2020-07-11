@@ -84,6 +84,102 @@ var circleWireframe = new THREE.Line(wireframeCircleGeometry, wireframeMaterial)
 scene.add(circleWireframe)
 circleWireframe.position.set(15, 15, 15)
 
+/* Shape Geometry */
+var createShape = () => {
+    var shape = new THREE.Shape()
+    shape.moveTo(10, 10)
+    shape.lineTo(10, 40)
+    shape.bezierCurveTo(15, 25, 25, 30, 40)
+    shape.splineThru([
+        new THREE.Vector2(32, 30),
+        new THREE.Vector2(28, 20),
+        new THREE.Vector2(30, 10),
+    ])
+    shape.quadraticCurveTo(20, 15, 10, 10)
+
+    var hole1 = new THREE.Path()
+    hole1.absellipse(16, 24, 2, 3, 0, Math.PI * 2, true)
+    shape.holes.push(hole1)
+
+    var hole2 = new THREE.Path()
+    hole2.absellipse(23, 24, 2, 3, 0, Math.PI * 2, true)
+    shape.holes.push(hole2)
+
+    var hole3 = new THREE.Path()
+    hole3.absellipse(20, 16, 2, 0, Math.PI, true)
+    shape.holes.push(hole3)
+
+    return shape
+}
+var shapeGeometry = new THREE.ShapeGeometry(createShape())
+var shapeMesh = new THREE.Mesh(shapeGeometry, meshBasicMaterial)
+shapeMesh.position.set(25, 25, 25)
+scene.add(shapeMesh)
+
+var shapeLineGeometry = new THREE.Line(
+    createShape().createPointsGeometry(10),
+    new THREE.LineBasicMaterial({ color: colors.red, linewidth: 2 })
+)
+shapeLineGeometry.position.set(50, 50, 50)
+scene.add(shapeLineGeometry)
+
+var boxGeometry = new THREE.BoxGeometry(10, 10, 10)
+var boxMesh = new THREE.Mesh(boxGeometry, meshBasicMaterial)
+boxMesh.position.set(-15, 15, -15)
+scene.add(boxMesh)
+
+var sphereGeometry = new THREE.SphereGeometry(5, 20, 20)
+var sphereMesh = new THREE.Mesh(sphereGeometry, meshBasicMaterial)
+sphereMesh.position.set(-30, 15, -15)
+scene.add(sphereMesh)
+
+var cylinderGeometry = new THREE.CylinderGeometry(5, 5, 10, 5)
+var cylinderMesh = new THREE.Mesh(cylinderGeometry, meshBasicMaterial)
+cylinderMesh.position.set(-50, 50, -50)
+scene.add(cylinderMesh)
+
+var torusGeometry = new THREE.TorusGeometry(10, 3, 16, 100);
+var torusMesh = new THREE.Mesh(torusGeometry, meshBasicMaterial)
+torusMesh.position.set(-80, 80, -80)
+scene.add(torusMesh)
+
+var torusKnotGeometry = new THREE.TorusKnotGeometry(10, 8, 100, 16)
+var torusKnotMesh = new THREE.Mesh(torusKnotGeometry, meshBasicMaterial)
+torusKnotMesh.position.set(-100, 100, -100)
+scene.add(torusKnotMesh)
+
+var vertices = [
+    -1, -1, -1, 1, -1, -1, 1, 1, -1, -1, 1, -1,
+    -1, -1, 1, 1, -1, 1, 1, 1, 1, -1, 1, 1,
+];
+
+var faces = [
+    2, 1, 0, 0, 3, 2,
+    0, 4, 7, 7, 3, 0,
+    0, 1, 5, 5, 4, 0,
+    1, 2, 6, 6, 5, 1,
+    2, 3, 7, 7, 6, 2,
+    4, 5, 6, 6, 7, 4
+];
+var polyhedronGeometry = new THREE.PolyhedronGeometry(vertices, faces, 6, 2);
+var polyhedronMesh = new THREE.Mesh(polyhedronGeometry, meshBasicMaterial)
+polyhedronMesh.position.set(-150, 50, -150)
+scene.add(polyhedronMesh)
+
+var icosahedronGeometry = new THREE.IcosahedronGeometry(6, 2);
+var IcosahedronMesh = new THREE.Mesh(icosahedronGeometry, meshBasicMaterial)
+IcosahedronMesh.position.set(-175, 100, -175)
+scene.add(IcosahedronMesh)
+
+var tetrahedronGeometry = new THREE.TetrahedronGeometry(6, 2);
+var tetrahedronMesh = new THREE.Mesh(tetrahedronGeometry, meshBasicMaterial)
+tetrahedronMesh.position.set(-300, 125, -300)
+scene.add(tetrahedronMesh)
+
+var OctahedronGeometry = new THREE.OctahedronGeometry(6, 2);
+var octahedronMesh = new THREE.Mesh(OctahedronGeometry, meshBasicMaterial)
+octahedronMesh.position.set(-300, 150, -300)
+scene.add(octahedronMesh)
 
 /* Axes Helper */
 var axesHelper = new THREE.AxesHelper(15)
