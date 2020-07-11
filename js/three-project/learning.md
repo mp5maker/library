@@ -281,3 +281,16 @@
 > THREE.VertexColors
 <!-- Line -->
 > THREE.Line
+
+### 4.5 Geometry ###
+<!-- Plane Geometry -->
+> geometry.width
+> geometry.height
+> geometry.widthSegements
+> geometry.heightSegments
+<!-- Geomtery -->
+> THREE.WireframeGeometry
+> THREE.PlaneGeometry
+> THREE.CircleGeometry
+<!--  Material -->
+> THREE.LineBasicMaterial
