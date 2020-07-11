@@ -252,7 +252,32 @@
 > material.metalness
 > material.roughness
 <!-- Mesh Phong Material -->
-> material.ambient
 > material.emissive
 > material.specular
 > material.shininess
+<!-- Shader Material -->
+> material.wireframe
+> material.wireframeLinewidth
+> material.shading
+> material.vertexColors
+> material.fog
+> material.fragmentShader
+> material.vertexShader
+> material.uniforms
+> material.defines
+> material.attributes
+> material.lights
+> {NEED TO LEARN MORE ABOUT VERTEX AND FRAGMENT SHADER}
+<!-- Line Basic Material -->
+> material.color
+> material.linewidth
+> material.vertexColors
+> material.fog
+<!-- Line Dashed Material -->
+> material.scale
+> material.dashSize
+> material.gapSize
+<!-- Utilities -->
+> THREE.VertexColors
+<!-- Line -->
+> THREE.Line

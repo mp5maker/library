@@ -71,7 +71,6 @@ var meshLambertMaterial = new THREE.MeshLambertMaterial({ color: colors.red })
 var meshPhongMaterial = new THREE.MeshPhongMaterial({
     color: colors.red,
     shininess: 100,
-    ambient: new THREE.Color(colors.white),
     specular: 0x111111,
     emissive: new THREE.Color(colors.black),
     opacity: 1
@@ -79,6 +78,32 @@ var meshPhongMaterial = new THREE.MeshPhongMaterial({
 var box = new THREE.Mesh(boxGeometry, meshPhongMaterial)
 box.position.set(5, 5, 5)
 scene.add(box)
+
+/* Lines */
+let lineColors = []
+let linesGeometry = new THREE.Geometry()
+for (let i = 0; i < 50; i++) {
+    linesGeometry.vertices.push(new THREE.Vector3(i, i, i))
+    lineColors[i] = new THREE.Color(Math.random() * 0xffffff)
+}
+linesGeometry.colors = lineColors
+var lineMaterial = new THREE.LineBasicMaterial({
+    opacity: 1,
+    linewidth: 1,
+    vertexColors: THREE.VertexColors
+})
+var lineDashedMaterial = new THREE.LineDashedMaterial({
+    opacity: 1,
+    linewidth: 1,
+    vertexColors: THREE.VertexColors
+})
+var line = new THREE.Line(linesGeometry, lineMaterial)
+line.position.set(15, 15, 15)
+scene.add(line)
+
+var lineDashed = new THREE.Line(linesGeometry, lineDashedMaterial)
+lineDashed.position.set(-50, -50, -50)
+scene.add(lineDashed)
 
 /* Axes Helper */
 var axesHelper = new THREE.AxesHelper(15)
@@ -102,7 +127,7 @@ var controls = {
     specular: colors.white,
     emissive: colors.black,
     shininess: 100,
-    material: 'lambert'
+    material: 'phong'
 }
 
 /* GUI */
