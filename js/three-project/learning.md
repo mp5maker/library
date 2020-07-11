@@ -82,6 +82,8 @@
 > gui.max
 > gui.name
 > gui.addFolder
+<!-- Geometry -->
+> geometry.clone()
 
 ## 2.4 Basic Camera Types ##
 <!-- Perspective -->
@@ -106,25 +108,25 @@
 > THREE.Colors
 > colors.set(value)
 > colors.setHex(value)
-> setRGB(r, g, b)
-> setHSV(h, s, v)
-> setStyle(style)
-> copy(color)
-> copyGammaToLinear(color)
-> copyLinearToGamma(color)
-> convertGammaToLinear()
-> convertLinearToGamma()
-> getHex()
-> getHexString()
-> getStyle()
-> getHSV()
-> add(color)
-> addColors(color1, color2)
-> addScalar(s)
-> multiply(color)
-> multiplyScalar(s)
-> lerp(color, alpha)
-> clone()
+> colors.setRGB(r, g, b)
+> colors.setHSV(h, s, v)
+> colors.setStyle(style)
+> colors.copy(color)
+> colors.copyGammaToLinear(color)
+> colors.copyLinearToGamma(color)
+> colors.convertGammaToLinear()
+> colors.convertLinearToGamma()
+> colors.getHex()
+> colors.getHexString()
+> colors.getStyle()
+> colors.getHSV()
+> colors.add(color)
+> colors.addColors(color1, color2)
+> colors.addScalar(s)
+> colors.multiply(color)
+> colors.multiplyScalar(s)
+> colors.lerp(color, alpha)
+> colors.clone()
 <!-- Ambient Light (Atmosphere)-->
 > ambient.color
 <!-- Point Light (Light Bulb)-->
@@ -220,3 +222,37 @@
 > vertexColors
 > fog
 > visible
+
+### 4.2 Mesh Depth Material ###
+<!-- Blending -->
+> THREE.MultiplyBlending
+
+### 4.3 Mesh Normal Material ###
+<!-- Mesh Normal Material -->
+> material.wireframe
+> material.wirframeLineWidth
+> material.shading
+<!-- Shading -->
+> THREE.FlatShading
+> THREE.SmoothShading
+<!-- Helper -->
+> THREE.ArrowHelper
+<!-- Geometry -->
+> sphere.geometry.faces
+
+### 4.4 Mesh Face Material ###
+<!-- Material -->
+>  THREE.MeshFaceMaterial
+
+### 4.4 Mesh Advanced Material ###
+<!-- Mesh Lambert Material -->
+> material.ambient
+> material.emissive
+<!-- Mesh Standard Material -->
+> material.metalness
+> material.roughness
+<!-- Mesh Phong Material -->
+> material.ambient
+> material.emissive
+> material.specular
+> material.shininess
