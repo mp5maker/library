@@ -282,7 +282,7 @@
 <!-- Line -->
 > THREE.Line
 
-### 4.5 Geometry ###
+### 5.1 Geometry ###
 <!-- Plane Geometry -->
 > geometry.width
 > geometry.height
@@ -330,6 +330,9 @@
 <!-- Icosahedron Geometry -->
 > geometry.radius
 > geometry.detail
+<!-- Tetrahardon Geometry -->
+> geometry.radius
+> geometry.detail
 <!-- Shape -->
 > shape.moveTo()
 > shape.lineTo(x, y)
@@ -349,5 +352,30 @@
 > THREE.PlaneGeometry
 > THREE.CircleGeometry
 > THREE.ShapeGeometry
+> THREE.OctahedronGeometry
+> THREE.PolyhedronGeometry
+> THREE.TetrahedronGeometry
+> THREE.IcosahedronGeometry
 <!--  Material -->
 > THREE.LineBasicMaterial
+
+### 6.1 Advanced Geometries ###
+> ConvexGeometry
+> THREE.LatheGeometry
+> THREE.ExtrudeGeometry
+> THREE.TubeGeometry
+<!-- Lathe Geometry -->
+> geometry.points
+> geometry.segments
+> geometry.phiStart
+> geometry.phiLength
+<!-- Extruding Geometry -->
+> geometry.curveSegements
+> geometry.steps
+> geometry.depth
+> geometry.bevelEnabled
+> geometry.bevelThickness
+> geometry.bevelSize
+> geometry.bevelOffset
+> geometry.extrudePath
+> geometry.UVGenerator
