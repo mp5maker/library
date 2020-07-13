@@ -360,10 +360,12 @@
 > THREE.LineBasicMaterial
 
 ### 6.1 Advanced Geometries ###
+<!-- Geometry -->
 > ConvexGeometry
 > THREE.LatheGeometry
 > THREE.ExtrudeGeometry
 > THREE.TubeGeometry
+> THREE.ParametricGeometry
 <!-- Lathe Geometry -->
 > geometry.points
 > geometry.segments
@@ -379,3 +381,19 @@
 > geometry.bevelOffset
 > geometry.extrudePath
 > geometry.UVGenerator
+<!-- Tube Geometry -->
+> geometry.path
+> geometry.segments
+> geometry.radius
+> geometry.radiusSegments
+> geometry.closed
+> geometry.debug
+<!-- Parametric Geometry-->
+> geometry.function
+> geometry.slices
+> geometry.stacks
+> geometry.useTris
+<!-- Utilities -->
+> THREE.CatmullRomCurve3
+<!-- Loader -->
+> THREE.SVGLoader

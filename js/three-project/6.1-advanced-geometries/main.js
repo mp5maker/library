@@ -3,6 +3,7 @@ import Stats from '../node_modules/three/examples/jsm/libs/stats.module.js'
 import { GUI, color } from '../node_modules/three/examples/jsm/libs/dat.gui.module.js'
 import { OrbitControls } from '../node_modules/three/examples/jsm/controls/OrbitControls.js'
 import { ConvexGeometry } from '../node_modules/three/examples/jsm/geometries/ConvexGeometry.js'
+import { SVGLoader } from '../node_modules/three/examples/jsm/loaders/SVGLoader.js'
 
 /* Colors */
 const colors = {
@@ -98,6 +99,69 @@ var material =new THREE.MeshBasicMaterial({ color: colors.red, side: THREE.Doubl
 var lathe = new THREE.Mesh(geometry, material)
 lathe.position.set(25, 25, 25)
 scene.add(lathe)
+
+var points = []
+for (let i = 0;  i < 20; i++) {
+    var randomX = -20 + Math.round(Math.random() * 50)
+    var randomY = -15 + Math.round(Math.random() * 40)
+    var randomZ = -20 + Math.round(Math.random() * 40)
+    points.push(new THREE.Vector3(randomX, randomY, randomZ))
+}
+var tubeGeometry = new THREE.TubeGeometry(
+    new THREE.CatmullRomCurve3(points),
+    5,
+    20,
+    20,
+    true
+)
+var mesh = new THREE.Mesh(tubeGeometry, meshBasicMaterial)
+mesh.position.set(-50, 50, 50)
+scene.add(mesh)
+
+var loader = new SVGLoader()
+const onSuccessLoad = (data) => {
+    var paths = data.paths;
+    var group = new THREE.Group();
+
+    for (var i = 0; i < paths.length; i++) {
+        var path = paths[i];
+        var material = new THREE.MeshBasicMaterial({
+            color: path.color,
+            side: THREE.DoubleSide,
+            depthWrite: false
+        });
+
+        var shapes = path.toShapes(true);
+        for (var j = 0; j < shapes.length; j++) {
+            var shape = shapes[j];
+            var geometry = new THREE.ExtrudeGeometry(shape, {
+                steps: 2,
+                depth: 16,
+                bevelEnabled: true,
+                bevelThickness: 1,
+                bevelSize: 1,
+                bevelOffset: 0,
+                bevelSegments: 1
+            });
+            var mesh = new THREE.Mesh(geometry, material);
+            group.add(mesh);
+        }
+    }
+    scene.add(group);
+}
+loader.load('./batman.svg', onSuccessLoad)
+
+var paraFunction = function (a, b, target) {
+    var x = -5 + 5 * a;
+    var y = -5 + 5 * b;
+    var z = (Math.sin(a * Math.PI) + Math.sin(b * Math.PI)) * -7;
+    target.set(x, y, z);
+}
+var geometry = new THREE.ParametricGeometry(paraFunction, 25, 25);
+var material = new THREE.MeshBasicMaterial({ color: 0x00ff00 });
+var klein = new THREE.Mesh(geometry, material);
+klein.position.set(-100, 100, 100)
+scene.add(klein);
 
 var options = {
     steps: 2,
