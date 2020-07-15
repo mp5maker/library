@@ -426,3 +426,12 @@
 > THREE.SkeletonHelper
 <!-- Loader -->
 > THREE.GLTFLoader
+<!-- Clock -->
+> clock.getDelta()
+<!-- Animation Mixer -->
+> mixer.clipAction
+> mixer.enabled
+> mixer.setEffectiveTimeScale
+> mixer.setEffectiveWeigth
+> mixer.play
+> mixer.update
