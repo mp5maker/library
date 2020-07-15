@@ -413,3 +413,16 @@
     bevelOffset: 0,
     bevelSegments: 5
 }
+
+### 9.1 Animation ###
+<!-- RayCaster -->
+> Three.RayCaster()
+
+### 9.2 Working with Glb ###
+<!-- Utilities -->
+> THREE.Clock
+> THREE.AnimationMixer
+> THREE.Skeleton
+> THREE.SkeletonHelper
+<!-- Loader -->
+> THREE.GLTFLoader
