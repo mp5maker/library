@@ -1,0 +1,9 @@
+.Flex {
+    display: flex;
+    justify-content: flex-start;
+    flex-wrap: wrap;
+}
+
+.Flex div {
+    margin: 12px;
+}
