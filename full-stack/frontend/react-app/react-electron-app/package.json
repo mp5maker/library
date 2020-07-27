@@ -2,6 +2,7 @@
   "name": "react-electron-app",
   "productName": "Electron Create React App Example",
   "main": "electron/main.js",
+  "homepage": "./",
   "version": "0.1.0",
   "private": true,
   "dependencies": {
@@ -17,7 +18,9 @@
     "build": "react-scripts build",
     "test": "react-scripts test",
     "eject": "react-scripts eject",
-    "start-electron": "export ELECTRON_START_URL=http://localhost:3000 && electron ."
+    "start-electron": "export ELECTRON_START_URL=http://localhost:3000 && electron .",
+    "build-electron": "cp -R electron build && mkdir build/src && cp -R src/Shared build/src/Shared",
+    "package": "electron-builder build --mac --win --linux --x64 -c.extraMetadata.main=build/electron/main.js --publish never"
   },
   "eslintConfig": {
     "extends": "react-app"
@@ -35,6 +38,18 @@
     ]
   },
   "devDependencies": {
-    "electron": "^9.1.1"
+    "electron": "^9.1.1",
+    "electron-builder": "^22.7.0"
+  },
+  "build": {
+    "files": [
+      "build/**/*",
+      "node_modules/**/*"
+    ],
+    "publish": {
+      "provider": "github",
+      "repo": "electron-cra-example",
+      "owner": "mp5maker"
+    }
   }
 }
