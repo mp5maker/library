@@ -81,3 +81,90 @@ user = new Proxy(user, {
 })
 
 console.log(user['name'])
+
+
+/* USE CASE: You want to detect how many times you called an api */
+/* Manipulate: Object */
+let bears = { grizzly: true }
+let grizzlyCount = 0
+const proxyBears = new Proxy(bears, {
+    get: function(target, prop) {
+        if (prop in target) {
+            grizzlyCount++;
+            return target[prop]
+        }
+        else throw new Error('Access Denied')
+    },
+    set: function(target, prop, value) {
+        if (['grizzly', 'brown', 'polar'].indexOf(prop) == -1) {
+            throw new Error('It is not a bear!')
+        }
+        target[prop] = value
+    },
+    deleteProperty: function(target, prop) {
+        delete target[prop]
+    }
+})
+
+proxyBears.grizzly
+proxyBears.grizzly
+proxyBears.grizzly
+console.log(grizzlyCount)
+
+
+/* Manipulating Function */
+function growl() {
+    return 'grrrr'
+}
+const loudGrowl = new Proxy(growl, {
+    apply: function(target, thisArg, args) {
+        return target().toUpperCase() + `!!!`
+    }
+})
+console.log(loudGrowl())
+
+
+/* Manipulate Array */
+const indexedArray = new Proxy(Array, {
+    construct: function (target, [originalArray]) {
+        const index = {}
+        originalArray.forEach(function(item) {
+            index[item.id] = item
+        })
+
+        const newArray = new target(...originalArray)
+
+        return new Proxy(newArray, {
+            get: function(target, prop) {
+                if (prop == 'push') {
+                    return function(item) {
+                        index[item.id] = item
+                        return target[prop].call(target, item)
+                    }
+                }
+                if (prop == 'findById') {
+                    return function(searchById) {
+                        return index[searchById]
+                    }
+                }
+            }
+        })
+    }
+})
+
+let newBears = new indexedArray([
+    {
+        id: 2,
+        name: `grizzly`
+    },
+    {
+        id: 4,
+        name: `black`,
+    },
+    {
+        id: 3,
+        name: `polar`
+    }
+])
+
+console.log(newBears.findById(2))
