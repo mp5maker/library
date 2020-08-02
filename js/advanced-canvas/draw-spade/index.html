@@ -1,0 +1,273 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <canvas id="canvas"></canvas>
+    <script>
+        (function() {
+            const canvas = document.querySelector('#canvas')
+            const context = canvas.getContext('2d')
+            canvas.width = 1000
+            canvas.height = 500
+
+            const drawSpade = ({ context, x, y, width, height }) => {
+                context.save()
+                const bottomWidth = width * 0.7
+                const topHeight = height * 0.7
+                const bottomHeight = height * 0.3
+
+                context.beginPath()
+                context.moveTo(x, y)
+
+                /* Top Left */
+                context.bezierCurveTo(
+                    x,
+                    y + topHeight / 2,
+                    x - width / 2,
+                    y + topHeight / 2,
+                    x - width / 2,
+                    y + topHeight
+                )
+
+                /* Bottom Left */
+                context.bezierCurveTo(
+                    x - width / 2,
+                    y + topHeight * 1.3,
+                    x,
+                    y + topHeight * 1.3,
+                    x,
+                    y + topHeight
+                )
+
+                /* Bottom Right */
+                context.bezierCurveTo(
+                    x,
+                    y + topHeight * 1.3,
+                    x + width / 2,
+                    y + topHeight * 1.3,
+                    x + width / 2,
+                    y + topHeight
+                )
+
+                 /* Top Right */
+                context.bezierCurveTo(
+                    x + width / 2,
+                    y + topHeight / 2,
+                    x,
+                    y + topHeight / 2,
+                    x,
+                    y
+                )
+                context.closePath()
+                context.fill()
+
+                /* Bottom Spade */
+                context.beginPath()
+                context.moveTo(x, y + topHeight)
+                context.quadraticCurveTo(
+                    x,
+                    y + topHeight + bottomHeight,
+                    x - bottomWidth / 2,
+                    y + topHeight + bottomHeight
+                )
+                context.lineTo(x + bottomWidth / 2, y + topHeight + bottomHeight)
+                context.quadraticCurveTo(
+                    x,
+                    y + topHeight + bottomHeight,
+                    x,
+                    y + topHeight
+                )
+                context.closePath()
+                context.fillStyle = "black"
+                context.fill()
+                context.restore()
+            }
+
+            // /* Draw Spade */
+            drawSpade({
+                context,
+                x: 50,
+                y: canvas.height / 2,
+                width: 50,
+                height: 50
+            })
+
+            const drawHeart = ({ context, x, y, width, height }) => {
+                context.save()
+                context.beginPath()
+                const topCurveHeight = height * 0.3
+                context.moveTo(x, y + topCurveHeight)
+
+                context.bezierCurveTo(
+                    x,
+                    y,
+                    x - width / 2,
+                    y,
+                    x - width / 2,
+                    y + topCurveHeight
+                )
+
+                context.bezierCurveTo(
+                    x - width / 2,
+                    y + (height + topCurveHeight) / 2,
+                    x,
+                    y + (height + topCurveHeight) / 2,
+                    x,
+                    y + height
+                )
+
+                context.bezierCurveTo(
+                    x,
+                    y + (height + topCurveHeight) / 2,
+                    x + width / 2,
+                    y + (height + topCurveHeight) / 2,
+                    x + width / 2,
+                    y + topCurveHeight
+                )
+
+                context.bezierCurveTo(
+                    x + width / 2,
+                    y,
+                    x,
+                    y,
+                    x,
+                    y + topCurveHeight
+                )
+
+                context.closePath()
+                context.fillStyle = "red"
+                context.fill()
+                context.restore()
+            }
+
+            /* Draw Heart */
+            drawHeart({
+                context,
+                x: 125,
+                y: canvas.height / 2,
+                width: 50,
+                height: 50
+            })
+
+            const drawClub = ({ context, x, y, width, height }) => {
+                context.save()
+                const circleRadius = width * 0.3
+                const bottomWidth = width * 0.5
+                context.fillStyle = "black"
+
+                context.beginPath()
+                context.arc(
+                    x,
+                    y + circleRadius + (height * 0.05),
+                    circleRadius,
+                    0,
+                    2 * Math.PI,
+                    false
+                )
+                context.fill()
+
+                context.beginPath()
+                context.arc(
+                    x + circleRadius,
+                    y + (height * 0.6),
+                    circleRadius,
+                    0,
+                    2 * Math.PI,
+                    false
+                )
+                context.fill()
+
+                context.beginPath()
+                context.arc(
+                    x - circleRadius,
+                    y + (height * 0.6),
+                    circleRadius,
+                    0,
+                    2 * Math.PI,
+                    false
+                )
+                context.fill()
+
+                context.beginPath()
+                context.arc(
+                    x,
+                    y + (height * 0.5),
+                    circleRadius / 2,
+                    0,
+                    2 * Math.PI,
+                    false
+                )
+                context.fill()
+
+                context.beginPath()
+                context.arc(
+                    x,
+                    y + (height * 0.5),
+                    circleRadius / 2,
+                    0,
+                    2 * Math.PI,
+                    false
+                )
+                context.fill()
+
+                context.moveTo(x, y + (height * 0.6))
+                context.quadraticCurveTo(
+                    x,
+                    y + height,
+                    x - bottomWidth / 2,
+                    y + height
+                )
+
+                context.lineTo(x + bottomWidth / 2, y + height)
+                context.quadraticCurveTo(
+                    x,
+                    y + height,
+                    x,
+                    y + (height * 0.6)
+                )
+                context.closePath()
+                context.fill()
+
+                context.restore()
+            }
+
+            /* Draw Club */
+            drawClub({
+                context,
+                x: 200,
+                y: canvas.height / 2,
+                width: 50,
+                height: 50
+            })
+
+            const drawDiamond = ({ context, x, y, width, height }) => {
+                context.save()
+                context.beginPath()
+                context.moveTo(x, y)
+
+                context.lineTo(x - width / 2, y + height / 2)
+                context.lineTo(x, y + height)
+                context.lineTo(x + width / 2, y + height / 2)
+                context.closePath()
+                context.restore()
+            }
+
+            /* Draw Driamond */
+            drawDiamond({
+                context,
+                x: 275,
+                y: canvas.height / 2,
+                width: 50,
+                height: 50
+            })
+
+            context.fillStyle = 'black'
+            context.fill()
+        })()
+    </script>
+</body>
+</html>
