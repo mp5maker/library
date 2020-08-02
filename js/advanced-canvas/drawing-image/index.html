@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <canvas id="canvas"></canvas>
+    <script>
+        (function() {
+            const canvas = document.querySelector('#canvas')
+            const context = canvas.getContext('2d')
+            canvas.width = 300
+            canvas.height = 300
+
+            const image = new Image()
+            image.onload = function() {
+                const destX = canvas.width / 2 - image.width / 2
+                const destY = canvas.height / 2 - image.width / 2
+                context.drawImage(image, destX, destY)
+            }
+            image.src = 'https://picsum.photos/300/300'
+        })()
+    </script>
+</body>
+</html>
