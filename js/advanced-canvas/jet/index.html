@@ -1,0 +1,109 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <canvas id = "canvas"></canvas>
+    <script>
+        (function() {
+            const canvas = document.querySelector('#canvas')
+            const context = canvas.getContext('2d')
+            canvas.width = 1000
+            canvas.height = 1000
+
+            context.beginPath()
+            context.moveTo(248, 60)
+            context.lineTo(262, 45)
+            context.lineTo(285, 56)
+            context.lineTo(284, 59)
+            context.lineTo(276, 91)
+            context.closePath()
+            context.fillStyle = 'black'
+            context.fill()
+            context.lineWidth = 4
+            context.stroke()
+
+            context.beginPath()
+            context.moveTo(281, 54)
+            context.lineTo(273, 84)
+            context.closePath()
+            context.lineWidth = 2
+            context.stroke()
+
+            context.beginPath()
+            context.moveTo(425, 159)
+            context.lineTo(449, 91)
+            context.lineTo(447, 83)
+            context.lineTo(408, 67)
+            context.lineTo(343, 132)
+            context.fillStyle = 'black'
+            context.fill()
+            context.lineWidth = 4
+            context.stroke()
+
+            context.beginPath()
+            context.moveTo(420, 158)
+            context.lineTo(447, 83)
+            context.lineWidth = 2
+            context.stroke()
+
+            context.beginPath()
+            context.moveTo(439, 102)
+            context.lineTo(395, 81)
+            context.lineWidth = 2
+            context.stroke()
+
+            context.beginPath()
+            context.moveTo(541, 300)
+            context.quadraticCurveTo(529, 252, 490, 228)
+            context.quadraticCurveTo(487, 160, 303, 123)
+
+            context.lineTo(213, 20)
+            context.lineTo(207, 22)
+            context.bezierCurveTo(208, 164, 255, 207, 412, 271);
+            context.lineTo(427, 271)
+            context.quadraticCurveTo(470, 296, 541, 300)
+            context.closePath()
+            context.fillStyle = 'black'
+            context.fill()
+            context.lineWidth = 4
+            context.stroke()
+
+            context.beginPath()
+            context.moveTo(297, 124)
+            context.lineTo(207, 22)
+            context.lineWidth = 2
+            context.stroke()
+
+            context.beginPath()
+            context.moveTo(303, 121)
+            context.lineTo(297, 125)
+            context.lineTo(255, 104)
+            context.lineWidht = 2
+            context.stroke()
+
+            context.beginPath()
+            context.moveTo(212, 80)
+            context.lineTo(140, 85)
+            context.lineTo(138, 91)
+            context.lineTo(156, 105)
+            context.lineTo(254, 104)
+            contexst.lineWidth = 4
+            context.fillStyle = 'black'
+            context.fill()
+            context.stroke()
+
+            context.beginPath()
+            context.moveTo(140, 86)
+            context.lineTo(156, 100)
+            context.lineTo(254, 100)
+            context.lineTo(209, 77)
+            context.lineWidth = 2
+            context.stroke()
+        })();
+    </script>
+</body>
+</html>
