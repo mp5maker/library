@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+
+<body>
+    <canvas id="canvas"></canvas>
+    <script>
+        (function () {
+            const canvas = document.querySelector('#canvas')
+            const context = canvas.getContext('2d')
+            canvas.width = 500
+            canvas.height = 500
+
+            context.lineWidth = 1
+            context.strokeColor = 'black'
+
+            let radius = 0
+            let angle = 0
+            context.moveTo(canvas.width / 2, canvas.height / 2)
+            for (let i = 0; i < 150; i++) {
+                radius += 0.75
+                angle += ((2 * Math.PI) / 50)
+                let x = (canvas.width / 2) + (radius * Math.cos(angle))
+                let y = (canvas.height / 2) + (radius * Math.sin(angle))
+                context.lineTo(x, y)
+            }
+            context.stroke()
+        })();
+    </script>
+</body>
+
+</html>

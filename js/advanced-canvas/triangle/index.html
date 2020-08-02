@@ -1,0 +1,91 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <canvas id="canvas"></canvas>
+    <script>
+        (function(){
+            const canvas = document.querySelector('#canvas')
+            const context = canvas.getContext('2d')
+            canvas.width = 1000
+            canvas.height = 1000
+            const triangleWidth = 150
+            const triangleHeight = 150
+
+            const drawTriangle = ({ context, x, y, triangleWidth, triangleHeight, fillStyle }) => {
+                context.beginPath()
+                context.moveTo(x, y)
+                context.lineTo(x + triangleWidth / 2, y - triangleHeight)
+                context.lineTo(x + triangleWidth, triangleHeight)
+                context.closePath()
+
+                context.fillStyle = fillStyle
+                context.strokeStyle = fillStyle
+                context.strokeWidth = 10
+                context.fill()
+                context.stroke()
+            }
+
+            context.save()
+            const linearGradient = context.createLinearGradient(0, triangleHeight, triangleWidth, triangleHeight)
+            linearGradient.addColorStop(0, '#8ED6FF')
+            linearGradient.addColorStop(1, '#004CB3')
+            drawTriangle({
+                context,
+                x: 0,
+                y: triangleHeight,
+                triangleWidth: triangleWidth,
+                triangleHeight: triangleHeight,
+                fillStyle: linearGradient
+            })
+            context.restore()
+
+            context.save()
+            const radialGradient = context.createRadialGradient(
+                triangleWidth + (triangleWidth / 2),
+                triangleHeight / 2,
+                20,
+                triangleWidth * 2,
+                triangleHeight / 2,
+                triangleWidth
+            )
+            radialGradient.addColorStop(0, 'orange')
+            radialGradient.addColorStop(0.17, 'yellow')
+            radialGradient.addColorStop(0.5, 'green')
+            radialGradient.addColorStop(0.666, 'blue')
+            radialGradient.addColorStop(1, 'violet')
+            drawTriangle({
+                context,
+                x: triangleWidth,
+                y: triangleHeight,
+                triangleWidth: triangleWidth,
+                triangleHeight: triangleHeight,
+                fillStyle: radialGradient
+            })
+            context.restore()
+
+            context.save()
+            const image = new Image()
+            image.onload = function() {
+                const pattern = context.createPattern(image, 'repeat')
+                drawTriangle({
+                    context,
+                    x: triangleWidth * 2,
+                    y: triangleHeight,
+                    triangleWidth: triangleWidth,
+                    triangleHeight: triangleHeight,
+                    fillStyle: pattern
+                })
+            }
+            image.src = "https://picsum.photos/150/150"
+            image.crossOrigin = 'anonymous'
+            context.restore()
+
+        })()
+    </script>
+</body>
+</html>

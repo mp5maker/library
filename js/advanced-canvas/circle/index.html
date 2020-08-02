@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+
+<body>
+    <canvas id="canvas"></canvas>
+    <script>
+        (function () {
+            const canvas = document.querySelector('#canvas')
+            const context = canvas.getContext('2d')
+            canvas.width = 500
+            canvas.height = 500
+
+            context.arc(canvas.width / 2, canvas.height / 2, 75, 0, 2 * Math.PI, false)
+            context.fillStyle = 'black'
+            context.fill()
+            context.strokeStyle = 'black'
+            context.strokeWidth = 10
+            context.stroke()
+        })();
+    </script>
+</body>
+
+</html>

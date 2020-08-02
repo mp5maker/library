@@ -1,0 +1,165 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <canvas id="canvas"></canvas>
+    <script>
+        (function(){
+            const canvas = document.querySelector('#canvas')
+            const context = canvas.getContext('2d')
+            canvas.width = 500
+            canvas.height = 500
+
+            const cloud = ({ x = 50, y = canvas.height / 2, fillStyle = 'black', strokeStyle = 'black'} = {}) => {
+                const widthRandom = () => Math.max(40, Math.ceil(Math.random() * 50))
+                const heightRandom = () => Math.max(25, Math.ceil(Math.random() * 50))
+                let generatedWidth, generatedHeight, newStartX = x, newStartY = y;
+                context.beginPath()
+
+                /* First Curve */
+                context.moveTo(newStartX, newStartY)
+                generatedWidth = widthRandom()
+                generatedHeight = heightRandom()
+                context.bezierCurveTo(
+                    newStartX,
+                    newStartY - generatedHeight,
+                    newStartX + generatedWidth,
+                    newStartY - generatedHeight,
+                    newStartX + generatedWidth,
+                    newStartY
+                )
+                context.strokeStyle = strokeStyle
+                context.stroke()
+
+                /* Second Curve */
+                newStartX = generatedWidth + newStartX
+                generatedWidth = widthRandom()
+                generatedHeight = heightRandom()
+                context.bezierCurveTo(
+                    newStartX,
+                    newStartY - generatedHeight,
+                    newStartX + generatedWidth,
+                    newStartY - generatedHeight,
+                    newStartX + generatedWidth,
+                    newStartY
+                )
+                context.strokeStyle = strokeStyle
+                context.stroke()
+
+                /* Third Curve */
+                newStartX = generatedWidth + newStartX
+                generatedWidth = widthRandom()
+                generatedHeight = heightRandom()
+                context.bezierCurveTo(
+                    newStartX,
+                    newStartY - generatedHeight,
+                    newStartX + generatedWidth,
+                    newStartY - generatedHeight,
+                    newStartX + generatedWidth,
+                    newStartY
+                )
+                context.strokeStyle = strokeStyle
+                context.stroke()
+
+                /* Forth Curve */
+                newStartX = generatedWidth + newStartX
+                generatedWidth = widthRandom()
+                generatedHeight = heightRandom()
+                context.bezierCurveTo(
+                    newStartX + generatedWidth,
+                    newStartY,
+                    newStartX + generatedWidth,
+                    newStartY + generatedHeight,
+                    newStartX,
+                    newStartY + generatedHeight
+                )
+                context.strokeStyle = strokeStyle
+                context.stroke()
+
+                /* Fifth Curve */
+                newStartX = newStartX
+                newStartY = generatedHeight + newStartY
+                generatedWidth = widthRandom()
+                generatedHeight = heightRandom()
+                context.bezierCurveTo(
+                    newStartX,
+                    newStartY,
+                    newStartX - generatedWidth,
+                    newStartY + generatedHeight,
+                    newStartX - generatedWidth,
+                    newStartY
+                )
+                context.strokeStyle = strokeStyle
+                context.stroke()
+
+                /* Sixth Curve */
+                newStartX = newStartX - generatedWidth
+                newStartY = newStartY
+                generatedWidth = widthRandom()
+                generatedHeight = heightRandom()
+                context.bezierCurveTo(
+                    newStartX,
+                    newStartY,
+                    newStartX - generatedWidth,
+                    newStartY + generatedHeight,
+                    newStartX - generatedWidth,
+                    newStartY
+                )
+                context.strokeStyle = strokeStyle
+                context.stroke()
+
+                /* Seventh Curve */
+                newStartX = newStartX - generatedWidth
+                newStartY = newStartY
+                generatedWidth = widthRandom()
+                generatedHeight = heightRandom()
+                context.bezierCurveTo(
+                    newStartX,
+                    newStartY,
+                    newStartX - generatedWidth,
+                    newStartY + generatedHeight,
+                    newStartX - generatedWidth,
+                    newStartY
+                )
+                context.strokeStyle = strokeStyle
+                context.stroke()
+
+                /* Arc */
+                newStartX = newStartX - generatedWidth
+                newStartY = newStartY
+                generatedWidth = widthRandom()
+                generatedHeight = heightRandom()
+                context.bezierCurveTo(
+                    newStartX - generatedWidth,
+                    newStartY,
+                    newStartX - generatedWidth,
+                    newStartY - generatedHeight,
+                    x,
+                    y
+                )
+                context.strokeStyle = strokeStyle
+                context.stroke()
+
+                context.fillStyle = fillStyle
+                context.fill()
+                context.closePath()
+            }
+
+            const radialGradient = context.createRadialGradient(canvas.width / 2, canvas.height / 2, 10, canvas.width / 2, canvas.height / 2, 200)
+            radialGradient.addColorStop(0, '#8ED6FF')
+            radialGradient.addColorStop(1, '#004CB3')
+
+            cloud({
+                x: 50,
+                y: canvas.height / 2,
+                strokeStyle: radialGradient,
+                fillStyle: radialGradient
+            })
+        })()
+    </script>
+</body>
+</html>

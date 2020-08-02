@@ -1,0 +1,24 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <canvas id="canvas"></canvas>
+    <script>
+        (function() {
+            const canvas = document.querySelector('#canvas')
+            const context = canvas.getContext('2d')
+            canvas.width = 500
+            canvas.height = 500
+
+            context.lineWidth = 10
+            context.strokeStyle = "blue"
+            context.arc(canvas.width / 2, canvas.height / 2, 80, -1.57, 0.79, false)
+            context.stroke()
+        })();
+    </script>
+</body>
+</html>

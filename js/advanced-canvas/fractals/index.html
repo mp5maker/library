@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+
+<body>
+    <canvas id="canvas"></canvas>
+    <script>
+        (function () {
+            const canvas = document.querySelector('#canvas')
+            const context = canvas.getContext('2d')
+            canvas.width = 1000
+            canvas.height = 1000
+
+            context.lineWidth = 1
+            context.strokeColor = 'black'
+
+            const drawBranches = (context, startX, startY, trunkWidth, level) => {
+                if (level < 12) {
+                    const changeX = 100 / (level + 1)
+                    const changeY = 200 / (level + 1)
+
+                    const topRightX = startX + Math.random() * changeX
+                    const topRightY = startY - Math.random() * changeY
+                    const topLeftX = startX - Math.random() * changeX
+                    const topLeftY = startY - Math.random() * changeY
+
+                    context.beginPath()
+                    context.moveTo(startX + trunkWidth / 4, startY)
+                    context.quadraticCurveTo(startX + trunkWidth / 4, startY + trunkWidth / 4, topRightX, topRightY)
+                    context.lineWidth = trunkWidth
+                    context.lineCap = "round"
+                    context.stroke()
+
+                    context.beginPath()
+                    context.moveTo(startX - trunkWidth / 4, startY)
+                    context.quadraticCurveTo(startX - trunkWidth / 4, startY - trunkWidth / 4, topLeftX, topLeftY)
+                    context.lineWidth = trunkWidth
+                    context.lineCap = "round"
+                    context.stroke()
+
+                    drawBranches(context, topLeftX, topLeftY, trunkWidth + 0.7, level + 1)
+                    drawBranches(context, topRightX, topRightY, trunkWidth + 0.7, level + 1)
+                }
+            }
+
+            drawBranches(context, canvas.width / 2, canvas.height - 50, 12, 0)
+        })();
+    </script>
+</body>
+
+</html>

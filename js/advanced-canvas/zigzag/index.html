@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <canvas id="canvas"></canvas>
+    <script>
+        (function() {
+            const canvas = document.querySelector('#canvas')
+            const context = canvas.getContext('2d')
+            canvas.width = 500
+            canvas.height = 500
+
+            context.lineWidth = 1
+            context.strokeColor = 'black'
+
+            context.moveTo(0, 0)
+            const spacing = 30
+            for(let i = 0; i < 10; i++) {
+                if (i % 2) context.lineTo(spacing * i, canvas.height)
+                else context.lineTo(spacing * i, 0)
+            }
+            context.stroke()
+        })();
+    </script>
+</body>
+</html>

@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <canvas id="canvas"></canvas>
+    <script>
+        (function() {
+            const canvas = document.querySelector('#canvas')
+            const context = canvas.getContext('2d')
+            canvas.width = 500
+            canvas.height = 500
+
+            context.lineWidth = 10;
+            context.strokeStyle = 'blue'
+
+            context.moveTo(100, canvas.height - 50)
+            context.quadraticCurveTo(canvas.width / 2, -50, canvas.width - 100, canvas.height - 50)
+            context.stroke()
+        })();
+    </script>
+</body>
+</html>

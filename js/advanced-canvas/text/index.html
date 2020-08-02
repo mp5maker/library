@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+
+<body>
+    <canvas id="canvas"></canvas>
+    <script>
+        (function () {
+            const canvas = document.querySelector('#canvas')
+            const context = canvas.getContext('2d')
+            canvas.width = 500
+            canvas.height = 500
+
+            context.lineWidth = 1
+            context.strokeColor = 'black'
+
+            context.font = '40pt Calibri'
+            context.fillStyle = 'black'
+            context.textAlign = 'center'
+            context.textBaseLine = 'middle'
+            context.shadowColor = 'black'
+            context.shadowBlur = 10
+            context.shadowOffsetX = 2
+            context.shadowOffsetY = 2
+            context.fillText('Hello, Motto', canvas.width / 2, canvas.height / 2)
+        })();
+    </script>
+</body>
+
+</html>
