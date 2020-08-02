@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+        #canvas {
+            border: 1px solid black;
+        }
+        #video {
+            display: none;
+        }
+    </style>
+</head>
+<body>
+    <video
+        autoplay="true"
+        loop="true"
+        id="video">
+        <source
+            src="https://upload.wikimedia.org/wikipedia/commons/transcoded/7/79/Big_Buck_Bunny_small.ogv/Big_Buck_Bunny_small.ogv.120p.vp9.webm"
+            type="video/webm" />
+    </video>
+    <canvas id="canvas"></canvas>
+    <script>
+        (function() {
+            const video = document.querySelector('#video')
+            const canvas = document.querySelector('#canvas')
+            const context = canvas.getContext('2d')
+            let animationFrame = ""
+            canvas.width = 214
+            canvas.height = 118
+
+            const animate = () => {
+                context.drawImage(video, 0, 0)
+                animationFrame = requestAnimationFrame(animate)
+            }
+
+            animationFrame = requestAnimationFrame(animate)
+        })();
+    </script>
+</body>
+</html>

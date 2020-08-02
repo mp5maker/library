@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <canvas id="canvas"></canvas>
+    <script>
+        (function() {
+            const canvas = document.querySelector('#canvas')
+            const context = canvas.getContext('2d')
+
+            const image = new Image()
+            image.onload = function() {
+                const sourceWidth = image.width
+                const sourceHeight = image.height
+                canvas.width = 500
+                canvas.height = 500
+                const destX = canvas.width / 2 - sourceWidth / 2
+                const destY = canvas.height / 2 - sourceHeight / 2
+                const sourceX = destX
+                const sourceY = destY
+
+                context.drawImage(image, destX, destY)
+                const imageData = context.getImageData(sourceX, sourceY, sourceWidth, sourceHeight)
+                const data = imageData.data
+
+                const str = `width = ${imageData.width}, height = ${imageData.height}`
+                context.font = `12pt Calibri`
+                context.fillText(str, 4, 14)
+
+                for(let i = 0; i < data.length; i += 4) {
+                    data[i] = 255 - data[i]
+                    data[i + 1] = 255 - data[i + 1]
+                    data[i + 2] = 255 - data[i + 2]
+                }
+
+                context.putImageData(imageData, destX, destY)
+            }
+
+            image.src = 'https://picsum.photos/200/300'
+            image.crossOrigin = 'anonymous'
+        })()
+    </script>
+</body>
+</html>
