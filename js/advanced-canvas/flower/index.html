@@ -1,0 +1,91 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <div id="type"></div>
+    <canvas id="canvas"></canvas>
+    <script>
+        (function () {
+            const canvas = document.querySelector('#canvas')
+            const type = document.querySelector('#type')
+            const context = canvas.getContext('2d')
+            canvas.width = 500
+            canvas.height = 500
+
+            class Flower {
+                constructor({ context, centerX, centerY, radius, numOfPetals, color }) {
+                    this.context = context
+                    this.centerX = centerX
+                    this.centerY = centerY
+                    this.radius = radius
+                    this.numOfPetals = numOfPetals
+                    this.color = color
+                }
+
+                draw() {
+                    const context = this.context
+                    context.beginPath()
+
+                    for(let i = 0; i < this.numOfPetals; i++) {
+                        const theta1 = (( 2 * Math.PI / this.numOfPetals)) * (i + 1)
+                        const theta2 = (( 2 * Math.PI / this.numOfPetals)) * i
+
+                        let x1 = this.radius * Math.sin(theta1) + this.centerX
+                        let y1 = this.radius * Math.cos(theta1) + this.centerY
+                        let x2 = this.radius * Math.sin(theta2) + this.centerX
+                        let y2 = this.radius * Math.cos(theta2) + this.centerY
+
+                        context.moveTo(this.centerX, this.centerY)
+                        context.bezierCurveTo(x1, y1, x2, y2, this.centerX, this.centerY)
+                    }
+
+                    context.closePath()
+                    context.fillStyle = this.color
+                    context.fill()
+
+                    context.beginPath()
+                    context.arc(this.centerX, this.centerY, this.radius / 5, 0, 2 * Math.PI, false)
+                    context.fillStyle = 'yellow'
+                    context.fill()
+                }
+            }
+
+            context.beginPath()
+            context.rect(0, 0, canvas.width, canvas.height)
+            const gradient = context.createLinearGradient(0, 0, canvas.width, canvas.height)
+            gradient.addColorStop(0, '#1EdE70')
+            gradient.addColorStop(1, '#00A747')
+            context.fillStyle =  gradient;
+            context.fill()
+
+            let colorArray = [
+                'red',
+                'orange',
+                'blue',
+                'purple'
+            ]
+
+            let numOfFlowers = 50
+            for (let i = 0; i < numOfFlowers; i ++) {
+                let centerX = Math.random() * canvas.width
+                let centerY = Math.random() * canvas.height
+                let radius = (Math.random() * 25) + 25;
+                let colorIndex = Math.round(Math.random() * (colorArray.length - 1))
+                let flower = new Flower({
+                    context,
+                    centerX,
+                    centerY,
+                    radius,
+                    numOfPetals: 5,
+                    color: colorArray[colorIndex]
+                })
+                flower.draw()
+            }
+        })()
+    </script>
+</body>
+</html>

@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <div id="type"></div>
+    <canvas id="canvas"></canvas>
+    <script>
+        (function () {
+            const canvas = document.querySelector('#canvas')
+            const type = document.querySelector('#type')
+            const context = canvas.getContext('2d')
+            canvas.width = 500
+            canvas.height = 500
+
+            const centerX = canvas.width / 2
+            const centerY = canvas.height / 2
+
+            const outerRadius = 95
+            const innerRadius = 50
+            const midRadius = innerRadius * 1.6
+            const holeRadius = 10
+            const numOfPoints = 50
+
+            context.beginPath()
+            context.lineJoin = 'bevel'
+            for(let n = 0; n < numOfPoints; n++) {
+                let radius = null
+                if (n % 2 == 0) radius = outerRadius
+                else radius = innerRadius
+
+                const theta = (2 * Math.PI / numOfPoints) * (n + 1)
+                const x = (radius * Math.sin(theta)) + centerX
+                const y = (radius * Math.cos(theta)) + centerY
+
+                if (n == 0) context.moveTo(x, y)
+                else context.lineTo(x, y)
+            }
+            context.closePath()
+
+            context.lineWidth = 5
+            context.strokeStyle = 'black'
+            context.stroke()
+
+            context.beginPath()
+            context.arc(centerX, centerY, midRadius, 0, 2 * Math.PI, false)
+            context.strokeStyle = 'black'
+            context.fill()
+            context.strokeStyle = 'black'
+            context.stroke()
+
+            context.beginPath()
+            context.arc(centerX, centerY, holeRadius, 0, 2 * Math.PI, false)
+            context.strokeStyle = 'white'
+            context.fill()
+            context.strokeStyle = 'white'
+            context.stroke()
+        })()
+    </script>
+</body>
+</html>
