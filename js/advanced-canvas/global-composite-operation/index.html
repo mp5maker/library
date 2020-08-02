@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+
+<body>
+    <div id="type"></div>
+    <canvas id="canvas"></canvas>
+    <script>
+        (function () {
+            const canvas = document.querySelector('#canvas')
+            const type = document.querySelector('#type')
+            const context = canvas.getContext('2d')
+            canvas.width = 500
+            canvas.height = 500
+
+            const operations = [
+                'source-stop',
+                'source-in',
+                'source-out',
+                'source-over',
+                'destination-stop',
+                'destination-in',
+                'destination-out',
+                'destination-over',
+                'lighter',
+                'zor',
+                'copy'
+            ]
+
+            const operation = operations[Math.floor(Math.random() * operations.length)]
+            type.innerHTML = operation
+
+            context.fillStyle = 'blue'
+            context.rect((40), 40, 30, 30)
+            context.fill()
+            context.globalCompositeOperation = operation
+            context.fillStyle = 'red'
+            context.arc((40) + 25, 70, 15, 0, 2 * Math.PI, false)
+            context.fill()
+        })()
+    </script>
+</body>
+
+</html>
