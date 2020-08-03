@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <canvas id="canvas"></canvas>
+    <script src="./animation.js"></script>
+    <script>
+        (function() {
+            const Animation = window.PhotonAnimation
+            const animation = new Animation()
+            const canvas = animation.getCanvas()
+            const context = animation.getContext()
+
+            const gravity = 2
+            const box = {
+                x: canvas.width / 2 - 50,
+                y: 0,
+                vx: 0,
+                vy: 0,
+                width: 100,
+                height: 50
+            }
+
+            function stage() {
+                if (this.getTime() > 1000) {
+                    const speedIncrementEachFrame = gravity * this.getTimeInterval() / 1000
+                    box.vy += speedIncrementEachFrame
+                    box.y += box.vy * this.getTimeInterval()
+                    if (box.y > canvas.height - box.height) {
+                        box.y = canvas.height - box.height
+                        this.stop()
+                    }
+                }
+                this.clear()
+                context.beginPath()
+                context.fillStyle = 'blue'
+                context.fillRect(box.x, box.y, box.width, box.height)
+            }
+
+            animation.start()
+
+            animation.setStage(stage)
+        })()
+    </script>
+</body>
+</html>

@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <canvas id="canvas"></canvas>
+    <script src="./animation.js"></script>
+    <script>
+        (function() {
+            const Animation = window.PhotonAnimation
+            const animation = new Animation()
+            const canvas = animation.getCanvas()
+            const context = animation.getContext()
+
+            const stage = function() {
+                const widthScale = Math.sin(this.getTime() / 200) * 0.1 + 0.9
+                const heightScale = Math.sin(this.getTime() / 200) * 0.1 + 0.9
+
+                this.clear()
+
+                context.beginPath()
+                context.save()
+
+                context.translate(canvas.width / 2, canvas.height / 2)
+                context.scale(widthScale, heightScale)
+                context.arc(0, 0, 65, 0, 2 * Math.PI, false)
+                context.restore()
+
+                context.fillStyle = 'black'
+                context.fill()
+                context.lineWidth = 2;
+                context.strokeStyle = 'black'
+                context.stroke()
+
+                context.beginPath()
+                context.save()
+                context.translate(canvas.width / 2, canvas.height / 2)
+                context.scale(widthScale, heightScale)
+                context.arc(-30, -30, 15, 0, 2 * Math.PI, false)
+                context.restore()
+
+                context.fillStyle = 'white'
+                context.fill()
+
+            }
+
+            animation.start()
+
+            animation.setStage(stage)
+        })()
+    </script>
+</body>
+</html>

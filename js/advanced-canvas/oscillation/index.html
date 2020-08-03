@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <canvas id="canvas"></canvas>
+    <script src="./animation.js"></script>
+    <script>
+        (function() {
+            const Animation = window.PhotonAnimation
+            const animation = new Animation()
+            const canvas = animation.getCanvas()
+            const context = animation.getContext()
+
+            let box = {
+                x: 250,
+                y: canvas.height / 2 - 25,
+                width: 100,
+                height: 50
+            }
+
+            let centerX = canvas.width / 2 - box.width / 2
+            let amplitude = 150
+            let period = 2000
+
+            function stage() {
+                box.x = amplitude * Math.sin(animation.getTime() * 2 * Math.PI / period) + centerX
+                this.clear()
+                context.beginPath()
+                context.rect(box.x, box.y, box.width, box.height)
+                context.fillStyle = "blue"
+                context.fill()
+            }
+
+            animation.start()
+
+            animation.setStage(stage)
+        })()
+    </script>
+</body>
+</html>

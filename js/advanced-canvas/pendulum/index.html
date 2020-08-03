@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <canvas id="canvas"></canvas>
+    <script src="./animation.js"></script>
+    <script>
+        (function() {
+            const Animation = window.PhotonAnimation
+            const animation = new Animation()
+            const canvas = animation.getCanvas()
+            const context = animation.getContext()
+            canvas.width = 500
+            canvas.height = 500
+
+            const amplitude = Math.PI / 4
+            const period = 4000
+            let theta = 0
+            const pendulumLength = 250
+            const pendulumWidth = 10
+            const rotationPointX = canvas.width / 2
+            const rotationPointY = 20
+
+            const stage = function() {
+                theta = (amplitude) * Math.sin(2 * Math.PI * this.getTime() / period) + (Math.PI / 2)
+                this.clear()
+
+                context.beginPath()
+                context.arc(rotationPointX, rotationPointY, 15, 0, 2 * Math.PI, false)
+                context.fillStyle = 'black'
+                context.fill()
+
+                context.beginPath()
+                context.arc(rotationPointX, rotationPointY, 10, 0, 2 * Math.PI, false)
+                context.fillStyle = 'red'
+                context.fill()
+
+                context.beginPath()
+                const endPointX = rotationPointX + (pendulumLength * Math.cos(theta))
+                const endPointY = rotationPointY + (pendulumLength * Math.sin(theta))
+
+                context.beginPath()
+                context.moveTo(rotationPointX, rotationPointY)
+                context.lineTo(endPointX, endPointY)
+                context.lineWidth = pendulumWidth
+                context.lineCap = "round"
+                context.strokeStyle = "pink"
+                context.stroke()
+
+                context.beginPath()
+                context.arc(endPointX, endPointY, 40, 0, 2 * Math.PI, false)
+                context.fillStyle = 'black'
+                context.fill()
+            }
+
+            animation.start()
+
+            animation.setStage(stage)
+        })()
+    </script>
+</body>
+</html>

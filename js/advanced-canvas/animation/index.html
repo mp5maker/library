@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <canvas id="canvas"></canvas>
+    <script src="./animation.js"></script>
+    <script>
+        (function() {
+            const Animation = window.PhotonAnimation
+            const animation = new Animation()
+            const canvas = animation.getCanvas()
+            const context = animation.getContext()
+
+            let linearSpeed = 100
+            let box = {
+                x: 0,
+                y: canvas.height / 2 - 25,
+                width: 100,
+                height: 50
+            }
+
+            function stage() {
+                const linearDistaneEachFrame = linearSpeed * this.getTimeInterval() / 1000
+                if (box.x < canvas.width - box.width) box.x += linearDistaneEachFrame
+                else animation.stop()
+                this.clear()
+
+                context.beginPath()
+                context.fillStyle = "blue"
+                context.fillRect(box.x, box.y, box.width, box.height)
+            }
+
+            animation.setStage(stage)
+            animation.start()
+        })()
+    </script>
+</body>
+</html>
