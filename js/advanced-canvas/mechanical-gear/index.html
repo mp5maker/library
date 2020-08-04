@@ -1,0 +1,158 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <canvas id="canvas"></canvas>
+    <script src="./animation.js"></script>
+    <script>
+        (function() {
+            const Animation = window.PhotonAnimation
+            const animation = new Animation()
+            const canvas = animation.getCanvas()
+            const context = animation.getContext()
+            canvas.width = 1000
+            canvas.height = 1000
+
+            class Gear {
+                constructor({ config }) {
+                    this.x = config.x
+                    this.y = config.y
+                    this.outerRadius = config.outerRadius
+                    this.innerRadius = config.innerRadius
+                    this.holeRadius = config.holeRadius
+                    this.numTeeth = config.numTeeth
+                    this.theta = config.theta
+                    this.thetaSpeed = config.thetaSpeed
+                    this.lightColor = config.lightColor
+                    this.darkColor = config.darkColor
+                    this.clockwise = config.clockwise
+                    this.midRadius = config.midRadius
+                }
+
+                draw({ context }) {
+                    context.save()
+                    context.translate(this.x, this.y)
+                    context.rotate(this.theta)
+
+                    context.beginPath()
+                    context.lineJoin = "bevel"
+                    const numPoints = this.numTeeth * 2
+                    for(let n = 0; n < numPoints; n++) {
+                        let radius = null;
+                        if (n % 2 == 0) radius = this.outerRadius
+                        else  radius = this.innerRadius
+
+                        let theta = ((Math.PI * 2) / numPoints) * (n + 1)
+                        let x = (radius * Math.sin(theta))
+                        let y = (radius * Math.cos(theta))
+
+                        if (n == 0) context.moveTo(x, y)
+                        else context.lineTo(x, y)
+                    }
+                    context.closePath()
+
+                    context.lineWidth = 5
+                    context.strokeStyle = this.darkColor
+                    context.stroke()
+
+                    context.beginPath()
+                    context.arc(0, 0, this.midRadius, 0, 2 * Math.PI)
+                    let gradient = context.createLinearGradient(
+                        -1 * this.outerRadius / 2,
+                        -1 * this.outerRadius / 2,
+                        this.outerRadius / 2,
+                        this.outerRadius / 2
+                    )
+                    gradient.addColorStop(0, this.lightColor)
+                    gradient.addColorStop(1, this.darkColor)
+                    context.fillStyle = gradient
+                    context.fill()
+                    context.lineWidth = 5
+                    context.strokeStyle = this.darkColor
+                    context.stroke()
+
+                    context.beginPath()
+                    context.arc(0, 0, this.holeRadius, 0, 2 * Math.PI, false)
+                    context.fillStyle = "white"
+                    context.fill()
+                    context.strokeStyle = this.darkColor
+                    context.stroke()
+                    context.restore()
+
+                    context.restore()
+                }
+            }
+
+            let gears = [
+                new Gear({
+                    config: {
+                        x: 270,
+                        y: 105,
+                        outerRadius: 90,
+                        innerRadius: 50,
+                        holeRadius: 10,
+                        midRadius: 75,
+                        numTeeth: 24,
+                        theta: 0,
+                        thetaSpeed: 1 / 1000,
+                        lightColor: `#B1CCFF`,
+                        darkColor: `#3959CC`,
+                        clockwise: false,
+                    }
+                }),
+                new Gear({
+                    config: {
+                        x: 372,
+                        y: 190,
+                        outerRadius: 50,
+                        innerRadius: 15,
+                        holeRadius: 10,
+                        midRadius: 40,
+                        numTeeth: 12,
+                        theta: 0.14,
+                        thetaSpeed: 2 / 1000,
+                        lightColor: `black`,
+                        darkColor: `#AD0825`,
+                        clockwise: false,
+                    }
+                }),
+                new Gear({
+                    config: {
+                        x: 422,
+                        y: 142,
+                        outerRadius: 28,
+                        innerRadius: 7,
+                        holeRadius: 7,
+                        midRadius: 20,
+                        numTeeth: 6,
+                        theta: 0.35,
+                        thetaSpeed: 4 / 1000,
+                        lightColor: `#FFDD87`,
+                        darkColor: `#D25D00`,
+                        clockwise: false,
+                    }
+                }),
+            ]
+
+            const stage = function() {
+                for (let i = 0; i < gears.length; i++) {
+                    const gear = gears[i]
+                    let thetaIncrement = gear.thetaSpeed * this.getTimeInterval()
+                    gear.theta += gear.clockwise ? thetaIncrement : - 1 * thetaIncrement
+                }
+                this.clear()
+                for (let i = 0; i < gears.length; i++) {
+                    gears[i].draw({ context })
+                }
+            }
+
+            animation.setStage(stage)
+            animation.start()
+        })()
+    </script>
+</body>
+</html>

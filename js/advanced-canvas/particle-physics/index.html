@@ -1,0 +1,83 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <canvas id="canvas"></canvas>
+    <script src="./animation.js"></script>
+    <script>
+        (function() {
+            const Animation = window.PhotonAnimation
+            const animation = new Animation()
+            const canvas = animation.getCanvas()
+            const context = animation.getContext()
+            canvas.width = 500
+            canvas.height = 500
+
+            let gravity = 1500 // pixels / second ^ 2
+            let collisionDamper = 0.8 // 80% velocity lost after collision
+            let floorFriction = 100
+            let particle = {
+                x: 10,
+                y: 10,
+                vy: 0.001,
+                vx: 0.001,
+                radius: 10
+            }
+
+            const applyPhysics = (newAnimation, newParticle) => {
+                let timeInterval = newAnimation.getTimeInterval();
+
+                /* Gravity */
+                newParticle.vy += gravity + timeInterval / 1000
+
+                /* Position */
+                newParticle.y += (newParticle.vy + timeInterval) * 0.01 / 1000
+                newParticle.x += (newParticle.vx + timeInterval) * 0.01 / 1000
+
+                if (newParticle.y > (canvas.height - newParticle.radius)) {
+                    newParticle.y = canvas.height - newParticle
+                    newParticle.vy *= -1 * collisionDamper
+                }
+
+                if (newParticle.y == canvas.height - newParticle.radius) {
+                    if (newParticle.vx > 0) newParticle.vx -= floorFriction * timeInterval / 1000
+                    else if (newParticle.vx < 0.1) newParticle.vx += floorFriction * timeInterval
+                    else newParticle.vx = 0
+                }
+
+                if (newParticle.y < (newParticle.radius)) {
+                    newParticle.y = newParticle.radius;
+                    newParticle.vy *= -1 * collisionDamper
+                }
+
+                if (newParticle.x > (canvas.width - newParticle.radius)) {
+                    newParticle.x = canvas.width - newParticle.radius
+                    newParticle.vx *= -1 * collisionDamper
+                }
+
+                if (newParticle.x < (newParticle.radius)) {
+                    newParticle.x = newParticle.radius
+                    newParticle.vx *= -1 * collisionDamper
+                }
+            }
+
+            const stage = function() {
+                applyPhysics(this, particle)
+                this.clear()
+                context.beginPath()
+                context.arc(particle.x, particle.y, particle.radius, 0, 2 * Math.PI, false)
+                context.fillStyle = 'blue'
+                context.fill()
+            }
+
+
+            animation.setStage(stage)
+            animation.start()
+        })()
+    </script>
+</body>
+</html>

@@ -1,0 +1,114 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <canvas id="canvas"></canvas>
+    <script src="./animation.js"></script>
+    <script>
+        (function() {
+            const Animation = window.PhotonAnimation
+            const animation = new Animation()
+            const canvas = animation.getCanvas()
+            const context = animation.getContext()
+            canvas.width = 1000
+            canvas.height = 1000
+            const clockRadius = 75;
+
+            const stage = function() {
+                let date = new Date()
+                let hours = date.getHours()
+                let minutes = date.getMinutes()
+                let seconds = date.getSeconds()
+
+                hours = hours > 12 ? hours - 12 : hours
+                let hour = hours + (minutes / 60)
+                let minute = minutes + (seconds / 60)
+
+                this.clear()
+
+                context.save()
+                context.beginPath()
+                context.arc(canvas.width / 2, (canvas.height / 2) - 8, clockRadius, 0, Math.PI * 2, true)
+                let gradient = context.createLinearGradient(
+                    clockRadius,
+                    -clockRadius,
+                    clockRadius,
+                    -clockRadius
+                )
+                gradient.addColorStop(0, '#F8FCFF')
+                gradient.addColorStop(1, '#A1CCEE')
+                context.fillStyle = gradient
+                context.fill()
+
+                context.font = "16pt Calibri"
+                context.fillStyle = 'black'
+                context.textAlign = "center"
+                context.textBaseLine = "middle"
+                for (let n = 1; n <= 12; n++) {
+                    let theta = ((n - 3) * (Math.PI * 2)) / 12
+                    var x = clockRadius * 0.8 * Math.cos(theta) + canvas.width / 2
+                    var y = clockRadius * 0.8 * Math.sin(theta) + canvas.height / 2
+                    context.fillText(n, x, y);
+                }
+                context.save()
+
+                context.shadowColor = "#bbbbbb"
+                context.shadowBlur = 5
+                context.shadowOffsetX = 1;
+                context.shadowOffsetY = 1;
+
+                context.lineWidth = 3;
+                context.strokeStyle = "#005EA8"
+                context.stroke()
+
+                /* Hour */
+                context.save()
+                let theta = (hour - 3) * 2 * Math.PI / 12
+                context.translate(canvas.width / 2, canvas.height / 2)
+                context.rotate(theta)
+                context.beginPath()
+                context.moveTo(-10, -4)
+                context.lineTo(-10, 4)
+                context.lineTo(clockRadius * 0.6, 1)
+                context.lineTo(clockRadius * 0.6, -1)
+                context.fill()
+                context.restore()
+
+                /* Minute */
+                context.save()
+                context.translate(canvas.width / 2, canvas.height / 2)
+                theta = (minute - 15) * 2 * Math.PI / 60
+                context.rotate(theta);
+                context.beginPath()
+                context.moveTo(-10, -3)
+                context.lineTo(-10, 3)
+                context.lineTo(clockRadius * 0.9, 1)
+                context.lineTo(clockRadius * 0.9, -1)
+                context.fill()
+                context.restore()
+
+                /* Second */
+                context.save()
+                context.translate(canvas.width / 2, canvas.height / 2)
+                theta = (seconds - 15) * 2 * Math.PI / 60
+                context.rotate(theta)
+                context.beginPath()
+                context.moveTo(-10, -2)
+                context.lineTo(-10, 2)
+                context.lineTo(clockRadius * 0.8, 1)
+                context.lineTo(clockRadius * 0.8, -1)
+                context.fillStyle = 'red'
+                context.fill()
+                context.restore()
+            }
+
+            animation.start()
+            animation.setStage(stage)
+        })()
+    </script>
+</body>
+</html>
