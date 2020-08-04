@@ -1,0 +1,103 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+
+<body>
+    <canvas id="canvas"></canvas>
+    <script src="./animation.js"></script>
+    <script>
+        (function () {
+            const Animation = window.PhotonAnimation
+            const animation = new Animation()
+            const canvas = animation.getCanvas()
+            const context = animation.getContext()
+            canvas.width = 500
+            canvas.height = 500
+
+            const getRandomColor = () => {
+                const colors = ['red', 'orange', 'yellow', 'green', 'blue', 'violet']
+                return colors[Math.floor(Math.random() * colors.length)]
+            }
+
+            const getRandTheta = () => Math.random() * 2 * Math.PI
+
+            class Microbes {
+                constructor({ context, canvas, animation, color }) {
+                    this.canvas = canvas
+                    this.context = context
+                    this.animation = animation
+                    this.color = color
+                    this.angleVariance = 0.2
+                    this.segmentLength = 0.2
+                    this.angles = [getRandTheta(), getRandTheta(), getRandTheta(), getRandTheta(), getRandTheta()]
+                    this.headX = Math.min(Math.ceil(Math.random() * (canvas.width - 10)), canvas.width - 10)
+                    this.headY = Math.min(Math.ceil(Math.random() * (canvas.height - 10)), canvas.height - 10)
+                }
+
+                draw() {
+                    this.context.beginPath()
+                    this.context.moveTo(this.headX, this.headY)
+
+                    for (let n = this.angles.length - 1; n >= 0; n--) {
+                        let angle = this.angles[n]
+                        this.headX -= this.segmentLength * Math.cos(angle)
+                        this.headY -= this.segmentLength * Math.sin(angle)
+                        this.context.lineTo(this.headX, this.headY)
+                    }
+
+                    this.context.lineWidth = 10
+                    this.context.lineCap = "round"
+                    this.context.lineJoin = "round"
+                    this.context.strokeStyle = this.color
+                    this.context.stroke()
+                    this.context.closePath()
+                }
+
+                update() {
+                    const headAngle = this.angles[this.angles.length - 1]
+                    const dist = 0.01
+                    const newHeadAngle = headAngle + ((this.angleVariance / 2) - Math.random() * angleVariance)
+                    const newHeadX = this.headX + dist + Math.cos(newHeadAngle)
+                    const newHeadY = this.headY + dist + Math.sin(newHeadAngle)
+
+                    if (newHeadX >= canvas.width || newHeadX <= 0) {
+                        newHeadAngle += Math.PI / 2
+                        newHeadX = this.headX + dist + Math.cos(newHeadAngle)
+                        newHeadY = this.headY + dist + Math.sin(newHeadAngle)
+                    }
+
+                    this.headX = newHeadX
+                    this.headY = newHeadY
+                    this.angles.push(newHeadAngle)
+
+                    if (this.angles.length > 20) this.angles.shift()
+                }
+            }
+
+            const microbes = [...new Array(100)].map((item) => {
+                return new Microbes({
+                    context,
+                    canvas,
+                    animation,
+                    color: getRandomColor(),
+                })
+            })
+
+            const stage = function () {
+                this.clear()
+                microbes.forEach((microbe) => microbe.draw())
+
+            }
+
+            animation.setStage(stage)
+            animation.start()
+            microbes.forEach((microbe) => microbe.draw())
+        })()
+    </script>
+</body>
+</html>
