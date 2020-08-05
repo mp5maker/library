@@ -1,0 +1,251 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <canvas id="canvas"></canvas>
+    <script>
+        (function() {
+            class CustomEvents {
+                constructor() {
+                    this.canvas = document.querySelector('#canvas')
+                    this.context = this.canvas.getContext('2d')
+                    this.stage = undefined
+                    this.listening = false
+
+                    /* Desktop Flags*/
+                    this.mousePos = null
+                    this.mouseDown = false
+                    this.mouseUp = false
+                    this.mouseOver = false
+                    this.mouseMove = false
+
+                    /* Mobile Flgas */
+                    this.touchPos = null
+                    this.touchStart = false
+                    this.touchMove = false
+                    this.touchEnd = false
+
+                    /* Region Event */
+                    this.currentRegion = null
+                    this.regionIndex = 0
+                    this.lastRegionIndex = -1
+                    this.mouseOverRagionIndex = -1
+                }
+
+                getContext() {
+                    return this.context
+                }
+
+                getCanvas() {
+                    return this.canvas
+                }
+
+                clear() {
+                    this.context.clearRect(0, 0, this.canvas.width, this.canvas.height)
+                }
+
+                getCanvasPos() {
+                    let obj = this.getCanvas()
+                    let top = 0
+                    let left = 0
+                    while (obj.tagName != "BODY") {
+                        top += obj.offsetTop
+                        left += obj.offsetLeft
+                        obj = obj.offsetParent
+                    }
+
+                    return { top, left }
+                }
+
+                setMousePos(event) {
+                    let mouseX = event.clientX - this.getCanvasPos().left + window.pageXOffset
+                    let mouseY = event.clientY - this.getCanvasPos().top + window.pageYOffset
+
+                    this.mousePos = {
+                        x: mouseX,
+                        y: mouseY
+                    }
+                }
+
+                setTouchPos(event) {
+                    if (event.touches && event.touches.length == 1) {
+                        let touch = event.touches[0]
+                        let touchX = touch.pageX - this.getCanvasPos().left + window.pageXOffset
+                        let touchY = touch.pageY - this.getCanvasPos().top + window.pageYOffset
+
+                        this.touchPos = {
+                            x: touchX,
+                            y: touchY
+                        }
+                    }
+                }
+
+                beginRegion() {
+                    this.currentRegion = {}
+                    this.regionIndex++;
+                }
+
+                addRegionEventListener(type, func) {
+                    let event = (type.indexOf('touch') == 1 ? `on${type}` : type)
+                    this.currentRegion[event] = func
+                }
+
+                closeRegion() {
+                    let pos = this.touchPos || this.mousePos
+                    if (pos !== null && this.context.isPointInPath(pos.x, pos.y)) {
+                        if (this.lartRegionIndex != this.regionIndex) this.lastRegionIndex = this.regionIndex
+
+                        if (this.mouseDown && this.currentRegion.onmousedown !== undefined) {
+                            this.currentRegion.onmousedown()
+                            this.mouseDown = false
+                        } else if (this.mouseUp && this.currentRegion.onmouseup !== undefined) {
+                            this.currentRegion.onmouseup()
+                            this.mouseUp = false
+                        } else if (!this.mouseOver && this.regionIndex != this.mouseOverRagionIndex && this.currentRegion.onmouseover !== undefined) {
+                            this.currentRegion.onmouseover()
+                            this.mouseOver = true
+                            this.mouseOverRegionIndex = this.regionIndex
+                        } else if (!this.mouseMove && this.currentRegion.onmousemove !== undefined) {
+                            this.currentRegion.onmousemove()
+                            this.mousemove = true
+                        }
+
+                        if (this.touchStart && this.currentRegion.touchstart !== undefined) {
+                            this.currentRegion.touchstart()
+                            this.touchStart = false
+                        }
+
+                        if (this.touchEnd && this.currentRegion.touchend !== undefined) {
+                            this.currentRegion.touchmove()
+                            this.touchMove = true
+                        }
+
+                        if (!this.touchMove && this.currentRegion.touchmove !== undefined) {
+                            this.currentRegion.touchmove()
+                            this.touchMove = true
+                        }
+                    } else if(this.regionIndex == this.lastRegionIndex) {
+                        this.lastRegionIndex = -1;
+                        this.mouseOverRegionIndex = -1
+
+                        if (this.currentRegion.onmouseout !== undefined) this.currentRegion.onmouseout()
+                    }
+                }
+
+                getMousePos() {
+                    return this.mousePos
+                }
+
+                getTouchPos() {
+                    return this.touchPos
+                }
+
+                listen() {
+                    if (this.stage) this.stage()
+
+                    this.canvas.addEventListener('mousedown', (event) => {
+                        this.mouseDown = true
+                        this.reset(event)
+                    }, false)
+
+                    this.canvas.addEventListener('mousemove', (event) => {
+                        this.reset(event)
+                    }, false)
+
+                    this.canvas.addEventListener('mouseup', (event) => {
+                        this.mouseUp = true
+                        this.reset(event)
+                    }, false)
+
+                    this.canvas.addEventListener('mouseover', (event) => {
+                        this.reset(event)
+                    }, false)
+
+                    this.canvas.addEventListener('mouseout', (event) => {
+                        this.mousePos = null
+                    }, false)
+
+                    this.canvas.addEventListener('touchstart', (event) => {
+                        event.preventDefault()
+                        this.touchStart = true
+                        this.reset(event)
+                    }, false)
+
+                    this.canvas.addEventListener('touchmove', (event) => {
+                        event.preventDefault()
+                        this.reset(event)
+                    }, false)
+
+                    this.canvas.addEventListener('touchend', (event) => {
+                        event.preventDefault()
+                        this.touchEnd = false
+                        this.reset(event)
+                    }, false)
+                }
+
+                setStage(func) {
+                    this.stage = func
+                    this.listen()
+                }
+
+                reset(event = window.event) {
+                    this.setMousePos(event)
+                    this.setTouchPos(event)
+                    this.regionIndex = 0
+
+                    if (this.stage) this.stage()
+
+                    this.mouseOver = false
+                    this.mouseMove = false
+                    this.mouseDown = false
+                    this.mouseUp = false
+
+                    this.touchStart = false
+                    this.touchMove = false
+                    this.touchEnd = false
+                }
+            }
+
+            function writeMessage(context, message) {
+                context.font = '18pt Calibri'
+                context.fillStyle = 'black'
+                context.fillText(message, 10, 25)
+            }
+
+            let events = new CustomEvents()
+            let canvas = events.getCanvas()
+            let context = events.getContext()
+
+            events.setStage(function() {
+                this.beginRegion()
+                context.beginPath()
+                context.lineWidth = 4
+                context.strokeStyle = 'black'
+                context.fillStyle = 'black'
+                context.fillRect(50, 50, 50, 50)
+                context.fill()
+                context.stroke()
+
+                this.closeRegion()
+
+                let message = ''
+                this.addRegionEventListener('mousemove', function() {
+                    let mousePos = events.getMousePos()
+                    let mouseX = mousePos.x - 50
+                    let mouseY = mousePos.y - 50
+                    message = `Mouse Position: ${mousePos.x}, ${mousePos.y}`
+                })
+            })
+
+            events.listen()
+            canvas.width = 1000
+            canvas.height = 1000
+            writeMessage(context, 'Mouseover me!')
+        })()
+    </script>
+</body>
+</html>
