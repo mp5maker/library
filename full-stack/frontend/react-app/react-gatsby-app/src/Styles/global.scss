@@ -1,0 +1,21 @@
+@font-face {
+    font-family: "Arigatou";
+    src: url("../Fonts/Arigatou.ttf");
+}
+
+@font-face {
+    font-family: "FiraSans";
+    src: url("../Fonts/FiraSans.ttf");
+}
+
+html, body {
+    margin: 0;
+    padding: 0;
+}
+
+html {
+    background-color: lavenderblush;
+    body {
+        font-family: "Arigatou", "FiraSans", sans-serif;
+    }
+}
