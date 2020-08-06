@@ -7,6 +7,7 @@ const Container = styled.div`
     align-items: center;
     justify-content: flex-start;
 `
+
 const Block = styled.div`
     margin: 6px;
 `
@@ -42,12 +43,10 @@ export const UserList = () => {
         <Container>
             <User
                 username="Jane Doe"
-                avatar="https://s3.amazonaws.com/uifaces/faces/twitter/adellecharles/128.jpg"
-            />
+                avatar="https://s3.amazonaws.com/uifaces/faces/twitter/adellecharles/128.jpg" />
             <User
                 username="Bob Smith"
-                avatar="https://s3.amazonaws.com/uifaces/faces/twitter/vladarbatov/128.jpg"
-            />
+                avatar="https://s3.amazonaws.com/uifaces/faces/twitter/vladarbatov/128.jpg" />
         </Container>
     )
 }

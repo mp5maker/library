@@ -1,7 +1,37 @@
 .header-container {
     margin: 12px;
     padding: 12px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
     h1 {
         color: #630a63;
+    }
+    .header-content-right {
+        ul {
+            display: flex;
+            justify-content: flex-start;
+            list-style: none;
+            li {
+                background-color: white;
+                width: 40px;
+                height: 40px;
+                border-radius: 50%;
+                a {
+                    color: #630a63;
+                    width: 40px;
+                    height: 40px;
+                    border-radius: 50%;
+                    display: flex;
+                    justify-content: center;
+                    align-items: center;
+                    transition: 0.25s box-shadow ease-in-out;
+                    &:hover {
+                        transition: 0.25s box-shadow ease-in-out;
+                        box-shadow: 0 1px 15px 0 rgba(0, 0, 0, 0.2);
+                    }
+                }
+            }
+        }
     }
 }
