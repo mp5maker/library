@@ -5,8 +5,6 @@ import { Layout } from '../Components/Layout'
 import { Header } from '../Components/Header'
 
 export default function MyFiles({ data }) {
-    console.log(data)
-
     return (
         <>
             <Header

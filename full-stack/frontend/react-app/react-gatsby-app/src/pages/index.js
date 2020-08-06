@@ -1,5 +1,5 @@
 import React from "react"
-import { graphql, useStaticQuery } from 'gatsby'
+import { graphql, useStaticQuery, Link } from 'gatsby'
 
 import { Header } from '../Components/Header'
 import { Layout } from '../Components/Layout'
@@ -14,13 +14,16 @@ export default function Home() {
                 title
             }
         }
-        allMarkdownRemark {
+        allMarkdownRemark(sort: { fields: [frontmatter___date], order: DESC }) {
           edges {
             node {
               id
               frontmatter {
                 date
                 title
+              }
+              fields {
+                slug
               }
               excerpt
               timeToRead
@@ -66,6 +69,9 @@ export default function Home() {
                     </span>
                   </h3>
                   <p>{node.excerpt}</p>
+                  <Link to={node.fields.slug}>
+                      Details
+                  </Link>
                 </div>
               )
             })
