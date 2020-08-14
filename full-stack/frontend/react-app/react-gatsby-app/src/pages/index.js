@@ -1,5 +1,6 @@
 import React from "react"
 import { graphql, useStaticQuery, Link } from 'gatsby'
+import { FacebookProvider, Like } from 'react-facebook';
 
 import { Header } from '../Components/Header'
 import { Layout } from '../Components/Layout'
@@ -77,6 +78,9 @@ export default function Home() {
             })
           }
         </div>
+        <FacebookProvider appId="123456789">
+          <Like href="http://www.facebook.com" colorScheme="dark" showFaces share />
+        </FacebookProvider>
       </Layout>
     </>
   )
