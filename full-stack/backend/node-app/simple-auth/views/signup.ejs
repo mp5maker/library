@@ -5,5 +5,29 @@
         Sign Up
     </div>
 </header>
+<form>
+    <!-- Email -->
+    <label for="email">Email</label>
+    <input type="text" name="email" required/>
+    <div class="email error"></div>
+    <!-- Password -->
+    <label for="password">Password</label>
+    <input type="password" name="password" required/>
+    <div class="password error"></div>
+    <button> Sign UP </button>
+</form>
+
+<script>
+    const form = document.querySelector('form')
+    form.addEventListener('submit', (event) => {
+        event.preventDefault()
+
+        const email = form.email.value
+        const password = form.password.value
+
+        console.log(email)
+        console.log(password)
+    })
+</script>
 
 <%- include('partials/footer'); -%>
