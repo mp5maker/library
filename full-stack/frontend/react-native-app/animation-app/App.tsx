@@ -61,13 +61,13 @@ export const App = () => {
 
   const loadAssets = async () => {
     const imageAssets = cacheImages([
-      require('./assets/images/logo/icon.png'),
-      require('./assets/images/logo/splash.png'),
+      require('./assets/icon.png'),
+      require('./assets/splash.png'),
     ])
 
     const fontAssets = cacheFonts({
-      'fira-sans': require(`./assets/fonts/FiraSans/FiraSans-Regular.ttf`),
-      'fira-sans-bold': require('./assets/fonts/FiraSans/FiraSans-Bold.ttf'),
+      'fira-sans': require(`./assets/fonts/FiraSans-Regular.ttf`),
+      'fira-sans-bold': require('./assets/fonts/FiraSans-Bold.ttf'),
     })
 
     await Promise.all([fontAssets, imageAssets])
