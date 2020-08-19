@@ -1,5 +1,5 @@
 import * as React from 'react'
-import { Animated, Text, View, Easing, StyleSheet } from 'react-native'
+import { Animated, Text, View, Easing, StyleSheet, Dimensions } from 'react-native'
 
 export const Carousel = ({ list = [], display }: any) => {
     return (
