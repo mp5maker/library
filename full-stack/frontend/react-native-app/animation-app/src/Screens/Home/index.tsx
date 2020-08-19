@@ -2,7 +2,7 @@ import * as React from 'react'
 import { View, TouchableOpacity, StyleSheet, Text } from 'react-native'
 import { useTranslation } from 'react-i18next'
 
-import { HeartOfTheMatter } from 'Native/Constants/Routes'
+import * as Routes from 'Native/Constants/Routes'
 
 export const HomeScreen = ({ navigation }: any) => {
     const { t } = useTranslation()
@@ -11,10 +11,17 @@ export const HomeScreen = ({ navigation }: any) => {
         <View style={styles.mainContainer}>
             <View style={styles.list}>
                 <TouchableOpacity
-                    onPress={() => navigation.navigate(HeartOfTheMatter.state)}
+                    onPress={() => navigation.navigate(Routes.HeartOfTheMatter.state)}
                     style={styles.item}>
                     <Text>
                         { t(`HEART_OF_THE_MATTER`) }
+                    </Text>
+                </TouchableOpacity>
+                <TouchableOpacity
+                    onPress={() => navigation.navigate(Routes.Transition.state)}
+                    style={styles.item}>
+                    <Text>
+                        { t(`TRANSITION`) }
                     </Text>
                 </TouchableOpacity>
             </View>
