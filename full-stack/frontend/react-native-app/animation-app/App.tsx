@@ -4,26 +4,18 @@ import { I18nextProvider } from 'react-i18next'
 import { AppLoading } from 'expo'
 import * as Font from 'expo-font';
 import {
-  View,
   Image,
   Platform,
   UIManager,
-  StyleSheet,
-  Text
 } from 'react-native'
 import { Asset } from 'expo-asset'
+import { NavigationContainer } from '@react-navigation/native'
 
 import i18n from 'Native/Locales/i18n';
 import { THEME, LIGHT, DARK, ANDROID, IOS } from 'Native/Constants/Settings'
 import { AsyncGet, AsyncSet } from 'Native/Utilities/AsyncStorage'
 import { ThemeContext } from 'Native/Contexts/ThemeContext'
-
-
-export const styles = StyleSheet.create({
-  mainContainer: {
-    flex: 1,
-  },
-});
+import { HomeStackNavigator } from 'Native/Navigations/Stack'
 
 
 if (Platform.OS == ANDROID && UIManager.setLayoutAnimationEnabledExperimental) {
@@ -85,11 +77,9 @@ export const App = () => {
     return (
       <I18nextProvider i18n={i18n}>
           <ThemeContext.Provider value={{ theme, setTheme, }}>
-            <View style={styles.mainContainer}>
-              <Text>
-                Text on the way
-              </Text>
-            </View>
+            <NavigationContainer>
+              <HomeStackNavigator />
+            </NavigationContainer>
         </ThemeContext.Provider>
       </I18nextProvider>
     )
