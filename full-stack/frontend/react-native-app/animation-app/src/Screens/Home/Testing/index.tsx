@@ -1,12 +1,29 @@
 import * as React from 'react'
-import { View, Text, StyleSheet, Animated, TouchableOpacity, Easing } from 'react-native'
+import { View, Text, StyleSheet, Animated, TouchableOpacity, Easing, PanResponder } from 'react-native'
 import { useTranslation } from 'react-i18next'
 
 export const TestingScreen = () => {
     const { t } = useTranslation()
     const value = React.useRef(new Animated.ValueXY({ x: 0, y: 0 })).current
     const translate = React.useRef(new Animated.Value(0)).current
+    const pan = React.useRef(new Animated.ValueXY()).current
     const [nativeDriver, setNativeDriver] = React.useState(false)
+    const panResponder = React.useRef(
+        PanResponder.create({
+            onStartShouldSetPanResponder: () => true,
+            onMoveShouldSetPanResponder: () => true,
+            onPanResponderGrant: () => {},
+            onPanResponderMove: Animated.event([
+                null,
+                { dx: pan.x, dy: pan.y },
+            ], {
+                useNativeDriver: false,
+            }),
+            onPanResponderRelease: () => {
+                pan.flattenOffset()
+            }
+        })
+    ).current
 
     const moveTimingBall = () => {
         /* Linear */
@@ -47,15 +64,19 @@ export const TestingScreen = () => {
         <View style={styles.mainContainer}>
             <Animated.View
                 style={[
-                    { ...(!nativeDriver ? value.getLayout() : {} )},
+                    { ...(!nativeDriver ? {
+                        ...value.getLayout(),
+                        ...pan.getLayout()
+                    } : {} )},
                     { ...(nativeDriver ? {
                         transform: [
                             { translateX: translated },
                             { translateY: translated }
                         ]
 
-                    } : {})}
-                ]}>
+                    } : {})},
+                ]}
+                {...panResponder.panHandlers}>
                 <View style={[
                     styles.ball,
                 ]} />
