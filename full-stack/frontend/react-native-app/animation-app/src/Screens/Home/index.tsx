@@ -34,7 +34,18 @@ export const styles = StyleSheet.create({
         alignItems: `flex-start`
     },
     item: {
-        width: 90,
-        height: 25
+        width: `90%`,
+        height: 25,
+        padding: 2,
+        margin: 12,
+        shadowColor: "#000",
+        shadowOffset: {
+            width: 0,
+            height: 2,
+        },
+        shadowOpacity: 0.25,
+        shadowRadius: 3.84,
+
+        elevation: 5
     }
 });
