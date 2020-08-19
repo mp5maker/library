@@ -10,6 +10,8 @@ const randomColor = () => {
     return '#' + n.slice(0, 6);
 };
 
+const CARD_WIDTH = 299
+
 export const Cards = ({ list = [], allowRotation = false, pivotCenter = false }: any) => {
     const transition = useTransition(allowRotation, { duration: 400 })
 
@@ -32,7 +34,11 @@ export const Cards = ({ list = [], allowRotation = false, pivotCenter = false }:
                             <Animated.View
                                 style={[
                                     styles.item,
-                                    { transform: [{ rotate }] },
+                                    {
+                                        transform: [
+                                            { rotate }
+                                        ]
+                                    },
                                     { ...(pivotCenter ? {
                                         borderColor: randomColor(),
                                         backgroundColor: randomColor(),
@@ -63,7 +69,7 @@ const styles = StyleSheet.create({
     },
     item: {
         padding: 12,
-        width: 299,
+        width: CARD_WIDTH,
         height: 200,
         borderWidth: 1,
         borderColor: `lightgrey`,

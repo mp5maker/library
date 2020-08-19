@@ -9,3 +9,7 @@ export const HeartOfTheMatter = {
 export const Transition = {
     state: 'transition'
 }
+
+export const Testing = {
+    state: 'testing'
+}

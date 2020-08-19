@@ -24,6 +24,13 @@ export const HomeScreen = ({ navigation }: any) => {
                         { t(`TRANSITION`) }
                     </Text>
                 </TouchableOpacity>
+                <TouchableOpacity
+                    onPress={() => navigation.navigate(Routes.Testing.state)}
+                    style={styles.item}>
+                    <Text>
+                        { t(`TESTING`) }
+                    </Text>
+                </TouchableOpacity>
             </View>
         </View>
     )
@@ -52,7 +59,6 @@ export const styles = StyleSheet.create({
         },
         shadowOpacity: 0.25,
         shadowRadius: 3.84,
-
         elevation: 5
     }
 });
