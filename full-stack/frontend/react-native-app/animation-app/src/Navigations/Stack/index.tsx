@@ -6,6 +6,7 @@ import * as Routes from 'Native/Constants/Routes'
 import { HomeScreen } from 'Native/Screens/Home'
 import { HeartOfTheMatterScreen } from 'Native/Screens/Home/HeartOfTheMatter'
 import { TransitionScreen } from 'Native/Screens/Home/Transition'
+import { CarouselScreen } from 'Native/Screens/Home/Carousel'
 import { TestingScreen } from 'Native/Screens/Home/Testing'
 
 const Stack = createStackNavigator()
@@ -27,6 +28,10 @@ export const HomeStackNavigator = () => {
                 options={{ title: t(`TRANSITION`) }}
                 name={Routes.Transition.state}
                 component={TransitionScreen} />
+            <Stack.Screen
+                options={{ title: t(`CAROUSEL`) }}
+                name={Routes.Carousel.state}
+                component={CarouselScreen} />
             <Stack.Screen
                 options={{ title: t(`TESTING`) }}
                 name={Routes.Testing.state}

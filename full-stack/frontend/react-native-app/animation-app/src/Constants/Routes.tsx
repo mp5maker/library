@@ -13,3 +13,7 @@ export const Transition = {
 export const Testing = {
     state: 'testing'
 }
+
+export const Carousel = {
+    state: 'carousel'
+}

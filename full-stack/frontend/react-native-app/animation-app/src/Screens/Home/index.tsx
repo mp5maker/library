@@ -25,6 +25,13 @@ export const HomeScreen = ({ navigation }: any) => {
                     </Text>
                 </TouchableOpacity>
                 <TouchableOpacity
+                    onPress={() => navigation.navigate(Routes.Carousel.state)}
+                    style={styles.item}>
+                    <Text>
+                        { t(`CAROUSEL`) }
+                    </Text>
+                </TouchableOpacity>
+                <TouchableOpacity
                     onPress={() => navigation.navigate(Routes.Testing.state)}
                     style={styles.item}>
                     <Text>
