@@ -1,20 +1,37 @@
 import * as React from 'react'
-import { View, StyleSheet } from 'react-native'
+import { View, StyleSheet, Text, Image, Dimensions } from 'react-native'
+import get from 'lodash/get'
+import { EvilIcons } from '@expo/vector-icons'
 
 import { Carousel } from 'Native/Layouts/Carousel'
+import fakeData from './data.json'
+
+const { width } = Dimensions.get('screen')
+const OVERFLOW_HEIGHT = 70
+const SPACING = 10
+const ITEM_WIDTH = width * 0.8
+const ITEM_HEIGHT = ITEM_WIDTH * 1.7
+
 
 export const CarouselScreen = () => {
     return (
-        <View style={styles.mainContainer}>
-            <Carousel />
-        </View>
+        <Carousel
+            display={({ item }: any) => {
+                const poster = get(item, 'poster', '')
+
+                return (
+                    <>
+                        <Image
+                            style={{
+                                width: ITEM_WIDTH,
+                                height: ITEM_HEIGHT,
+                                borderRadius: 14
+                            }}
+                            source={{ uri: poster }} />
+                    </>
+                )
+            }} />
     )
 }
 
-export const styles = StyleSheet.create({
-    mainContainer: {
-        flex: 1,
-        alignItems: `center`,
-        justifyContent: `center`
-    },
-});
+export const styles = StyleSheet.create({});
