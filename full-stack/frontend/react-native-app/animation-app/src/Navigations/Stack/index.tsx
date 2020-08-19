@@ -2,8 +2,9 @@ import * as React from 'react'
 import { createStackNavigator } from '@react-navigation/stack'
 import { useTranslation } from 'react-i18next'
 
+import * as Routes from 'Native/Constants/Routes'
 import { HomeScreen } from 'Native/Screens/Home'
-import { HomeDetailsScreen } from 'Native/Screens/Home/Details'
+import { HeartOfTheMatterScreen } from 'Native/Screens/Home/HeartOfTheMatter'
 
 const Stack = createStackNavigator()
 
@@ -14,12 +15,12 @@ export const HomeStackNavigator = () => {
         <Stack.Navigator>
             <Stack.Screen
                 options={{ title: t(`HOME`) }}
-                name="Home"
+                name={Routes.Home.state}
                 component={HomeScreen} />
             <Stack.Screen
-                options={{ title: t(`HOME_DETAILS`) }}
-                name="HomeDetails"
-                component={HomeDetailsScreen} />
+                options={{ title: t(`HEART_OF_THE_MATTER`) }}
+                name={Routes.HeartOfTheMatter.state}
+                component={HeartOfTheMatterScreen} />
         </Stack.Navigator>
     )
 }
