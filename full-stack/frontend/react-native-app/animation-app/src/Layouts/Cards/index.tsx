@@ -1,19 +1,28 @@
 import * as React from 'react'
-import { View, Text, StyleSheet } from 'react-native'
-import Animated from 'react-native-reanimated'
-import { useTransition, mix } from 'react-native-redash'
+import { View, StyleSheet, Animated } from 'react-native'
 
 const alpha = Math.PI / 6
+const CARD_WIDTH = 299
 
 const randomColor = () => {
     let n = (Math.random() * 0xfffff * 1000000).toString(16);
     return '#' + n.slice(0, 6);
 };
 
-const CARD_WIDTH = 299
+export const Cards = ({
+    list = [],
+    allowRotation = false,
+    pivotCenter = false,
+    display
+}: any) => {
+    const animationValue = React.useRef(new Animated.Value(0)).current
 
-export const Cards = ({ list = [], allowRotation = false, pivotCenter = false }: any) => {
-    const transition = useTransition(allowRotation, { duration: 400 })
+    React.useEffect(() => {
+        Animated.timing(animationValue, {
+            toValue: allowRotation ? 1 : 0,
+            useNativeDriver: true
+        }).start()
+    }, [allowRotation])
 
     return (
         <>
@@ -23,12 +32,11 @@ export const Cards = ({ list = [], allowRotation = false, pivotCenter = false }:
                 ]}>
                 {
                     list.map((item: any, index: number) => {
-                        // const rotate = Animated.interpolate(transition, {
-                        //     inputRange: [0, 1],
-                            // outputRange: [0, (index - 1) * alpha]
-                        // })
-                        const rotate = mix(transition, 0, (index - 1) * alpha)
-                        const zIndex = 2 - index
+                        const rotate = animationValue.interpolate({
+                            inputRange: [0, 1],
+                            outputRange: [0, (index - 1) * alpha]
+                        })
+                        const zIndex = list.length - index
 
                         return (
                             <Animated.View
@@ -49,9 +57,7 @@ export const Cards = ({ list = [], allowRotation = false, pivotCenter = false }:
                                     } : {} )}
                                 ]}
                                 key={index}>
-                                <Text>
-                                    { item }
-                                </Text>
+                                { display({ item, index }) }
                             </Animated.View>
                         )
                     })

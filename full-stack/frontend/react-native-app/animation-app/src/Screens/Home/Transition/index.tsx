@@ -2,6 +2,7 @@ import * as React from 'react'
 import { View, Text, StyleSheet, TouchableOpacity } from 'react-native'
 import { useTranslation } from 'react-i18next'
 
+import { CreditCard } from 'Native/Layouts/CreditCard'
 import { Cards } from 'Native/Layouts/Cards'
 
 export const TransitionScreen = () => {
@@ -21,7 +22,16 @@ export const TransitionScreen = () => {
                 <Cards
                     pivotCenter={true}
                     allowRotation={toggle}
-                    list={['Hi', 'Hello', 'Bye']} />
+                    display={({ item, index }: any) => {
+                        return (
+                            <CreditCard />
+                        )
+                    }}
+                    list={[
+                        '',
+                        '',
+                        ''
+                    ]} />
             </View>
         </View>
     )
