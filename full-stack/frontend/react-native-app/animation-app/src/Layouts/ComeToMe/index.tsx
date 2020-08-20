@@ -6,7 +6,7 @@ import { PanGestureHandler } from 'react-native-gesture-handler'
 
 import { Colors } from 'Native/Constants/Colors'
 
-export const HeartOfTheMatter = () => {
+export const ComeToMe = () => {
     const { gestureHandler, translation, state } = usePanGestureHandler()
     const translateX  = withOffset(translation.x, state)
     const translateY = withOffset(translation.y, state)

@@ -1,37 +1,78 @@
 import * as React from 'react'
-import { StyleSheet, Image, Dimensions } from 'react-native'
+import { View, StyleSheet, Text, Image, Dimensions } from 'react-native'
 import get from 'lodash/get'
+import { EvilIcons } from '@expo/vector-icons';
 
-import { Carousel } from 'Native/Layouts/Carousel'
 import { Posters } from 'Native/Data/Posters'
+import { Carousel } from 'Native/Layouts/Carousel'
 
-const { width } = Dimensions.get('screen')
-const OVERFLOW_HEIGHT = 70
-const SPACING = 10
-const ITEM_WIDTH = width * 0.7
-const ITEM_HEIGHT = ITEM_WIDTH * 1.7
-
+const width = Dimensions.get('screen').width
+const IMAGE_WIDTH = width * 0.7
+const IMAGE_HEIGHT = IMAGE_WIDTH * 1.2
 
 export const CarouselScreen = () => {
     return (
-        <Carousel
-            list={Posters}
-            display={({ item }: any) => {
-                const poster = get(item, 'poster', '')
-
-                return (
-                    <>
+        <>
+            <Carousel
+                display={({ item, index }: any) => {
+                    const poster = get(item, 'poster', '')
+                    return (
                         <Image
                             style={{
-                                width: ITEM_WIDTH,
-                                height: ITEM_HEIGHT,
-                                borderRadius: 14
+                                width: IMAGE_WIDTH,
+                                height: IMAGE_HEIGHT
                             }}
                             source={{ uri: poster }} />
-                    </>
-                )
-            }} />
+                    )
+                }}
+                overflowDisplay={({ item, index }: any) => {
+                    const title = get(item, 'title', '')
+                    const location = get(item, 'location', '')
+                    const date = get(item, 'date', '')
+
+                    return (
+                        <View>
+                            <Text style={[styles.title]} numberOfLines={1}>
+                                {title}
+                            </Text>
+                            <View style={styles.itemContainerRow}>
+                                <Text style={[styles.location]}>
+                                    <EvilIcons
+                                        name='location'
+                                        size={16}
+                                        color='black'
+                                        style={{ marginRight: 5 }}
+                                    />
+                                    {location}
+                                </Text>
+                                <Text style={[styles.date]}>
+                                    {date}
+                                </Text>
+                            </View>
+                        </View>
+                    )
+                }}
+                list={Posters} />
+        </>
     )
 }
 
-export const styles = StyleSheet.create({});
+export const styles = StyleSheet.create({
+    title: {
+        fontSize: 28,
+        fontWeight: '900',
+        textTransform: 'uppercase',
+        letterSpacing: -1,
+    },
+    location: {
+        fontSize: 16,
+    },
+    date: {
+        fontSize: 12,
+    },
+    itemContainerRow: {
+        flexDirection: 'row',
+        justifyContent: 'space-between',
+        alignItems: 'center',
+    },
+});

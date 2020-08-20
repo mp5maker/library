@@ -1,12 +1,12 @@
 import * as React from 'react'
 import { View, StyleSheet } from 'react-native'
 
-import { HeartOfTheMatter } from 'Native/Layouts/HeartOfTheMatter'
+import { ComeToMe } from 'Native/Layouts/ComeToMe'
 
-export const HeartOfTheMatterScreen = () => {
+export const ComeToMeScreen = () => {
     return (
         <View style={styles.mainContainer}>
-            <HeartOfTheMatter />
+            <ComeToMe />
         </View>
     )
 }

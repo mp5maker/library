@@ -1,3 +1,4 @@
+```javascript
 import * as React from 'react'
 import { View, Text, StyleSheet, Animated, TouchableOpacity, Easing, PanResponder } from 'react-native'
 import { useTranslation } from 'react-i18next'
@@ -125,3 +126,4 @@ export const styles = StyleSheet.create({
         margin: 12
     }
 });
+```

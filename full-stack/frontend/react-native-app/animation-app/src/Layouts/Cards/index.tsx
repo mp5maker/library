@@ -2,12 +2,6 @@ import * as React from 'react'
 import { View, StyleSheet, Animated } from 'react-native'
 
 const alpha = Math.PI / 6
-const CARD_WIDTH = 299
-
-const randomColor = () => {
-    let n = (Math.random() * 0xfffff * 1000000).toString(16);
-    return '#' + n.slice(0, 6);
-};
 
 export const Cards = ({
     list = [],
@@ -48,8 +42,6 @@ export const Cards = ({
                                         ]
                                     },
                                     { ...(pivotCenter ? {
-                                        borderColor: randomColor(),
-                                        backgroundColor: randomColor(),
                                         position: `absolute`,
                                         top: 0,
                                         left: 0,
@@ -75,18 +67,7 @@ const styles = StyleSheet.create({
     },
     item: {
         padding: 12,
-        width: CARD_WIDTH,
         height: 200,
-        borderWidth: 1,
-        borderColor: `lightgrey`,
-        shadowOffset: {
-            width: 1,
-            height: 1,
-        },
-        shadowOpacity: 0.3,
-        shadowRadius: 2,
-        elevation: 2,
-        marginBottom: 12,
         borderRadius: 5,
         display: `flex`,
         justifyContent: `center`,

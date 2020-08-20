@@ -11,17 +11,17 @@ export const HomeScreen = ({ navigation }: any) => {
         <View style={styles.mainContainer}>
             <View style={styles.list}>
                 <TouchableOpacity
-                    onPress={() => navigation.navigate(Routes.HeartOfTheMatter.state)}
+                    onPress={() => navigation.navigate(Routes.ComeToMe.state)}
                     style={styles.item}>
                     <Text>
-                        { t(`HEART_OF_THE_MATTER`) }
+                        { t(`COME_TO_ME`) }
                     </Text>
                 </TouchableOpacity>
                 <TouchableOpacity
-                    onPress={() => navigation.navigate(Routes.Transition.state)}
+                    onPress={() => navigation.navigate(Routes.Wallet.state)}
                     style={styles.item}>
                     <Text>
-                        { t(`TRANSITION`) }
+                        { t(`WALLET`) }
                     </Text>
                 </TouchableOpacity>
                 <TouchableOpacity
@@ -29,20 +29,6 @@ export const HomeScreen = ({ navigation }: any) => {
                     style={styles.item}>
                     <Text>
                         { t(`CAROUSEL`) }
-                    </Text>
-                </TouchableOpacity>
-                <TouchableOpacity
-                    onPress={() => navigation.navigate(Routes.FlatListAnimation.state)}
-                    style={styles.item}>
-                    <Text>
-                        { t(`FLAT_LIST_ANIMATION_SCREEEN`) }
-                    </Text>
-                </TouchableOpacity>
-                <TouchableOpacity
-                    onPress={() => navigation.navigate(Routes.Testing.state)}
-                    style={styles.item}>
-                    <Text>
-                        { t(`TESTING`) }
                     </Text>
                 </TouchableOpacity>
             </View>

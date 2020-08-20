@@ -5,7 +5,7 @@ import { useTranslation } from 'react-i18next'
 import { CreditCard } from 'Native/Layouts/CreditCard'
 import { Cards } from 'Native/Layouts/Cards'
 
-export const TransitionScreen = () => {
+export const WalletScreen = () => {
     const { t } = useTranslation()
     const [toggle, setToggle] = React.useState(false)
 
