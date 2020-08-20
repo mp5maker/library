@@ -62,21 +62,15 @@ const defaultList = [
 ];
 
 export const Carousel = ({ list = defaultList, display }: any) => {
-    const scrollXIndex = React.useRef(new Animated.Value(0)).current
     const scrollXAnimated = React.useRef(new Animated.Value(0)).current
-    const [index, setIndex] = React.useState(0)
-
-    const setActiveIndex = (activeIndex: number) => {
-        setIndex(activeIndex)
-        scrollXIndex.setValue(activeIndex)
-    }
+    const [currentIndex, setCurrentIndex] = React.useState(0)
 
     React.useEffect(() => {
         Animated.spring(scrollXAnimated, {
-            toValue: scrollXIndex,
+            toValue: currentIndex,
             useNativeDriver: true
         }).start()
-    })
+    }, [currentIndex])
 
     return (
         <FlingGestureHandler
@@ -84,8 +78,7 @@ export const Carousel = ({ list = defaultList, display }: any) => {
             direction={Directions.LEFT}
             onHandlerStateChange={(event) => {
                 if (event.nativeEvent.state == State.END) {
-                    if (index == list.length - 1) return
-                    else setActiveIndex(index + 1)
+                    if (currentIndex !== list.length - 1) setCurrentIndex(currentIndex + 1)
                 }
             }}>
             <FlingGestureHandler
@@ -93,10 +86,7 @@ export const Carousel = ({ list = defaultList, display }: any) => {
                 direction={Directions.RIGHT}
                 onHandlerStateChange={(ev) => {
                     if (ev.nativeEvent.state === State.END) {
-                        if (index === 0) {
-                            return;
-                        }
-                        setActiveIndex(index - 1);
+                        if (currentIndex !== 0) setCurrentIndex(currentIndex - 1);
                     }
                 }}>
                 <SafeAreaView
