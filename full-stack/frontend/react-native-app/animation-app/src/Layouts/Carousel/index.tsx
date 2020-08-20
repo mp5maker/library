@@ -70,7 +70,7 @@ export const Carousel = ({ list = [], display }: any) => {
                             });
                             const scale = scrollXAnimated.interpolate({
                                 inputRange,
-                                outputRange: [0.8, 1, 1.3],
+                                outputRange: [0.8, 1, 0],
                             });
                             const opacity = scrollXAnimated.interpolate({
                                 inputRange,

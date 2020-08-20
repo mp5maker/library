@@ -1,6 +1,7 @@
 import * as React from 'react'
 import { View, StyleSheet, Text, Image, Dimensions } from 'react-native'
 import get from 'lodash/get'
+import { EvilIcons } from '@expo/vector-icons';
 
 import { Posters } from 'Native/Data/Posters'
 import { FlatListAnimation } from 'Native/Layouts/FlatListAnimation'
@@ -15,33 +16,37 @@ export const FlatListAnimationScreen = () => {
             <FlatListAnimation
                 display={({ item, index }: any) => {
                     const poster = get(item, 'poster', '')
+                    return (
+                        <Image
+                            style={{
+                                width: IMAGE_WIDTH,
+                                height: IMAGE_HEIGHT
+                            }}
+                            source={{ uri: poster }} />
+                    )
+                }}
+                overflowDisplay={({ item, index }: any) => {
                     const title = get(item, 'title', '')
                     const location = get(item, 'location', '')
                     const date = get(item, 'date', '')
 
                     return (
                         <View>
-                            <View>
-                                <Image
-                                    style={{
-                                        width: IMAGE_WIDTH,
-                                        height: IMAGE_HEIGHT
-                                    }}
-                                    source={{ uri: poster }} />
-                            </View>
-                            <View>
-                                <Text>
-                                    { title }
+                            <Text style={[styles.title]} numberOfLines={1}>
+                                {title}
+                            </Text>
+                            <View style={styles.itemContainerRow}>
+                                <Text style={[styles.location]}>
+                                    <EvilIcons
+                                        name='location'
+                                        size={16}
+                                        color='black'
+                                        style={{ marginRight: 5 }}
+                                    />
+                                    {location}
                                 </Text>
-                            </View>
-                            <View>
-                                <Text>
-                                    { location }
-                                </Text>
-                            </View>
-                            <View>
-                                <Text>
-                                    { date }
+                                <Text style={[styles.date]}>
+                                    {date}
                                 </Text>
                             </View>
                         </View>
@@ -52,4 +57,22 @@ export const FlatListAnimationScreen = () => {
     )
 }
 
-export const styles = StyleSheet.create({});
+export const styles = StyleSheet.create({
+    title: {
+        fontSize: 28,
+        fontWeight: '900',
+        textTransform: 'uppercase',
+        letterSpacing: -1,
+    },
+    location: {
+        fontSize: 16,
+    },
+    date: {
+        fontSize: 12,
+    },
+    itemContainerRow: {
+        flexDirection: 'row',
+        justifyContent: 'space-between',
+        alignItems: 'center',
+    },
+});
