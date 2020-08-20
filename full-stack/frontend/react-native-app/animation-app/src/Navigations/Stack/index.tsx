@@ -7,6 +7,7 @@ import { HomeScreen } from 'Native/Screens/Home'
 import { HeartOfTheMatterScreen } from 'Native/Screens/Home/HeartOfTheMatter'
 import { TransitionScreen } from 'Native/Screens/Home/Transition'
 import { CarouselScreen } from 'Native/Screens/Home/Carousel'
+import { FlatListAnimationScreen } from 'Native/Screens/Home/FlatListAnimation'
 import { TestingScreen } from 'Native/Screens/Home/Testing'
 
 const Stack = createStackNavigator()
@@ -32,6 +33,10 @@ export const HomeStackNavigator = () => {
                 options={{ title: t(`CAROUSEL`) }}
                 name={Routes.Carousel.state}
                 component={CarouselScreen} />
+            <Stack.Screen
+                options={{ title: t(`FLAT_LIST_ANIMATION`) }}
+                name={Routes.FlatListAnimation.state}
+                component={FlatListAnimationScreen} />
             <Stack.Screen
                 options={{ title: t(`TESTING`) }}
                 name={Routes.Testing.state}

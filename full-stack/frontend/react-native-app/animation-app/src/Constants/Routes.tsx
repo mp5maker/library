@@ -17,3 +17,7 @@ export const Testing = {
 export const Carousel = {
     state: 'carousel'
 }
+
+export const FlatListAnimation = {
+    state: 'flat-list-animation'
+}

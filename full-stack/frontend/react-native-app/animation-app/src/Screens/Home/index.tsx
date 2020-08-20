@@ -32,6 +32,13 @@ export const HomeScreen = ({ navigation }: any) => {
                     </Text>
                 </TouchableOpacity>
                 <TouchableOpacity
+                    onPress={() => navigation.navigate(Routes.FlatListAnimation.state)}
+                    style={styles.item}>
+                    <Text>
+                        { t(`FLAT_LIST_ANIMATION_SCREEEN`) }
+                    </Text>
+                </TouchableOpacity>
+                <TouchableOpacity
                     onPress={() => navigation.navigate(Routes.Testing.state)}
                     style={styles.item}>
                     <Text>

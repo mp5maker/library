@@ -1,9 +1,9 @@
 import * as React from 'react'
-import { View, StyleSheet, Text, Image, Dimensions } from 'react-native'
+import { StyleSheet, Image, Dimensions } from 'react-native'
 import get from 'lodash/get'
 
 import { Carousel } from 'Native/Layouts/Carousel'
-import fakeData from './data.json'
+import { Posters } from 'Native/Data/Posters'
 
 const { width } = Dimensions.get('screen')
 const OVERFLOW_HEIGHT = 70
@@ -15,6 +15,7 @@ const ITEM_HEIGHT = ITEM_WIDTH * 1.7
 export const CarouselScreen = () => {
     return (
         <Carousel
+            list={Posters}
             display={({ item }: any) => {
                 const poster = get(item, 'poster', '')
 
