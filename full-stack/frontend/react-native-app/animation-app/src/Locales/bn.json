@@ -18,5 +18,8 @@
     "TESTING": "পরীক্ষামূলক",
     "CAROUSEL": "ক্যারোজেল",
     "FLAT_LIST_ANIMATION": "ফ্ল্যাট তালিকা অ্যানিমেশন",
-    "WALLET": "মানিব্যাগ"
+    "WALLET": "মানিব্যাগ",
+    "COME_TO_ME": "আমার কাছে এসো",
+    "SHOW_ME_THE_WALLET": "আমাকে মানিব্যাগ দেখান",
+    "TAKE_YOUR_WALLET_BACK": "আপনার মানিব্যাগটি ফিরে নিন"
 }

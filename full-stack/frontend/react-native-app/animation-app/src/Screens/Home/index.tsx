@@ -1,8 +1,13 @@
 import * as React from 'react'
-import { View, TouchableOpacity, StyleSheet, Text } from 'react-native'
+import { View, TouchableOpacity, StyleSheet, Text, Dimensions } from 'react-native'
 import { useTranslation } from 'react-i18next'
 
 import * as Routes from 'Native/Constants/Routes'
+import { Colors } from 'Native/Constants/Colors'
+
+const width = Dimensions.get('screen').width
+const WIDTH = width * 0.94
+const HEIGHT = WIDTH * 0.2
 
 export const HomeScreen = ({ navigation }: any) => {
     const { t } = useTranslation()
@@ -11,23 +16,23 @@ export const HomeScreen = ({ navigation }: any) => {
         <View style={styles.mainContainer}>
             <View style={styles.list}>
                 <TouchableOpacity
-                    onPress={() => navigation.navigate(Routes.ComeToMe.state)}
-                    style={styles.item}>
-                    <Text>
+                    style={styles.item}
+                    onPress={() => navigation.navigate(Routes.ComeToMe.state)}>
+                    <Text style={styles.itemText}>
                         { t(`COME_TO_ME`) }
                     </Text>
                 </TouchableOpacity>
                 <TouchableOpacity
-                    onPress={() => navigation.navigate(Routes.Wallet.state)}
-                    style={styles.item}>
-                    <Text>
+                    style={styles.item}
+                    onPress={() => navigation.navigate(Routes.Wallet.state)}>
+                    <Text style={styles.itemText}>
                         { t(`WALLET`) }
                     </Text>
                 </TouchableOpacity>
                 <TouchableOpacity
-                    onPress={() => navigation.navigate(Routes.Carousel.state)}
-                    style={styles.item}>
-                    <Text>
+                    style={styles.item}
+                    onPress={() => navigation.navigate(Routes.Carousel.state)}>
+                    <Text style={styles.itemText}>
                         { t(`CAROUSEL`) }
                     </Text>
                 </TouchableOpacity>
@@ -39,26 +44,30 @@ export const HomeScreen = ({ navigation }: any) => {
 export const styles = StyleSheet.create({
     mainContainer: {
         flex: 1,
-        alignItems: `center`,
-        justifyContent: `center`
+        alignItems: `flex-start`,
+        justifyContent: `flex-start`
     },
     list: {
         display: `flex`,
         justifyContent: `flex-start`,
-        alignItems: `flex-start`
+        alignItems: `flex-start`,
     },
     item: {
-        width: `90%`,
-        height: 25,
-        padding: 2,
+        width: WIDTH,
+        height: HEIGHT,
+        padding: 12,
         margin: 12,
-        shadowColor: "#000",
-        shadowOffset: {
-            width: 0,
-            height: 2,
-        },
-        shadowOpacity: 0.25,
-        shadowRadius: 3.84,
-        elevation: 5
+        display: `flex`,
+        justifyContent: `center`,
+        alignItems: `center`,
+        backgroundColor: Colors.light.backgroundColor,
+        borderRadius: 15,
+        shadowOffset: { width: 10, height: 10 },
+        shadowColor: Colors.light.boxShadowSmallColor,
+        shadowOpacity: 1,
+        elevation: 3,
+    },
+    itemText: {
+        color: Colors.light.primaryColor
     }
 });

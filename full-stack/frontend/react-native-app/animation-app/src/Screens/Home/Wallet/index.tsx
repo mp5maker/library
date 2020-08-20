@@ -15,7 +15,7 @@ export const WalletScreen = () => {
                 style={styles.button}
                 onPress={() => setToggle(!toggle)}>
                 <Text>
-                    { t(`ALLOW_ROTATION`) }
+                    {toggle ? t(`TAKE_YOUR_WALLET_BACK`) : t(`SHOW_ME_THE_WALLET`) }
                 </Text>
             </TouchableOpacity>
             <View style={styles.cardSection}>
