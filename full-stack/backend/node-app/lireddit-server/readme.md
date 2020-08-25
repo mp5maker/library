@@ -35,3 +35,9 @@
         response.send('Hello')
     })
 ```
+
+## UBUNTU ##
+
+```shell
+    fuser -n tcp -k 4000
+```
