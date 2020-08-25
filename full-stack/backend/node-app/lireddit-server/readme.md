@@ -13,3 +13,25 @@
 ## MIGRATION ##
 
 1. npx mikro-orm migrate:create
+
+## QUERIES ##
+
+```javascript
+    import { Post } from "./entities/Post"
+
+    /* Create Example */
+    const post = orm.em.create(Post, { title: 'my first post' })
+    await orm.em.persistAndFlush(post)
+
+    /* Find Example */
+    const posts = await orm.em.find(Post, {})
+    console.log(posts)
+```
+
+## EXPRESS ##
+
+```javascript
+    app.get('/', (_, response) => {
+        response.send('Hello')
+    })
+```
