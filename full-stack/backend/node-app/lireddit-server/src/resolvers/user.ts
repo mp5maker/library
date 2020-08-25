@@ -1,4 +1,4 @@
-import { Resolver, Arg, InputType, Field, Mutation, Ctx, ObjectType } from 'type-graphql'
+import { Resolver, Arg, InputType, Field, Mutation, Ctx, ObjectType, Query } from 'type-graphql'
 import get from 'lodash/get'
 import argon2 from 'argon2'
 
@@ -34,6 +34,16 @@ class UserResponse {
 
 @Resolver()
 export class UserResolver {
+    @Query(() => User, { nullable: true })
+    async me(
+        @Ctx() { em, req }: MyContext
+    ) {
+        if (!req.session.userId) return null
+        const user = await em.findOne(User, { id: req.session.userId })
+        return user
+    }
+
+
     @Mutation(() => UserResponse)
     async register(
         @Arg('options') options: UsernamePasswordInput,
