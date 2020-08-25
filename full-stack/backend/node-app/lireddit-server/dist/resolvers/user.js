@@ -108,7 +108,7 @@ let UserResolver = class UserResolver {
                     .getKnexQuery()
                     .insert({
                     username,
-                    password,
+                    password: hashedPassword,
                     created_at: new Date(),
                     updated_at: new Date()
                 })
