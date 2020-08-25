@@ -74,12 +74,46 @@ let UserResolver = class UserResolver {
             const username = get_1.default(options, 'username', '');
             const password = get_1.default(options, 'password', '');
             const hashedPassword = yield argon2_1.default.hash(password);
+            if (username.length <= 2) {
+                return {
+                    errors: [
+                        {
+                            field: "username",
+                            message: "LENGTH_MUST_BE_GREATER_THAN_TWO"
+                        }
+                    ]
+                };
+            }
+            if (username.length <= 2) {
+                return {
+                    errors: [
+                        {
+                            field: "password",
+                            message: "LENGTH_MUST_BE_GREATER_THAN_TWO"
+                        }
+                    ]
+                };
+            }
             const user = em.create(User_1.User, { username, password: hashedPassword });
-            yield em.persistAndFlush(user);
-            return user;
+            try {
+                yield em.persistAndFlush(user);
+            }
+            catch (error) {
+                if (error.code = '23505' || error.detail.includes("already exists")) {
+                    return {
+                        errors: [
+                            {
+                                field: "username",
+                                message: "USERNAME_ALREADY_TAKEN"
+                            }
+                        ]
+                    };
+                }
+            }
+            return { user };
         });
     }
-    login(options, { em }) {
+    login(options, { em, req }) {
         return __awaiter(this, void 0, void 0, function* () {
             const username = get_1.default(options, 'username', '');
             const password = get_1.default(options, 'password', '');
@@ -106,12 +140,13 @@ let UserResolver = class UserResolver {
                     ]
                 };
             }
+            req.session.userId = user.id;
             return { user };
         });
     }
 };
 __decorate([
-    type_graphql_1.Mutation(() => User_1.User),
+    type_graphql_1.Mutation(() => UserResponse),
     __param(0, type_graphql_1.Arg('options')),
     __param(1, type_graphql_1.Ctx()),
     __metadata("design:type", Function),

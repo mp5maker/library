@@ -34,24 +34,60 @@ class UserResponse {
 
 @Resolver()
 export class UserResolver {
-    @Mutation(() => User)
+    @Mutation(() => UserResponse)
     async register(
         @Arg('options') options: UsernamePasswordInput,
         @Ctx() { em }: MyContext
-    ) {
+    ): Promise<UserResponse> {
         const username = get(options, 'username', '')
         const password = get(options, 'password', '')
         const hashedPassword = await argon2.hash(password)
 
+        if (username.length <= 2) {
+            return {
+                errors: [
+                    {
+                        field: "username",
+                        message: "LENGTH_MUST_BE_GREATER_THAN_TWO"
+                    }
+                ]
+            }
+        }
+
+        if (username.length <= 2) {
+            return {
+                errors: [
+                    {
+                        field: "password",
+                        message: "LENGTH_MUST_BE_GREATER_THAN_TWO"
+                    }
+                ]
+            }
+        }
+
         const user = em.create(User, { username, password: hashedPassword })
-        await em.persistAndFlush(user)
-        return user
+
+        try {
+            await em.persistAndFlush(user)
+        } catch(error) {
+            if (error.code = '23505' || error.detail.includes("already exists")) {
+                return {
+                    errors: [
+                        {
+                            field: "username",
+                            message: "USERNAME_ALREADY_TAKEN"
+                        }
+                    ]
+                }
+            }
+        }
+        return { user }
     }
 
     @Mutation(() => UserResponse)
     async login(
         @Arg('options') options: UsernamePasswordInput,
-        @Ctx() { em }: MyContext
+        @Ctx() { em, req }: MyContext
     ): Promise<UserResponse> {
         const username = get(options, 'username', '')
         const password = get(options, 'password', '')
@@ -80,6 +116,8 @@ export class UserResolver {
                 ]
             }
         }
+
+        req.session.userId =  user.id
 
         return { user }
     }
