@@ -5,9 +5,11 @@ import { EntityManager } from '@mikro-orm/postgresql'
 
 import { MyContext } from 'src/types'
 import { User } from '../entities/User'
-import { COOKIE_NAME } from '../constants'
+import { COOKIE_NAME, FORGET_PASSWORD_PREFIX } from '../constants'
 import { UsernamePasswordInput } from './UsernamePasswordInput'
 import { validateRegister } from '../utils/validateRegister'
+import { sendEmail } from '../utils/sendEmail'
+import { v4 } from 'uuid'
 
 @ObjectType()
 class FieldError {
@@ -29,13 +31,20 @@ class UserResponse {
 
 @Resolver()
 export class UserResolver {
-    // @Mutation(() => Boolean)
-    // async forgotPassword(
-    //     @Arg('email') email: string,
-    //     @Ctx() { req }: MyContext
-    // ) {
-    //     const user = await email.findOne(User, { email })
-    // }
+    @Mutation(() => Boolean)
+    async forgotPassword(
+        @Arg('email') email: string,
+        @Ctx() { em, redis }: MyContext
+    ) {
+        const user = await em.findOne(User, { email })
+        /* Do not let the user know whether this email exist or not */
+        if (!user) return true
+        const token = v4()
+        await redis.set(`${FORGET_PASSWORD_PREFIX}${token}`, user.id, 'ex', 1000 * 60 * 60 * 24 * 3)
+        const anchoreTag = `<a href="http://localhost:3000/change-password/${token}">Reset Password</a>`
+        await sendEmail(email, anchoreTag)
+        return true
+    }
 
 
     @Query(() => User, { nullable: true })
