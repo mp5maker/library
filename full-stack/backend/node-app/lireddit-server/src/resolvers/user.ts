@@ -60,7 +60,7 @@ export class UserResolver {
             }
         }
 
-        const user: any = em.findOne(User, { id: parseInt(userId) })
+        const user: any = await em.findOne(User, { id: parseInt(userId) })
         if (!user) {
             return {
                 errors: [

@@ -84,7 +84,7 @@ let UserResolver = class UserResolver {
                     ]
                 };
             }
-            const user = em.findOne(User_1.User, { id: parseInt(userId) });
+            const user = yield em.findOne(User_1.User, { id: parseInt(userId) });
             if (!user) {
                 return {
                     errors: [
