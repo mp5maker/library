@@ -30,19 +30,8 @@ const get_1 = __importDefault(require("lodash/get"));
 const argon2_1 = __importDefault(require("argon2"));
 const User_1 = require("../entities/User");
 const constants_1 = require("../constants");
-let UsernamePasswordInput = class UsernamePasswordInput {
-};
-__decorate([
-    type_graphql_1.Field(),
-    __metadata("design:type", String)
-], UsernamePasswordInput.prototype, "username", void 0);
-__decorate([
-    type_graphql_1.Field(),
-    __metadata("design:type", String)
-], UsernamePasswordInput.prototype, "password", void 0);
-UsernamePasswordInput = __decorate([
-    type_graphql_1.InputType()
-], UsernamePasswordInput);
+const UsernamePasswordInput_1 = require("./UsernamePasswordInput");
+const validateRegister_1 = require("../utils/validateRegister");
 let FieldError = class FieldError {
 };
 __decorate([
@@ -81,34 +70,19 @@ let UserResolver = class UserResolver {
     register(options, { em }) {
         return __awaiter(this, void 0, void 0, function* () {
             const username = get_1.default(options, 'username', '');
+            const email = get_1.default(options, 'email', '');
             const password = get_1.default(options, 'password', '');
             const hashedPassword = yield argon2_1.default.hash(password);
-            if (username.length <= 2) {
-                return {
-                    errors: [
-                        {
-                            field: "username",
-                            message: "LENGTH_MUST_BE_GREATER_THAN_TWO"
-                        }
-                    ]
-                };
-            }
-            if (username.length <= 2) {
-                return {
-                    errors: [
-                        {
-                            field: "password",
-                            message: "LENGTH_MUST_BE_GREATER_THAN_TWO"
-                        }
-                    ]
-                };
-            }
+            const errors = validateRegister_1.validateRegister(options);
+            if (errors)
+                return { errors };
             let user;
             try {
                 const result = yield em.createQueryBuilder(User_1.User)
                     .getKnexQuery()
                     .insert({
                     username,
+                    email,
                     password: hashedPassword,
                     created_at: new Date(),
                     updated_at: new Date()
@@ -131,18 +105,28 @@ let UserResolver = class UserResolver {
             return { user };
         });
     }
-    login(options, { em, req }) {
+    login(usernameOrEmail, password, { em, req }) {
         return __awaiter(this, void 0, void 0, function* () {
-            const username = get_1.default(options, 'username', '');
-            const password = get_1.default(options, 'password', '');
             const hashedPassword = yield argon2_1.default.hash(password);
-            const user = yield em.findOne(User_1.User, { username });
+            const user = yield em.findOne(User_1.User, usernameOrEmail.includes('@')
+                ? { email: usernameOrEmail }
+                : { username: usernameOrEmail });
             if (!user) {
                 return {
                     errors: [
                         {
-                            field: 'username',
-                            message: "USERNAME_DO_NOT_EXIST"
+                            field: 'usernameOrEmail',
+                            message: "USERNAME_OR_EMAIL_DO_NOT_EXIST"
+                        }
+                    ]
+                };
+            }
+            if (!password) {
+                return {
+                    errors: [
+                        {
+                            field: 'password',
+                            message: "PASSWORD_CANNOT_BE_EMPTY"
                         }
                     ]
                 };
@@ -188,15 +172,16 @@ __decorate([
     __param(0, type_graphql_1.Arg('options')),
     __param(1, type_graphql_1.Ctx()),
     __metadata("design:type", Function),
-    __metadata("design:paramtypes", [UsernamePasswordInput, Object]),
+    __metadata("design:paramtypes", [UsernamePasswordInput_1.UsernamePasswordInput, Object]),
     __metadata("design:returntype", Promise)
 ], UserResolver.prototype, "register", null);
 __decorate([
     type_graphql_1.Mutation(() => UserResponse),
-    __param(0, type_graphql_1.Arg('options')),
-    __param(1, type_graphql_1.Ctx()),
+    __param(0, type_graphql_1.Arg('usernameOrEmail')),
+    __param(1, type_graphql_1.Arg('password')),
+    __param(2, type_graphql_1.Ctx()),
     __metadata("design:type", Function),
-    __metadata("design:paramtypes", [UsernamePasswordInput, Object]),
+    __metadata("design:paramtypes", [String, String, Object]),
     __metadata("design:returntype", Promise)
 ], UserResolver.prototype, "login", null);
 __decorate([

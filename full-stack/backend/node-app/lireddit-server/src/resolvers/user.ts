@@ -1,4 +1,4 @@
-import { Resolver, Arg, InputType, Field, Mutation, Ctx, ObjectType, Query } from 'type-graphql'
+import { Resolver, Arg, Field, Mutation, Ctx, ObjectType, Query } from 'type-graphql'
 import get from 'lodash/get'
 import argon2 from 'argon2'
 import { EntityManager } from '@mikro-orm/postgresql'
@@ -6,15 +6,8 @@ import { EntityManager } from '@mikro-orm/postgresql'
 import { MyContext } from 'src/types'
 import { User } from '../entities/User'
 import { COOKIE_NAME } from '../constants'
-
-@InputType()
-class UsernamePasswordInput {
-    @Field()
-    username: string
-
-    @Field()
-    password: string
-}
+import { UsernamePasswordInput } from './UsernamePasswordInput'
+import { validateRegister } from '../utils/validateRegister'
 
 @ObjectType()
 class FieldError {
@@ -36,6 +29,15 @@ class UserResponse {
 
 @Resolver()
 export class UserResolver {
+    // @Mutation(() => Boolean)
+    // async forgotPassword(
+    //     @Arg('email') email: string,
+    //     @Ctx() { req }: MyContext
+    // ) {
+    //     const user = await email.findOne(User, { email })
+    // }
+
+
     @Query(() => User, { nullable: true })
     async me(
         @Ctx() { em, req }: MyContext
@@ -52,30 +54,12 @@ export class UserResolver {
         @Ctx() { em }: MyContext
     ): Promise<UserResponse> {
         const username = get(options, 'username', '')
+        const email = get(options, 'email', '')
         const password = get(options, 'password', '')
         const hashedPassword = await argon2.hash(password)
 
-        if (username.length <= 2) {
-            return {
-                errors: [
-                    {
-                        field: "username",
-                        message: "LENGTH_MUST_BE_GREATER_THAN_TWO"
-                    }
-                ]
-            }
-        }
-
-        if (username.length <= 2) {
-            return {
-                errors: [
-                    {
-                        field: "password",
-                        message: "LENGTH_MUST_BE_GREATER_THAN_TWO"
-                    }
-                ]
-            }
-        }
+        const errors = validateRegister(options)
+        if (errors) return { errors }
 
         let user;
         try {
@@ -83,6 +67,7 @@ export class UserResolver {
             .getKnexQuery()
             .insert({
                 username,
+                email,
                 password: hashedPassword,
                 created_at: new Date(),
                 updated_at: new Date()
@@ -106,20 +91,36 @@ export class UserResolver {
 
     @Mutation(() => UserResponse)
     async login(
-        @Arg('options') options: UsernamePasswordInput,
+        @Arg('usernameOrEmail') usernameOrEmail: string,
+        @Arg('password') password: string,
         @Ctx() { em, req }: MyContext
     ): Promise<UserResponse> {
-        const username = get(options, 'username', '')
-        const password = get(options, 'password', '')
         const hashedPassword = await argon2.hash(password)
 
-        const user = await em.findOne(User, { username })
+        const user = await em.findOne(
+            User,
+            usernameOrEmail.includes('@')
+                ? { email: usernameOrEmail }
+                : { username: usernameOrEmail }
+        )
+
         if (!user) {
             return {
                 errors: [
                     {
-                        field: 'username',
-                        message: "USERNAME_DO_NOT_EXIST"
+                        field: 'usernameOrEmail',
+                        message: "USERNAME_OR_EMAIL_DO_NOT_EXIST"
+                    }
+                ]
+            }
+        }
+
+        if (!password) {
+            return {
+                errors: [
+                    {
+                        field: 'password',
+                        message: "PASSWORD_CANNOT_BE_EMPTY"
                     }
                 ]
             }
