@@ -7,6 +7,8 @@ import { Wrapper } from '../components/Wrapper'
 import { InputField } from '../components/InputField'
 import { useLoginMutation } from '../generated/graphql'
 import { toErrorMap } from '../utils/toErrorMap'
+import { createUrqlClient } from '../utils/createUrqlClient'
+import { withUrqlClient } from 'next-urql'
 
 export const Login: React.FC<{}> = ({ }) => {
     const router = useRouter()
@@ -65,4 +67,4 @@ export const Login: React.FC<{}> = ({ }) => {
     )
 }
 
-export default Login
+export default withUrqlClient(createUrqlClient)(Login)
