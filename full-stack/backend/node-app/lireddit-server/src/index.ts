@@ -9,7 +9,6 @@ import { createConnection } from 'typeorm'
 
 import { ApolloServer } from 'apollo-server-express'
 import { buildSchema } from 'type-graphql'
-import { HelloResolver } from "./resolvers/hello"
 import { PostResolver } from "./resolvers/post"
 import { UserResolver } from "./resolvers/user"
 import { User } from "./entities/User"
@@ -18,12 +17,12 @@ import { Post } from "./entities/Post"
 const RedisStore = connectRedis(session)
 const redis = new Redis()
 const main = async () => {
-    const conn = await createConnection({
+    await createConnection({
         type: 'postgres',
         database: 'lireddit',
         username: 'postgres',
         password: '123',
-        logging: true,
+        logging: !__prod__,
         synchronize: true,
         entities: [Post, User],
     })
@@ -55,7 +54,6 @@ const main = async () => {
     const apolloServer = new ApolloServer({
         schema: await buildSchema({
             resolvers: [
-                HelloResolver,
                 PostResolver,
                 UserResolver
             ],
