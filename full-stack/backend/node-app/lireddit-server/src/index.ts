@@ -6,6 +6,7 @@ import session from 'express-session'
 import connectRedis from 'connect-redis'
 import cors from 'cors'
 import { createConnection } from 'typeorm'
+import path from "path"
 
 import { ApolloServer } from 'apollo-server-express'
 import { buildSchema } from 'type-graphql'
@@ -17,15 +18,17 @@ import { Post } from "./entities/Post"
 const RedisStore = connectRedis(session)
 const redis = new Redis()
 const main = async () => {
-    await createConnection({
+    const conn = await createConnection({
         type: 'postgres',
         database: 'lireddit',
         username: 'postgres',
         password: '123',
         logging: !__prod__,
         synchronize: true,
+        migrations: [path.join(__dirname, './migrations/*')],
         entities: [Post, User],
     })
+    await conn.runMigrations()
 
     const app = express()
     app.use(cors({
