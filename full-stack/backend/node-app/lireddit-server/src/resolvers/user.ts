@@ -1,7 +1,6 @@
 import { Resolver, Arg, Field, Mutation, Ctx, ObjectType, Query } from 'type-graphql'
 import get from 'lodash/get'
 import argon2 from 'argon2'
-import { EntityManager } from '@mikro-orm/postgresql'
 
 import { MyContext } from 'src/types'
 import { User } from '../entities/User'
@@ -10,6 +9,7 @@ import { UsernamePasswordInput } from './UsernamePasswordInput'
 import { validateRegister } from '../utils/validateRegister'
 import { sendEmail } from '../utils/sendEmail'
 import { v4 } from 'uuid'
+import { getConnection } from 'typeorm'
 
 @ObjectType()
 class FieldError {
@@ -35,7 +35,7 @@ export class UserResolver {
     async changePassword(
         @Arg('token') token: string,
         @Arg('newPassword') newPassword: string,
-        @Ctx() { redis, em, req }: MyContext
+        @Ctx() { redis, req }: MyContext
     ): Promise<UserResponse> {
         if (newPassword.length <= 2) {
             return {
@@ -61,7 +61,8 @@ export class UserResolver {
             }
         }
 
-        const user: any = await em.findOne(User, { id: parseInt(userId) })
+        const userIdNum = parseInt(userId)
+        const user: any = await User.findOne(userIdNum)
         if (!user) {
             return {
                 errors: [
@@ -73,8 +74,7 @@ export class UserResolver {
             }
         }
         const hashedPassword = await argon2.hash(newPassword)
-        user.password = hashedPassword
-        await em.persistAndFlush(user)
+        await User.update({ id: userIdNum }, { password: hashedPassword })
         await redis.del(key)
         req.session.userId = user.id
         return { user }
@@ -84,9 +84,9 @@ export class UserResolver {
     @Mutation(() => Boolean)
     async forgotPassword(
         @Arg('email') email: string,
-        @Ctx() { em, redis }: MyContext
+        @Ctx() { redis }: MyContext
     ) {
-        const user = await em.findOne(User, { email })
+        const user = await User.findOne({ where: { email }})
         /* Do not let the user know whether this email exist or not */
         if (!user) return true
         const token = v4()
@@ -98,19 +98,15 @@ export class UserResolver {
 
 
     @Query(() => User, { nullable: true })
-    async me(
-        @Ctx() { em, req }: MyContext
-    ) {
+    async me(@Ctx() { req }: MyContext) {
         if (!req.session.userId) return null
-        const user = await em.findOne(User, { id: req.session.userId })
-        return user
+        return User.findOne(req.session.userId)
     }
 
 
     @Mutation(() => UserResponse)
     async register(
         @Arg('options') options: UsernamePasswordInput,
-        @Ctx() { em }: MyContext
     ): Promise<UserResponse> {
         const username = get(options, 'username', '')
         const email = get(options, 'email', '')
@@ -120,19 +116,21 @@ export class UserResolver {
         const errors = validateRegister(options)
         if (errors) return { errors }
 
-        let user;
+        let user: any;
         try {
-            const result =  await (em as EntityManager).createQueryBuilder(User)
-            .getKnexQuery()
-            .insert({
-                username,
-                email,
-                password: hashedPassword,
-                created_at: new Date(),
-                updated_at: new Date()
-            })
-            .returning("*")
-            user = result[0]
+            /* User.create({ username, email, password }).save() */
+            const result = await getConnection()
+                .createQueryBuilder()
+                .insert()
+                .into(User)
+                .values({
+                    username,
+                    email,
+                    password: hashedPassword,
+                })
+                .returning("*")
+                .execute()
+            user = result.raw[0]
         } catch(error) {
             if (error.code = '23505' || error.detail.includes("already exists")) {
                 return {
@@ -152,12 +150,11 @@ export class UserResolver {
     async login(
         @Arg('usernameOrEmail') usernameOrEmail: string,
         @Arg('password') password: string,
-        @Ctx() { em, req }: MyContext
+        @Ctx() { req }: MyContext
     ): Promise<UserResponse> {
         const hashedPassword = await argon2.hash(password)
 
-        const user = await em.findOne(
-            User,
+        const user = await User.findOne(
             usernameOrEmail.includes('@')
                 ? { email: usernameOrEmail }
                 : { username: usernameOrEmail }
