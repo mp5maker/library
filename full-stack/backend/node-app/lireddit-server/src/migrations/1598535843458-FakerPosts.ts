@@ -1,4 +1,10 @@
-insert into post (title, text, "creatorId", "createdAt") values ('Waterloo', 'Nulla ut erat id mauris vulputate elementum. Nullam varius. Nulla facilisi.
+import {MigrationInterface, QueryRunner} from "typeorm";
+
+export class FakerPosts1598535843458 implements MigrationInterface {
+
+    public async up(queryRunner: QueryRunner): Promise<void> {
+        queryRunner.query(`
+            insert into post (title, text, "creatorId", "createdAt") values ('Waterloo', 'Nulla ut erat id mauris vulputate elementum. Nullam varius. Nulla facilisi.
 
 Cras non velit nec nisi vulputate nonummy. Maecenas tincidunt lacus at velit. Vivamus vel nulla eget eros elementum pellentesque.
 
@@ -306,3 +312,11 @@ Sed ante. Vivamus tortor. Duis mattis egestas metus.
 
 Aenean fermentum. Donec ut mauris eget massa tempor convallis. Nulla neque libero, convallis eget, eleifend luctus, ultricies eu, nibh.', 1, '2020-03-22T08:02:06Z');
 insert into post (title, text, "creatorId", "createdAt") values ('Rasputin and the Empress', 'Phasellus in felis. Donec semper sapien a libero. Nam dui.', 1, '2019-11-24T13:04:36Z');
+
+        `)
+    }
+
+    public async down(_: QueryRunner): Promise<void> {
+    }
+
+}
