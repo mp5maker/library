@@ -10,7 +10,7 @@ const Index = () => {
   const [variables, setVariables] = React.useState({ limit: 10, cursor: null as null | string })
   const [{ data, fetching }] = usePostsQuery({ variables });
 
-  if (!fetching && !data) {
+  if (!fetching && !data?.posts) {
     return (
       <div>
         No Data Found
@@ -30,14 +30,14 @@ const Index = () => {
           </NextLink>
         </Flex>
         {
-          !data && fetching ? (
+          !data && data?.posts && fetching ? (
             <div>
               Loading...
             </div>
           ) : (
             <Stack spacing={8}>
               {
-                data.posts.map((item) => {
+                data?.posts?.posts?.map((item) => {
                   return (
                     <Box key={item.id} p={5} shadow="md" borderWidth="1px">
                       <Heading fontSize="xl">
@@ -55,13 +55,13 @@ const Index = () => {
           )
         }
         {
-          data ? (
+          data && data?.posts?.hasMore? (
             <Flex>
               <Button
                 onClick={() => {
                   setVariables({
                     limit: variables.limit,
-                    cursor: data.posts[data.posts.length - 1].createdAt
+                    cursor: data?.posts?.posts[data?.posts?.posts.length - 1].createdAt
                   })
                 }}
                 isLoading={fetching}
