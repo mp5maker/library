@@ -2,17 +2,20 @@ import React from 'react'
 import { useRouter } from 'next/router'
 import { Layout } from '../components/Layout'
 import { Formik, Form } from 'formik'
-import { Box, Flex, Button, Link } from '@chakra-ui/core'
+import { Box, Flex, Button } from '@chakra-ui/core'
 import { InputField } from '../components/InputField'
 import { useCreatePostMutation } from '../generated/graphql'
 import { createUrqlClient } from '../utils/createUrqlClient'
 import { withUrqlClient } from 'next-urql'
+import { userIsAuth } from '../utils/userIsAuth'
 
 interface createPostProps {}
 
 export const CreatePost: React.FC<createPostProps> = ({}) => {
     const router = useRouter()
     const [, createPost] = useCreatePostMutation()
+    userIsAuth()
+
 
     return (
         <>
