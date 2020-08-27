@@ -1,37 +1,78 @@
+import React from 'react'
 import { withUrqlClient } from 'next-urql'
 import { createUrqlClient } from "../utils/createUrqlClient"
 import { usePostsQuery } from "../generated/graphql"
 import { Layout } from "../components/Layout"
 import NextLink from 'next/link'
-import { Link } from '@chakra-ui/core'
+import { Link, Stack, Box, Heading, Text, Flex, Button } from '@chakra-ui/core'
 
 const Index = () => {
-  const [{ data }] = usePostsQuery({
-    variables: {
-      limit: 10
-    }
-  });
+  const [variables, setVariables] = React.useState({ limit: 10, cursor: null as null | string })
+  const [{ data, fetching }] = usePostsQuery({ variables });
+
+  if (!fetching && !data) {
+    return (
+      <div>
+        No Data Found
+      </div>
+    )
+  }
 
   return (
     <>
       <Layout>
-        <NextLink href="/create-post">
-          <Link>
-            Create Post
-          </Link>
-        </NextLink>
+        <Flex align="center" mb="5">
+          <Heading>LiReddit</Heading>
+          <NextLink href="/create-post">
+            <Link ml="auto">
+              Create Post
+            </Link>
+          </NextLink>
+        </Flex>
         {
-          !data ? (
+          !data && fetching ? (
             <div>
               Loading...
             </div>
-          ) : data.posts.map((item) => {
-            return (
-              <div key={item.id}>
-                { item.title }
-              </div>
-            )
-          })
+          ) : (
+            <Stack spacing={8}>
+              {
+                data.posts.map((item) => {
+                  return (
+                    <Box key={item.id} p={5} shadow="md" borderWidth="1px">
+                      <Heading fontSize="xl">
+                        { item.title }
+                      </Heading>
+                      <Text
+                        mt={4}>
+                        { item.textSnippet }
+                      </Text>
+                    </Box>
+                  )
+                })
+              }
+            </Stack>
+          )
+        }
+        {
+          data ? (
+            <Flex>
+              <Button
+                onClick={() => {
+                  setVariables({
+                    limit: variables.limit,
+                    cursor: data.posts[data.posts.length - 1].createdAt
+                  })
+                }}
+                isLoading={fetching}
+                m="auto"
+                my="8">
+                Load More
+              </Button>
+            </Flex>
+          ) : (
+            <></>
+          )
         }
       </Layout>
     </>
