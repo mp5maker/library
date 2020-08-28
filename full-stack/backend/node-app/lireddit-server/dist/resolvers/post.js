@@ -79,7 +79,10 @@ let PostResolver = class PostResolver {
         return __awaiter(this, void 0, void 0, function* () {
             const realLimit = Math.min(50, limit);
             const realLimitPlusOne = realLimit + 1;
-            const replacements = [realLimitPlusOne];
+            const replacements = [
+                realLimitPlusOne,
+                ...(cursor ? [new Date(parseInt(cursor))] : [])
+            ];
             const posts = yield typeorm_1.getConnection()
                 .query(`
                 select p.*,

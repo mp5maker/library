@@ -63,7 +63,11 @@ export class PostResolver {
         const realLimit = Math.min(50, limit)
         const realLimitPlusOne = realLimit + 1
 
-        const replacements: any[] = [realLimitPlusOne]
+        const replacements: any[] = [
+            realLimitPlusOne,
+            ...(cursor ? [new Date(parseInt(cursor))]: [])
+        ]
+
         const posts = await getConnection()
             .query(`
                 select p.*,
