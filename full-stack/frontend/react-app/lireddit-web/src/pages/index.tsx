@@ -32,6 +32,7 @@ const Index = () => {
             <Stack spacing={8}>
               {
                 data?.posts?.posts?.map((item) => {
+                  if (!item) return null
                   return (
                     <Flex key={item.id} p={5} shadow="md" borderWidth="1px">
                       <Box mr={5}>
@@ -55,11 +56,21 @@ const Index = () => {
                             mt={4}>
                             { item.textSnippet }
                           </Text>
-                          <IconButton
-                            onClick={() => deletePost({ id: item.id })}
-                            variantColor={`red`}
-                            icon={`delete`}
-                            aria-label="delete post" />
+                          <Box>
+                            <NextLink
+                              href="/post/edit/[id]"
+                              as={`/post/edit/${item.id}`}>
+                              <IconButton
+                                as={Link}
+                                mr={5}
+                                icon={`edit`}
+                                aria-label="edit post" />
+                            </NextLink>
+                            <IconButton
+                              onClick={() => deletePost({ id: item.id })}
+                              icon={`delete`}
+                              aria-label="delete post" />
+                          </Box>
                         </Flex>
                       </Box>
                     </Flex>

@@ -18,6 +18,12 @@
         postId,
         value: realValue
     })
+
+    const post = await Post.findOne(id)
+    if (!post) return false
+    if (post?.creatorId !== req.session.userId) throw new Error('NOT_AUTHORIZED')
+    await Updoot.delete({ postId: id })
+    await Post.delete({ id, creatorId: req.session.userId })
 ```
 
 ## RAW QUERY ##
