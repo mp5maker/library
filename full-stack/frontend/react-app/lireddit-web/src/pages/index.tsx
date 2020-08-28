@@ -4,13 +4,14 @@ import NextLink from 'next/link'
 import React from 'react'
 import { Layout } from "../components/Layout"
 import { UpdootSection } from '../components/UpdootSection'
-import { usePostsQuery, useDeletePostMutation } from "../generated/graphql"
+import { usePostsQuery, useDeletePostMutation, useMeQuery } from "../generated/graphql"
 import { createUrqlClient } from "../utils/createUrqlClient"
 
 const Index = () => {
   const [variables, setVariables] = React.useState({ limit: 10, cursor: null as null | string })
   const [{ data, fetching }] = usePostsQuery({ variables });
   const [, deletePost] = useDeletePostMutation()
+  const [{ data: meData }] = useMeQuery()
 
   if (!fetching && !data?.posts) {
     return (
@@ -56,21 +57,25 @@ const Index = () => {
                             mt={4}>
                             { item.textSnippet }
                           </Text>
-                          <Box>
-                            <NextLink
-                              href="/post/edit/[id]"
-                              as={`/post/edit/${item.id}`}>
-                              <IconButton
-                                as={Link}
-                                mr={5}
-                                icon={`edit`}
-                                aria-label="edit post" />
-                            </NextLink>
-                            <IconButton
-                              onClick={() => deletePost({ id: item.id })}
-                              icon={`delete`}
-                              aria-label="delete post" />
-                          </Box>
+                          {
+                            meData?.me?.id === item.creator.id ? (
+                              <Box>
+                                <NextLink
+                                  href="/post/edit/[id]"
+                                  as={`/post/edit/${item.id}`}>
+                                  <IconButton
+                                    as={Link}
+                                    mr={5}
+                                    icon={`edit`}
+                                    aria-label="edit post" />
+                                </NextLink>
+                                <IconButton
+                                  onClick={() => deletePost({ id: item.id })}
+                                  icon={`delete`}
+                                  aria-label="delete post" />
+                              </Box>
+                            ) : <></>
+                          }
                         </Flex>
                       </Box>
                     </Flex>
