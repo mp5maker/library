@@ -4,6 +4,7 @@ import { createUrqlClient } from '../../utils/createUrqlClient'
 import { useRouter } from 'next/router'
 import { usePostQuery } from '../../generated/graphql'
 import { Layout } from '../../components/Layout'
+import { Box, Heading } from '@chakra-ui/core'
 
 interface PostProps {}
 
@@ -34,9 +35,22 @@ export const Post: React.FC<PostProps> = ({}) => {
         )
     }
 
+    if (!data?.post) {
+        return (
+            <Layout>
+                <Box>
+                    Could not find post
+                </Box>
+            </Layout>
+        )
+    }
+
     return (
         <>
             <Layout>
+                <Heading>
+                    { data?.post?.title }
+                </Heading>
                 { data?.post?.text }
             </Layout>
         </>

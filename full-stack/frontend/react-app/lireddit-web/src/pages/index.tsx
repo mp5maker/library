@@ -1,11 +1,11 @@
-import React from 'react'
+import { Box, Button, Flex, Heading, Link, Stack, Text } from '@chakra-ui/core'
 import { withUrqlClient } from 'next-urql'
-import { createUrqlClient } from "../utils/createUrqlClient"
-import { usePostsQuery } from "../generated/graphql"
-import { Layout } from "../components/Layout"
 import NextLink from 'next/link'
-import { Link, Stack, Box, Heading, Text, Flex, Button, Icon, IconButton } from '@chakra-ui/core'
+import React from 'react'
+import { Layout } from "../components/Layout"
 import { UpdootSection } from '../components/UpdootSection'
+import { usePostsQuery } from "../generated/graphql"
+import { createUrqlClient } from "../utils/createUrqlClient"
 
 const Index = () => {
   const [variables, setVariables] = React.useState({ limit: 10, cursor: null as null | string })
@@ -22,14 +22,6 @@ const Index = () => {
   return (
     <>
       <Layout>
-        <Flex align="center" mb="5">
-          <Heading>LiReddit</Heading>
-          <NextLink href="/create-post">
-            <Link ml="auto">
-              Create Post
-            </Link>
-          </NextLink>
-        </Flex>
         {
           !data && data?.posts && fetching ? (
             <div>
