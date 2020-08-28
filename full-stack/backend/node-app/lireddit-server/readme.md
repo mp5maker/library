@@ -10,6 +10,16 @@
 
 1. createdb lireddit
 
+## SIMPLE QUERY ##
+
+```javascript
+    await Updoot.insert({
+        userId,
+        postId,
+        value: realValue
+    })
+```
+
 ## QUERY BUILDER ##
 
 ```javascript
