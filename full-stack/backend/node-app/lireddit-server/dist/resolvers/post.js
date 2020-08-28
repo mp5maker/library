@@ -112,10 +112,11 @@ let PostResolver = class PostResolver {
                     'createdAt', u."createdAt",
                     'updatedAt', u."updatedAt"
                 ) creator
-                ${userId ? `,(select value from updoot where "userId" = $2 and "postId" = p.id) "voteStatus"` : `null as "voteStatus"`}
+                ${userId ? `,(select value from updoot where "userId" = $2 and "postId" = p.id) "voteStatus"` : `,null as "voteStatus"`}
                 from post p
                 inner join public.user u on u.id = p."creatorId"
-                ${cursor ? `where p."createdAt" < $3` : ""}
+                ${cursor && !userId ? `where p."createdAt" < $2` : ""}
+                ${cursor && userId ? `where p."createdAt" < $3` : ""}
                 order by p."createdAt" DESC
                 limit $1
             `, replacements);
