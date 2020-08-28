@@ -10,13 +10,21 @@ import { createUrqlClient } from "../utils/createUrqlClient"
 
 const Index = () => {
   const [variables, setVariables] = React.useState({ limit: 10, cursor: null as null | string })
-  const [{ data, fetching }] = usePostsQuery({ variables });
+  const [{ data, error, fetching }] = usePostsQuery({ variables });
+
+  if (!fetching && !data) {
+    return (
+      <Box>
+        { error.message }
+      </Box>
+    )
+  }
 
   if (!fetching && !data?.posts) {
     return (
-      <div>
+      <Box>
         No Data Found
-      </div>
+      </Box>
     )
   }
 
@@ -25,9 +33,9 @@ const Index = () => {
       <Layout>
         {
           !data && data?.posts && fetching ? (
-            <div>
+            <Box>
               Loading...
-            </div>
+            </Box>
           ) : (
             <Stack spacing={8}>
               {
