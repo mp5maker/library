@@ -58,8 +58,8 @@ let PostResolver = class PostResolver {
     textSnippet(root) {
         return root.text.slice(0, 50);
     }
-    creator(post) {
-        return User_1.User.findOne(post.creatorId);
+    creator(post, { userLoader }) {
+        return userLoader.load(post.creatorId);
     }
     vote(postId, value, { req }) {
         return __awaiter(this, void 0, void 0, function* () {
@@ -109,7 +109,7 @@ let PostResolver = class PostResolver {
             const posts = yield typeorm_1.getConnection()
                 .query(`
                 select p.*,
-                ${userId ? `,(select value from updoot where "userId" = $2 and "postId" = p.id) "voteStatus"` : `null as "voteStatus"`}
+                ${userId ? `(select value from updoot where "userId" = $2 and "postId" = p.id) "voteStatus"` : `null as "voteStatus"`}
                 from post p
                 ${cursor && !userId ? `where p."createdAt" < $2` : ""}
                 ${cursor && userId ? `where p."createdAt" < $3` : ""}
@@ -160,8 +160,9 @@ __decorate([
 __decorate([
     type_graphql_1.FieldResolver(() => User_1.User),
     __param(0, type_graphql_1.Root()),
+    __param(1, type_graphql_1.Ctx()),
     __metadata("design:type", Function),
-    __metadata("design:paramtypes", [Post_1.Post]),
+    __metadata("design:paramtypes", [Post_1.Post, Object]),
     __metadata("design:returntype", void 0)
 ], PostResolver.prototype, "creator", null);
 __decorate([

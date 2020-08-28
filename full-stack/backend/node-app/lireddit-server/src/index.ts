@@ -15,6 +15,7 @@ import { UserResolver } from "./resolvers/user"
 import { User } from "./entities/User"
 import { Post } from "./entities/Post"
 import { Updoot } from "./entities/Updoot"
+import { createUserLoader } from "./utils/createUserLoader"
 
 const RedisStore = connectRedis(session)
 const redis = new Redis()
@@ -63,7 +64,7 @@ const main = async () => {
             ],
             validate: false
         }),
-        context: ({ req, res }) => ({ req, res, redis })
+        context: ({ req, res }) => ({ req, res, redis, userLoader: createUserLoader() })
     })
     apolloServer.applyMiddleware({
         app,

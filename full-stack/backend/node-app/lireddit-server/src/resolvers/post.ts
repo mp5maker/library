@@ -32,8 +32,11 @@ export class PostResolver {
     }
 
     @FieldResolver(() => User)
-    creator(@Root() post: Post) {
-        return User.findOne(post.creatorId)
+    creator(
+        @Root() post: Post,
+        @Ctx() { userLoader }: MyContext
+    ) {
+        return userLoader.load(post.creatorId)
     }
 
     @Mutation(() => Boolean)
@@ -97,7 +100,7 @@ export class PostResolver {
         const posts = await getConnection()
             .query(`
                 select p.*,
-                ${ userId ? `,(select value from updoot where "userId" = $2 and "postId" = p.id) "voteStatus"` : `null as "voteStatus"`}
+                ${ userId ? `(select value from updoot where "userId" = $2 and "postId" = p.id) "voteStatus"` : `null as "voteStatus"`}
                 from post p
                 ${cursor && !userId ? `where p."createdAt" < $2` : ""}
                 ${cursor && userId ? `where p."createdAt" < $3` : ""}
