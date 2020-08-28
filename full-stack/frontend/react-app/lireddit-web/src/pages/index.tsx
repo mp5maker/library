@@ -43,6 +43,9 @@ const Index = () => {
                       <Heading fontSize="xl">
                         { item.title }
                       </Heading>
+                      <Text>
+                        Posted By: {item.creator.username}
+                      </Text>
                       <Text
                         mt={4}>
                         { item.textSnippet }
