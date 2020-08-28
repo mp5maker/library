@@ -10,6 +10,25 @@
 
 1. createdb lireddit
 
+## QUERY BUILDER ##
+
+```javascript
+    const queryBuilder = getConnection()
+        .getRepository(Post)
+        .createQueryBuilder("p")
+        .orderBy('"createdAt"', "DESC")
+        .take(realLimitPlusOne)
+
+    if (cursor) {
+        queryBuilder
+            .where('"createdAt" < :cursor', {
+            cursor: new Date(parseInt(cursor))
+        })
+    }
+
+    const posts = await queryBuilder.getMany()
+```
+
 ## MIGRATION ##
 
 1. npx typeorm migration:create -n FakePosts
