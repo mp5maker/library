@@ -4,7 +4,8 @@ import { createUrqlClient } from '../../utils/createUrqlClient'
 import { useRouter } from 'next/router'
 import { usePostQuery } from '../../generated/graphql'
 import { Layout } from '../../components/Layout'
-import { Box, Heading } from '@chakra-ui/core'
+import { Box, Heading, Flex } from '@chakra-ui/core'
+import { EditDeletePostButtons } from '../../components/EditDeletePostButtons'
 
 interface PostProps {}
 
@@ -51,7 +52,12 @@ export const Post: React.FC<PostProps> = ({}) => {
                 <Heading>
                     { data?.post?.title }
                 </Heading>
-                { data?.post?.text }
+                <Box minHeight={`100px`}>
+                    { data?.post?.text }
+                </Box>
+                <Box>
+                    <EditDeletePostButtons item={data?.post} />
+                </Box>
             </Layout>
         </>
     )

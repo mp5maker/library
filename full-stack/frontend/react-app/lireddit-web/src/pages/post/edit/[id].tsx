@@ -55,7 +55,7 @@ export const EditPost: React.FC<{}> = ({}) => {
                     }}
                     onSubmit={async (values) => {
                         await updatePost({ id: intId, ...values })
-                        router.push('/')
+                        router.back()
                     }}>
                     {
                         ({ isSubmitting }) => {
