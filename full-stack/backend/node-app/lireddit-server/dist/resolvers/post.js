@@ -127,7 +127,7 @@ let PostResolver = class PostResolver {
         });
     }
     post(id) {
-        return Post_1.Post.findOne(id);
+        return Post_1.Post.findOne(id, { relations: ["creator"] });
     }
     createPost(input, { req }) {
         return __awaiter(this, void 0, void 0, function* () {
