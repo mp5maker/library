@@ -39,6 +39,16 @@ export class PostResolver {
         return userLoader.load(post.creatorId)
     }
 
+    @FieldResolver(() => Int, { nullable: true })
+    async voteStatus(
+        @Root() post: Post,
+        @Ctx() { updootLoader, req }: MyContext
+    ) {
+        if (!req.session.userId) return null
+        const updoot = await updootLoader.load({ postId: post.id, userId: req.session.userId })
+        return updoot ? updoot.value : null
+    }
+
     @Mutation(() => Boolean)
     @UseMiddleware(isAuth)
     async vote(
@@ -85,25 +95,20 @@ export class PostResolver {
     async posts(
         @Arg('limit', () => Int) limit: number,
         @Arg('cursor', () => String, { nullable: true }) cursor: string | null,
-        @Ctx() { req }: MyContext
     ): Promise<PaginatedPosts> {
         const realLimit = Math.min(50, limit)
         const realLimitPlusOne = realLimit + 1
-        const userId = req.session.userId
 
         const replacements: any[] = [
             realLimitPlusOne,
-            ...(userId ? [userId] : []),
             ...(cursor ? [new Date(parseInt(cursor))]: [])
         ]
 
         const posts = await getConnection()
             .query(`
-                select p.*,
-                ${ userId ? `(select value from updoot where "userId" = $2 and "postId" = p.id) "voteStatus"` : `null as "voteStatus"`}
+                select p.*
                 from post p
-                ${cursor && !userId ? `where p."createdAt" < $2` : ""}
-                ${cursor && userId ? `where p."createdAt" < $3` : ""}
+                ${cursor ? `where p."createdAt" < $2` : ""}
                 order by p."createdAt" DESC
                 limit $1
             `, replacements)

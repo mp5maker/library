@@ -29,6 +29,7 @@ const User_1 = require("./entities/User");
 const Post_1 = require("./entities/Post");
 const Updoot_1 = require("./entities/Updoot");
 const createUserLoader_1 = require("./utils/createUserLoader");
+const createUpdootLoader_1 = require("./utils/createUpdootLoader");
 const RedisStore = connect_redis_1.default(express_session_1.default);
 const redis = new ioredis_1.default();
 const main = () => __awaiter(void 0, void 0, void 0, function* () {
@@ -72,7 +73,13 @@ const main = () => __awaiter(void 0, void 0, void 0, function* () {
             ],
             validate: false
         }),
-        context: ({ req, res }) => ({ req, res, redis, userLoader: createUserLoader_1.createUserLoader() })
+        context: ({ req, res }) => ({
+            req,
+            res,
+            redis,
+            userLoader: createUserLoader_1.createUserLoader(),
+            updootLoader: createUpdootLoader_1.createUpdootLoader()
+        })
     });
     apolloServer.applyMiddleware({
         app,

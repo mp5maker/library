@@ -61,6 +61,14 @@ let PostResolver = class PostResolver {
     creator(post, { userLoader }) {
         return userLoader.load(post.creatorId);
     }
+    voteStatus(post, { updootLoader, req }) {
+        return __awaiter(this, void 0, void 0, function* () {
+            if (!req.session.userId)
+                return null;
+            const updoot = yield updootLoader.load({ postId: post.id, userId: req.session.userId });
+            return updoot ? updoot.value : null;
+        });
+    }
     vote(postId, value, { req }) {
         return __awaiter(this, void 0, void 0, function* () {
             const isUpdoot = value !== -1;
@@ -96,23 +104,19 @@ let PostResolver = class PostResolver {
             return true;
         });
     }
-    posts(limit, cursor, { req }) {
+    posts(limit, cursor) {
         return __awaiter(this, void 0, void 0, function* () {
             const realLimit = Math.min(50, limit);
             const realLimitPlusOne = realLimit + 1;
-            const userId = req.session.userId;
             const replacements = [
                 realLimitPlusOne,
-                ...(userId ? [userId] : []),
                 ...(cursor ? [new Date(parseInt(cursor))] : [])
             ];
             const posts = yield typeorm_1.getConnection()
                 .query(`
-                select p.*,
-                ${userId ? `(select value from updoot where "userId" = $2 and "postId" = p.id) "voteStatus"` : `null as "voteStatus"`}
+                select p.*
                 from post p
-                ${cursor && !userId ? `where p."createdAt" < $2` : ""}
-                ${cursor && userId ? `where p."createdAt" < $3` : ""}
+                ${cursor ? `where p."createdAt" < $2` : ""}
                 order by p."createdAt" DESC
                 limit $1
             `, replacements);
@@ -166,6 +170,14 @@ __decorate([
     __metadata("design:returntype", void 0)
 ], PostResolver.prototype, "creator", null);
 __decorate([
+    type_graphql_1.FieldResolver(() => type_graphql_1.Int, { nullable: true }),
+    __param(0, type_graphql_1.Root()),
+    __param(1, type_graphql_1.Ctx()),
+    __metadata("design:type", Function),
+    __metadata("design:paramtypes", [Post_1.Post, Object]),
+    __metadata("design:returntype", Promise)
+], PostResolver.prototype, "voteStatus", null);
+__decorate([
     type_graphql_1.Mutation(() => Boolean),
     type_graphql_1.UseMiddleware(isAuth_1.isAuth),
     __param(0, type_graphql_1.Arg('postId', () => type_graphql_1.Int)),
@@ -179,9 +191,8 @@ __decorate([
     type_graphql_1.Query(() => PaginatedPosts),
     __param(0, type_graphql_1.Arg('limit', () => type_graphql_1.Int)),
     __param(1, type_graphql_1.Arg('cursor', () => String, { nullable: true })),
-    __param(2, type_graphql_1.Ctx()),
     __metadata("design:type", Function),
-    __metadata("design:paramtypes", [Number, Object, Object]),
+    __metadata("design:paramtypes", [Number, Object]),
     __metadata("design:returntype", Promise)
 ], PostResolver.prototype, "posts", null);
 __decorate([
