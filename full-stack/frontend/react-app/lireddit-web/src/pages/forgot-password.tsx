@@ -1,10 +1,8 @@
+import { Box, Button, Flex } from '@chakra-ui/core'
+import { Form, Formik } from 'formik'
 import React from 'react'
-import { Wrapper } from '../components/Wrapper'
-import { Formik, Form } from 'formik'
-import { Box, Flex, Button, Link } from '@chakra-ui/core'
 import { InputField } from '../components/InputField'
-import { createUrqlClient } from '../utils/createUrqlClient'
-import { withUrqlClient } from 'next-urql'
+import { Wrapper } from '../components/Wrapper'
 import { useForgotPasswordMutation } from '../generated/graphql'
 import { withApollo } from '../utils/withApollo'
 

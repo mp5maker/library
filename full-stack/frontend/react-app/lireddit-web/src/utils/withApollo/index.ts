@@ -7,7 +7,7 @@ const createClient = (ctx: NextPageContext) => new ApolloClient({
     uri: process.env.NEXT_PUBLIC_API_URL as string,
     credentials: "include" as const,
     headers: {
-        ...(typeof window === 'undefined' ? { cookie: ctx.req?.headers.cookie }: {})
+        ...(typeof window === 'undefined' ? { cookie: ctx?.req?.headers.cookie }: {})
     },
     cache: new InMemoryCache({
         typePolicies: {
