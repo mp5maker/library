@@ -11,6 +11,7 @@ COPY yarn.lock ./
 
 RUN yarn
 COPY . .
+COPY .env.production .env
 RUN yarn build
 # If you are building your code for production
 # RUN npm ci --only=production

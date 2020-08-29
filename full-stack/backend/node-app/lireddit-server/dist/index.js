@@ -32,7 +32,7 @@ const Updoot_1 = require("./entities/Updoot");
 const createUserLoader_1 = require("./utils/createUserLoader");
 const createUpdootLoader_1 = require("./utils/createUpdootLoader");
 const RedisStore = connect_redis_1.default(express_session_1.default);
-const redis = new ioredis_1.default();
+const redis = new ioredis_1.default(process.env.REDIS_URL);
 const main = () => __awaiter(void 0, void 0, void 0, function* () {
     const conn = yield typeorm_1.createConnection({
         type: 'postgres',

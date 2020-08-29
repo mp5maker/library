@@ -20,7 +20,7 @@ import { createUserLoader } from "./utils/createUserLoader"
 import { createUpdootLoader } from "./utils/createUpdootLoader"
 
 const RedisStore = connectRedis(session)
-const redis = new Redis()
+const redis = new Redis(process.env.REDIS_URL)
 const main = async () => {
     const conn = await createConnection({
         type: 'postgres',
@@ -34,7 +34,7 @@ const main = async () => {
 
     const app = express()
     app.use(cors({
-        origin: 'http://localhost:3000',
+        origin: process.env.CORS_ORIGIN,
         credentials: true
     }))
     app.use(
@@ -48,7 +48,8 @@ const main = async () => {
                 maxAge: 1000 * 60 * 60 * 24 * 365 * 10, // 10 years
                 httpOnly: true,
                 sameSite: 'lax', // csrf
-                secure: __prod__ // cookie only work in https for production
+                secure: __prod__,
+                ...(__prod__ ? { domain: ".codeponder.com" } : {})
             },
             secret: process.env.SESSION_SECRET,
             saveUninitialized: false,
