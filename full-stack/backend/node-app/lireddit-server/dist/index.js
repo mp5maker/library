@@ -37,6 +37,7 @@ const main = () => __awaiter(void 0, void 0, void 0, function* () {
     const conn = yield typeorm_1.createConnection(Object.assign(Object.assign({ type: 'postgres', url: process.env.DATABASE_URL, logging: !constants_1.__prod__ }, (constants_1.__prod__ ? { synchronize: true } : {})), { migrations: [path_1.default.join(__dirname, './migrations/*')], entities: [Post_1.Post, User_1.User, Updoot_1.Updoot] }));
     yield conn.runMigrations();
     const app = express_1.default();
+    app.set("trust proxy", 1);
     app.use(cors_1.default({
         origin: process.env.CORS_ORIGIN,
         credentials: true
