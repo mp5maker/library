@@ -4,7 +4,7 @@
     "port": 5432,
     "username": "postgres",
     "password": "123",
-    "database": "lireddit2",
+    "database": "lireddit",
     "migrations": ["dist/migrations/*.js"],
     "entities": ["dist/entities/*.js"]
 }

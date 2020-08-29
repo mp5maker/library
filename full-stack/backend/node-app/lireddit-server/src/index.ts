@@ -26,7 +26,7 @@ const main = async () => {
         type: 'postgres',
         url: process.env.DATABASE_URL,
         logging: !__prod__,
-        synchronize: true,
+        ...(__prod__? { synchronize : true }: {}),
         migrations: [path.join(__dirname, './migrations/*')],
         entities: [Post, User, Updoot],
     })

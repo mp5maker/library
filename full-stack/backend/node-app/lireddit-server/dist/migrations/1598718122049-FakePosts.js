@@ -1,9 +1,19 @@
-import {MigrationInterface, QueryRunner} from "typeorm";
-
-export class FakePosts1598713161832 implements MigrationInterface {
-
-    public async up(queryRunner: QueryRunner): Promise<void> {
-        queryRunner.query(`
+"use strict";
+var __awaiter = (this && this.__awaiter) || function (thisArg, _arguments, P, generator) {
+    function adopt(value) { return value instanceof P ? value : new P(function (resolve) { resolve(value); }); }
+    return new (P || (P = Promise))(function (resolve, reject) {
+        function fulfilled(value) { try { step(generator.next(value)); } catch (e) { reject(e); } }
+        function rejected(value) { try { step(generator["throw"](value)); } catch (e) { reject(e); } }
+        function step(result) { result.done ? resolve(result.value) : adopt(result.value).then(fulfilled, rejected); }
+        step((generator = generator.apply(thisArg, _arguments || [])).next());
+    });
+};
+Object.defineProperty(exports, "__esModule", { value: true });
+exports.FakePosts1598718122049 = void 0;
+class FakePosts1598718122049 {
+    up(queryRunner) {
+        return __awaiter(this, void 0, void 0, function* () {
+            queryRunner.query(`
             insert into post (title, text, "creatorId", "createdAt") values ('Waterloo', 'Nulla ut erat id mauris vulputate elementum. Nullam varius. Nulla facilisi.
 
 Cras non velit nec nisi vulputate nonummy. Maecenas tincidunt lacus at velit. Vivamus vel nulla eget eros elementum pellentesque.
@@ -313,10 +323,13 @@ Sed ante. Vivamus tortor. Duis mattis egestas metus.
 Aenean fermentum. Donec ut mauris eget massa tempor convallis. Nulla neque libero, convallis eget, eleifend luctus, ultricies eu, nibh.', 1, '2020-03-22T08:02:06Z');
 insert into post (title, text, "creatorId", "createdAt") values ('Rasputin and the Empress', 'Phasellus in felis. Donec semper sapien a libero. Nam dui.', 1, '2019-11-24T13:04:36Z');
 
-        `)
+        `);
+        });
     }
-
-    public async down(_: QueryRunner): Promise<void> {
+    down(_) {
+        return __awaiter(this, void 0, void 0, function* () {
+        });
     }
-
 }
+exports.FakePosts1598718122049 = FakePosts1598718122049;
+//# sourceMappingURL=1598718122049-FakePosts.js.map

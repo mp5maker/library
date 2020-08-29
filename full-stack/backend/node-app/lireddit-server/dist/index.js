@@ -34,14 +34,7 @@ const createUpdootLoader_1 = require("./utils/createUpdootLoader");
 const RedisStore = connect_redis_1.default(express_session_1.default);
 const redis = new ioredis_1.default(process.env.REDIS_URL);
 const main = () => __awaiter(void 0, void 0, void 0, function* () {
-    const conn = yield typeorm_1.createConnection({
-        type: 'postgres',
-        url: process.env.DATABASE_URL,
-        logging: !constants_1.__prod__,
-        synchronize: true,
-        migrations: [path_1.default.join(__dirname, './migrations/*')],
-        entities: [Post_1.Post, User_1.User, Updoot_1.Updoot],
-    });
+    const conn = yield typeorm_1.createConnection(Object.assign(Object.assign({ type: 'postgres', url: process.env.DATABASE_URL, logging: !constants_1.__prod__ }, (constants_1.__prod__ ? { synchronize: true } : {})), { migrations: [path_1.default.join(__dirname, './migrations/*')], entities: [Post_1.Post, User_1.User, Updoot_1.Updoot] }));
     yield conn.runMigrations();
     const app = express_1.default();
     app.use(cors_1.default({
