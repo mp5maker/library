@@ -121,3 +121,9 @@
         "queryPlan.hideQueryPlanResponse": true
     }
 ```
+
+## CREATE TYPESCRIPT ENV ###
+
+```env
+npx gen-env-types .env -o src/env.d.ts -e .
+```

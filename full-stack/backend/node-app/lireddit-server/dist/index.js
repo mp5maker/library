@@ -13,6 +13,7 @@ var __importDefault = (this && this.__importDefault) || function (mod) {
 };
 Object.defineProperty(exports, "__esModule", { value: true });
 require("reflect-metadata");
+require("dotenv-safe/config");
 const constants_1 = require("./constants");
 const express_1 = __importDefault(require("express"));
 const ioredis_1 = __importDefault(require("ioredis"));
@@ -35,9 +36,7 @@ const redis = new ioredis_1.default();
 const main = () => __awaiter(void 0, void 0, void 0, function* () {
     const conn = yield typeorm_1.createConnection({
         type: 'postgres',
-        database: 'lireddit',
-        username: 'postgres',
-        password: '123',
+        url: process.env.DATABASE_URL,
         logging: !constants_1.__prod__,
         synchronize: true,
         migrations: [path_1.default.join(__dirname, './migrations/*')],

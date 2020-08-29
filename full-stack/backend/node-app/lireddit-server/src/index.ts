@@ -1,4 +1,5 @@
 import "reflect-metadata"
+import "dotenv-safe/config"
 import { __prod__, COOKIE_NAME } from "./constants"
 import express from 'express'
 import Redis from 'ioredis'
@@ -23,9 +24,7 @@ const redis = new Redis()
 const main = async () => {
     const conn = await createConnection({
         type: 'postgres',
-        database: 'lireddit',
-        username: 'postgres',
-        password: '123',
+        url: process.env.DATABASE_URL,
         logging: !__prod__,
         synchronize: true,
         migrations: [path.join(__dirname, './migrations/*')],
