@@ -45,7 +45,7 @@ const main = () => __awaiter(void 0, void 0, void 0, function* () {
     yield conn.runMigrations();
     const app = express_1.default();
     app.use(cors_1.default({
-        origin: 'http://localhost:3000',
+        origin: process.env.CORS_ORIGIN,
         credentials: true
     }));
     app.use(express_session_1.default({
@@ -54,12 +54,7 @@ const main = () => __awaiter(void 0, void 0, void 0, function* () {
             client: redis,
             disableTouch: true,
         }),
-        cookie: {
-            maxAge: 1000 * 60 * 60 * 24 * 365 * 10,
-            httpOnly: true,
-            sameSite: 'lax',
-            secure: constants_1.__prod__
-        },
+        cookie: Object.assign({ maxAge: 1000 * 60 * 60 * 24 * 365 * 10, httpOnly: true, sameSite: 'lax', secure: constants_1.__prod__ }, (constants_1.__prod__ ? { domain: ".codeponder.com" } : {})),
         secret: process.env.SESSION_SECRET,
         saveUninitialized: false,
         resave: false

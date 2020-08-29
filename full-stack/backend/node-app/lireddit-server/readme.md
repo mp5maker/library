@@ -84,6 +84,7 @@
 ## MIGRATION ##
 
 1. npx typeorm migration:create -n FakePosts
+2. npx typeorm migration:generate -n Initial
 
 ## EXPRESS ##
 

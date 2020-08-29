@@ -1,0 +1,10 @@
+{
+    "type": "postgres",
+    "host": "localhost",
+    "port": 5432,
+    "username": "postgres",
+    "password": "123",
+    "database": "lireddit2",
+    "migrations": ["dist/migrations/*.js"],
+    "entities": ["dist/entities/*.js"]
+}
