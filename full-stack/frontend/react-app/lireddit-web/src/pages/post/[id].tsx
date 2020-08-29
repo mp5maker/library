@@ -1,11 +1,9 @@
-import React from 'react'
-import { withUrqlClient } from 'next-urql'
-import { createUrqlClient } from '../../utils/createUrqlClient'
+import { Box, Heading } from '@chakra-ui/core'
 import { useRouter } from 'next/router'
-import { usePostQuery } from '../../generated/graphql'
-import { Layout } from '../../components/Layout'
-import { Box, Heading, Flex } from '@chakra-ui/core'
+import React from 'react'
 import { EditDeletePostButtons } from '../../components/EditDeletePostButtons'
+import { Layout } from '../../components/Layout'
+import { usePostQuery } from '../../generated/graphql'
 
 interface PostProps {}
 
@@ -13,14 +11,14 @@ interface PostProps {}
 export const Post: React.FC<PostProps> = ({}) => {
     const router = useRouter()
     const intId = typeof router?.query?.id === 'string' ? parseInt(router.query.id) : -1
-    const [{ data, error, fetching }] = usePostQuery({
-        pause: intId === -1,
+    const { data, error, loading } = usePostQuery({
+        skip: intId === -1,
         variables: {
             id: intId
         }
     })
 
-    if (fetching) {
+    if (loading) {
         return (
             <Layout>
                 <div>Loading....</div>
@@ -64,4 +62,4 @@ export const Post: React.FC<PostProps> = ({}) => {
 }
 
 
-export default withUrqlClient(createUrqlClient, { ssr: true })(Post)
+export default Post

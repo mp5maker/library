@@ -8,8 +8,8 @@ interface EditDeletePostButtonsProps {
 }
 
 export const EditDeletePostButtons: React.FC<EditDeletePostButtonsProps> = ({ item }) => {
-    const [, deletePost] = useDeletePostMutation()
-    const [{ data: meData }] = useMeQuery()
+    const [deletePost] = useDeletePostMutation()
+    const { data: meData } = useMeQuery()
 
     const Content =  (
         <Box>
@@ -23,7 +23,7 @@ export const EditDeletePostButtons: React.FC<EditDeletePostButtonsProps> = ({ it
                     aria-label="edit post" />
             </NextLink>
             <IconButton
-                onClick={() => deletePost({ id: item?.id })}
+                onClick={() => deletePost({ variables: { id: item?.id } })}
                 icon={`delete`}
                 aria-label="delete post" />
         </Box>

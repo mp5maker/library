@@ -7,13 +7,11 @@ import { Box, Button, Link, Flex } from '@chakra-ui/core'
 import { InputField } from '../../components/InputField'
 import { useRouter } from 'next/router'
 import { useChangePasswordMutation } from '../../generated/graphql'
-import { withUrqlClient } from 'next-urql'
-import { createUrqlClient } from '../../utils/createUrqlClient'
 import NextLink from 'next/link'
 
 export const ChangePassword: NextPage = () => {
     const router = useRouter()
-    const [,ChangePassword] = useChangePasswordMutation()
+    const [changePassword] = useChangePasswordMutation()
     const [tokenError, setTokenError] = React.useState('')
 
     return (
@@ -24,17 +22,17 @@ export const ChangePassword: NextPage = () => {
                         newPassword: '',
                     }}
                     onSubmit={async (values, { setErrors }) => {
-                        const response = await ChangePassword({
-                            newPassword: values.newPassword,
-                            token: typeof router.query.token == 'string' ? router.query.token : ''
+                        const response = await changePassword({
+                            variables: {
+                                newPassword: values.newPassword,
+                                token: typeof router.query.token == 'string' ? router.query.token : ''
+                            }
                         })
                         if(response.data?.changePassword.errors) {
                             const errorMap = toErrorMap(response.data.changePassword.errors)
                             if ('token' in errorMap) setTokenError(errorMap.token)
                             setErrors(errorMap)
-                        } else if (response.data?.changePassword.user) {
-                            router.push("/")
-                        }
+                        } else if (response.data?.changePassword.user) router.push("/")
                     }}>
                     {
                         ({ isSubmitting }) => {
@@ -80,4 +78,4 @@ export const ChangePassword: NextPage = () => {
     )
 }
 
-export default withUrqlClient(createUrqlClient, { ssr: false })(ChangePassword)
+export default ChangePassword

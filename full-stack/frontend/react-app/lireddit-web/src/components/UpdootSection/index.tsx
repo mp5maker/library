@@ -8,7 +8,7 @@ interface UpdootSectionProps {
 
 export const UpdootSection: React.FC<UpdootSectionProps> = ({ item }) => {
     const [loadingState, setLoadingState] = React.useState<'updoot-loading' | 'downdoot-loading' | 'not-loading'>('not-loading')
-    const [_, vote] = useVoteMutation()
+    const [vote] = useVoteMutation()
 
     return (
         <>
@@ -20,7 +20,7 @@ export const UpdootSection: React.FC<UpdootSectionProps> = ({ item }) => {
                         onClick={async() => {
                             if (item.voteStatus === 1) return
                             setLoadingState('updoot-loading')
-                            await vote({ postId: item.id, value: 1 })
+                            await vote({ variables: { postId: item.id, value: 1 } })
                             setLoadingState('not-loading')
                         }}
                         aria-label={`updoot post`}
@@ -36,7 +36,7 @@ export const UpdootSection: React.FC<UpdootSectionProps> = ({ item }) => {
                         onClick={async() => {
                             if (item.voteStatus === -1) return
                             setLoadingState('downdoot-loading')
-                            vote({ postId: item.id, value: -1 })
+                            vote({ variables: { postId: item.id, value: -1 } })
                             setLoadingState('not-loading')
                         }}
                         aria-label={`downdoot post`}
