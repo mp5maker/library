@@ -50,7 +50,7 @@ const main = async () => {
                 sameSite: 'lax', // csrf
                 secure: __prod__ // cookie only work in https for production
             },
-            secret: 'photon',
+            secret: process.env.SESSION_SECRET,
             saveUninitialized: false,
             resave: false
         })
@@ -76,7 +76,7 @@ const main = async () => {
         app,
         cors: false
     })
-    app.listen(4000, () => console.log('server started on localhost:400'))
+    app.listen(parseInt(process.env.PORT), () => console.log('server started on localhost:400'))
 }
 
 main().catch((error) => console.error(error))

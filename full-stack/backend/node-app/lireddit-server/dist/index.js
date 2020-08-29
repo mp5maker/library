@@ -60,7 +60,7 @@ const main = () => __awaiter(void 0, void 0, void 0, function* () {
             sameSite: 'lax',
             secure: constants_1.__prod__
         },
-        secret: 'photon',
+        secret: process.env.SESSION_SECRET,
         saveUninitialized: false,
         resave: false
     }));
@@ -84,7 +84,7 @@ const main = () => __awaiter(void 0, void 0, void 0, function* () {
         app,
         cors: false
     });
-    app.listen(4000, () => console.log('server started on localhost:400'));
+    app.listen(parseInt(process.env.PORT), () => console.log('server started on localhost:400'));
 });
 main().catch((error) => console.error(error));
 //# sourceMappingURL=index.js.map
