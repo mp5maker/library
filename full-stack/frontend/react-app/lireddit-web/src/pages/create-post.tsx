@@ -15,7 +15,6 @@ export const CreatePost: React.FC<createPostProps> = ({}) => {
     const [createPost] = useCreatePostMutation()
     userIsAuth()
 
-
     return (
         <>
             <Layout variant="small">
@@ -25,7 +24,12 @@ export const CreatePost: React.FC<createPostProps> = ({}) => {
                         text: ''
                     }}
                     onSubmit={async (values) => {
-                        const { errors } = await createPost({ variables: { input: values } })
+                        const { errors } = await createPost({
+                            variables: { input: values },
+                            update: (cache) => {
+                                cache.evict({ fieldName: "posts:{}" });
+                            }
+                        })
                         if (!errors) router.push("/")
                     }}>
                     {

@@ -6,7 +6,7 @@ import { toErrorMap } from '../../utils/toErrorMap'
 import { Box, Button, Link, Flex } from '@chakra-ui/core'
 import { InputField } from '../../components/InputField'
 import { useRouter } from 'next/router'
-import { useChangePasswordMutation } from '../../generated/graphql'
+import { useChangePasswordMutation, MeQuery, MeDocument } from '../../generated/graphql'
 import NextLink from 'next/link'
 import { withApollo } from '../../utils/withApollo'
 
@@ -27,7 +27,16 @@ export const ChangePassword: NextPage = () => {
                             variables: {
                                 newPassword: values.newPassword,
                                 token: typeof router.query.token == 'string' ? router.query.token : ''
-                            }
+                            },
+                            update: (cache, { data }) => {
+                                cache.writeQuery<MeQuery>({
+                                    query: MeDocument,
+                                    data: {
+                                        __typename: "Query",
+                                        me: data?.changePassword.user,
+                                    },
+                                });
+                            },
                         })
                         if(response.data?.changePassword.errors) {
                             const errorMap = toErrorMap(response.data.changePassword.errors)

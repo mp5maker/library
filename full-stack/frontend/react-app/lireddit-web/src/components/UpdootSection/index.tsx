@@ -30,8 +30,8 @@ const updateAfterVote = (value: number, postId, cache: ApolloCache<VoteMutation>
             id: `Post:${postId}`,
             fragment: gql`
                 fragment __ on Post {
-                points
-                voteStatus
+                    points
+                    voteStatus
                 }
             `,
             data: { points: newPoints, voteStatus: value },
