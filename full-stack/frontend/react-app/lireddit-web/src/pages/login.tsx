@@ -8,6 +8,7 @@ import { InputField } from '../components/InputField'
 import { useLoginMutation } from '../generated/graphql'
 import { toErrorMap } from '../utils/toErrorMap'
 import NextLink from 'next/link'
+import { withApollo } from '../utils/withApollo'
 
 export const Login: React.FC<{}> = ({ }) => {
     const router = useRouter()
@@ -72,4 +73,4 @@ export const Login: React.FC<{}> = ({ }) => {
     )
 }
 
-export default Login
+export default withApollo({ ssr: false })(Login)

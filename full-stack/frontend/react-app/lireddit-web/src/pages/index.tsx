@@ -6,6 +6,7 @@ import { Layout } from "../components/Layout"
 import { UpdootSection } from '../components/UpdootSection'
 import { usePostsQuery } from "../generated/graphql"
 import { v4 } from 'uuid'
+import { withApollo } from '../utils/withApollo'
 
 const Index = () => {
   const { data, error, loading, fetchMore, variables } = usePostsQuery({
@@ -88,20 +89,6 @@ const Index = () => {
                       limit: variables?.limit,
                       cursor: data.posts.posts[data.posts.posts.length - 1].createdAt
                     },
-                    // updateQuery: (previousValue, { fetchMoreResult }): PostsQuery => {
-                    //   if (!fetchMoreResult) return previousValue as PostsQuery
-                    //   return {
-                    //     __typename: "Query",
-                    //     posts: {
-                    //       __typename: "PaginatedPosts",
-                    //       hasMore: (fetchMoreResult as PostsQuery).posts.hasMore,
-                    //       posts: [
-                    //         ...(previousValue as PostsQuery).posts.posts,
-                    //         ...(fetchMoreResult as PostsQuery).posts.posts
-                    //       ]
-                    //     }
-                    //   }
-                    // }
                   })
                 }}
                 isLoading={loading}
@@ -119,4 +106,4 @@ const Index = () => {
   )
 }
 
-export default Index
+export default withApollo({ ssr: true })(Index)

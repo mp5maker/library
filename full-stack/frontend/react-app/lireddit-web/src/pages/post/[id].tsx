@@ -4,6 +4,7 @@ import React from 'react'
 import { EditDeletePostButtons } from '../../components/EditDeletePostButtons'
 import { Layout } from '../../components/Layout'
 import { usePostQuery } from '../../generated/graphql'
+import { withApollo } from '../../utils/withApollo'
 
 interface PostProps {}
 
@@ -62,4 +63,4 @@ export const Post: React.FC<PostProps> = ({}) => {
 }
 
 
-export default Post
+export default withApollo({ ssr: true })(Post)

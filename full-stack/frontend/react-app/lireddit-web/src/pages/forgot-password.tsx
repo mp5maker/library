@@ -6,6 +6,7 @@ import { InputField } from '../components/InputField'
 import { createUrqlClient } from '../utils/createUrqlClient'
 import { withUrqlClient } from 'next-urql'
 import { useForgotPasswordMutation } from '../generated/graphql'
+import { withApollo } from '../utils/withApollo'
 
 export const ForgotPassword: React.FC<{}> = ({}) => {
     const [complete, setComplete] = React.useState(false)
@@ -60,4 +61,4 @@ export const ForgotPassword: React.FC<{}> = ({}) => {
     )
 }
 
-export default ForgotPassword
+export default withApollo({ ssr: false })(ForgotPassword)

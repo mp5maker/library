@@ -6,6 +6,7 @@ import { Box, Flex, Button } from '@chakra-ui/core'
 import { InputField } from '../components/InputField'
 import { useCreatePostMutation } from '../generated/graphql'
 import { userIsAuth } from '../utils/userIsAuth'
+import { withApollo } from '../utils/withApollo'
 
 interface createPostProps {}
 
@@ -65,4 +66,4 @@ export const CreatePost: React.FC<createPostProps> = ({}) => {
     )
 }
 
-export default CreatePost
+export default withApollo({ ssr: false })(CreatePost)

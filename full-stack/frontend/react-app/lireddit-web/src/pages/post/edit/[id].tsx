@@ -7,6 +7,7 @@ import { Layout } from '../../../components/Layout'
 import { useUpdatePostMutation } from '../../../generated/graphql'
 import { useGetIntId } from '../../../utils/useGetIntId'
 import { useGetPostFromUrl } from '../../../utils/useGetPostFromUrl'
+import { withApollo } from '../../../utils/withApollo'
 
 export const EditPost: React.FC<{}> = ({}) => {
     const router = useRouter()
@@ -93,4 +94,4 @@ export const EditPost: React.FC<{}> = ({}) => {
     )
 }
 
-export default EditPost
+export default withApollo({ ssr: false })(EditPost)

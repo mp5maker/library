@@ -8,6 +8,7 @@ import { InputField } from '../../components/InputField'
 import { useRouter } from 'next/router'
 import { useChangePasswordMutation } from '../../generated/graphql'
 import NextLink from 'next/link'
+import { withApollo } from '../../utils/withApollo'
 
 export const ChangePassword: NextPage = () => {
     const router = useRouter()
@@ -78,4 +79,4 @@ export const ChangePassword: NextPage = () => {
     )
 }
 
-export default ChangePassword
+export default withApollo({ ssr: false })(ChangePassword)
