@@ -40,6 +40,7 @@ const hi = (hello, hi) => {
 console.log(hi.name)
 console.log(hi.length)
 
+/* Prototype and Proto */
 function Animal(name) {
     if (!name) return
     this.name = name
@@ -66,3 +67,21 @@ console.log(animal.eat(['pumpkin', 'tomato']))
 const ferret = new Animal('Jenny')
 console.log(ferret.getName())
 console.log(ferret.eat(['carrot', 'leaves']))
+
+/* Accessors */
+if (hasWindow) {
+    Date.prototype.__defineGetter__('ago', function() {
+        const diff = (new Date().getTime() - this.getTime()) / 1000
+        const day_diff = Math.floor(diff / (60 * 60 * 24))
+
+        if (day_diff == 0 && diff < 60) return 'just now'
+        if (day_diff == 0 && diff < 120) return '1 minute ago'
+        if (day_diff == 0 && diff < 3600) return `${Math.floor(diff / 60)} minutes ago`
+        if (day_diff == 1) return `Yesterday`
+        if (day_diff < 7) return `${day_diff} days ago`
+        return `${Math.ceil(day_diff / 7)} weeks ago`
+    })
+
+    const a = new Date('12/12/1990')
+    console.log(a.ago)
+}
