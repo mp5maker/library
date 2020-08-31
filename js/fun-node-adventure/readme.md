@@ -10,11 +10,12 @@ server.listen
 
 const http = require('http')
 const server = http.createServer
+server.listen
 request.url
 request.method
 response.writeHead
 response.end
-server.listen
+response.json
 
 __proto__
 prototype
