@@ -1,0 +1,5 @@
+console.log(process.cwd())
+// console.log(process.chdir('/'))
+// console.log(process.stdout.write('asdf'))
+// console.log(process.stdin.resume())
+// console.log(process.stdin.pause())
