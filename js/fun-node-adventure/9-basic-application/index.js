@@ -8,3 +8,6 @@ const doSomethingWithIt = (error, files) => {
     console.log(files)
 }
 console.log(fs.readdirSync('.', doSomethingWithIt))
+
+
+process.stdout.write('Hello Bhai')
