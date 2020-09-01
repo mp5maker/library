@@ -15,7 +15,6 @@ request.url
 request.method
 response.writeHead
 response.end
-response.json
 
 __proto__
 prototype
