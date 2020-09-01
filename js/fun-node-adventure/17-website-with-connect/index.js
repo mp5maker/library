@@ -6,6 +6,8 @@ const morgan = require('morgan')
 const url = require('url')
 const bodyParser = require('body-parser')
 const formidable = require('formidable');
+const cookieParser = require('cookie-parser');
+const cookieSession = require('cookie-session')
 
 const app = connect()
 
@@ -20,17 +22,34 @@ app.use(function(request, response, next) {
     console.log(request.url)
     next()
 })
+app.use(morgan('dev'))
+
+/* COOKIE */
+app.use(cookieParser())
+app.use(function(request, _, next) {
+    request.cookies.username = 'hello'
+    request.cookies.logged_in = true
+    next()
+})
+
+/* SESSION */
+app.use(cookieSession({
+    name: 'session',
+    keys: [/* secret keys */],
+
+    // Cookie Options
+    maxAge: 24 * 60 * 60 * 1000 // 24 hours
+}))
 
 /* PARSE */
 app.use(bodyParser.urlencoded({ extended: false }));
 
-app.use(morgan('dev'))
-
 /* SERVE/GET */
 app.use(function(request, response, next) {
+    const query = url.parse(request.url, true).query
+    console.log("query", query)
+
     if (request.url == '/' && request.method == 'GET') {
-        const query = url.parse(request.url, true).query
-        console.log("query", query)
         response.writeHead(200, { 'Content-Type': 'text/html' })
         fs.createReadStream(`${__dirname}/website/index.html`).pipe(response)
     }
@@ -51,10 +70,9 @@ app.use(function(request, response, next) {
                 response.end();
             });
         });
-    } else {
-        response.writeHead(404)
-        response.end('Not Found')
     }
+    response.writeHead(404)
+    response.end('Not Found')
 })
 
 
