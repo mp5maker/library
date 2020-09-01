@@ -1,0 +1,34 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Simple API Populate</title>
+    <link rel='stylesheet' href='https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/5.0.0-alpha1/css/bootstrap.min.css'/>
+</head>
+<body>
+    <div class="container-fluid">
+        <div class="row">
+            <div class="col">
+                <% if (results.length) { %>
+                    <ul>
+                        <% results.forEach(function(user){ %>
+                            <div class="card">
+                                <div class="card-body">
+                                    <div><%= user.id %></div>
+                                    <div><%= user.name %></div>
+                                    <div><%= user.designation %></div>
+                                    <div><%= user.joining_date %></div>
+                                    <div><%= user.department %></div>
+                                </div>
+                            </div>
+                        <% }) %>
+                    </ul>
+                <% } else { %>
+                    <p> No Results </p>
+                <% } %>
+            </div>
+        </div>
+    </div>
+</body>
+</html>

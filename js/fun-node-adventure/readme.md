@@ -41,6 +41,32 @@ process.chdir('/')
 process.stdin.resume()
 process.stdin.pause()
 
+const express = require('express')
+const app = express()
+app.set('view engine', 'ejs')
+app.set('views', `${__dirname}/views`)
+app.set('view options', { layout: false })
+app.set('trust proxy', 1)
+
+/* STATIC */
+app.use(express.static(`${__dirname}/public`))
+
+/* ROUTES */
+app.get('/', function(reqeust, response) {})
+app.put('/', function(request, reponse, next) {})
+app.patch('/', function(request, reponse, next) {})
+app.head('/', function(request, reponse, next) {})
+app.post('/', function(request, reponse, next) {})
+app.del('/', function(request, reponse, next) {})
+
+request.header('content-type')
+request.is('json')
+response.sendFile(path.join(__dirname, 'views/index.html'))
+response.render('index')
+response.send(`<p> some thing </p>`)
+response.json(data)
+response.redirect('/')
+
 
 const EventEmitter = require('events').EventEmitter
 const a = new EventEmitter
