@@ -1,0 +1,18 @@
+extends layout
+
+block body
+    if (signupEmail)
+        p Congratulations on signing up! Please Log in below
+    form(action="/login", method="POST")
+        fieldset
+            legend Log in
+            p
+                label Email
+                input(name="email", type="text" value=signupEmail)
+            p
+                label Password
+                input(name="password", type="password")
+            p
+                button Submit
+            p
+                a(href="/") Go Back
