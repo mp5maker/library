@@ -1,8 +1,9 @@
-import { Resolver, Query, Mutation, Arg, ObjectType, Field, Ctx } from 'type-graphql'
+import { Resolver, Query, Mutation, Arg, ObjectType, Field, Ctx, UseMiddleware } from 'type-graphql'
 import { User } from './entity/User'
 import { hash, compare } from 'bcryptjs'
 import { MyContext } from './MyContext'
 import { createAccessToken, createRefreshToken } from './auth'
+import { isAuth } from './isAuth'
 
 @ObjectType()
 class LoginResponse {
@@ -12,6 +13,15 @@ class LoginResponse {
 
 @Resolver()
 export class UserResolver {
+    @Query(() => String)
+    @UseMiddleware(isAuth)
+    bye(
+        @Ctx() { payload }: MyContext
+    ) {
+        return `your user id is: ${payload!.userId}`
+    }
+
+
     @Query(() => [User])
     users() {
         return User.find()
@@ -31,13 +41,13 @@ export class UserResolver {
         if (!valid) throw new Error('Invalid Login')
 
         res.cookie(
-            'pid',
+            'jid',
             createRefreshToken(user),
             { httpOnly: true }
         )
 
         return {
-            accessToken: createAccessToken(user)
+            accessToken: await createAccessToken(user)
         }
     }
 
