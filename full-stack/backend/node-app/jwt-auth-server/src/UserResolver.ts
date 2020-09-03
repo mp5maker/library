@@ -1,9 +1,11 @@
-import { Resolver, Query, Mutation, Arg, ObjectType, Field, Ctx, UseMiddleware } from 'type-graphql'
+import { Resolver, Query, Mutation, Arg, ObjectType, Field, Ctx, UseMiddleware, Int } from 'type-graphql'
 import { User } from './entity/User'
 import { hash, compare } from 'bcryptjs'
 import { MyContext } from './MyContext'
 import { createAccessToken, createRefreshToken } from './auth'
 import { isAuth } from './isAuth'
+import { sendRefreshToken } from './sendRefreshToken'
+import { getConnection } from 'typeorm'
 
 @ObjectType()
 class LoginResponse {
@@ -27,6 +29,20 @@ export class UserResolver {
         return User.find()
     }
 
+    @Mutation(() => Boolean)
+    async revokeRefreshTokensForUser(
+        @Arg('userId', () => Int) userId: number
+    ): Promise<boolean> {
+        await getConnection()
+            .getRepository(User)
+            .increment(
+                { id: userId },
+                'tokenVersion',
+                1
+            )
+        return true
+    }
+
     @Mutation(() => LoginResponse)
     async login(
         @Arg('email') email: string,
@@ -40,15 +56,8 @@ export class UserResolver {
         const valid = await compare(password, user.password)
         if (!valid) throw new Error('Invalid Login')
 
-        res.cookie(
-            'jid',
-            createRefreshToken(user),
-            { httpOnly: true }
-        )
-
-        return {
-            accessToken: await createAccessToken(user)
-        }
+        sendRefreshToken(res, createRefreshToken(user))
+        return { accessToken: await createAccessToken(user) }
     }
 
     @Mutation(() => Boolean)

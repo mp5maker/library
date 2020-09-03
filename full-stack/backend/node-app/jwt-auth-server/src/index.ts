@@ -8,7 +8,8 @@ import { createConnection } from "typeorm"
 import cookieParser from 'cookie-parser'
 import { verify } from 'jsonwebtoken'
 import { User } from "./entity/User"
-import { createAccessToken } from "./auth"
+import { createAccessToken, createRefreshToken } from "./auth"
+import { sendRefreshToken } from "./sendRefreshToken"
 
 const main = async() => {
     const app = express()
@@ -41,6 +42,9 @@ const main = async() => {
         }
         const user = await User.findOne({ id: payload.userId })
         if (!user) return res.send({ ok: false, accessToken: '' })
+        if (user.tokenVersion !== payload.tokenVersion) return res.send({ ok: false, accessToken: '' })
+
+        sendRefreshToken(res, createRefreshToken(user))
         return res.send({ ok: true, accessToken: createAccessToken(user) })
     })
 
