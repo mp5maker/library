@@ -6,11 +6,15 @@ import { createAccessToken, createRefreshToken } from './auth'
 import { isAuth } from './isAuth'
 import { sendRefreshToken } from './sendRefreshToken'
 import { getConnection } from 'typeorm'
+import { verify } from 'jsonwebtoken'
 
 @ObjectType()
 class LoginResponse {
     @Field()
     accessToken: string
+
+    @Field(() => User)
+    user: User
 }
 
 @Resolver()
@@ -26,6 +30,23 @@ export class UserResolver {
         @Ctx() { payload }: MyContext
     ) {
         return `your user id is: ${payload!.userId}`
+    }
+
+    @Query(() => User, { nullable: true })
+    me(
+        @Ctx() context: MyContext
+    ) {
+        const authorization = context.req.headers['authorization']
+        if (!authorization) throw new Error('Not Authenticated')
+        try {
+            const token = authorization.split(' ')[1]
+            const payload: any = verify(token, process.env.ACCESS_TOKEN_SECRET!)
+            context.payload = payload as any;
+            return User.findOne(payload.userId)
+        } catch (error) {
+            console.log(error)
+            return  null
+        }
     }
 
 
@@ -48,6 +69,14 @@ export class UserResolver {
         return true
     }
 
+    @Mutation(() => Boolean)
+    async logout(
+        @Ctx() { res }: MyContext
+    ): Promise<boolean> {
+        sendRefreshToken(res, '')
+        return true
+    }
+
     @Mutation(() => LoginResponse)
     async login(
         @Arg('email') email: string,
@@ -62,7 +91,7 @@ export class UserResolver {
         if (!valid) throw new Error('Invalid Login')
 
         sendRefreshToken(res, createRefreshToken(user))
-        return { accessToken: await createAccessToken(user) }
+        return { accessToken: await createAccessToken(user), user }
     }
 
     @Mutation(() => Boolean)
