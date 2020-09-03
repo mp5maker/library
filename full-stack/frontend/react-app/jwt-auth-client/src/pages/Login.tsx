@@ -1,6 +1,7 @@
 import React from 'react'
 import { useLoginMutation } from '../generated/graphql'
 import { RouteComponentProps } from 'react-router'
+import { setAccessToken } from '../accessToken'
 
 interface Props { }
 
@@ -20,8 +21,9 @@ export const Login: React.FC<RouteComponentProps> = ({ history }) => {
                             password
                         }
                     })
-                    history.push("/")
                     console.log(response)
+                    if (response && response.data) setAccessToken(response.data.login.accessToken)
+                    history.push("/")
                 }}>
                 <div>
                     <input value={email} placeholder="email" onChange={(event) => setEmail(event?.target.value)} />

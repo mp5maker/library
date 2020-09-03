@@ -20,8 +20,8 @@ export const Register: React.FC<RouteComponentProps> = ({ history }) => {
                             password
                         }
                     })
-                    history.push("/")
                     console.log(response)
+                    history.push("/")
                 }}>
                 <div>
                     <input value={email} placeholder="email" onChange={(event) => setEmail(event?.target.value)} />

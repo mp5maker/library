@@ -10,6 +10,7 @@ import { verify } from 'jsonwebtoken'
 import { User } from "./entity/User"
 import { createAccessToken, createRefreshToken } from "./auth"
 import { sendRefreshToken } from "./sendRefreshToken"
+import cors from 'cors'
 
 const main = async() => {
     const app = express()
@@ -25,8 +26,15 @@ const main = async() => {
     await createConnection();
 
     /* MIDDLEWARES */
+    app.use(cors({
+        origin: "http://localhost:3000",
+        credentials: true,
+    }))
     app.use(cookieParser())
-    apolloServer.applyMiddleware({ app })
+    apolloServer.applyMiddleware({
+        app,
+        cors: false
+    })
 
     /* ROUTES */
     app.get("/", (_req, res) => res.send('Hello'))
