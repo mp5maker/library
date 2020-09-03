@@ -16,6 +16,11 @@ class LoginResponse {
 @Resolver()
 export class UserResolver {
     @Query(() => String)
+    hello() {
+        return "hi!";
+    }
+
+    @Query(() => String)
     @UseMiddleware(isAuth)
     bye(
         @Ctx() { payload }: MyContext
