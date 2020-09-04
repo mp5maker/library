@@ -36,3 +36,7 @@ Otherwise, firewall rules will prevent all network traffic from reaching your co
 ## FORCE ##
 --force option stops a running container, so it can be removed.
 If you stop the container running with docker stop bb first, then you do not need to use --force to remove it.
+
+## UPLOAD TO YOUR ACCOUNT ##
+docker tag bulletinboard:1.0 <Your Docker ID>/bulletinboard:1.0
+docker push <Your Docker ID>/bulletinboard:1.0
