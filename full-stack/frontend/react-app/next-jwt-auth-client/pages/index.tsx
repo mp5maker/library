@@ -5,8 +5,7 @@ import Layout from '../components/Layouts'
 interface Props{}
 
 export const Home: React.FC<Props> = () => {
-    // const { data, loading } = useUsersQuery({ fetchPolicy: 'network-only' })
-    const { data, loading } = { data: { users: [] }, loading: false }
+    const { data, loading } = useUsersQuery({ fetchPolicy: 'network-only' })
 
     if (loading) return (<div>Loading ...</div>)
     return (

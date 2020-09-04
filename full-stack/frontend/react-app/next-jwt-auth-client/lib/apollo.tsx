@@ -135,7 +135,7 @@ function createApolloClient(initialState = {}) {
         fetch
     });
 
-    const refreshLink = new TokenRefreshLink({
+    const refreshLink: any = new TokenRefreshLink({
         accessTokenField: "accessToken",
         isTokenValidOrUndefined: () => {
             const token = getAccessToken();

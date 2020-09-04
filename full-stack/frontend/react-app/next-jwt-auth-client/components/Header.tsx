@@ -12,12 +12,12 @@ export const Header: React.FC<{}> = () => {
             <div>
                 <div>
                     <NextLink href="/">
-                        Home
+                        <a href="">Home</a>
                     </NextLink>
                 </div>
                 <div>
                     <NextLink href="/bye">
-                        Bye
+                        <a href="">Bye</a>
                     </NextLink>
                 </div>
                 {
@@ -40,12 +40,12 @@ export const Header: React.FC<{}> = () => {
                         <>
                                 <div>
                                     <NextLink href="/register">
-                                        Register
+                                        <a href="">Register</a>
                                     </NextLink>
                                 </div>
                                 <div>
                                     <NextLink href="/login">
-                                        Login
+                                        <a href="">Login</a>
                                     </NextLink>
                                 </div>
                         </>
