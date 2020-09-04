@@ -10,12 +10,18 @@ import jwtDecode from "jwt-decode";
 import { getAccessToken, setAccessToken } from "./accessToken";
 import { onError } from "apollo-link-error";
 import { ApolloLink } from "apollo-link";
-import cookie from 'cookie'
+import cookie from "cookie";
 
-const isServer = () => typeof window === 'undefined'
+const isServer = () => typeof window === "undefined";
 
 export function withApollo(PageComponent: any, { ssr = true } = {}) {
-    const WithApollo = ({ apolloClient, apolloState, ...pageProps }: any) => {
+    const WithApollo = ({
+        apolloClient,
+        serverAccessToken,
+        apolloState,
+        ...pageProps
+    }: any) => {
+        if (!isServer() && !getAccessToken()) setAccessToken(serverAccessToken);
         const client = apolloClient || initApolloClient(apolloState);
         return <PageComponent {...pageProps} apolloClient={client} />;
     };
@@ -33,23 +39,27 @@ export function withApollo(PageComponent: any, { ssr = true } = {}) {
                 ctx: { req, res }
             } = ctx;
 
+            let serverAccessToken = "";
+
             if (isServer()) {
-                const cookies = cookie.parse(req.headers.cookie)
+                const cookies = cookie.parse(req.headers.cookie);
                 if (cookies.jid) {
-                    console.log("WithApollo.getInitialProps -> cookies.jid", cookies.jid)
-                    const response = await fetch('http://localhost:4000/refresh-token', {
-                        credentials: "include",
+                    const response = await fetch("http://localhost:4000/refresh_token", {
                         method: "POST",
+                        credentials: "include",
                         headers: {
-                            cookie: `jid=${cookies.jid}`
+                            cookie: "jid=" + cookies.jid
                         }
-                    })
-                    const data = await response.json()
-                    console.log(data)
+                    });
+                    const data = await response.json();
+                    serverAccessToken = data.accessToken;
                 }
             }
 
-            const apolloClient = (ctx.ctx.apolloClient = initApolloClient({}));
+            const apolloClient = (ctx.ctx.apolloClient = initApolloClient(
+                {},
+                serverAccessToken
+            ));
 
             const pageProps = PageComponent.getInitialProps
                 ? await PageComponent.getInitialProps(ctx)
@@ -81,7 +91,8 @@ export function withApollo(PageComponent: any, { ssr = true } = {}) {
 
             return {
                 ...pageProps,
-                apolloState
+                apolloState,
+                serverAccessToken
             };
         };
     }
@@ -91,17 +102,13 @@ export function withApollo(PageComponent: any, { ssr = true } = {}) {
 
 let apolloClient: ApolloClient<NormalizedCacheObject> | null = null;
 
-function initApolloClient(initState: any) {
-    if (typeof window === "undefined") return createApolloClient(initState);
-    if (!apolloClient) {
-        // setAccessToken(cookie.parse(document.cookie).test);
-        apolloClient = createApolloClient(initState);
-    }
-
+function initApolloClient(initState: any, serverAccessToken?: string) {
+    if (isServer()) return createApolloClient(initState, serverAccessToken);
+    if (!apolloClient) apolloClient = createApolloClient(initState);
     return apolloClient;
 }
 
-function createApolloClient(initialState = {}) {
+function createApolloClient(initialState = {}, serverAccessToken?: string) {
     const httpLink = new HttpLink({
         uri: "http://localhost:4000/graphql",
         credentials: "include",
@@ -112,11 +119,7 @@ function createApolloClient(initialState = {}) {
         accessTokenField: "accessToken",
         isTokenValidOrUndefined: () => {
             const token = getAccessToken();
-
-            if (!token) {
-                return true;
-            }
-
+            if (!token) return true;
             try {
                 const { exp } = jwtDecode(token);
                 if (Date.now() >= exp * 1000) {
@@ -129,14 +132,12 @@ function createApolloClient(initialState = {}) {
             }
         },
         fetchAccessToken: () => {
-            return fetch("http://localhost:4000/refresh_token", {
+            return fetch("http://localhost:4000/refresh-token", {
                 method: "POST",
                 credentials: "include"
             });
         },
-        handleFetch: accessToken => {
-            setAccessToken(accessToken);
-        },
+        handleFetch: accessToken => setAccessToken(accessToken),
         handleError: err => {
             console.warn("Your refresh token is invalid. Try to relogin");
             console.error(err);
@@ -144,7 +145,7 @@ function createApolloClient(initialState = {}) {
     });
 
     const authLink = setContext((_request, { headers }) => {
-        const token = getAccessToken();
+        const token = isServer() ? serverAccessToken : getAccessToken();
         return {
             headers: {
                 ...headers,
@@ -159,7 +160,7 @@ function createApolloClient(initialState = {}) {
     });
 
     return new ApolloClient({
-        ssrMode: typeof window === "undefined",
+        ssrMode: typeof window === "undefined", // Disables forceFetch on the server (so queries are only run once)
         link: ApolloLink.from([refreshLink, authLink, errorLink, httpLink]),
         cache: new InMemoryCache().restore(initialState)
     });
