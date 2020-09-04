@@ -52,3 +52,5 @@ export const Login: React.FC<{}> = ({}) => {
         </Layout>
     )
 }
+
+export default Login

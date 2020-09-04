@@ -10,6 +10,7 @@
   },
   "dependencies": {
     "@apollo/react-hooks": "^4.0.0",
+    "@apollo/react-ssr": "^4.0.0",
     "@types/graphql": "^14.5.0",
     "@types/jest": "^24.0.0",
     "@types/jwt-decode": "^2.2.1",
@@ -17,20 +18,24 @@
     "@types/react": "^16.9.0",
     "@types/react-dom": "^16.9.0",
     "apollo-boost": "^0.4.9",
+    "apollo-link-context": "^1.0.20",
     "apollo-link-token-refresh": "^0.3.2",
+    "cookie": "^0.4.1",
     "graphql": "^15.3.0",
+    "isomorphic-unfetch": "^3.0.0",
     "jwt-decode": "^2.2.0",
     "next": "9.3.5",
+    "next-with-apollo": "^5.1.0",
     "react": "16.13.1",
     "react-dom": "16.13.1"
   },
   "devDependencies": {
-    "@types/node": "^14.6.4",
-    "typescript": "^4.0.2",
     "@graphql-codegen/cli": "1.17.8",
     "@graphql-codegen/introspection": "1.17.8",
     "@graphql-codegen/typescript": "1.17.8",
     "@graphql-codegen/typescript-operations": "1.17.8",
-    "@graphql-codegen/typescript-react-apollo": "1.17.8"
+    "@graphql-codegen/typescript-react-apollo": "1.17.8",
+    "@types/node": "^14.6.4",
+    "typescript": "^4.0.2"
   }
 }

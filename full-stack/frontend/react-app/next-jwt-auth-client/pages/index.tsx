@@ -5,7 +5,8 @@ import Layout from '../components/Layouts'
 interface Props{}
 
 export const Home: React.FC<Props> = () => {
-    const { data, loading } = useUsersQuery({ fetchPolicy: 'network-only' })
+    // const { data, loading } = useUsersQuery({ fetchPolicy: 'network-only' })
+    const { data, loading } = { data: { users: [] }, loading: false }
 
     if (loading) return (<div>Loading ...</div>)
     return (
@@ -17,7 +18,7 @@ export const Home: React.FC<Props> = () => {
                     </h4>
                     <ul>
                         {
-                            data?.users.map((user, key) => {
+                            data?.users?.map((user, key) => {
                                 return (
                                     <li key={key}>
                                         <div>
@@ -33,3 +34,5 @@ export const Home: React.FC<Props> = () => {
         </Layout>
     )
 }
+
+export default Home

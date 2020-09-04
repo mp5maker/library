@@ -39,3 +39,5 @@ export const Bye: React.FC<Props> = () => {
         </Layout>
     )
 }
+
+export default Bye

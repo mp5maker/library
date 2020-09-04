@@ -3,7 +3,7 @@ import { useRegisterMutation } from '../generated/graphql'
 import Layout from '../components/Layouts'
 import { useRouter } from 'next/router'
 
-export const Register: React.FC<{ history }> = ({ history }) => {
+export const Register: React.FC<{}> = ({}) => {
     const [ email, setEmail ] = React.useState('')
     const [ password, setPassword ] = React.useState("")
     const [register] = useRegisterMutation()
@@ -40,3 +40,5 @@ export const Register: React.FC<{ history }> = ({ history }) => {
         </Layout>
     )
 }
+
+export default Register;
