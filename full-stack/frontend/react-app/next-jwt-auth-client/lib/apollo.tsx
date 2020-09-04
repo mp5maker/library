@@ -44,7 +44,7 @@ export function withApollo(PageComponent: any, { ssr = true } = {}) {
             if (isServer()) {
                 const cookies = cookie.parse(req.headers.cookie);
                 if (cookies.jid) {
-                    const response = await fetch("http://localhost:4000/refresh_token", {
+                    const response = await fetch("http://localhost:4000/refresh-token", {
                         method: "POST",
                         credentials: "include",
                         headers: {
