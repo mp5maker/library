@@ -6,23 +6,30 @@ Object.defineProperty(exports, "__esModule", { value: true });
 const express_1 = require("express");
 const swagger_ui_express_1 = __importDefault(require("swagger-ui-express"));
 const swagger_jsdoc_1 = __importDefault(require("swagger-jsdoc"));
-const options = {
+const router = express_1.Router();
+const swaggerOptions = {
     swaggerDefinition: {
         info: {
-            title: 'Swagger Test Bro',
+            title: 'Swagger API',
             version: '1.0.0',
-            description: 'A Practice API',
+            description: 'A Sample API',
+            contact: {
+                name: "Photon Khan"
+            },
+            servers: ["http://localhost:4000"]
         },
         swagger: "2.0",
-        host: 'localhost',
+        host: 'localhost:4000',
         basePath: '/',
     },
     apis: [
-        `${__dirname}/routes/*.ts`
+        './routes/user.js',
+        './index.js',
+        `${__dirname}/routes/**/*.js`,
+        `${__dirname}/index.js`,
     ],
 };
-const specs = swagger_jsdoc_1.default(options);
-const router = express_1.Router();
-router.use('/api-docs', swagger_ui_express_1.default.serve, swagger_ui_express_1.default.setup(specs));
+const swaggerDocs = swagger_jsdoc_1.default(swaggerOptions);
+router.use('/api-docs', swagger_ui_express_1.default.serve, swagger_ui_express_1.default.setup(swaggerDocs));
 exports.default = router;
 //# sourceMappingURL=swagger.js.map

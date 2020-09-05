@@ -2,25 +2,32 @@ import { Router } from 'express'
 import swaggerUi from 'swagger-ui-express'
 import swaggerJSdoc from 'swagger-jsdoc'
 
-const options = {
+const router = Router()
+
+const swaggerOptions = {
     swaggerDefinition: {
         info: {
-            title: 'Swagger Test Bro',
+            title: 'Swagger API',
             version: '1.0.0',
-            description: 'A Practice API',
+            description: 'A Sample API',
+            contact: {
+                name: "Photon Khan"
+            },
+            servers: ["http://localhost:4000"]
         },
         swagger: "2.0",
-        host: 'localhost',
+        host: 'localhost:4000',
         basePath: '/',
     },
     apis: [
-        `${__dirname}/routes/*.ts`
+        './routes/user.js',
+        './index.js',
+        `${__dirname}/routes/**/*.js`,
+        `${__dirname}/index.js`,
     ],
 }
 
-const specs = swaggerJSdoc(options);
-
-const router = Router()
-router.use('/api-docs', swaggerUi.serve, swaggerUi.setup(specs))
+const swaggerDocs = swaggerJSdoc(swaggerOptions);
+router.use('/api-docs', swaggerUi.serve, swaggerUi.setup(swaggerDocs))
 
 export default router
