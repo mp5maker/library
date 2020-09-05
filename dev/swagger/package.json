@@ -44,8 +44,7 @@
   },
   "devDependencies": {
     "@types/cors": "^2.8.7",
-    "nodemon": "^2.0.4",
-    "tsoa": "^3.2.1"
+    "nodemon": "^2.0.4"
   },
   "_moduleAliases": {
     "@myapp": "dist"
