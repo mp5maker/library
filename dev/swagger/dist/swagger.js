@@ -23,8 +23,8 @@ const swaggerOptions = {
         basePath: '/',
     },
     apis: [
-        `${__dirname}/routes/**/*.ts`,
-        `${__dirname}/index.ts`,
+        `${__dirname}/routes/**/*.js`,
+        `${__dirname}/index.js`,
     ],
 };
 const swaggerDocs = swagger_jsdoc_1.default(swaggerOptions);

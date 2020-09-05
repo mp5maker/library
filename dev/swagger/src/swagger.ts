@@ -20,8 +20,8 @@ const swaggerOptions = {
         basePath: '/',
     },
     apis: [
-        `${__dirname}/routes/**/*.ts`,
-        `${__dirname}/index.ts`,
+        `${__dirname}/routes/**/*.js`,
+        `${__dirname}/index.js`,
     ],
 }
 

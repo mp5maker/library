@@ -8,7 +8,7 @@
     "trace-resolution": "tsc --traceResolution",
     "build": "tsc",
     "dev": "nodemon dist/index.js",
-    "swagger": "ts-node src/index.ts",
+    "dev-ts-node": "ts-node src/index.ts",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "keywords": [],
