@@ -1,23 +1,22 @@
 import React, { Component } from "react";
-import { inject, observer } from "mobx-react";
+import Reviews from "../components/reviews";
+import Dashboard from "../components/dashboard";
+import Form from "../components/form";
+import { inject } from "mobx-react";
 
-@inject("postStore")
-@observer
-class Post extends Component {
-    static async getInitialProps({ mobxStore, query }) {
-        await mobxStore.postStore.fetch(query.id);
-        return { post: mobxStore.postStore.post };
-    }
-
+@inject('reviewStore')
+class Home extends Component {
     render() {
-        const { post } = this.props
+        const { reviewStore } = this.props
 
         return (
-            <div>
-                <h1>{post.title}</h1>
+            <div className="container">
+                <Form store={reviewStore} />
+                <Dashboard store={reviewStore} />
+                <Reviews store={reviewStore} />
             </div>
         );
     }
 }
 
-export default Post;
+export default Home;
