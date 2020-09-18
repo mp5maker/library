@@ -1,0 +1,66 @@
+:root {
+    --bg: #653832;
+    --fg: #8C3C3D;
+    --primary: #B95626;
+    --secondary: #BAAF83;
+    --tertiary: #87465D;
+    --quadra: #BF722C;
+}
+
+body, html {
+    margin: 0;
+    padding: 0;
+}
+
+body {
+    height: 100%;
+    background-color: var(--bg);
+    color: var(--secondary);
+    overflow-x: hidden;
+}
+
+
+.huge-extra-space {
+    min-height: 1000px;
+}
+
+.content {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    color: white;
+}
+
+.main-content {
+    position: relative;
+}
+
+
+.content-1 {
+    background-color: var(--fg);
+}
+
+.content-2 {
+    background-color: var(--primary);
+}
+
+.content-3 {
+    width: 100%;
+    position: absolute;
+    top: 0;
+    background-color: var(--secondary);
+}
+
+.content-4 {
+    width: 100%;
+    position: absolute;
+    top: 0;
+    background-color: var(--tertiary);
+}
+
+.content-5 {
+    width: 100%;
+    position: absolute;
+    top: 0;
+    background-color: var(--quadra);
+}

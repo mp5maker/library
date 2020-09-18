@@ -20,6 +20,13 @@ body {
 
 body .container-fluid {
     min-height: calc(100vh - 60px);
+    overflow-x: hidden;
+}
+
+.col {
+    padding-left: 0;
+    padding-right: 0;
+    position: relative;
 }
 
 body .container-fluid ~ footer {
