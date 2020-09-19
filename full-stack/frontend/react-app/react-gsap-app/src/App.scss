@@ -1,0 +1,51 @@
+:root {
+  --bg: #653832;
+  --fg: #8C3C3D;
+  --primary: #B95626;
+  --secondary: #BAAF83;
+  --tertiary: #87465D;
+  --quadra: #BF722C;
+
+}
+
+.container-fluid {
+  .row {
+    .col {
+      position: relative;
+      width: 100%;
+      height: 1000px;
+      color: var(--black);
+      [class|="acting-content"] {
+        position: absolute;
+        top: 0;
+        width: 100%;
+        height: 100%;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+      }
+      .actual-content {
+        position: relative;
+        background-color: var(--bg);
+        width: 100%;
+        min-height: 1000px;
+      }
+      .acting-content-1 {
+        background-color: var(--fg);
+        min-height: 1000px;
+      }
+      .acting-content-2 {
+        background-color: var(--primary);
+        min-height: 1000px;
+      }
+      .acting-content-3 {
+        background-color: var(--secondary);
+        min-height: 1000px;
+      }
+      .acting-content-4 {
+        background-color: var(--tertiary);
+        min-height: 1000px;
+      }
+    }
+  }
+}
