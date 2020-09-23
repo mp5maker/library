@@ -1,5 +1,5 @@
 const { parse } = require('url')
-const getHtml = require('./getHtml')
+const getHtml = require('./getHtml');
 
 module.exports = async (req, res) => {
     try {
@@ -10,9 +10,11 @@ module.exports = async (req, res) => {
         if (Array.isArray(title)) throw new Error('Title must be a string')
         if (Array.isArray(image)) throw new Error('Image must be a string')
 
+        const html = getHtml(query)
+
         res.statusCode = 200
         res.setHeader("Content-Type", "text/html")
-        res.end(getHtml(query))
+        res.end(html)
     } catch(error) {
         res.statusCode = 500
         res.setHeader("Content-Type", "text/html")
