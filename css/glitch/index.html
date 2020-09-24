@@ -1,0 +1,113 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <link rel='stylesheet' href='https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/4.5.2/css/bootstrap.css'/>
+    <style>
+        body, html {
+            margin: 0;
+            padding: 0;
+            color: white;
+        }
+
+        body > .container-fluid {
+            min-height: calc(100vh);
+        }
+
+        .col {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: calc(100vh - 200px);
+        }
+
+        .glitch {
+            position: relative;
+            font-size: 6rem;
+            font-weight: 700;
+            text-transform: uppercase;
+            text-shadow: 0.05em 0 0 rgba(255, 0, 0, 0.75),
+                -0.025em -0.05em 0 rgba(0, 255, 0, 0.75),
+                0.025em 0 0 rgba(0, 0, 255, 0.75);
+            animation: glitch 750ms infinite;
+        }
+
+        .glitch span {
+            position: absolute;
+            top: 0;
+            left: 0;
+        }
+
+        .glitch span .first {
+            animation: glitch 100ms infinite;
+            clip-path: polygon(0 0, 100% 0, 100 20%, 0 20%);
+            transform: translate(-0.05em, -0.025em);
+            opacity: 0.8;
+        }
+
+        .glitch span .last {
+            animation: glitch 2000ms infinite;
+            clip-path: polygon(0 60%, 100% 60%, 100 100%, 0 100%);
+            transform: translate(-0.05em, -0.025em);
+            opacity: 0.8;
+        }
+
+        @keyframes glitch {
+            0% {
+                text-shadow: 0.05em 0 0 rgba(255, 0, 0, 0.75),
+                -0.025em -0.05em 0 rgba(0, 255, 0, 0.75),
+                0.025em 0 0 rgba(0, 0, 255, 0.75);
+            }
+            14% {
+                text-shadow: 0.05em 0 0 rgba(255, 0, 0, 0.75),
+                -0.025em -0.05em 0 rgba(0, 255, 0, 0.75),
+                0.025em 0 0 rgba(0, 0, 255, 0.75);
+            }
+            15% {
+                text-shadow: 0.05em -0.025 0 rgba(255, 0, 0, 0.75),
+                -0.025em 0.025em 0 rgba(0, 255, 0, 0.75),
+                0.025em -0.05em 0 rgba(0, 0, 255, 0.75);
+            }
+            49% {
+                text-shadow: 0.05em -0.025 0 rgba(255, 0, 0, 0.75),
+                -0.025em 0.025em 0 rgba(0, 255, 0, 0.75),
+                0.025em -0.05em 0 rgba(0, 0, 255, 0.75);
+            }
+            50% {
+                text-shadow: 0.05em 0.05em 0 rgba(255, 0, 0, 0.75),
+                -0.025em -0.05em 0 rgba(0, 255, 0, 0.75),
+                0.05em 0 0 rgba(0, 0, 255, 0.75);
+            }
+            99% {
+                text-shadow: 0.05em 0.05em 0 rgba(255, 0, 0, 0.75),
+                -0.025em -0.05em 0 rgba(0, 255, 0, 0.75),
+                0.05em 0 0 rgba(0, 0, 255, 0.75);
+            }
+            100% {
+                text-shadow: -0.05em 0 0 rgba(255, 0, 0, 0.75),
+                -0.025em -0.05em 0 rgba(0, 255, 0, 0.75),
+                -0.025em 0 0 rgba(0, 0, 255, 0.75);
+            }
+        }
+    </style>
+</head>
+<body class="bg-dark">
+    <div class="container-fluid">
+        <div class="row">
+            <div class="col">
+                <div class="glitch">
+                    <span aria-hidden="true" class="first">
+                        Glitch Text
+                    </span>
+                    Glitch Text
+                    <span aria-hidden="true" class="last">
+                        Glitch Text
+                    </span>
+                </div>
+            </div>
+        </div>
+    </div>
+</body>
+</html>
