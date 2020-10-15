@@ -1,52 +1,22 @@
-import React from 'react';
-import './App.scss';
-import { Button } from 'components/Button'
-import { Typography } from 'components/Typography';
-import { makeStyles } from '@material-ui/core/styles'
+import React from "react";
+import { Router, Switch, Route } from 'react-router-dom'
+import { createBrowserHistory } from "history";
 
-const useStyles = makeStyles({
-  typography: {
-    fontStyle: `italic`,
-    color: "firebrick"
-  },
-  buttonStyle: {
-    color: 'green',
-    borderColor: 'green'
-  }
-})
+import Figma from 'pages/Figma'
+import Showcase from 'pages/Showcase'
+import "App.scss";
+
+const history = createBrowserHistory()
 
 function App() {
-  const classes = useStyles()
-
-  return (
-    <div className="App">
-      <div
-        style={{
-          padding: 5
-        }}>
-        <div
-          style={{
-            padding: 5
-          }}>
-          <Typography
-            className={classes.typography}
-            variant={`h3`}
-            color={`secondary`}>
-            Check out my typography
-          </Typography>
-        </div>
-        <Button
-          className={classes.buttonStyle}
-          fullWidth={true}
-          color={`primary`}
-          variant={`outlined`}
-          disabled={false}
-        >
-            My First Button
-        </Button>
-      </div>
-    </div>
-  );
+    return (
+      <Router history={history}>
+        <Switch>
+          <Route exact path={"/"} component={Figma}/>
+          <Route exact path={"/showcase"} component={Showcase}/>
+        </Switch>
+      </Router>
+    );
 }
 
 export default App;
