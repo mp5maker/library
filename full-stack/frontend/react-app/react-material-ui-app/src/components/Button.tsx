@@ -8,7 +8,9 @@ interface ButtonPropsInterface {
     disabled?: boolean,
     fullWidth?: boolean,
     className?: string,
-    size?: 'large' | 'medium' | 'small'
+    size?: 'large' | 'medium' | 'small',
+    startIcon?: React.ReactElement,
+    endIcon?: React.ReactElement,
 }
 
 
@@ -20,11 +22,15 @@ export const Button: React.FC<ButtonPropsInterface> = ({
     children,
     className,
     size,
+    startIcon,
+    endIcon
 }) => {
 
     const props = {
         ...(className ? { className } : {}),
-        ...(size ? { size } : {})
+        ...(size ? { size } : {}),
+        ...(startIcon ? { startIcon } : {}),
+        ...(endIcon ? { endIcon } : {}),
     }
 
     return (
@@ -49,23 +55,12 @@ Button.defaultProps = {
 
 
 Button.propTypes = {
-    color: PropTypes.oneOf([
-        'default',
-        'inherit',
-        'primary',
-        'secondary'
-    ]),
-    variant: PropTypes.oneOf([
-        'contained',
-        'outlined',
-        'text'
-    ]),
+    color: PropTypes.oneOf(["default", "inherit", "primary", "secondary"]),
+    variant: PropTypes.oneOf(["contained", "outlined", "text"]),
     disabled: PropTypes.bool,
     fullWidth: PropTypes.bool,
     className: PropTypes.string,
-    size: PropTypes.oneOf([
-        'large',
-        'medium',
-        'small'
-    ])
-}
+    size: PropTypes.oneOf(["large", "medium", "small"]),
+    startIcon: PropTypes.element,
+    endIcon: PropTypes.element,
+};

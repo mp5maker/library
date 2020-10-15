@@ -2,6 +2,12 @@ import React from "react";
 import { Button } from "components/Button";
 import { Typography } from "components/Typography";
 import { makeStyles } from "@material-ui/core/styles";
+import DeleteIcon from "@material-ui/icons/Delete";
+import SaveIcon from "@material-ui/icons/Save";
+import Box from "@material-ui/core/Box";
+import ButtonGroup from "@material-ui/core/ButtonGroup";
+import { Checkbox } from "components/Checkbox";
+
 import "App.scss";
 
 const useStyles = makeStyles({
@@ -15,21 +21,14 @@ const useStyles = makeStyles({
     },
 });
 
-export const ShowCase = () => {
+export const ShowCase = (): JSX.Element => {
     const classes = useStyles();
+    const [checked, setChecked] = React.useState<boolean>(false);
 
     return (
-        <div className="App">
-            <div
-                style={{
-                    padding: 5,
-                }}
-            >
-                <div
-                    style={{
-                        padding: 5,
-                    }}
-                >
+        <Box className="App">
+            <Box padding={5}>
+                <Box padding={5}>
                     <Typography
                         className={classes.typography}
                         variant={`h3`}
@@ -37,19 +36,66 @@ export const ShowCase = () => {
                     >
                         Check out my typography
                     </Typography>
-                </div>
-                <Button
-                    className={classes.buttonStyle}
-                    fullWidth={true}
-                    color={`primary`}
-                    variant={`outlined`}
+                </Box>
+                <Box padding={5}>
+                    <Button
+                        className={classes.buttonStyle}
+                        fullWidth={true}
+                        color={`primary`}
+                        variant={`outlined`}
+                        disabled={false}
+                    >
+                        My First Button
+                    </Button>
+                </Box>
+            </Box>
+            <Box padding={5}>
+                <Box display={`inline-block`} marginLeft={2}>
+                    <Button
+                        startIcon={<SaveIcon />}
+                        color={`primary`}
+                        variant={`contained`}
+                        disabled={false}
+                    >
+                        Save
+                    </Button>
+                </Box>
+                <Box display={`inline-block`} marginLeft={2}>
+                    <Button
+                        startIcon={<DeleteIcon />}
+                        color={`secondary`}
+                        variant={`contained`}
+                        disabled={false}
+                    >
+                        Delete
+                    </Button>
+                </Box>
+            </Box>
+            <Box padding={5}>
+                <ButtonGroup
+                    color={`secondary`}
+                    variant={`contained`}
                     disabled={false}
                 >
-                    My First Button
-                </Button>
-            </div>
-        </div>
+                    <Button startIcon={<SaveIcon />}>Save</Button>
+                    <Button startIcon={<DeleteIcon />} color={`secondary`}>
+                        Delete
+                    </Button>
+                </ButtonGroup>
+            </Box>
+            <Box padding={5} display={`flex`} justifyContent={`space-between`}>
+                <Box>Checkbox Check</Box>
+                <Box>
+                    <Checkbox
+                        checked={checked}
+                        onChange={(
+                            event: React.ChangeEvent<HTMLInputElement>
+                        ) => setChecked(event.currentTarget.checked)}
+                    />
+                </Box>
+            </Box>
+        </Box>
     );
-}
+};
 
 export default ShowCase;
