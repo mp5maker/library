@@ -6,7 +6,8 @@ interface ButtonPropsInterface {
     color?: 'default' | 'inherit' | 'primary' | 'secondary',
     variant?: 'contained' | 'outlined' | 'text',
     disabled?: boolean,
-    fullWidth?: boolean
+    fullWidth?: boolean,
+    className?: string,
 }
 
 
@@ -16,13 +17,20 @@ export const Button: React.FC<ButtonPropsInterface> = ({
     disabled,
     fullWidth,
     children,
+    className
 }) => {
+
+    const props = {
+        ...(className ? { className } : {})
+    }
+
     return (
         <MaterialUIButton
             color={color}
             variant={variant}
             disabled={disabled}
             fullWidth={fullWidth}
+            {...props}
         >
             {children}
         </MaterialUIButton>
@@ -50,5 +58,6 @@ Button.propTypes = {
         'text'
     ]),
     disabled: PropTypes.bool,
-    fullWidth: PropTypes.bool
+    fullWidth: PropTypes.bool,
+    className: PropTypes.string
 }
