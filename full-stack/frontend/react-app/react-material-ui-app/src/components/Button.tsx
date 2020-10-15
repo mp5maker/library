@@ -8,6 +8,7 @@ interface ButtonPropsInterface {
     disabled?: boolean,
     fullWidth?: boolean,
     className?: string,
+    size?: 'large' | 'medium' | 'small'
 }
 
 
@@ -17,11 +18,13 @@ export const Button: React.FC<ButtonPropsInterface> = ({
     disabled,
     fullWidth,
     children,
-    className
+    className,
+    size,
 }) => {
 
     const props = {
-        ...(className ? { className } : {})
+        ...(className ? { className } : {}),
+        ...(size ? { size } : {})
     }
 
     return (
@@ -59,5 +62,10 @@ Button.propTypes = {
     ]),
     disabled: PropTypes.bool,
     fullWidth: PropTypes.bool,
-    className: PropTypes.string
+    className: PropTypes.string,
+    size: PropTypes.oneOf([
+        'large',
+        'medium',
+        'small'
+    ])
 }

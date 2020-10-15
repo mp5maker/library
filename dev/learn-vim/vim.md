@@ -94,7 +94,12 @@ eg:
 
 > Go To Visual Mode
 ```bash
-    ctrl + v 
+    ctrl + v
+```
+
+> Repeat an instruction
+```bash
+    .
 ```
 
 > Go To Insert Mode by inserting a blank line
