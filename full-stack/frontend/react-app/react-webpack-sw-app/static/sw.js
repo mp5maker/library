@@ -1,6 +1,6 @@
 const CACHE_ASSETS = ['index.html', 'index.js']
 const CACHE_NAME = `test-v1-${new Date().getTime()}`;
-
+const OFFLINE_URL = 'index.html'
 
 /**
  *  Add all assets
@@ -57,7 +57,7 @@ self.addEventListener('fetch', event => {
         event.respondWith(
             fetch(event.request.url)
                 .catch(() => {
-                    return caches.match(offlineUrl);
+                    return caches.match(OFFLINE_URL);
                 })
         );
     }
