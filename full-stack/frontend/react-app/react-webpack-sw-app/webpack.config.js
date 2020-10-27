@@ -1,56 +1,73 @@
-const path = require('path')
-const HTMLWebpackPlugin = require('html-webpack-plugin')
+const path = require("path");
+const HTMLWebpackPlugin = require("html-webpack-plugin");
+const WorkboxWebpackPlugin = require("workbox-webpack-plugin");
 
-const isProduction = process.env.NODE_ENV === 'production';
+const isProduction = process.env.NODE_ENV === "production";
 
 module.exports = {
-    mode: isProduction ? 'production' : 'development',
+    mode: isProduction ? "production" : "development",
     entry: {
-        index: path.join(__dirname, 'src/index.tsx')
+        index: path.join(__dirname, "src/index.tsx"),
     },
-    ...(isProduction ? {} : {
-        devServer: {
-            port: 8080,
-            open: true,
-            hot: true,
-        }
-    }),
+    ...(isProduction
+        ? {}
+        : {
+            devServer: {
+                port: 8080,
+                open: true,
+                hot: true,
+                contentBase: path.join(__dirname, 'static'),
+            },
+        }),
     output: {
-        path: path.resolve(__dirname, 'dist'),
-        filename: '[name].js'
+        path: path.resolve(__dirname, "dist"),
+        filename: "[name].js",
     },
     devtool: "source-map",
     resolve: {
-        extensions: [".ts", ".tsx", ".js", ".jsx", ".json"]
+        extensions: [".ts", ".tsx", ".js", ".jsx", ".json"],
     },
     module: {
         rules: [
             {
-                test: /\.tsx?$/,
+                test: /\.(tsx|ts)?$/,
                 exclude: /node_modules/,
                 use: {
-                    loader: "awesome-typescript-loader"
-                }
+                    loader: "awesome-typescript-loader",
+                },
             },
             {
                 test: [/\.jsx?$/],
                 exclude: /node_modules/,
                 use: {
-                    loader: 'babel-loader',
+                    loader: "babel-loader",
                     options: {
                         presets: [
                             "@babel/env",
                             "@babel/react",
-                            "@babel/typescript"
-                        ]
-                    }
-                }
-            }
-        ]
+                            "@babel/typescript",
+                        ],
+                    },
+                },
+            },
+        ],
     },
     plugins: [
         new HTMLWebpackPlugin({
-            template: path.join(__dirname, 'src/index.html')
-        })
-    ]
-}
+            template: path.join(__dirname, "src/index.html"),
+        }),
+        new WorkboxWebpackPlugin.GenerateSW({
+            clientsClaim: true,
+            skipWaiting: true,
+        }),
+        ...(isProduction ?
+            [
+                new CopyWebpackPlugin([
+                    { from: 'static/images', to: 'dist/images' },
+                    { from: 'static/icon', to: 'dist/icon' },
+                    { from: 'static/manifest.json', to: 'dist' }
+                ])
+            ]
+        : [])
+    ],
+};

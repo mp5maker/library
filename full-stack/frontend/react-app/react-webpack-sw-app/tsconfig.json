@@ -35,6 +35,7 @@
     "jest",
     "src/setupTests.ts",
     "webpack.config.js",
-    "dist"
+    "dist",
+    "serviceWorker.ts"
   ]
 }
