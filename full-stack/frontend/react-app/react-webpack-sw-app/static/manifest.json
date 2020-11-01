@@ -8,9 +8,15 @@
     "background_color": "#fff",
     "icons": [
         {
+            "src": "icon/space-512x512.png",
+            "type": "image/png",
+            "sizes": "512x512"
+        },
+        {
             "src": "icon/android-icon-192x192-dunplab-manifest-21927.jpg",
             "type": "image/png",
-            "sizes": "192x192"
+            "sizes": "192x192",
+            "purpose": "any maskable"
         },
         {
             "src": "icon/apple-icon-180x180-dunplab-manifest-21927.jpg",

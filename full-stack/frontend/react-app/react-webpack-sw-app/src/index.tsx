@@ -10,3 +10,4 @@ ReactDOM.render(
 )
 
 serviceWorker.register()
+serviceWorker.addToHomeScreen()

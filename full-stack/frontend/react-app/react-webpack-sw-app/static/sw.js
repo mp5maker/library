@@ -1,4 +1,4 @@
-const CACHE_ASSETS = ['index.html', 'index.js']
+const CACHE_ASSETS = ['index.html', 'index.js', 'index.css']
 const CACHE_NAME = `test-v1-${new Date().getTime()}`;
 const OFFLINE_URL = 'index.html'
 

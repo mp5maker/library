@@ -56,10 +56,10 @@ module.exports = {
         new HTMLWebpackPlugin({
             template: path.join(__dirname, "src/index.html"),
         }),
-        new WorkboxWebpackPlugin.GenerateSW({
-            clientsClaim: true,
-            skipWaiting: true,
-        }),
+        // new WorkboxWebpackPlugin.GenerateSW({
+        //     clientsClaim: true,
+        //     skipWaiting: true,
+        // }),
         ...(isProduction ?
             [
                 new CopyWebpackPlugin([
