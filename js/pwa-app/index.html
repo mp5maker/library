@@ -1,11 +1,43 @@
 <!DOCTYPE html>
 <html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Photon Food App</title>
-</head>
-<body>
-    Boom Shakalaka
-</body>
+    <head>
+        <meta charset="UTF-8" />
+        <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+        <meta http-equiv="X-UA-Compatible" content="ie-edge" />
+        <title>Photon Blog App</title>
+        <link
+            rel="stylesheet"
+            href="/materialize-css/dist/css/materialize.min.css"
+        />
+        <link
+            href="https://fonts.googleapis.com/icon?family=Material+Icons"
+            rel="stylesheet"
+        />
+    </head>
+    <body>
+        <nav>
+            <div class="nav-wrapper">
+                <a href="#" class="brand-logo">
+                    Photon Blog App
+                </a>
+                <a
+                    href="#"
+                    data-target="nav-mobile-dropdown"
+                    class="sidenav-trigger right"
+                    >
+                    <i class="material-icons">menu</i>
+                </a>
+            </div>
+        </nav>
+
+        <ul class="sidenav" id="nav-mobile-dropdown">
+            <li><a href="sass.html">Sass</a></li>
+            <li><a href="badges.html">Components</a></li>
+            <li><a href="collapsible.html">Javascript</a></li>
+            <li><a href="mobile.html">Mobile</a></li>
+        </ul>
+
+        <script src="/materialize-css/dist/js/materialize.min.js"></script>
+        <script src="/js/index.js"></script>
+    </body>
 </html>
