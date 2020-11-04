@@ -38,15 +38,42 @@
             <div class="card horizontal ma-3 pa-3">
                 <div class="card-stacked">
                     <div class="card-content">
-                        <span
-                            class="card-title activator grey-text text-darken-4"
-                            >
+                        <span class="card-title activator grey-text text-darken-4">
                             Card Title
                         </span>
-                        <p>Lorem ipsum dolor sit amet.</p>
+                        <p class="description">
+                            Lorem ipsum dolor sit amet.
+                        </p>
+                        <a class="waves-effect waves-teal btn-flat right">
+                            <i class="material-icons">delete</i>
+                        </a>
                     </div>
                 </div>
             </div>
+        </div>
+
+        <div class="center">
+            <a href="" class="btn-floating btn-small add-btn sidenav-trigger" data-target="side-form">
+                <i class="material-icons">add</i>
+            </a>
+        </div>
+
+        <div id="side-form" class="sidenav side-form">
+            <form class="add-recipe container section">
+                <h6>New Post</h6>
+                <div class="divider"></div>
+                <div class="input-field">
+                    <input type="text" id="title" class="validate" placeholder="e.g. Great Day">
+                    <label for="title">Title</label>
+                </div>
+                <div class="input-field">
+                    <input type="text" id="title" class="validate" placeholder="e.g. Night sky all above">
+                    <label for="title">Description</label>
+                </div>
+                <div class="input-field center">
+                    <button class="btn-small">Add</button>
+                </div>
+            </form>
         </div>
 
         <script src="/materialize-css/dist/js/materialize.min.js"></script>
