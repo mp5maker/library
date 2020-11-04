@@ -11,4 +11,12 @@ app.get('/', (_request, response) => {
     response.sendFile(path.join(__dirname, 'index.html'));
 })
 
+app.get('/about', (_request, response) => {
+    response.sendFile(path.join(__dirname, 'pages/about.html'));
+})
+
+app.get('/contact', (_request, response) => {
+    response.sendFile(path.join(__dirname, 'pages/contact.html'));
+})
+
 app.listen(port, () => console.log(`Listening to the port: ${port}`))
