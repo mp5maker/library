@@ -1,8 +1,8 @@
 const CACHE_NAME = `site-static-${new Date().getTime()}`;
+const DYNAMIC_CACHE = `site-dynamic-${new Date().getTime()}`;
 const CACHES = [
     "/",
-    "/about",
-    "/contact",
+    "/offline",
     "/materialize-css/dist/js/materialize.min.js",
     "/js/ui.js",
     "/css/main.css",
@@ -31,12 +31,12 @@ self.addEventListener('install', (event) => {
 self.addEventListener('activate', (event) => {
     console.debug('Service Worker has been activated');
     event.waitUntil(
-        cache.keys().then((keys) => {
+        caches.keys().then((keys) => {
             return Promise.all(
                 keys
-                    .filter((key) => key !== CACHE_NAME)
+                    .filter((key) => (key !== CACHE_NAME) && key !== DYNAMIC_CACHE)
                     .map((key) => caches.delete(key))
-            ).
+            )
         })
     )
 });
@@ -44,9 +44,27 @@ self.addEventListener('activate', (event) => {
 // Fetch Event
 self.addEventListener('fetch', (event) => {
     console.debug('fetch event', event);
-    event.respondWith(
-        fetch(event.request).catch(function() {
-            return caches.match(event.request);
+
+    const onSuccessFetch = (response) => {
+        if (CACHES.includes(new URL(event.request.url).pathname)) return response;
+        return caches.open(DYNAMIC_CACHE).then((cache) => {
+            cache.put(event.request.url, response.clone());
+            return response;
         })
+    }
+
+    const onErrorFetch = () => {
+        return caches.match(event.request)
+            .then((response) => {
+                if (response) return response;
+                else return caches.match("/offline");
+            })
+            .catch(() => caches.match("/offline"));
+    };
+
+    event.respondWith(
+        fetch(event.request)
+            .then(onSuccessFetch)
+            .catch(onErrorFetch)
     )
 });

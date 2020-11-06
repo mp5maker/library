@@ -19,4 +19,8 @@ app.get('/contact', (_request, response) => {
     response.sendFile(path.join(__dirname, 'pages/contact.html'));
 })
 
+app.get('/offline', (_request, response) => {
+    response.sendFile(path.join(__dirname, 'pages/fallback.html'));
+})
+
 app.listen(port, () => console.log(`Listening to the port: ${port}`))
