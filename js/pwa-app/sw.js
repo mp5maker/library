@@ -16,6 +16,18 @@ const CACHES = [
     'manifest.json'
 ];
 
+// Limit Cache Size
+const limitCacheSize = (name, size) => {
+    caches.open(name).then((cache) => {
+        cache.keys().then((keys) => {
+            if (keys.length > size) {
+                cache.delete(keys[0]).then(limitCacheSize(name, size));
+            }
+            return;
+        })
+    })
+}
+
 // Install Service Worker
 self.addEventListener('install', (event) => {
     console.debug('Service Worker has been installed');
