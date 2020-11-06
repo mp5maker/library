@@ -30,6 +30,15 @@ self.addEventListener('install', (event) => {
 // Activate Event
 self.addEventListener('activate', (event) => {
     console.debug('Service Worker has been activated');
+    event.waitUntil(
+        cache.keys().then((keys) => {
+            return Promise.all(
+                keys
+                    .filter((key) => key !== CACHE_NAME)
+                    .map((key) => caches.delete(key))
+            ).
+        })
+    )
 });
 
 // Fetch Event
