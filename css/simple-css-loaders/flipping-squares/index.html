@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <link rel='stylesheet' href='https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/4.5.3/css/bootstrap.min.css'/>
+    <style>
+        body, html {
+            margin: 0;
+            padding: 0;
+            background-color: var(--dark);
+            color: var(--light);
+        }
+        body {
+            height: 100%
+        }
+        body > .container-fluid {
+            min-height: calc(100vh - 60px);
+        }
+        body > .container-fluid ~ footer {
+            height: 60px;
+            line-height: 60px;
+            border-top: 1px soiid var(--light);
+            text-align: center;
+        }
+        .content {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            width: 100%;
+            min-height: 250px;
+        }
+    </style>
+</head>
+<body>
+    <main class="container-fluid">
+        <div class="row">
+            <div class="col">
+                    <div class="content">
+                    </div>
+            </div>
+        </div>
+    </main>
+    <footer>
+        2020 All Rights Reserved, Photon Enterprise
+    </footer>
+</body>
+</html>
