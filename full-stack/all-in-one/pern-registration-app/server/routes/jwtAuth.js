@@ -4,8 +4,9 @@ const head = require("lodash/head");
 const pool = require("../db");
 const bcrypt = require("bcrypt");
 const jwtGenerator = require("../utilities/jwtGenerator");
+const validInfo = require("../middleware/validInfo");
 
-router.post("/register", async (request, response) => {
+router.post("/register", validInfo, async (request, response) => {
   // #swagger.description = 'Register a user.'
   try {
     const name = get(request, "body.name", "");
@@ -37,13 +38,13 @@ router.post("/register", async (request, response) => {
     } else new Error("");
   } catch (error) {
     console.error(error.message);
-    return response.status(500).send({
+    return response.status(500).json({
       error: "Server Error",
     });
   }
 });
 
-router.post("/login", async (request, response) => {
+router.post("/login", validInfo, async (request, response) => {
   // #swagger.description = 'User Login.'
   try {
     const email = get(request, "body.email", "");
