@@ -5,20 +5,27 @@
   "main": "index.js",
   "scripts": {
     "prettier": "npx prettier --write .",
-    "lint": "eslint ."
+    "lint": "eslint .",
+    "dev": "node index.js",
+    "watch": "nodemon index.js"
   },
   "keywords": [],
   "author": "",
   "license": "ISC",
   "devDependencies": {
+    "babel-eslint": "^10.1.0",
     "eslint": "^7.17.0",
     "husky": "^4.3.7",
     "nodemon": "^2.0.7",
     "prettier": "^2.2.1"
   },
   "dependencies": {
+    "bcrypt": "^5.0.0",
     "cors": "^2.8.5",
+    "dotenv-safe": "^8.2.0",
     "express": "^4.17.1",
+    "jsonwebtoken": "^8.5.1",
+    "lodash": "^4.17.20",
     "pg": "^8.5.1"
   },
   "husky": {
