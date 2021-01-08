@@ -6,6 +6,7 @@ const bcrypt = require("bcrypt");
 const jwtGenerator = require("../utilities/jwtGenerator");
 
 router.post("/register", async (request, response) => {
+  // #swagger.description = 'Register a user.'
   try {
     const name = get(request, "body.name", "");
     const email = get(request, "body.email", "");
@@ -43,6 +44,7 @@ router.post("/register", async (request, response) => {
 });
 
 router.post("/login", async (request, response) => {
+  // #swagger.description = 'User Login.'
   try {
     const email = get(request, "body.email", "");
     const password = get(request, "body.password", "");
@@ -62,7 +64,15 @@ router.post("/login", async (request, response) => {
         password,
         user.rows[0].password
       );
-      return response.json({ validPassword });
+
+      if (validPassword) {
+        const token = await jwtGenerator(user.rows[0].id);
+        return response.json({ token });
+      }
+
+      return response
+        .status(401)
+        .send({ error: "Password or email is incorrect" });
     } else new Error({ error: "Email or password cannot be empty" });
   } catch (error) {
     console.error(error.message);

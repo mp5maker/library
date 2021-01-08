@@ -2,6 +2,8 @@ require("dotenv-safe").config();
 const express = require("express");
 const cors = require("cors");
 const path = require("path");
+const swaggerUI = require("swagger-ui-express");
+const swaggerFile = require("./swaggerOutput.json");
 
 // App
 const app = express();
@@ -12,6 +14,7 @@ app.use(express.json());
 
 // Routes
 app.use("/auth", require("./routes/jwtAuth"));
+app.use("/doc", swaggerUI.serve, swaggerUI.setup(swaggerFile));
 
 // Assets
 app.use(express.static(path.join(__dirname, "static")));
