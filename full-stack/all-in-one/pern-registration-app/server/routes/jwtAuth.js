@@ -17,7 +17,9 @@ router.post("/register", async (request, response) => {
       ]);
 
       if (user.rows.length !== 0) {
-        return response.status(401).send("User already exists");
+        return response.status(401).json({
+          error: "User already exists",
+        });
       }
 
       const saltRound = 10;
@@ -34,7 +36,37 @@ router.post("/register", async (request, response) => {
     } else new Error("");
   } catch (error) {
     console.error(error.message);
-    return response.status(500).send("Server Error");
+    return response.status(500).send({
+      error: "Server Error",
+    });
+  }
+});
+
+router.post("/login", async (request, response) => {
+  try {
+    const email = get(request, "body.email", "");
+    const password = get(request, "body.password", "");
+
+    if (email && password) {
+      const user = await pool.query("SELECT * FROM users WHERE email = ($1)", [
+        email,
+      ]);
+
+      if (user.rows.length == 0) {
+        return response
+          .status(401)
+          .send({ error: "Password or email is incorrect" });
+      }
+
+      const validPassword = await bcrypt.compare(
+        password,
+        user.rows[0].password
+      );
+      return response.json({ validPassword });
+    } else new Error({ error: "Email or password cannot be empty" });
+  } catch (error) {
+    console.error(error.message);
+    response.status(400);
   }
 });
 
