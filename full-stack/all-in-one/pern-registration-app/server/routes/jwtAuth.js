@@ -5,6 +5,7 @@ const pool = require("../db");
 const bcrypt = require("bcrypt");
 const jwtGenerator = require("../utilities/jwtGenerator");
 const validInfo = require("../middleware/validInfo");
+const authorization = require("../middleware/authorization");
 
 router.post("/register", validInfo, async (request, response) => {
   // #swagger.description = 'Register a user.'
@@ -67,7 +68,7 @@ router.post("/login", validInfo, async (request, response) => {
       );
 
       if (validPassword) {
-        const token = await jwtGenerator(user.rows[0].id);
+        const token = await jwtGenerator({ id: user.rows[0].id });
         return response.json({ token });
       }
 
@@ -75,6 +76,15 @@ router.post("/login", validInfo, async (request, response) => {
         .status(401)
         .send({ error: "Password or email is incorrect" });
     } else new Error({ error: "Email or password cannot be empty" });
+  } catch (error) {
+    console.error(error.message);
+    response.status(400);
+  }
+});
+
+router.get("/is-verify", authorization, async (_request, response) => {
+  try {
+    response.json(true);
   } catch (error) {
     console.error(error.message);
     response.status(400);

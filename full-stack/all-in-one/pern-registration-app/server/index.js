@@ -14,6 +14,7 @@ app.use(express.json());
 
 // Routes
 app.use("/auth", require("./routes/jwtAuth"));
+app.use("/dashboard", require("./routes/dashboard"));
 app.use("/doc", swaggerUI.serve, swaggerUI.setup(swaggerFile));
 
 // Assets
