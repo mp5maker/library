@@ -41,10 +41,26 @@ router.patch("/:id", (request, response) => {
   response.send("these are the restaurants");
 });
 
-router.put("/:id", (request, response) => {
-  const id = get(request, "params.id", "");
-  const body = get(request, "body", {});
-  response.send("these are the restaurants");
+router.put("/:id", async (request, response) => {
+  try {
+    const id = get(request, "params.id", "");
+    const body = get(request, "body", {});
+    const name = get(body, "name", "");
+    const location = get(body, "location", "");
+    const price_range = get(body, "price_range", "");
+    const results = await db.query(
+      "UPDATE restaurants SET name = $1, location = $2, price_range = $3 WHERE id = $4 RETURNING *",
+      [name, location, price_range, id]
+    );
+    response.status(200).json({
+      data: get(results, "rows", []),
+      count: get(results, "rowCount", 0),
+    });
+  } catch (error) {
+    response.status(400).json({
+      error: error.message,
+    });
+  }
 });
 
 router.post("/", async (request, response) => {
@@ -68,9 +84,23 @@ router.post("/", async (request, response) => {
   }
 });
 
-router.delete("/:id", (request, response) => {
-  const id = get(request, "params.id", "");
-  response.send("these are the restaurants");
+router.delete("/:id", async (request, response) => {
+  try {
+    const id = get(request, "params.id", "");
+    const results = await db.query(
+      "DELETE FROM restaurants WHERE id = $1 RETURNING *",
+      [id]
+    );
+    console.log(results);
+    response.status(200).json({
+      data: get(results, "rows", []),
+      count: get(results, "rowCount", 0),
+    });
+  } catch (error) {
+    response.status(400).json({
+      error: error.message,
+    });
+  }
 });
 
 module.exports = router;
