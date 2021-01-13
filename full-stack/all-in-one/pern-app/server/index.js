@@ -4,6 +4,7 @@ const cors = require("cors");
 const pool = require("./db");
 const get = require("lodash/get");
 const head = require("lodash/head");
+const PORT = process.env.PORT || 5000;
 
 // Middleware
 app.use(cors());
@@ -73,9 +74,10 @@ app.put("/todos/:id", async (request, response) => {
 app.delete("/todos/:id", async (request, response) => {
   try {
     const id = get(request, "params.id", "");
-    const deleteTodo = await pool.query("DELETE FROM todo WHERE todo_id = ($1)", [
-      id,
-    ]);
+    const deleteTodo = await pool.query(
+      "DELETE FROM todo WHERE todo_id = ($1)",
+      [id]
+    );
     response.json(deleteTodo);
   } catch (error) {
     console.log(error.message);
@@ -84,6 +86,6 @@ app.delete("/todos/:id", async (request, response) => {
 });
 
 // Listen
-app.listen(5000, () => {
-  console.log("Server has started on port 5000");
+app.listen(PORT, () => {
+  console.log(`Server has started on port ${PORT}`);
 });
