@@ -13,6 +13,7 @@
   "dependencies": {
     "cors": "^2.8.5",
     "dotenv-safe": "^8.2.0",
+    "elasticsearch": "^16.7.2",
     "express": "^4.17.1",
     "lodash": "^4.17.20",
     "pg": "^8.5.1"
