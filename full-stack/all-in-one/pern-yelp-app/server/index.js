@@ -17,6 +17,8 @@ app.use(express.static(path.join(__dirname, 'static')))
 
 /* ROUTES */
 app.use(`${version}/restaurants`, require('./routes/restaurants'))
+app.use(`${version}/reviews`, require('./routes/reviews'))
+app.use(`${version}/report`, require('./routes/report'))
 
 
 /* SERVER */

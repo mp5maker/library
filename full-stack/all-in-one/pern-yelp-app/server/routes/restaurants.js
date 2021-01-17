@@ -103,4 +103,22 @@ router.delete("/:id", async (request, response) => {
   }
 });
 
+router.get("/:id/reviews", async (request, response) => {
+  try {
+    const id = get(request, "params.id", "");
+    const results = await db.query(
+      "SELECT * FROM reviews WHERE restaurant_id = $1",
+      [id]
+    );
+    response.status(200).json({
+      data: head(get(results, "rows", [])),
+      count: get(results, "rowCount", 0),
+    });
+  } catch (error) {
+    response.status(400).json({
+      error: error.message,
+    });
+  }
+});
+
 module.exports = router;
