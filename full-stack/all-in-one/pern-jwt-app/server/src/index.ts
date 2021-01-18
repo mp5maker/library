@@ -6,6 +6,7 @@ import get from "lodash/get";
 import { RegisterDTO } from "./dto/request/register.dto";
 import { Database } from "./database";
 import registerSchema from "./schema/register.schema";
+import errorHelper from "./utilities/errorHelper";
 
 const app = express();
 
@@ -17,17 +18,30 @@ Database.initialize();
 app.get("/", (req: express.Request, res: express.Response) => {
   res.send("Hello There");
 });
-app.post("/register", (req: express.Request, res: express.Response) => {
+app.post("/register", async (req: express.Request, res: express.Response) => {
   const body: RegisterDTO = get(req, "body", {});
 
-  res.status(200).json({
-    token: "dummy-token",
-    refreshToken: "dummy-refresh-token",
-    user: {
-      id: 1,
-      username: "dummy-username",
-    },
-  });
+  const onSuccessValidation = () => {
+    res.status(200).json({
+      token: "dummy-token",
+      refreshToken: "dummy-refresh-token",
+      user: {
+        id: 1,
+        username: "dummy-username",
+      },
+    });
+  };
+
+  const onErrorValidation = (error) => {
+    res.status(400).json({
+      ...errorHelper.generate(error),
+    });
+  };
+
+  registerSchema
+    .validate(body, { abortEarly: false })
+    .then(onSuccessValidation)
+    .catch(onErrorValidation);
 });
 
 // Lis
