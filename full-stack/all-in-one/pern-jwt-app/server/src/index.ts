@@ -1,4 +1,5 @@
 import "reflect-metadata";
+import dotenv from "dotenv-safe";
 import { createConnection } from "typeorm";
 import { User } from "./entity/User";
 import express from "express";
@@ -11,6 +12,7 @@ import passwordHelper from "./utilities/passwordHelper";
 import i18next from "i18next";
 import { AuthenticationDTO } from "./dto/response/authentication.dto";
 
+dotenv.config();
 const app = express();
 
 // Middleware
@@ -47,12 +49,12 @@ app.post("/register", async (req: express.Request, res: express.Response) => {
     const user = new User();
     user.username = username;
     user.email = email;
-    user.password = await passwordHelper.generate({ password });
+    user.password = await passwordHelper.generateHash({ password });
     user.age = age;
     await Database.userRepository.save(user);
 
     const response: AuthenticationDTO = {
-      token: "dummy-token",
+      token: await passwordHelper.generateToken({ user }),
       refreshToken: "dummy-refresh-token",
       user,
     };

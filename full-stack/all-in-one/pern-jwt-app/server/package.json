@@ -9,6 +9,7 @@
     "@types/node": "^8.0.29",
     "@typescript-eslint/eslint-plugin": "^4.13.0",
     "@typescript-eslint/parser": "^4.13.0",
+    "dotenv-safe": "^8.2.0",
     "eslint": "^7.18.0",
     "husky": "^4.3.8",
     "prettier": "^2.2.1",
@@ -26,11 +27,13 @@
     "pg": "^8.4.0",
     "reflect-metadata": "^0.1.10",
     "typeorm": "0.2.30",
+    "uuid": "^8.3.2",
     "yup": "^0.32.8"
   },
   "scripts": {
     "start": "ts-node src/index.ts",
-    "dev": "ts-node-dev src/index.ts"
+    "dev": "ts-node-dev src/index.ts",
+    "typeorm": "node --require ts-node/register ./node_modules/typeorm/cli.js"
   },
   "husky": {
     "hooks": {
