@@ -2,6 +2,8 @@ import bcrypt from "bcrypt";
 import jwt from "jsonwebtoken";
 import get from "lodash/get";
 import { v4 } from "uuid";
+import { RefreshToken } from "../entity/RefreshToken";
+import add from "date-fns/add";
 
 export default {
   generateHash: async ({ password }) => {
@@ -25,5 +27,13 @@ export default {
     });
 
     return token;
+  },
+  generateRefreshToken: async ({ user, jwtId }) => {
+    const refreshToken = new RefreshToken();
+    refreshToken.user = user;
+    refreshToken.jwtId = jwtId;
+    refreshToken.expiryDate = add(new Date(), {
+      days: 10,
+    });
   },
 };

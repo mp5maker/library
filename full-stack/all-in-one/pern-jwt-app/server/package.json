@@ -20,6 +20,7 @@
   },
   "dependencies": {
     "bcrypt": "^5.0.0",
+    "date-fns": "^2.16.1",
     "express": "^4.17.1",
     "i18next": "^19.8.4",
     "jsonwebtoken": "^8.5.1",
