@@ -18,6 +18,7 @@ Database.initialize();
 app.get("/", (req: express.Request, res: express.Response) => {
   res.send("Hello There");
 });
+
 app.post("/register", async (req: express.Request, res: express.Response) => {
   const body: RegisterDTO = get(req, "body", {});
 
