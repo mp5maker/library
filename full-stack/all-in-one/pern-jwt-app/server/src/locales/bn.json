@@ -1,0 +1,6 @@
+{
+  "EMAIL_IS_REQUIRED": "ইমেল প্রয়োজন",
+  "PASSWORD_IS_REQUIRED": "পাসওয়ার্ড প্রয়োজন",
+  "USERNAME_IS_REQUIRED": "ইউজার নাম দরকার",
+  "PASSWORD_MUST_MATCH": "পাসওয়ার্ড অবশ্যই মিলবে"
+}

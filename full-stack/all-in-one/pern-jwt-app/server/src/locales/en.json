@@ -1,0 +1,6 @@
+{
+  "EMAIL_IS_REQUIRED": "Email is required",
+  "PASSWORD_IS_REQUIRED": "Password is required",
+  "USERNAME_IS_REQUIRED": "Username is required",
+  "PASSWORD_MUST_MATCH": "Password must match"
+}
