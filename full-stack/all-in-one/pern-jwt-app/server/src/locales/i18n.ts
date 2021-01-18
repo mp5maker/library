@@ -1,9 +1,18 @@
-import { I18n } from "i18n";
-import path from "path";
+import i18next from "i18next";
+import * as English from "./en.json";
+import * as Bengali from "./bn.json";
 
-const i18n = new I18n({
-  locales: ["en", "bn"],
-  directory: path.join(__dirname, "."),
+i18next.init({
+  resources: {
+    en: {
+      translation: English,
+    },
+    bn: {
+      translation: Bengali,
+    },
+  },
+  lng: "en",
+  fallbackLng: "en",
 });
 
-export default i18n;
+export default i18next;

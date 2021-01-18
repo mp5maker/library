@@ -21,6 +21,7 @@ app.get("/", (req: express.Request, res: express.Response) => {
 
 app.post("/register", async (req: express.Request, res: express.Response) => {
   const body: RegisterDTO = get(req, "body", {});
+  const currentLanguage = get(req, "headers.accept-language", "");
 
   const onSuccessValidation = () => {
     res.status(200).json({
@@ -39,7 +40,9 @@ app.post("/register", async (req: express.Request, res: express.Response) => {
     });
   };
 
-  registerSchema
+  registerSchema({
+    currentLanguage: currentLanguage.trim() ? currentLanguage : "en",
+  })
     .validate(body, { abortEarly: false })
     .then(onSuccessValidation)
     .catch(onErrorValidation);
