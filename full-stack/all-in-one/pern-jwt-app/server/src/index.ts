@@ -7,6 +7,9 @@ import { RegisterDTO } from "./dto/request/register.dto";
 import { Database } from "./database";
 import registerSchema from "./schema/register.schema";
 import errorHelper from "./utilities/errorHelper";
+import passwordHelper from "./utilities/passwordHelper";
+import i18next from "i18next";
+import { AuthenticationDTO } from "./dto/response/authentication.dto";
 
 const app = express();
 
@@ -21,27 +24,51 @@ app.get("/", (req: express.Request, res: express.Response) => {
 
 app.post("/register", async (req: express.Request, res: express.Response) => {
   const body: RegisterDTO = get(req, "body", {});
-  const currentLanguage = get(req, "headers.accept-language", "");
+  const headerLanguage = get(req, "headers.accept-language", "").trim();
+  const currentLanguage = headerLanguage ? headerLanguage : "en";
 
-  const onSuccessValidation = () => {
-    res.status(200).json({
+  const onSuccessValidation = async () => {
+    const t = i18next.getDataByLanguage(currentLanguage).translation;
+    const email = get(body, "email", "");
+    const username = get(body, "username", "");
+    const password = get(body, "password", "");
+    const age = get(body, "age", 0);
+
+    const findUser = await Database.userRepository.findOne({ email });
+    if (findUser) {
+      res.status(400).json({
+        error: {
+          overall: t["USER_ALREADY_EXIST"],
+        },
+      });
+    }
+
+    // Store the user
+    const user = new User();
+    user.username = username;
+    user.email = email;
+    user.password = await passwordHelper.generate({ password });
+    user.age = age;
+    await Database.userRepository.save(user);
+
+    const response: AuthenticationDTO = {
       token: "dummy-token",
       refreshToken: "dummy-refresh-token",
-      user: {
-        id: 1,
-        username: "dummy-username",
-      },
-    });
+      user,
+    };
+    res.status(200).json(response);
   };
 
   const onErrorValidation = (error) => {
     res.status(400).json({
-      ...errorHelper.generate(error),
+      error: {
+        ...errorHelper.generate(error),
+      },
     });
   };
 
   registerSchema({
-    currentLanguage: currentLanguage.trim() ? currentLanguage : "en",
+    currentLanguage,
   })
     .validate(body, { abortEarly: false })
     .then(onSuccessValidation)

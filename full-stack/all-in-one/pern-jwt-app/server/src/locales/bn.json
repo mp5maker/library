@@ -2,5 +2,6 @@
   "EMAIL_IS_REQUIRED": "ইমেল প্রয়োজন",
   "PASSWORD_IS_REQUIRED": "পাসওয়ার্ড প্রয়োজন",
   "USERNAME_IS_REQUIRED": "ইউজার নাম দরকার",
-  "PASSWORD_MUST_MATCH": "পাসওয়ার্ড অবশ্যই মিলবে"
+  "PASSWORD_MUST_MATCH": "পাসওয়ার্ড অবশ্যই মিলবে",
+  "USER_ALREADY_EXISTS": "ব্যবহারকারী আগে থেকেই আছে"
 }
