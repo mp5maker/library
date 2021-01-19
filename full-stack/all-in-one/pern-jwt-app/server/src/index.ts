@@ -53,9 +53,16 @@ app.post("/register", async (req: express.Request, res: express.Response) => {
     user.age = age;
     await Database.userRepository.save(user);
 
+    const {
+      token,
+      refreshToken,
+    } = await passwordHelper.generateTokenAndRefreshToken({
+      user,
+    });
+
     const response: AuthenticationDTO = {
-      token: await passwordHelper.generateToken({ user }),
-      refreshToken: "dummy-refresh-token",
+      token,
+      refreshToken,
       user,
     };
     res.status(200).json(response);
