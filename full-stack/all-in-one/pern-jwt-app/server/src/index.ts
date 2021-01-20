@@ -55,12 +55,8 @@ app.post("/register", async (req: express.Request, res: express.Response) => {
     user.age = age;
     await Database.userRepository.save(user);
 
-    const {
-      token,
-      refreshToken,
-    } = await tokenHelper.generateTokenAndRefreshToken({
-      user,
-    });
+    const token = await tokenHelper.generateToken({ user });
+    const refreshToken = await tokenHelper.generateRefreshToken({ user });
 
     const response: AuthenticationDTO = {
       token,
@@ -99,10 +95,10 @@ app.post("/login", async (req: express.Request, res: express.Response) => {
     });
 
     if (isPasswordValid) {
-      const {
-        token,
-        refreshToken,
-      } = await tokenHelper.generateTokenAndRefreshToken({ user: findUser });
+      const token = await tokenHelper.generateToken({ user: findUser });
+      const refreshToken = await tokenHelper.generateRefreshToken({
+        user: findUser,
+      });
       const id = get(findUser, "id", 0);
       const username = get(findUser, "username", "");
       const age = get(findUser, "age", 0);
@@ -136,7 +132,7 @@ app.post("/login", async (req: express.Request, res: express.Response) => {
 });
 
 app.post("/verify", async (req: express.Request, res: express.Response) => {
-  const token = get(req, "body.token", "");
+  const token = get(req, "body.refreshToken", "");
   const onVerifySuccessToken = (_response) => res.status(200).send(true);
   const onVerifyErrorToken = (_error) => res.status(400).send(false);
 
@@ -145,6 +141,43 @@ app.post("/verify", async (req: express.Request, res: express.Response) => {
     .then(onVerifySuccessToken)
     .catch(onVerifyErrorToken);
 });
+
+app.post(
+  "/refresh-token",
+  async (req: express.Request, res: express.Response) => {
+    const bodyToken = get(req, "body.refreshToken", "");
+    const onVerifySuccessToken = async (verifyResponse) => {
+      const email = get(verifyResponse, "email", "");
+      const id = get(verifyResponse, "aud", "");
+
+      const user = await Database.userRepository.findOne({ id, email });
+      if (user) {
+        const findToken = await Database.refreshTokenRepository.findOne({
+          jwtId: bodyToken,
+          user,
+        });
+        await Database.refreshTokenRepository.save({
+          ...findToken,
+          used: true,
+        });
+        const token = await tokenHelper.generateToken({ user });
+        const refreshToken = await tokenHelper.generateRefreshToken({ user });
+        res.status(200).send({
+          token,
+          refreshToken,
+        });
+      } else {
+        res.status(400).send(false);
+      }
+    };
+    const onVerifyErrorToken = () => res.status(400).send(false);
+
+    tokenHelper
+      .verifyToken({ token: bodyToken })
+      .then(onVerifySuccessToken)
+      .catch(onVerifyErrorToken);
+  }
+);
 
 app.post("/logout", async (req: express.Request, res: express.Response) => {
   response.send(200);

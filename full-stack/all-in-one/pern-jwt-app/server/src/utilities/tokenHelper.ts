@@ -1,43 +1,40 @@
 import dotenv from "dotenv-safe";
 import jwt from "jsonwebtoken";
 import get from "lodash/get";
-import { v4 } from "uuid";
 import { RefreshToken } from "../entity/RefreshToken";
-import add from "date-fns/add";
 import { Database } from "../database";
 
 dotenv.config();
 
-const generateRefreshToken = async ({ user, jwtId }) => {
-  const refreshToken = new RefreshToken();
-  refreshToken.user = user;
-  refreshToken.jwtId = jwtId;
-  refreshToken.expiryDate = add(new Date(), {
-    days: 10,
-  });
-  await Database.refreshTokenRepository.save(refreshToken);
-  return refreshToken.id;
-};
-
-const generateTokenAndRefreshToken = async ({ user }) => {
+const generateToken = async ({ user, options = {} }) => {
   const id = get(user, "id", "");
   const email = get(user, "email", "");
 
   const payload = {
-    id,
     email,
   };
 
-  const jwtId = v4();
-
   const token = await jwt.sign(payload, process.env.SECRET, {
     expiresIn: "1h",
-    jwtid: jwtId,
-    subject: id.toString(),
+    issuer: process.env.SITE_NAME,
+    audience: String(id),
+    ...options,
   });
 
-  const refreshToken = await generateRefreshToken({ user, jwtId });
-  return { token, refreshToken };
+  return token;
+};
+
+const generateRefreshToken = async ({ user }) => {
+  const refreshToken = new RefreshToken();
+  refreshToken.user = user;
+  refreshToken.jwtId = await generateToken({
+    user,
+    options: {
+      expiresIn: "1y",
+    },
+  });
+  await Database.refreshTokenRepository.save(refreshToken);
+  return refreshToken.jwtId;
 };
 
 const verifyToken = async ({ token }) => {
@@ -45,7 +42,7 @@ const verifyToken = async ({ token }) => {
 };
 
 export default {
+  generateToken,
   generateRefreshToken,
-  generateTokenAndRefreshToken,
   verifyToken,
 };

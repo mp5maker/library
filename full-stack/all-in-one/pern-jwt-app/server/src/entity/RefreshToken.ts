@@ -19,14 +19,11 @@ export class RefreshToken {
   @Column()
   jwtId: string;
 
+  @Column({ default: null })
+  device: string;
+
   @Column({ default: false })
   used: boolean;
-
-  @Column({ default: false })
-  invalidated: boolean;
-
-  @Column()
-  expiryDate: Date;
 
   @CreateDateColumn()
   creationDate: Date;
