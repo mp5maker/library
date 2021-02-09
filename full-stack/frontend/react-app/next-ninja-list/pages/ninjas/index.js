@@ -1,12 +1,7 @@
-import { Navbar } from "../../components/Navbar";
-import { Footer } from "../../components/Footer";
-
 export default function Ninjas() {
   return (
     <div>
-      <Navbar />
-      <span>Ninjas List</span>
-      <Footer />
+      <h1>Ninjas List</h1>
     </div>
   );
 }
