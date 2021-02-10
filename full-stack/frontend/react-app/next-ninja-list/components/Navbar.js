@@ -1,10 +1,11 @@
 import Link from "next/link";
+import Image from "next/image";
 
 export const Navbar = () => {
   return (
     <nav>
       <div className={"logo"}>
-        <h1> Ninjas List </h1>
+        <Image height={60} width={60} src={"/logo.png"} />
       </div>
       <div className={"links"}>
         <Link href="/">

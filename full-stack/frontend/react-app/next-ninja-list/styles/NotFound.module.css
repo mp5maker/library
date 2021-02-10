@@ -1,0 +1,25 @@
+.container {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  min-height: 500px;
+}
+
+.content {
+  text-align: center;
+}
+
+.title {
+  font-weight: bolder;
+  color: var(--firebrick);
+}
+
+.text {
+  opacity: 0.7;
+  color: var(--firebrick);
+}
+
+.link {
+  text-decoration: none;
+  color: var(--black);
+}
