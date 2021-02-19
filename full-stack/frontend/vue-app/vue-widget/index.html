@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+  </head>
+  <body>
+    <h2>Vue Widget</h2>
+    <div id="app">
+      <div v-if="showBooks">
+        <p>{{ title }} - {{ author }} - {{ age }}</p>
+      </div>
+      <div>
+        <button v-on:click="age++">Increase Age</button>
+        <button v-on:click="age--">Decrease Age</button>
+        <button @click="title = 'something else'">Change Book Title</button>
+      </div>
+      <div style="margin-top: 12px">
+        <button @click="changeTitle('Oathbringer')">Change Book Title</button>
+        <button @click="hideShowBooks">
+          <span v-if="showBooks">Hide Books</span>
+          <span v-else>Show Books</span>
+        </button>
+        <div v-show="showBooks" style="margin-top: 12px">
+          Currently Showing Books
+        </div>
+      </div>
+    </div>
+    <script src="https://unpkg.com/vue@3.0.2"></script>
+    <script src="app.js"></script>
+  </body>
+</html>
