@@ -7,6 +7,21 @@ const app = Vue.createApp({
       showBooks: true,
       x: 0,
       y: 0,
+      books: [
+        {
+          title: "Harry Potter",
+          author: "J.K Rowling",
+          img: "assets/book-1.jpg",
+          isFav: false,
+        },
+        {
+          title: "The way of kings",
+          author: "John Doe",
+          img: "assets/book-2.jpg",
+          isFav: true,
+        },
+      ],
+      url: "https://google.com",
     };
   },
   methods: {

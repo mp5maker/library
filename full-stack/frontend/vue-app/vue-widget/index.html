@@ -20,6 +20,9 @@
         justify-content: center;
         align-items: center;
       }
+      .fav {
+        border: 1px solid firebrick;
+      }
     </style>
   </head>
   <body>
@@ -70,8 +73,33 @@
           <h4>position - {{ x }} - {{ y }}</h4>
         </div>
       </div>
-      <div classes="boxes">
-        <div class="box"></div>
+      <div>
+        <ul style="padding: 0; margin: 0">
+          <li
+            v-for="book in books"
+            style="
+              text-decoration: none;
+              margin: 12px;
+              padding: 12px;
+              list-style: none;
+            "
+            :class="{
+              fav: book.isFav
+            }"
+          >
+            <h4>{{ book.title }}</h4>
+            <p>{{ book.author }}</p>
+            <img :src="book.img" :alt="book.img" height="100" width="100">
+          </li>
+        </ul>
+      </div>
+      <div style="padding: 12px; margin: 12px; border: 1px solid whitesmoke">
+        <div>
+          <a v-bind:href="url">Best Website Ever (v-bind:href)</a>
+        </div>
+        <div>
+          <a :href="url">Best Website Ever (:href)</a>
+        </div>
       </div>
     </div>
     <script src="https://unpkg.com/vue@3.0.2"></script>
