@@ -9,12 +9,14 @@ const app = Vue.createApp({
       y: 0,
       books: [
         {
+          id: 1,
           title: "Harry Potter",
           author: "J.K Rowling",
           img: "assets/book-1.jpg",
           isFav: false,
         },
         {
+          id: 2,
           title: "The way of kings",
           author: "John Doe",
           img: "assets/book-2.jpg",
@@ -22,6 +24,7 @@ const app = Vue.createApp({
         },
       ],
       url: "https://google.com",
+      search: "",
     };
   },
   methods: {
@@ -38,6 +41,27 @@ const app = Vue.createApp({
     handleMouseMove($event) {
       this.x = $event.offsetX;
       this.y = $event.offsetY;
+    },
+    makeItFav(book) {
+      book.isFav = !book.isFav;
+    },
+  },
+  computed: {
+    filteredBooks() {
+      return this.books.filter((book) => {
+        const bookTitle = book.title.toLowerCase();
+        const bookAuthor = book.author.toLowerCase();
+        const searchString = this.search.toLowerCase().trim();
+
+        if (searchString == "") return true;
+        if (
+          bookTitle.indexOf(searchString) > -1 ||
+          bookAuthor.indexOf(searchString) > -1
+        ) {
+          return true;
+        }
+        return false;
+      });
     },
   },
 });

@@ -73,23 +73,31 @@
           <h4>position - {{ x }} - {{ y }}</h4>
         </div>
       </div>
+      <div style="padding: 12px; margin: 12px">
+        <input v-model="search" />
+        <p>You typed: {{ search }}</p>
+      </div>
       <div>
         <ul style="padding: 0; margin: 0">
           <li
-            v-for="book in books"
+            v-for="book in filteredBooks"
+            @click="makeItFav(book)"
             style="
+              display: flex;
+              justify-content: space-between;
               text-decoration: none;
               margin: 12px;
               padding: 12px;
               list-style: none;
+              border-radius: 3px;
             "
             :class="{
               fav: book.isFav
             }"
           >
+            <img :src="book.img" :alt="book.img" height="100" width="100" />
             <h4>{{ book.title }}</h4>
             <p>{{ book.author }}</p>
-            <img :src="book.img" :alt="book.img" height="100" width="100">
           </li>
         </ul>
       </div>
