@@ -4,6 +4,23 @@
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Document</title>
+    <style>
+      .boxes {
+        display: flex;
+        justify-content: align-items;
+        align-items: center;
+        flex-wrap: wrap;
+      }
+      .box {
+        height: 250px;
+        width: 250px;
+        box-shadow: 0 1px 15px 0 rgba(0, 0, 0, 0.12);
+        margin: 12px;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+      }
+    </style>
   </head>
   <body>
     <h2>Vue Widget</h2>
@@ -24,6 +41,28 @@
         </button>
         <div v-show="showBooks" style="margin-top: 12px">
           Currently Showing Books
+        </div>
+      </div>
+      <div class="boxes">
+        <div class="box" @mouseover="handleEvents({$event, type: 'mouseover'})">
+          <h4>mouseover (enter)</h4>
+        </div>
+        <div
+          class="box"
+          @mouseleave="handleEvents({ $event, type: 'mouseleave'})"
+        >
+          <h4>mouseleave</h4>
+        </div>
+      </div>
+      <div class="boxes">
+        <div class="box" @dblclick="handleEvents({ $event, type: 'dblclick' })">
+          <h4>doubleclick</h4>
+        </div>
+        <div
+          class="box"
+          @contextmenu="handleEvents({ $event, type: 'contextmenu'})"
+        >
+          <h4>contextmenu</h4>
         </div>
       </div>
     </div>

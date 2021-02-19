@@ -14,6 +14,10 @@ const app = Vue.createApp({
     hideShowBooks() {
       this.showBooks = !this.showBooks;
     },
+    handleEvents({ $event, type }) {
+      console.log("🚀 ~ file: app.js ~ line 19 ~ handleEvents ~ event", $event);
+      console.log("🚀 ~ file: app.js ~ line 21 ~ handleEvents ~ type", type);
+    },
   },
 });
 
