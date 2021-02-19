@@ -5,6 +5,8 @@ const app = Vue.createApp({
       author: "Brandon Sanderson",
       age: 50,
       showBooks: true,
+      x: 0,
+      y: 0,
     };
   },
   methods: {
@@ -17,6 +19,10 @@ const app = Vue.createApp({
     handleEvents({ $event, type }) {
       console.log("🚀 ~ file: app.js ~ line 19 ~ handleEvents ~ event", $event);
       console.log("🚀 ~ file: app.js ~ line 21 ~ handleEvents ~ type", type);
+    },
+    handleMouseMove($event) {
+      this.x = $event.offsetX;
+      this.y = $event.offsetY;
     },
   },
 });
