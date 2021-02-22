@@ -1,9 +1,9 @@
 <template>
-  <div class="navbar-container">
+  <nav class="navbar-container">
     <div>
       <h3>{{ title }}</h3>
     </div>
-  </div>
+  </nav>
 </template>
 
 <style scoped>
