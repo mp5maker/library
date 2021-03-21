@@ -27,3 +27,10 @@ export function shapeShifter<P>({ data }: ShapeShifter<P>) {
     return item;
   });
 }
+
+export function getProperty<T, K extends keyof T>(obj: T, key: K) {
+  return obj[key];
+}
+let user = { name: 'John Doe', age: 25}
+const name = getProperty(user, 'name')
+const age = getProperty(user, 'age')
