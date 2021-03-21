@@ -36,3 +36,23 @@ JanesDrink = "Tea";
 type DrinksJamesLike = "Tea" | "Lemonade" | "Mohito";
 let JamesDrink: Extract<AvailableDrinks, DrinksJamesLike>;
 JamesDrink = "Lemonade";
+
+type Ok = null | undefined | string;
+type OkNoNull = NonNullable<Ok>;
+const hello: OkNoNull = "ok";
+
+interface StarshipProperties {
+  color?: "blue" | "red" | "green";
+}
+
+function paintStarship(
+  id: number,
+  color: NonNullable<StarshipProperties["color"]>
+) {
+  return {
+    id,
+    color,
+  };
+}
+type PaintStarshipReturn = ReturnType<typeof paintStarship>;
+const starshipColor: PaintStarshipReturn = paintStarship(1, "blue");
