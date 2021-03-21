@@ -1,13 +1,8 @@
-import React from "react";
-import logo from "./logo.svg";
-import "./App.css";
-import { useLocalStorage } from 'hook/useLocalStorage'
+import React from 'react';
+import logo from './logo.svg';
+import './App.css';
 
 function App() {
-  const [boo] = useLocalStorage<string>('boo', 'bhua')
-
-  console.log(boo)
-
   return (
     <div className="App">
       <header className="App-header">

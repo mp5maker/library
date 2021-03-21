@@ -31,7 +31,6 @@ mongo
 *.map
 .next
 *.sqlite3
-public
 *.mp3
 *.mp4
 .env
