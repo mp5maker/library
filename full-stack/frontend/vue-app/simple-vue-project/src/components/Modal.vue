@@ -5,14 +5,23 @@
     @click.self="closeModal({ type: 'outside-modal', event: $event })"
   >
     <div class="modal">
-      <div class="modal-header-container">
+      <!-- Header -->
+      <div class="modal-header-container" v-if="hasHeaderSlot">
+        <slot name="header"></slot>
+      </div>
+      <div class="modal-header-container" v-else>
         <div class="modal-header-left-content">
           {{ title }}
         </div>
         <button @click="closeModal({ type: 'times', event: $event })">X</button>
       </div>
+      <!-- Content -->
       <div class="modal-content-container">
         <slot></slot>
+      </div>
+      <!-- Footer -->
+      <div class="modal-footer-container" v-if="hasFooterSlot">
+        <slot name="footer"></slot>
       </div>
     </div>
   </div>
@@ -56,6 +65,14 @@ export default {
   methods: {
     closeModal({ type, event }) {
       this.$emit("close", { type, event });
+    },
+  },
+  computed: {
+    hasHeaderSlot() {
+      return !!this.$slots["header"];
+    },
+    hasFooterSlot() {
+      return !!this.$slots["footer"];
     },
   },
 };
