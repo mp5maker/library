@@ -1,13 +1,19 @@
 <template>
-  <div class="backdrop" :class="{ active: show }">
+  <div
+    class="backdrop"
+    :class="{ active: show }"
+    @click.self="closeModal({ type: 'outside-modal', event: $event })"
+  >
     <div class="modal">
       <div class="modal-header-container">
-        <div>
+        <div class="modal-header-left-content">
           {{ title }}
         </div>
-        <div @click="closeModal">X</div>
+        <button @click="closeModal({ type: 'times', event: $event })">X</button>
       </div>
-      <div class="modal-content-container"></div>
+      <div class="modal-content-container">
+        <slot></slot>
+      </div>
     </div>
   </div>
 </template>
@@ -33,8 +39,9 @@
   display: block;
 }
 .modal-header-container {
-  display: "flex";
-  justify-content: "space-between";
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
   align-items: center;
 }
 </style>
@@ -44,8 +51,12 @@ export default {
   name: "Modal",
   props: {
     show: Boolean,
-    closeModal: Function,
     title: String,
+  },
+  methods: {
+    closeModal({ type, event }) {
+      this.$emit("close", { type, event });
+    },
   },
 };
 </script>

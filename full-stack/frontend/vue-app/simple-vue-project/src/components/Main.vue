@@ -1,8 +1,15 @@
 <template>
   <main class="main-container">
-    <Modal :show="showModal" :closeModal="closeModal" title="Sample Test" />
+    <Modal :show="showModal" @close="closeModal" title="Sample Test">
+      <div>
+        <p>International Secrets to be traded</p>
+      </div>
+    </Modal>
     <button @click="openModal" style="margin: var(--small) 0">
       Show Modal
+    </button>
+    <button @click.alt="openModal" style="margin: var(--small) 0">
+      Show Modal [Alt + Click]
     </button>
     <div>
       <input type="text" ref="name" />
@@ -29,7 +36,8 @@ export default {
       this.$refs.name.classList.add("active");
       this.$refs.name.focus();
     },
-    closeModal() {
+    closeModal({ type }) {
+      console.log(type);
       this.showModal = false;
     },
     openModal() {
