@@ -1,0 +1,26 @@
+:root {
+  --border: whitesmoke;
+  --white: white;
+  --black: rgba(0, 0, 0, 0.8);
+  --extraSmall: 0.5rem;
+  --small: 1rem;
+  --medium: 1.5rem;
+  --large: 2rem;
+  --extraLarge: 3rem;
+}
+
+html, body {
+  margin: 0;
+  padding: 0;
+}
+
+body {
+  height: 100%;
+  font-family: Avenir, Helvetica, Arial, sans-serif;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+body main {
+  min-height: calc(100vh - 60px);
+}
