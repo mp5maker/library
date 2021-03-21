@@ -19,9 +19,8 @@ html {
   padding: 0;
 }
 
-#app {
+#app, #modal {
   font-family: Avenir, Helvetica, Arial, sans-serif;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
-  text-align: center;
 }

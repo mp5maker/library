@@ -1,10 +1,12 @@
 <template>
   <main class="main-container">
-    <Modal :show="showModal" @close="closeModal" title="Sample Test">
-      <div>
-        <p>International Secrets to be traded</p>
-      </div>
-    </Modal>
+    <teleport to="#modal" :show="showModal">
+      <Modal :show="showModal" @close="closeModal" title="Sample Test">
+        <div>
+          <p>International Secrets to be traded</p>
+        </div>
+      </Modal>
+    </teleport>
     <button @click="openModal" style="margin: var(--small) 0">
       Show Modal
     </button>
