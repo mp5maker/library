@@ -3,20 +3,20 @@
     <div class="form-group">
       <label> Email: </label>
       <div>
-        <input type="text" v-model="email" autocomplete="off" />
+        <input type="text" v-model="form.email" autocomplete="off" />
       </div>
     </div>
     <div class="form-group">
       <label> Password: </label>
       <div>
-        <input type="password" v-model="password" autocomplete="off" />
+        <input type="password" v-model="form.password" autocomplete="off" />
       </div>
     </div>
     <div class="form-group">
       <label> Password: </label>
     </div>
     <div class="form-group">
-      <select v-model="role">
+      <select v-model="form.role">
         <option value="developer">Developer</option>
         <option value="designer">Designer</option>
       </select>
@@ -24,11 +24,11 @@
     <div class="form-group">
       <label>Skills: </label>
       <div>
-        <input type="text" v-model="tempSkill" @keyup="addSkill" />
+        <input type="text" v-model="form.tempSkill" @keyup="addSkill" />
       </div>
       <div class="d-flex-inline space-top">
         <div
-          v-for="skill in skills"
+          v-for="skill in form.skills"
           :key="skill"
           class="pill"
           @click="deleteSkill(skill)"
@@ -38,8 +38,11 @@
       </div>
     </div>
     <div class="form-group d-flex-inline space-top">
+      <input type="checkbox" v-model="form.terms" required />
       <label>Accept terms and and conditions </label>
-      <input type="checkbox" v-model="terms" required />
+    </div>
+    <div class="form-group" @click="handleSubmit">
+      <button class="submit">Create an account</button>
     </div>
   </form>
 </template>
@@ -49,26 +52,31 @@ export default {
   name: "SignupForm",
   data() {
     return {
-      email: "",
-      password: "",
-      role: "developer",
-      terms: false,
-      tempSkill: "",
-      skills: [],
+      form: {
+        email: "",
+        password: "",
+        role: "developer",
+        terms: false,
+        tempSkill: "",
+        skills: [],
+      },
     };
   },
   methods: {
     addSkill(event) {
-      const tempSkill = this.tempSkill.replace(",", "");
-      if (event.key === "Enter" && tempSkill) {
-        if (!this.skills.includes(tempSkill)) {
-          this.skills = [...this.skills, tempSkill];
+      const tempSkill = this.form.tempSkill.replace(",", "");
+      if (event.key === "," && tempSkill) {
+        if (!this.form.skills.includes(tempSkill)) {
+          this.form.skills = [...this.form.skills, tempSkill];
         }
-        this.tempSkill = "";
+        this.form.tempSkill = "";
       }
     },
     deleteSkill(skill) {
-      this.skills = this.skills.filter((item) => item !== skill);
+      this.form.skills = this.form.skills.filter((item) => item !== skill);
+    },
+    handleSubmit(event) {
+      console.log(this.form);
     },
   },
 };
@@ -89,7 +97,7 @@ select {
   display: flex;
   justify-content: flex-start;
 }
-.d-flex-inline label {
+.d-flex-inline input {
   margin-right: var(--extraSmall);
 }
 .pill {
@@ -98,5 +106,13 @@ select {
   background-color: var(--whitesmoke);
   padding: calc(var(--extraSmall) * 0.5);
   cursor: pointer;
+  margin-right: var(-extraSmall);
+}
+.submit {
+  background-color: var(--black);
+  color: var(--white);
+  padding: var(--extraSmall);
+  border-radius: 5px;
+  min-width: 200px;
 }
 </style>
