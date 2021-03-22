@@ -25,6 +25,17 @@ const routes = [
     name: 'JobDetails',
     component: () => import(/* webpackChunkName: "jobs" */'../views/jobs/JobDetails.vue'),
     props: true
+  },
+  // redirect
+  {
+    path: '/all-jobs',
+    redirect: '/jobs'
+  },
+  // 404 Page
+  {
+    path: '/:catchAll(.*)',
+    name: 'NotFound',
+    component: () => import(/* webpackChunkName: "jobs" */'../views/NotFound.vue'),
   }
 ]
 
