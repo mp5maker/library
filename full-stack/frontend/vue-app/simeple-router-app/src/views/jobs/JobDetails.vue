@@ -2,6 +2,7 @@
   <div>
     <h1>Job Details Page</h1>
     <p>The Job id is {{ $route.params.id }}</p>
+    <p>The Job id is {{ id }}</p>
   </div>
 </template>
 
@@ -10,8 +11,13 @@ export default {
   name: "JobDetails",
   data() {
     return {
-      id: this.$route.params.id,
+      alternateID: this.$route.params.id,
     };
+  },
+  props: {
+    id: {
+      type: Number,
+    },
   },
 };
 </script>
