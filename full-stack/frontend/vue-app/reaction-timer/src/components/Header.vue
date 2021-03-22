@@ -23,7 +23,9 @@
 <script>
 export default {
   name: "Header",
-  data() {},
+  data() {
+    return {};
+  },
   props: {
     title: String,
   },
