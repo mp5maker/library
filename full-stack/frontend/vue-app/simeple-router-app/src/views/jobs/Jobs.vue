@@ -10,15 +10,19 @@
 </template>
 
 <script>
+import get from "lodash/get";
+
 export default {
   data() {
     return {
-      jobs: [
-        { title: "UX Designer", id: 1, detail: "lorem" },
-        { title: "Web Developer", id: 2, detail: "lorem" },
-        { title: "View Developer", id: 3, detail: "lorem" },
-      ],
+      jobs: [],
     };
+  },
+  mounted() {
+    fetch("http://localhost:3000/jobs")
+      .then((response) => response.json())
+      .then((data) => (this.jobs = data))
+      .catch((error) => console.log(get(error, "message", "")));
   },
 };
 </script>

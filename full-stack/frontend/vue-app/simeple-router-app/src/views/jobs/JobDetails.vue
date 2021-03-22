@@ -12,7 +12,14 @@ export default {
   data() {
     return {
       alternateID: this.$route.params.id,
+      job: {},
     };
+  },
+  mounted() {
+    fetch(`http://localhost:3000/jobs/${this.id}`)
+      .then((response) => response.json())
+      .then((data) => (this.job = data))
+      .catch((error) => console.log(get(error, "message", "")));
   },
   props: {
     id: {
