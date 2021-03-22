@@ -2,7 +2,12 @@
   <div>
     <h1>Job Details Page</h1>
     <p>The Job id is {{ $route.params.id }}</p>
-    <p>The Job id is {{ id }}</p>
+    <div v-if="job">
+      <p>The Job id is {{ id }}</p>
+      <p>The Job Title {{ job.title }}</p>
+      <p>The Job Detail is {{ job.detail }}</p>
+    </div>
+    <div v-else>Loading ...</div>
   </div>
 </template>
 
@@ -21,11 +26,7 @@ export default {
       .then((data) => (this.job = data))
       .catch((error) => console.log(get(error, "message", "")));
   },
-  props: {
-    id: {
-      type: Number,
-    },
-  },
+  props: ["id"],
 };
 </script>
 
