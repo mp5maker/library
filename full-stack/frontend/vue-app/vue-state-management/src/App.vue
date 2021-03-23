@@ -16,13 +16,14 @@
 </template>
 
 <script lang="ts">
+import { mapState } from "vuex";
+interface ComputedProductsInterface {
+  products: Array<{ name?: string; price?: number }>;
+}
+
 export default {
   name: "App",
-  computed: {
-    products() {
-      return this.$store.products;
-    },
-  },
+  computed: mapState(["products"]),
 };
 </script>
 
