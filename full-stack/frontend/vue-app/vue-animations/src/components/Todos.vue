@@ -85,6 +85,10 @@ input {
   opacity: 0;
   transform: scale(0.6);
 }
+.list-enter-to {
+  opacity: 1;
+  transform: scale(1);
+}
 .list-enter-active {
   transition: all 0.4s ease;
 }
