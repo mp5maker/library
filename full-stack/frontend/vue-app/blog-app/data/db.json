@@ -1,6 +1,6 @@
 {
   "posts":  [
-    { "title": "welcome to the blog", "body": "Lorem Ipsum", "id": 1 },
-    { "title": "top 5 css tips", "body": "Lorem Ipsum", "id": 2 }
+    { "title": "welcome to the blog", "body": "Lorem Ipsum", "id": 1, "tags": ["webdev", "coding", "news"] },
+    { "title": "top 5 css tips", "body": "Lorem Ipsum", "id": 2, "tags": ["css", "webdev", "coding"] }
   ]
 }
