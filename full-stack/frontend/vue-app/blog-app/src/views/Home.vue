@@ -21,11 +21,15 @@
         {{ name }}
       </div>
     </div>
+    <div>
+      <button @click="handleStopWatch">Stop Watch</button>
+      <button @click="handleStopWatchEffect">Stop Watch Effect</button>
+    </div>
   </div>
 </template>
 
 <script>
-import { ref, reactive, computed } from "vue";
+import { ref, reactive, computed, watch, watchEffect } from "vue";
 
 export default {
   name: "Home",
@@ -52,6 +56,20 @@ export default {
       );
     });
 
+    const stopWatch = watch(search, () => {
+      console.log("Watch");
+      console.log(search.value);
+    });
+
+    const stopWatchEffect = watchEffect(() => {
+      // Automatically watches
+      console.log("Watch Effect");
+      console.log(search.value);
+    });
+
+    const handleStopWatch = () => stopWatch();
+    const handleStopWatchEffect = () => stopWatchEffect();
+
     const updateNinja = () => {
       ninja.value.name = "john";
       ninja.value.age = 27;
@@ -72,6 +90,8 @@ export default {
       names,
       search,
       matchingNames,
+      handleStopWatch,
+      handleStopWatchEffect,
     };
   },
   created() {
