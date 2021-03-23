@@ -1,0 +1,6 @@
+{
+  "posts":  [
+    { "title": "welcome to the blog", "body": "Lorem Ipsum", "id": 1 },
+    { "title": "top 5 css tips", "body": "Lorem Ipsum", "id": 2 }
+  ]
+}
