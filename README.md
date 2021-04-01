@@ -18,6 +18,8 @@
 17) Sass
 18) Dev Ops
 19) CSS Grid vs CSS Flexbox
+20) React JS
+21) Vue JS
 
 All thanks to [Traversy Media](http://www.traversymedia.com)
 
