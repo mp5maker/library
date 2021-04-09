@@ -18,3 +18,71 @@ It is created using C++
 Reads the Javascript file. Then it does lexical analysis where it breaks down code
 into tokens, these tokens are formed in Abstract Syntax Tree (AST)
 Then it goes to interpreter. These interpreters then spills out the byte code
+
+# Interpreter Vs Compiler
+Code Process -> First goes through high level language then to byte code and at
+the end to machine code
+
+Interpreter, translate the code, read the files line by line on the fly.
+It spits out to bytecode
+
+Compiler, doesn't translate on the fly and it translates it before
+it spits out the machine code
+
+
+# V8 Engine
+Compiler does the optimization, it takes little bit time to start
+JIT Compiler, Just in time compiler is used in V8 Engines, which uses
+the best of both worlds of interpreter and compiler
+
+Parser -> AST -> Interpreter -> Spits out the byte code
+Within Interpreter there is a profiler which detects the code that needs to be optimized
+and passes to the compiler and then spits out the optimized code
+
+# Is Javascript an interpreted language?
+It used to be a interpreted language, when Spider Monkey was present during the old days
+Nowaways techinically it depends.
+
+# Optimized for the compiler?
+The functions that are very bad for optimization
+* eval()
+* arguments
+* for in
+* with
+* delete
+* Hidden classes
+
+These optimizes the code
+* Inline Caching
+```javascript
+function findUser(user) {
+    return `found ${user.firstName} ${user.lastName}`
+}
+
+const userData = {
+    firstName: 'Johnson',
+    lastName: 'Junior'
+}
+
+findUser(userData)
+// if we keep on calling this function
+//It will cache it to 'found Johnson Junior'
+
+```
+
+
+# Hidden Classes
+```javascript
+    function Animal(x, y) {
+        this.x = x
+        this.y = y
+    }
+
+    const obj1 = new Animal(1, 2);
+    const obj2 = new Animatl(3,4);
+
+    obj1.a = 30;
+    obj1.b = 100;
+
+    // This is going to slow things down
+```
