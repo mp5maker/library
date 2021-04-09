@@ -159,3 +159,29 @@ Then it is added on the stack. It adds on the call stack, until the whole file i
 Uses V8 engines to use javascript and uses libuv for the event loops
 Node has no window instead it has global.
 Therefore, it is a server side. It uses the asynchronous code using worker threads
+
+# Execution Context
+Javascript will always be on the global execution context. This will give us
+global object and this keyword
+
+# Lexical Environment / Lexical Scope / Lexical Analysis
+In javascript our lexical scope (available data + variables where the function was defined)
+determines our available variables. Now where the function is called dynamic scope
+
+# Hoisting
+During the creating phase. It is only applicable to 'var' and 'function'
+Functions are fully hoisted which means compiled before it runs [applicable for function declaration]
+Variable are partially hoisted which means right side of the variable value are not assinged
+before interpretation
+
+```javascript
+// funciton expression
+var sing2 = function() {
+    console.log('I sing')
+}
+
+// function declaration
+function sing() {
+    console.log('I will sing')
+}
+```
