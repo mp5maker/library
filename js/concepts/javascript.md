@@ -118,3 +118,20 @@ calculate()
 subtractTow
 calculate
 anonymous
+
+
+# Stack Overflow
+```javascript
+function inception() {
+    inception()
+}
+```
+
+It keeps on piling the stacks.
+
+
+# Garbage Collection
+Javascript is a garbage collected language. It cleans up the memory, when the memory is
+not used. It used mark and sweep method to remove the not needed memory.
+
+# Memory Leaks
