@@ -153,4 +153,9 @@ DOM, fetch, setTimeOut, indexedDB, caches. These apis are asynchronous
 We call the callstack, as soon as something comes up like (fetch api) it passes the
 work to web api. Let me do that in the background. Then it store web api asynchronous work
 in a box called callback queue. Then the event loops checks where the stack is empty or not.
-Then it is added on the stack
+Then it is added on the stack. It adds on the call stack, until the whole file is read and run
+
+# Node JS
+Uses V8 engines to use javascript and uses libuv for the event loops
+Node has no window instead it has global.
+Therefore, it is a server side. It uses the asynchronous code using worker threads
