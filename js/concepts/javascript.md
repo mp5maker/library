@@ -135,3 +135,22 @@ Javascript is a garbage collected language. It cleans up the memory, when the me
 not used. It used mark and sweep method to remove the not needed memory.
 
 # Memory Leaks
+Reasons for memory leaks
+* Global Variable
+* Event Listeners
+* setInterval
+
+# Single Threaded
+One set of instructions are executing at a time. Javascript is synchronous
+
+# Javascript Runtime
+Nowadays browser just dont just use javascript engine since it is synchronous.
+Node.js, Browser utilizes javascript engine and the web api.
+
+Web Api comes from the browser. Web Api provides
+DOM, fetch, setTimeOut, indexedDB, caches. These apis are asynchronous
+
+We call the callstack, as soon as something comes up like (fetch api) it passes the
+work to web api. Let me do that in the background. Then it store web api asynchronous work
+in a box called callback queue. Then the event loops checks where the stack is empty or not.
+Then it is added on the stack
