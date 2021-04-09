@@ -111,6 +111,7 @@ function calculate() {
 
 debugger;
 calculate()
+calculate()
 ```
 
 --> Debugger
