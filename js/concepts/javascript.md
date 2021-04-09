@@ -86,3 +86,34 @@ findUser(userData)
 
     // This is going to slow things down
 ```
+
+# Web Assembly
+Standard binary format, Compile the code to web assembly helps the run code
+faster in browser
+
+# Call Stack and Memory Heap
+Javascript Engine: Reading the code and executing the code
+Memory Heap: Store and write information
+Call Stack: Where the code is, in the execution
+
+Anonymous: Global Execution Context
+Call Stack works in First In Last Out mode
+
+```javascript
+function substractTwo(num) {
+    return num -2
+}
+
+function calculate() {
+    const sumTotal = 4 + 5;
+    return subtractTwo(sumTotal)
+}
+
+debugger;
+calculate()
+```
+
+--> Debugger
+subtractTow
+calculate
+anonymous
