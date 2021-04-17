@@ -418,11 +418,52 @@ wizard.heal.apply(archer, [50, 30]);
 console.log(archer); // health = 110
 ```
 
-
 Bind: it doesn't return the function like call or apply
+
 ```javascript
-console.log(archer) // health = 30
-const healArcher = wizard.heal.bind(archer)
-healArcher(50, 30)
-console.log(archer) // health = 110
+console.log(archer); // health = 30
+const healArcher = wizard.heal.bind(archer);
+healArcher(50, 30);
+console.log(archer); // health = 110
 ```
+
+# Currying
+
+```javascript
+function multiply(a, b) {
+  return a * b;
+}
+
+let multipleByTwo = multiply.bind(this, 2); // a paramer is now two
+console.log(multipleByTwo(4)); // b parameter 4, thereform 2 * 4 = 8
+```
+
+```javascript
+var b = {
+  name: "jay",
+  say() {
+    console.log(this); // b
+  },
+};
+
+var c = {
+  name: "jay",
+  say() {
+    return function () {
+      console.log(this); // windpow
+    };
+  },
+};
+
+var d = {
+  name: "jay",
+  say() {
+    return () => console.log(this); // d
+  },
+};
+```
+
+
+# Context vs Scope
+Context: How a value is invoked
+Scope: Visibility of the variables
