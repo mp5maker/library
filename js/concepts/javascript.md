@@ -463,7 +463,51 @@ var d = {
 };
 ```
 
-
 # Context vs Scope
+
 Context: How a value is invoked
 Scope: Visibility of the variables
+
+# Primitive Types
+
+1. numbers; 5
+2. boolean; true or false
+3. string; 'To be or not to be'
+4. undefined: meaning the abscence of definition
+5. null // typeof(null) is an object: meaning the abscence of no value
+6. Symbol('just me') // It is a new on from ES6
+
+# Non Primitive Types
+
+7. Object {}
+   Arrays and functions are objects, eg: [] or function(){}
+   typeof funciton(){} is a 'function'
+
+# Pass by reference vs Pass be value
+
+Pass by value
+
+```javascript
+var a = 5; // Pass by value
+var b = a; // Pass by value
+b++;
+console.log(a); // 5
+console.log(b); // 6
+```
+
+Pass by reference
+
+```javascript
+let obj1 = { name: "Yao", passowrd: "123" };
+let obj2 = obj1;
+obj2.password = "easypasy";
+
+console.log(obj1.password); // easypasy
+console.log(obj2.password); // easypasy
+```
+
+Samething happens for arrays
+
+```javascript
+var c = [1, 2, 3, 4, 5];
+```
