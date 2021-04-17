@@ -292,3 +292,137 @@ var customFunction = (function (customQuery) {
   });
 })(jQuery);
 ```
+
+# This
+
+Gives methods access to their object
+Execute same code for multiple objects
+
+```javascript
+const obj = {
+  name: "Billy",
+  sing() {
+    return `lalalal ${this.name}`;
+  },
+  singAgain() {
+    return `${this.sing()}!`;
+  },
+};
+```
+
+```javascript
+const name = "Sunny";
+function importantPerson() {
+  console.log(this.name);
+}
+
+const objOne = {
+  name: "Cassy",
+  importantPerson,
+};
+const objTwo = {
+  name: "Jacob",
+  importantPerson,
+};
+
+importantPerson(); // Sunny
+objOne.importantPerson(); // Cassy
+objTwo.importantPerson(); // Jacab
+```
+
+```javascript
+const a = function () {
+  console.log("a", this);
+  const b = function () {
+    console.log(b, this);
+    const c = {
+      hi: function () {
+        console.log("c", this);
+      },
+    };
+    c.hi();
+  };
+  b();
+};
+
+a(); // a -> this = Window
+// Inside b (this = Window)
+// Inside c (this is not Window)
+// This is a dynamic scope
+```
+
+Fix the above issue with arrow functions with ES6 syntax
+
+```javascript
+const a = () => {
+  console.log("a", this);
+  const b = () => {
+    console.log(b, this);
+    const c = {
+      hi: () => {
+        console.log("c", this);
+      },
+    };
+    c.hi();
+  };
+  b();
+};
+```
+
+Previously it was solved by bind
+
+```javascript
+const obj = {
+  name: "Billy",
+  sing() {
+    console.log("a", this);
+    var anotherFunc = function () {
+      console.log("b", this);
+    };
+    return anotherFunc.bind(this);
+  },
+};
+```
+
+# Call, Apply, Bind
+
+Under the hood, all the functions calls the 'call' method
+
+Call: borrow the function from another object
+
+```javascript
+const wizard = {
+  name: "Merlin",
+  health: 100,
+  heal(numOne, numTwo) {
+    return (this.health += num1 + num2);
+  },
+};
+
+const archer = {
+  name: "Robin Hood",
+  health: 30,
+};
+
+console.log(archer); // health = 30
+wizard.heal.call(archer, 50, 30);
+console.log(archer); // health = 110
+```
+
+Apply: borrow the function from another object
+The only difference is, it takes parameters in the form of array
+
+```javascript
+console.log(archer); // health = 30
+wizard.heal.apply(archer, [50, 30]);
+console.log(archer); // health = 110
+```
+
+
+Bind: it doesn't return the function like call or apply
+```javascript
+console.log(archer) // health = 30
+const healArcher = wizard.heal.bind(archer)
+healArcher(50, 30)
+console.log(archer) // health = 110
+```
