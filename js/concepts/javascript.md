@@ -162,7 +162,8 @@ Therefore, it is a server side. It uses the asynchronous code using worker threa
 
 # Execution Context
 Javascript will always be on the global execution context. This will give us
-global object and this keyword
+global object and this keyword, arguments and also the variable environment.
+Each execution context has its own variable environment
 
 # Lexical Environment / Lexical Scope / Lexical Analysis
 In javascript our lexical scope (available data + variables where the function was defined)
@@ -183,5 +184,18 @@ var sing2 = function() {
 // function declaration
 function sing() {
     console.log('I will sing')
+}
+```
+
+# Scope Chain
+It links or chains to its parent variable, environment.
+eval() and with() because it has issues with scope and changes how the scope works.
+
+# Leakage of the global variable
+
+```javascript
+function wierd() {
+    height = 50;
+    return height;
 }
 ```
