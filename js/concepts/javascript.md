@@ -192,10 +192,37 @@ It links or chains to its parent variable, environment.
 eval() and with() because it has issues with scope and changes how the scope works.
 
 # Leakage of the global variable
+Use strict fixes the leakage of the global variable
 
 ```javascript
+'use strict'
+
 function wierd() {
     height = 50;
     return height;
 }
+
+wierd()
+```
+
+# Function Scope vs Block Scope
+
+* Function Scope
+secret can be accessed
+```javascript
+if (5 < 4) {
+    var secret = '12345'
+}
+
+secret;
+```
+
+* Block Scope
+secret can be accessed
+```javascript
+if (5 < 4) {
+    let secret = '12345'
+}
+
+secret;
 ```
