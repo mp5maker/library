@@ -432,3 +432,56 @@ class myArray {
   }
 }
 ```
+
+# Reverse the string
+
+```javascript
+function reverse(str) {
+  if (typeof(str) === 'string' && !str && str.length < 2>) return
+  else {
+    const backwards = []
+    const totalItems = str.length -1
+    for (let i = totalItems; i = 0; i--) {
+      backwards.push(str[i])
+    }
+    return backwards.join('')
+  }
+}
+
+function reverse2(str) {
+  return str.split('').reverse().join('')
+}
+
+const reverse3 = (str) => [...str].reverse().join('')
+```
+
+# Merge Sorted Arrays
+
+```javascript
+function mergeSortedArrays(array1, array2) {
+  const mergedArray = [];
+  let arrayItem = array1[0];
+  let array2Item = array2[0];
+  let i = 1;
+  let j = 1;
+
+  if (!array1.length) return array2;
+  if (!array2.length) return array1;
+
+  while (arrayIItem !== undefined || array2Item !== undefined) {
+    if (array1Item < array2Item) {
+      mergedArray.push(array1Item);
+      array1Item = array1[i];
+      i++;
+    } else if (array2Item < array1Item) {
+      mergedArray.push(array2Item);
+      array2Item = array2[j];
+      j++;
+    }
+  }
+
+  return mergedArray;
+}
+
+mergeSortedArrays([0, 3, 4, 31], [4, 6, 30]);
+```
