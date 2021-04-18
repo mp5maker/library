@@ -371,3 +371,64 @@ Storage
 
 > Persistent
 > It is slow
+
+# Arrays
+
+It is sometimes called as list.
+
+```javascript
+const strings = ["a", "b", "c", "d"];
+// 4*4 = 16 bytes of storage [32 bit]
+
+// push
+strings.push("e"); // O(1)
+
+// pop
+strings.pop(); // O(1)
+
+// unshift
+strings.unshift("x"); // O(n)
+
+// splice
+strings.splice(2, 0, "alien"); // O(n)
+```
+
+# Build an array
+
+```javascript
+class myArray {
+  constructor() {
+    this.length = 0;
+    this.data = {};
+  }
+
+  get(index) {
+    return this.data[index];
+  }
+
+  push(item) {
+    this.data[this.length] = item;
+    return this.length++;
+  }
+
+  pop() {
+    const data = this.data[this.length - 1];
+    delete this.data[this.length - 1];
+    this.length--;
+    return data;
+  }
+
+  delete(index) {
+    const item = this.data[index];
+    this.shiftItems(index);
+  }
+
+  shiftItems(index) {
+    for (let i = index; i < this.length - 1; i++) {
+      this.data[i] = this.data[i + 1];
+    }
+    delete this.data[this.length - 1];
+    this.length--;
+  }
+}
+```
