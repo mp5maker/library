@@ -688,3 +688,51 @@ ohno.totalPeaceTime() // 0
 ```
 
 # Prototypes
+
+    Object
+
+Array Function
+
+Array is chained to object
+Function is chained to object
+
+```javascript
+const array = [];
+console.log(array.__proto__); // It goes up the prototype chain (Array)
+console.log(array.__proto__.__proto__); // It goes up to the prototype chain (Object)
+```
+
+# Proto
+
+**proto** links to prototype
+Do not manually set **proto** bad for compilation
+Proto is one of the property in the prototype
+
+```javascript
+let dragon = {
+  name: "Tanya",
+  fire: true,
+  fight() {
+    return 5;
+  },
+  sing() {
+    if (this.fire) {
+      return `I am ${this.name}, the breather of fire`;
+    }
+  },
+};
+
+let lizard = {
+  name: "Kiki",
+  fight() {
+    return 1;
+  },
+};
+lizard.__proto__ = dragon;
+lizard.isPrototypeOf(dragon); // true
+for (let prop in lizard) {
+  if (lizard.hasOwnProperty(prop)) {
+    console.log(prop);
+  }
+}
+```
