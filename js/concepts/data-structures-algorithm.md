@@ -395,6 +395,18 @@ strings.splice(2, 0, "alien"); // O(n)
 
 # Build an array
 
+<!-- Pros -->
+
+Fast Lookups
+Fast push/pop
+Ordered
+
+<!-- Cons -->
+
+Slow inserts
+Slow deletes
+Fixed size (if using static array)
+
 ```javascript
 class myArray {
   constructor() {
@@ -484,4 +496,92 @@ function mergeSortedArrays(array1, array2) {
 }
 
 mergeSortedArrays([0, 3, 4, 31], [4, 6, 30]);
+```
+
+# Hash Tables
+
+Objects are type of a hash tables
+
+```javascript
+class HashTable {
+  constructor(size) {
+    this.data = new Array(size);
+  }
+
+  _hash(key) {
+    let hash = 0;
+    for (let i = 0; i < key.length; i++) {
+      hash = (hash + key.charCodeAt(i) * i) % this.data.length;
+    }
+    return hash;
+  }
+
+  set(key, value) {
+    let address = this._hash(key);
+    if (!this.data[address]) {
+      this.data[address] = [];
+    }
+    this.data[address].push([key, value]);
+    return this.data;
+  }
+
+  get(key) {
+    let address = this._hash(key);
+    const currentBucket = this.data[address];
+    if (currentBucket) {
+      for (let i = 0; i < currentBucket.length; i++) {
+        if (currentBucket[i][0] == key) {
+          return currentBuck[i][1];
+        }
+      }
+    }
+    return undefined;
+  }
+
+  keys() {
+    const keysArray = [];
+    for (let i = 0; i < this.data.length; i++) {
+      if (this.data[i]) {
+        for (let j = 0; j < this.data[i].length; j++) {
+          const key = this.data[i][j][0];
+          keysArray.push(key);
+        }
+      }
+    }
+    return keysArray;
+  }
+}
+
+const myHash = new HashTable(50);
+myHashTable.set("grapes", 10000);
+myHashTable.set("apples", 54);
+myHashTable.set("oranges", 2);
+```
+
+# Hash Collisions
+
+When we have limited space the data gets stored in the same address as some other data stored in it
+
+# Map and Sets
+
+In object we can only use **strings** for **key**.
+By using **Map** or **Set** we can use anythings as key. eg: Function, Array
+**Map** maintains the order of the insertion
+**Set** only saves the keys
+
+```javascript
+let user = {
+  age: 54,
+  name: "Kylie",
+  magic: true,
+  scream: function () {
+    console.log("aaaah");
+  },
+};
+
+user.age; // 0(1)
+user.spell = "abra kadabra"; // O(1)
+user.scream(); // 0(1)
+
+const a = new Map();
 ```
