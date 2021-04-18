@@ -564,6 +564,127 @@ const three = function () {
 three.call();
 
 // Fourth Way
-const four = new Function('num', 'return num')
-four(4)
+const four = new Function("num", "return num");
+four(4);
 ```
+
+# Functions
+
+Functions are first class citizen in Javascript
+
+```javascript
+var stuff = function () {};
+function a(fn) {
+  fn();
+}
+function b() {
+  return function c() {
+    console.log("bye");
+  };
+}
+```
+
+# Higher Order Function
+
+It lets functions as a parameter
+
+```javascript
+const giveAccessTo = (name) => `Access Granted to ${name}`;
+function authenticate(verify) {
+  let array = [];
+  for (let i = 0; i < verify; i++) {
+    array.push(i);
+  }
+  return true;
+}
+
+function letPerson(person, fn) {
+  if (person.level == "admin") {
+    fn(50000);
+  } else if (person.level === "user") {
+    fn(10000);
+  }
+  return giveAccessTo(person.name);
+}
+
+letPerson({ level: "admin", name: "Sally" }, authenticate);
+```
+
+```javascript
+const multiplyBy = function (num1) {
+  return function (num2) {
+    return num1 * num2;
+  };
+};
+
+const multiplyByTwo = multiplyBy(2);
+multiplyByTwo(4);
+```
+
+# Closures
+
+It is a special case for the closures, the variables are not garbage collected.
+They are very memory effficient and allows encapsulation
+
+```javascript
+function a() {
+  let grandpa = "grandpa";
+  return function b() {
+    let father = "father";
+    return function c() {
+      let son = "son";
+      return `${grandpa} ${father} ${son}`;
+    };
+  };
+}
+```
+
+Checking Memory Efficient
+
+```javascript
+// Not Optimized Code
+const heavyDuty(index) {
+    const bigArray = new Array(7000).fill('ok')
+    console.log('created')
+    return bigArray[index]
+}
+
+heavyDuty(688)
+heavyDuty(688)
+heavyDuty(688)
+heavyDuty(688)
+
+// Optimized Code
+function heavyDuty2() {
+    const bigArray = new Arrray(7000).fill('ok')
+    console.log('created again')
+    return function(index) {
+        return bigArray[index]
+    }
+}
+
+heavyDuty2(688)
+heavyDuty2(688)
+heavyDuty2(688)
+heavyDuty2(688)
+```
+
+Checking Encapsulation
+
+```javascript
+const makeNuclearButton = () => {
+    let timeWithoutDestruction = 0
+    const passTime = () => timeWithoutDestruction++;
+    const totalPeaceTime = () => timeWithoutDestruction
+    const launch = () => return 'fire'
+    setInterval(passTime, 1000)
+    return {
+        launch,
+        totalPeaceTime
+    }
+}
+const ohNo = makeNuclearButton()
+ohno.totalPeaceTime() // 0
+```
+
+# Prototypes
