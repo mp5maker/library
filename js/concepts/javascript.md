@@ -509,5 +509,30 @@ console.log(obj2.password); // easypasy
 Samething happens for arrays
 
 ```javascript
-var c = [1, 2, 3, 4, 5];
+let c = [1, 2, 3, 4, 5];
+let d = c;
+d.push(6);
+console.log(c); // [1,2,3,4,5,6]
+console.log(d); // [1,2,3,4,5,6]
+```
+
+# Shallow and Deep Cloning
+
+```javascript
+let obj = { a: "a", b: "b", c: "c", d: {
+    deep: 'try and copy me'
+} };
+let clone = Object.assign({}, obj); // Shallow Clone
+let cloneTwo = { ...obj }; // Shallow Clone
+let superClone = JSON.parse(JSON.stringify(obj)) // Deep Clone and has performance issue
+```
+
+# Type Coersion
+Double Equality changes the type for values
+
+```javascript
+1 == '1' // true
+Object.is(-0, +0) // false
+Object.is(NaN, NaN) // true
+
 ```
