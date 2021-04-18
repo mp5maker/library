@@ -636,7 +636,7 @@ function firstRecurringCharacter2(input) {
 firstRecurringCharacter2([2, 5, 1, 2, 3, 5, 1, 2, 4]);
 ```
 
-# Linked List
+# Singly Linked List
 
 It is a list that is linked.
 Singly Linked list has linked nodes
@@ -706,3 +706,62 @@ class LinkedList {
 
 const myLinkedList = new LinkedList(10);
 ```
+
+# Double Linked List
+
+```javascript
+class Node {
+  constructor(value) {
+    this.value = value;
+    this.next = null;
+    this.previous = null;
+  }
+}
+
+class DoubleLinkedList {
+  constructor(value) {
+    this.head = new Node(value);
+    this.tail = this.head;
+    this.length = 1;
+  }
+
+  append(value) {
+    const newNode = new Node(value);
+    newNode.previous = this.tail;
+    this.tail.next = newNode;
+    this.tail.value = value;
+    this.tail = newNode;
+    this.length++;
+    return this;
+  }
+
+  prepend(value) {
+    const newNode = new Node(value);
+    newNode.next = this.head;
+    this.head.previous = newNode;
+    this.head = newNode;
+    this.length++;
+    return this;
+  }
+
+  reverse() {
+    if (!this.head.next) {
+      return this.head
+    }
+    let first = this.head
+    let second = first.next
+    while(second) {
+      const temp = second.next
+      second.next = first
+      first = second
+      second = temp
+    }
+  }
+}
+```
+
+# Singly vs Doubly Linked List
+
+Singly list is used when the memory is less
+and it can be searched only in one direction
+Doubly list can be traversed backward
