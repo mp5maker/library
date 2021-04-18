@@ -635,3 +635,74 @@ function firstRecurringCharacter2(input) {
 
 firstRecurringCharacter2([2, 5, 1, 2, 3, 5, 1, 2, 4]);
 ```
+
+# Linked List
+
+It is a list that is linked.
+Singly Linked list has linked nodes
+First node is called head
+Last node is called tail
+At the end of the list it points to null pointer
+
+```javascript
+class Node {
+  constructor(value) {
+    this.value = value;
+    this.next = null;
+  }
+}
+
+class LinkedList {
+  constructor(value) {
+    this.head = new Node(value);
+    this.tail = this.head;
+    this.length = 1;
+  }
+
+  append(value) {
+    const newNode = new Node(value);
+    this.tail.next = newNode;
+    this.tail = newNode;
+    this.length++;
+    return this;
+  }
+
+  prepend(value) {
+    const newNode = new newNode(value);
+    newNode.next = this.head;
+    this.head = newNode;
+    this.length++;
+    return this;
+  }
+
+  insert(index, value) {
+    if (index >= this.length) {
+      return this.append(value);
+    } else {
+      let i = 0;
+      const newHead = this.head;
+      while (i !== index) {
+        newHead = newHead.next;
+        i++;
+      }
+      newHead.next = newHead;
+      newHead.value = value;
+      this.length++;
+      return this;
+    }
+  }
+
+  remove(index) {
+    let i = 0;
+    const newHead = this.head;
+    while (i !== index - 1) {
+      newHead = newHead.next;
+      i++;
+    }
+    newHead.next = newHead.next.next;
+    this.length--;
+  }
+}
+
+const myLinkedList = new LinkedList(10);
+```
