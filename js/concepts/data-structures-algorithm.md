@@ -82,11 +82,156 @@ function anotherFunChallenge(input) {
     let z = i + 3; // O(n)
   }
   for (let j = 0; j < input; j++) {
-    let p = j*2; // O(n)
-    let q = j *2; // O(n)
+    let p = j * 2; // O(n)
+    let q = j * 2; // O(n)
   }
-  let whoAmI = "I don't know" // O(1)
+  let whoAmI = "I don't know"; // O(1)
 }
 
-BIG O(4 + 5n)
+// BIG O(4 + 5n)
+```
+
+We always care about the worst case scenario
+Drop the constants
+Drop non dominant terms
+
+```javascript
+const everyone = [
+  "dory",
+  "bruce",
+  "marlin",
+  "nemo",
+  "gill",
+  "bloat",
+  "nigel",
+  "squirt",
+  "darla",
+  "hank",
+];
+const large = new Array(10000000).fill("hero");
+
+function findNemo(array) {
+  let t0 = performance.now();
+  for (let i = 0; i < array.length; i++) {
+    if (array[i] == "nemo") {
+      console.log("FOUND NEMO");
+      break;
+    }
+  }
+  let t1 = performanc.now();
+  console.log(t1 - t0);
+}
+
+findNemo([...large, ...everyone]);
+```
+
+```javascript
+function printfistItemThenFirstHalfThenSayHi100Times(items) {
+  console.log(items[0]); // O(1)
+  var middleIndex = Math.floor(items.length / 2); // O(1)
+  var index = 0; // O(1)
+
+  // O(n/2)
+  while (index < middleIndex) {
+    console.log(items[index]);
+    index++;
+  }
+
+  // O(100)
+  for (var i = 0; i < 100; i++) {
+    console.log("hi");
+  }
+}
+// Big O(n/2)
+```
+
+```javascript
+function compressBoxesTwice(boxes1, boxes2) {
+  boxes1.forEach(function (boxes) {
+    console.log(boxes);
+  });
+
+  boxes2.forEach(function (boxes) {
+    console.log(boxes);
+  });
+}
+
+// Big O(a + b)
+```
+
+```javascript
+const boxes = [1, 2, 3, 4, 5];
+function logAllPairsOfArray(array) {
+  for (let i = 0; i < array.length; i++) {
+    for (let j = 0; j < array.length; j++) {
+      console.log(i, j);
+    }
+  }
+}
+console.log(logAllPairsOfArray(boxes));
+// Big O(n^2)
+```
+
+```javascript
+function printAllNumbersThenAllPairSums(numbers) {
+  console.log("there are the numbers:"); // O(1)
+  // O(n)
+  numbers.forEach(function (number) {
+    console.log(number);
+  });
+  console.log("and there are their sums:");
+  // O(n)
+  numbers.forEach(function (firstNumber) {
+    // O(n)
+    numbers.forEach(function (secondNumber) {
+      console.log(firstNumber + secondNumber);
+    });
+  });
+}
+
+printAllNumbersThenAllPairSums([1, 2, 3, 4, 5]);
+// Big O(1 + n + n^2) = Big O(n^2)
+```
+
+# Programs
+
+Data Structures + Algorithms = Programs
+
+# O(n!)
+
+```javascript
+// O(n!), adding a loop for every loop
+```
+
+# What is a good code?
+
+1. Readable (Maintainable)
+2. Scalable
+   Scalable depends on speed (Time Complexity) and memory (Space Complexity)
+
+# What cause space complexity
+1. Variables
+2. Data Structures
+3. Function Call
+4. Allocations
+
+```javascript
+function boooo(n) {
+  for (let i = 0; i < n.length; i++) {
+    console.log('booo!')
+  }
+}
+
+console.log(booo([1,2,3,4,5])) // Space Complexity O(1), Time Complexity O(n)
+```
+
+```javascript
+function arrayOfHiNTimes(n) {
+  let hiArray = [];
+  for (let i = 0; i < n; i++) {
+    hiArray[i] = 'hi'
+  }
+  return hiArray
+}
+console.log(arrayHiNTimes(6)) // Space Complexity O(1), Time Complexty O(n)
 ```
