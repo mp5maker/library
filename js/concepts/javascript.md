@@ -736,3 +736,30 @@ for (let prop in lizard) {
   }
 }
 ```
+
+# Prototypal Inheritance
+
+```javascript
+const human = {
+  mortal: true,
+};
+let socrates = Object.create(human);
+socrates.age = 45;
+console.log(human.isPrototypeOf(socrates)); // true
+```
+
+```javascript
+Date.prototype.lastYear = function () {
+  return this.getFullYear() - 1;
+};
+new Date("1988-10-10").lastYear(); // 1987
+
+Array.prototype.map = function () {
+  let arr = [];
+  for (let i = 0; i < this.length; i++) {
+    arr.push(this[i] + "ok");
+  }
+  return arr;
+};
+console.log([1, 2, 3].map()); // 1ok, 2ok, 3ok
+```
