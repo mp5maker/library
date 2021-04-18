@@ -746,15 +746,15 @@ class DoubleLinkedList {
 
   reverse() {
     if (!this.head.next) {
-      return this.head
+      return this.head;
     }
-    let first = this.head
-    let second = first.next
-    while(second) {
-      const temp = second.next
-      second.next = first
-      first = second
-      second = temp
+    let first = this.head;
+    let second = first.next;
+    while (second) {
+      const temp = second.next;
+      second.next = first;
+      first = second;
+      second = temp;
     }
   }
 }
@@ -765,3 +765,15 @@ class DoubleLinkedList {
 Singly list is used when the memory is less
 and it can be searched only in one direction
 Doubly list can be traversed backward
+
+<!-- Pros -->
+
+Fast Insertion
+Fast Deletion
+Ordered
+Flexible Size
+
+<!-- Cons -->
+
+Slow Lookup
+More Memory
