@@ -501,6 +501,18 @@ mergeSortedArrays([0, 3, 4, 31], [4, 6, 30]);
 # Hash Tables
 
 Objects are type of a hash tables
+The keys are not ordered
+
+<!-- Pros -->
+
+Fast lookups
+Fast inserts
+Flexible keys
+
+<!-- Cons -->
+
+Slow key iterations
+Unordered
 
 ```javascript
 class HashTable {
@@ -584,4 +596,42 @@ user.spell = "abra kadabra"; // O(1)
 user.scream(); // 0(1)
 
 const a = new Map();
+```
+
+# Given an array tell me the first recurring character
+
+<!-- Given array = [2, 5, 1, 2, 3,5,1,2,4]
+It should return 2 -->
+
+<!-- Given array = [2, 51, 1, 2, 3,5,1,2,4]
+It should return 1 -->
+
+<!-- Given array = [2,3,4,5]
+It should return undefined -->
+
+```javascript
+function firstRecurringCharacter(input) {
+  for (let i = 0; i < input.length; i++) {
+    for (let j = i + 1; j < input.length; j++) {
+      if (input[i] === input[j]) return input[i];
+    }
+  }
+  return undefined;
+}
+
+firstRecurringCharacter([2, 5, 1, 2, 3, 5, 1, 2, 4]);
+```
+
+```javascript
+function firstRecurringCharacter2(input) {
+  let map = {};
+  for (let i = 0; i < input.length; i++) {
+    if (map[input[i]] !== undefined) {
+      return input[i];
+    }
+    map[input[i]] = true;
+  }
+}
+
+firstRecurringCharacter2([2, 5, 1, 2, 3, 5, 1, 2, 4]);
 ```
