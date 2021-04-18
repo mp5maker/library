@@ -210,6 +210,7 @@ Data Structures + Algorithms = Programs
    Scalable depends on speed (Time Complexity) and memory (Space Complexity)
 
 # What cause space complexity
+
 1. Variables
 2. Data Structures
 3. Function Call
@@ -218,20 +219,119 @@ Data Structures + Algorithms = Programs
 ```javascript
 function boooo(n) {
   for (let i = 0; i < n.length; i++) {
-    console.log('booo!')
+    console.log("booo!");
   }
 }
 
-console.log(booo([1,2,3,4,5])) // Space Complexity O(1), Time Complexity O(n)
+console.log(booo([1, 2, 3, 4, 5])); // Space Complexity O(1), Time Complexity O(n)
 ```
 
 ```javascript
 function arrayOfHiNTimes(n) {
   let hiArray = [];
   for (let i = 0; i < n; i++) {
-    hiArray[i] = 'hi'
+    hiArray[i] = "hi";
   }
-  return hiArray
+  return hiArray;
 }
-console.log(arrayHiNTimes(6)) // Space Complexity O(1), Time Complexty O(n)
+console.log(arrayHiNTimes(6)); // Space Complexity O(1), Time Complexty O(n)
+```
+
+```javascript
+const array = [
+  { tweet: "hi", date: 2012 },
+  { tweet: "my", date: 2014 },
+  { tweet: "teddy", date: 2018 },
+];
+console.log(array[0]); // O(1)
+console.log(arrray[array.length - 1]); // O(1)
+```
+
+Comparing dates of the above example will be O(n^2)
+
+# Data structures
+
+Collection of values, algorithms, steps, allows us to write great programs.
+
+# List of Data Structures (needed for basics)
+
+> Arrays
+> Stacks
+> Queues
+> Linked Lists
+> Trees
+> Tries
+> Graph
+> Hash Tables
+
+# List of Algorithms (needed for basics)
+
+> Sorting
+> Dynamic Programming
+> BFS + DFS (Searching)
+> Recursion
+
+# Given 2 arrays, create a function that let's a user know (true/false) whether these two arrays contain any common items
+
+```javascript
+// Example:
+const array1 = ["a", "b", "x"];
+const array2 = ["x", "y", "z"];
+// true
+
+// Example:
+const array3 = ["a", "b", "c"];
+const array4 = ["x", "y", "z"];
+// false
+
+// Easy answer
+function containsCommonItem(arr1, arr2) {
+  for (let i = 0; i < arr1.length; i++) {
+    for (let j = 0; j < arr2.length; j++) {
+      if (arr1[i] == arr2[j]) {
+        return true;
+      }
+    }
+  }
+}
+// O(a * b)
+// O(1) - space complexity
+// This is not the best approach
+```
+
+Improved solution
+
+```javascript
+const array1 = ["a", "b", "x"];
+const array2 = ["x", "y", "z"];
+
+function containsCommonItem2(arr1, arr2) {
+  // loop through first array and create object where properties === items in the array
+  let map = {}
+  // O(n)
+  for (let i = 0 i < arr1.length; i++) {
+    const item = array[i]
+    if(!map[item]) {
+      map[item] = true
+    }
+  }
+  console.log(map)
+  // loop through second array and check if item in second array exists on crreated object. O(n)
+  for (let j = 0; j < arr2.length; j++) {
+    const item = arr2[j]
+    if  (map[item]) {
+      return true;
+      break;
+    }
+  }
+  return false
+}
+// O (a + b) // Time complexity is better
+// O(a)  == Spacie Complexity
+containsCommonItems2(array1, array2)
+```
+
+```javascript
+const containsCommonItem3 = (arr1, arr2) =>
+  arr1.some((item) => arr2.includes(item));
 ```
