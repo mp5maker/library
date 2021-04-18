@@ -327,7 +327,7 @@ function containsCommonItem2(arr1, arr2) {
   return false
 }
 // O (a + b) // Time complexity is better
-// O(a)  == Spacie Complexity
+// O(a)  == Space Complexity
 containsCommonItems2(array1, array2)
 ```
 
@@ -335,3 +335,39 @@ containsCommonItems2(array1, array2)
 const containsCommonItem3 = (arr1, arr2) =>
   arr1.some((item) => arr2.includes(item));
 ```
+
+# Find out whether has pair with sum 2
+
+```javascript
+function hasPairWithSum2(arr, num) {
+  const length = arr.length;
+  const set = new Set();
+  for (let i = 0; i < length; i++) {
+    if (set.has(arr[i])) {
+      return true;
+    }
+    set.add(sum - arr[i]);
+  }
+  return false;
+}
+```
+
+# Data structures
+
+It is a collection of values.
+
+Central Processing Unit
+
+> It does all the calculation
+> Works faster with ram
+> It has a cache and holds very few and tiny memory
+
+Random Access Memory
+
+> stores the variables
+> 8 bit is 1 byte
+
+Storage
+
+> Persistent
+> It is slow
