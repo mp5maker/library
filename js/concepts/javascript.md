@@ -519,20 +519,51 @@ console.log(d); // [1,2,3,4,5,6]
 # Shallow and Deep Cloning
 
 ```javascript
-let obj = { a: "a", b: "b", c: "c", d: {
-    deep: 'try and copy me'
-} };
+let obj = {
+  a: "a",
+  b: "b",
+  c: "c",
+  d: {
+    deep: "try and copy me",
+  },
+};
 let clone = Object.assign({}, obj); // Shallow Clone
 let cloneTwo = { ...obj }; // Shallow Clone
-let superClone = JSON.parse(JSON.stringify(obj)) // Deep Clone and has performance issue
+let superClone = JSON.parse(JSON.stringify(obj)); // Deep Clone and has performance issue
 ```
 
 # Type Coersion
+
 Double Equality changes the type for values
 
 ```javascript
-1 == '1' // true
-Object.is(-0, +0) // false
-Object.is(NaN, NaN) // true
+1 == "1"; // true
+Object.is(-0, +0); // false
+Object.is(NaN, NaN); // true
+```
 
+# Types of Function
+
+```javascript
+// First Way
+const one = function () {
+  return 1;
+};
+one();
+
+// Second Way
+const obj = {
+  two: () => 2,
+};
+obj.two();
+
+// Third Way
+const three = function () {
+  return 1;
+};
+three.call();
+
+// Fourth Way
+const four = new Function('num', 'return num')
+four(4)
 ```
