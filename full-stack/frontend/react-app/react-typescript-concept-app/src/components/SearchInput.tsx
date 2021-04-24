@@ -1,11 +1,19 @@
 import * as React from "react";
+import useDebounce from "../hooks/useDebounce";
 
 export interface ISearchInputProps {
   setSearchQuery: (searchQuery: string) => void;
 }
 
 export function SearchInput(props: ISearchInputProps) {
+  const [query, setQuery] = React.useState<string>("");
   const { setSearchQuery } = props;
+  const debouncedQuery = useDebounce(query, 250);
+
+  React.useEffect(() => {
+    setSearchQuery(debouncedQuery);
+  }, [debouncedQuery]);
+
   return (
     <>
       <label htmlFor="search" className="mt-3">
@@ -17,7 +25,7 @@ export function SearchInput(props: ISearchInputProps) {
         type="search"
         placeholder="Search..."
         aria-label="Search"
-        onChange={(event) => setSearchQuery(event.target.value)}
+        onChange={(event) => setQuery(event.target.value)}
       />
     </>
   );
