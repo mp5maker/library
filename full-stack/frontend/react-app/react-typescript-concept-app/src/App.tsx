@@ -17,9 +17,11 @@ function App() {
   const [query, setSearchQuery] = React.useState<string>("");
   const [widgetSort, setWidgetSort] = React.useState<IProperty<IWidget>>({
     property: "title",
+    isDescending: false,
   });
   const [peopleSort, setPeopleSort] = React.useState<IProperty<IPerson>>({
     property: "firstName",
+    isDescending: false,
   });
 
   return (
@@ -30,13 +32,17 @@ function App() {
         </div>
         <div>
           <Sorters
-            setProperty={(property) => setWidgetSort({ property })}
+            setProperty={(property) =>
+              setWidgetSort({ property, isDescending: false })
+            }
             object={widgets[0]}
           />
         </div>
         <div>
           <Sorters
-            setProperty={(property) => setPeopleSort({ property })}
+            setProperty={(property) =>
+              setPeopleSort({ property, isDescending: false })
+            }
             object={people[0]}
           />
         </div>
@@ -50,7 +56,12 @@ function App() {
           .filter((widget) =>
             genericSearch(widget, ["title", "description"], query)
           )
-          .sort((a, b) => genericSort(a, b, widgetSort.property))
+          .sort((a, b) =>
+            genericSort(a, b, {
+              property: widgetSort.property,
+              isDescending: false,
+            })
+          )
           .map((widget) => {
             const id = get(widget, "id", "");
             return <WidgetRenderer key={id} {...widget} />;
@@ -64,7 +75,12 @@ function App() {
           .filter((widget) =>
             genericSearch(widget, ["firstName", "lastName", "eyeColor"], query)
           )
-          .sort((a, b) => genericSort(a, b, peopleSort.property))
+          .sort((a, b) =>
+            genericSort(a, b, {
+              property: peopleSort.property,
+              isDescending: false,
+            })
+          )
           .map((person, index) => {
             return <PeopleRenderer key={index} {...person} />;
           })}
