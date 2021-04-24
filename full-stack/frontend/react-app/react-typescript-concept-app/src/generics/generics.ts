@@ -1,6 +1,6 @@
 // First Lesson
 
-interface IFooBar {
+export default interface IFooBar {
   foo: string;
   bar: string;
 }

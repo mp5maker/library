@@ -1,25 +1,30 @@
-import React from 'react';
-import logo from './logo.svg';
-import './App.css';
+import React from "react";
+import "./App.css";
+import widgets from "./mock-data/widgets";
+import get from "lodash/get";
+import people from "./mock-data/people";
 
 function App() {
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.tsx</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
+    <>
+      <div>
+        <h2> Widgets</h2>
+        {widgets.map((widget) => {
+          const id = get(widget, "id", "");
+          return <p key={String(id)}>{widget.title}</p>;
+        })}
+      </div>
+      <div>
+        <h2> People</h2>
+        {people.map((person, index) => {
+          return (
+            <p key={String(index)}>
+              {person.firstName} {person.lastName}
+            </p>
+          );
+        })}
+      </div>
+    </>
   );
 }
 
