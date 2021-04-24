@@ -12,6 +12,8 @@ import IPerson from "./interfaces/IPerson";
 import Sorters from "./components/Sorters";
 import { WidgetRenderer } from "./components/renderers/WidgetRenderer";
 import { PeopleRenderer } from "./components/renderers/PeopleRenderer";
+import genericFilter from "./utilities/genericFilter";
+import { Filters } from "./components/Filters";
 
 function App() {
   const [query, setSearchQuery] = React.useState<string>("");
@@ -23,6 +25,12 @@ function App() {
     property: "firstName",
     isDescending: false,
   });
+  const [widgetFilterProperties, setWidgetFilterProperties] = React.useState<
+    Array<keyof IWidget>
+  >([]);
+  const [personFilterProperties, setPersonFilterProperties] = React.useState<
+    Array<keyof IPerson>
+  >([]);
 
   return (
     <>
@@ -46,6 +54,44 @@ function App() {
             object={people[0]}
           />
         </div>
+        <div>
+          <Filters
+            properties={widgetFilterProperties}
+            object={widgets[0]}
+            onChangeFilter={(property) =>
+              widgetFilterProperties.includes(property)
+                ? setWidgetFilterProperties([
+                    ...widgetFilterProperties.filter(
+                      (widgetFilterProperty) =>
+                        widgetFilterProperty !== property
+                    ),
+                  ])
+                : setWidgetFilterProperties([
+                    ...widgetFilterProperties,
+                    property,
+                  ])
+            }
+          />
+        </div>
+        <div>
+          <Filters
+            properties={personFilterProperties}
+            object={people[0]}
+            onChangeFilter={(property) =>
+              personFilterProperties.includes(property)
+                ? setPersonFilterProperties([
+                    ...personFilterProperties.filter(
+                      (personFilterProperty) =>
+                        personFilterProperty !== property
+                    ),
+                  ])
+                : setPersonFilterProperties([
+                    ...personFilterProperties,
+                    property,
+                  ])
+            }
+          />
+        </div>
       </div>
 
       <div>
@@ -56,6 +102,7 @@ function App() {
           .filter((widget) =>
             genericSearch(widget, ["title", "description"], query)
           )
+          .filter((widget) => genericFilter(widget, widgetFilterProperties))
           .sort((a, b) =>
             genericSort(a, b, {
               property: widgetSort.property,
@@ -75,6 +122,7 @@ function App() {
           .filter((widget) =>
             genericSearch(widget, ["firstName", "lastName", "eyeColor"], query)
           )
+          .filter((widget) => genericFilter(widget, personFilterProperties))
           .sort((a, b) =>
             genericSort(a, b, {
               property: peopleSort.property,
