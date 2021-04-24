@@ -12,7 +12,7 @@ export function SearchInput(props: ISearchInputProps) {
 
   React.useEffect(() => {
     setSearchQuery(debouncedQuery);
-  }, [debouncedQuery]);
+  }, [debouncedQuery, setSearchQuery]);
 
   return (
     <>

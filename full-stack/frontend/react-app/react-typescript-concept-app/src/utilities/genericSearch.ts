@@ -6,11 +6,11 @@ export default function genericSearch<T>(
   query: string,
   shouldBeCaseSensitive: boolean = false
 ): boolean {
-  if (query == "") return true;
+  if (query === "") return true;
 
   return properties.some((property) => {
     const value = get(object, property, "");
-    if (typeof value == "string" || typeof value == "number") {
+    if (typeof value === "string" || typeof value === "number") {
       if (shouldBeCaseSensitive) {
         return value.toString().includes(query);
       }
