@@ -10,6 +10,7 @@ import IWidget from "./interfaces/IWidget";
 import genericSort from "./utilities/genericSort";
 import IPerson from "./interfaces/IPerson";
 import Sorters from "./components/Sorters";
+import { WidgetRenderer } from "./components/renderers/WidgetRenderer";
 
 function App() {
   const [query, setSearchQuery] = React.useState<string>("");
@@ -49,7 +50,7 @@ function App() {
           .sort((a, b) => genericSort(a, b, widgetSort.property))
           .map((widget) => {
             const id = get(widget, "id", "");
-            return <p key={String(id)}>{widget.title}</p>;
+            return <WidgetRenderer key={id} {...widget} />;
           })}
       </div>
       <div>
