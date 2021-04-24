@@ -14,6 +14,7 @@ import { WidgetRenderer } from "./components/renderers/WidgetRenderer";
 import { PeopleRenderer } from "./components/renderers/PeopleRenderer";
 import genericFilter from "./utilities/genericFilter";
 import { Filters } from "./components/Filters";
+import List from "./components/List";
 
 function App() {
   const [query, setSearchQuery] = React.useState<string>("");
@@ -31,6 +32,28 @@ function App() {
   const [personFilterProperties, setPersonFilterProperties] = React.useState<
     Array<keyof IPerson>
   >([]);
+
+  const widgetList = widgets
+    .filter((widget) => genericSearch(widget, ["title", "description"], query))
+    .filter((widget) => genericFilter(widget, widgetFilterProperties))
+    .sort((a, b) =>
+      genericSort(a, b, {
+        property: widgetSort.property,
+        isDescending: false,
+      })
+    );
+
+  const peopleList = people
+    .filter((widget) =>
+      genericSearch(widget, ["firstName", "lastName", "eyeColor"], query)
+    )
+    .filter((widget) => genericFilter(widget, personFilterProperties))
+    .sort((a, b) =>
+      genericSort(a, b, {
+        property: peopleSort.property,
+        isDescending: false,
+      })
+    );
 
   return (
     <>
@@ -98,40 +121,13 @@ function App() {
         <div className={"p-3"}>
           <h2> Widgets</h2>
         </div>
-        {widgets
-          .filter((widget) =>
-            genericSearch(widget, ["title", "description"], query)
-          )
-          .filter((widget) => genericFilter(widget, widgetFilterProperties))
-          .sort((a, b) =>
-            genericSort(a, b, {
-              property: widgetSort.property,
-              isDescending: false,
-            })
-          )
-          .map((widget) => {
-            const id = get(widget, "id", "");
-            return <WidgetRenderer key={id} {...widget} />;
-          })}
+        <List data={widgetList}>{(item) => <WidgetRenderer {...item} />}</List>
       </div>
       <div>
         <div className="p-3">
           <h2> People</h2>
         </div>
-        {people
-          .filter((widget) =>
-            genericSearch(widget, ["firstName", "lastName", "eyeColor"], query)
-          )
-          .filter((widget) => genericFilter(widget, personFilterProperties))
-          .sort((a, b) =>
-            genericSort(a, b, {
-              property: peopleSort.property,
-              isDescending: false,
-            })
-          )
-          .map((person, index) => {
-            return <PeopleRenderer key={index} {...person} />;
-          })}
+        <List data={peopleList}>{(item) => <PeopleRenderer {...item} />}</List>
       </div>
     </>
   );
