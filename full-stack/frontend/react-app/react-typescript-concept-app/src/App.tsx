@@ -11,6 +11,7 @@ import genericSort from "./utilities/genericSort";
 import IPerson from "./interfaces/IPerson";
 import Sorters from "./components/Sorters";
 import { WidgetRenderer } from "./components/renderers/WidgetRenderer";
+import { PeopleRenderer } from "./components/renderers/PeopleRenderer";
 
 function App() {
   const [query, setSearchQuery] = React.useState<string>("");
@@ -21,28 +22,30 @@ function App() {
     property: "firstName",
   });
 
-  console.log(widgetSort);
-
   return (
     <>
-      <div>
-        <SearchInput setSearchQuery={setSearchQuery} />
-      </div>
-      <div>
-        <Sorters
-          setProperty={(property) => setWidgetSort({ property })}
-          object={widgets[0]}
-        />
-      </div>
-      <div>
-        <Sorters
-          setProperty={(property) => setPeopleSort({ property })}
-          object={people[0]}
-        />
+      <div className={"p-3"}>
+        <div>
+          <SearchInput setSearchQuery={setSearchQuery} />
+        </div>
+        <div>
+          <Sorters
+            setProperty={(property) => setWidgetSort({ property })}
+            object={widgets[0]}
+          />
+        </div>
+        <div>
+          <Sorters
+            setProperty={(property) => setPeopleSort({ property })}
+            object={people[0]}
+          />
+        </div>
       </div>
 
       <div>
-        <h2> Widgets</h2>
+        <div className={"p-3"}>
+          <h2> Widgets</h2>
+        </div>
         {widgets
           .filter((widget) =>
             genericSearch(widget, ["title", "description"], query)
@@ -54,18 +57,16 @@ function App() {
           })}
       </div>
       <div>
-        <h2> People</h2>
+        <div className="p-3">
+          <h2> People</h2>
+        </div>
         {people
           .filter((widget) =>
             genericSearch(widget, ["firstName", "lastName", "eyeColor"], query)
           )
           .sort((a, b) => genericSort(a, b, peopleSort.property))
           .map((person, index) => {
-            return (
-              <p key={String(index)}>
-                {person.firstName} {person.lastName}
-              </p>
-            );
+            return <PeopleRenderer key={index} {...person} />;
           })}
       </div>
     </>
