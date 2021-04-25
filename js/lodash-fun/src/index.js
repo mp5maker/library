@@ -110,4 +110,12 @@ import _ from "lodash";
   console.log("_.initial");
   const lodashInitial = _.initial(sampleData);
   console.log("lodashInitial", lodashInitial);
+
+  console.log("_.toUpper");
+  const lodashUpper = _.toUpper("aaA");
+  console.log("lodashUpper", lodashUpper);
+
+  console.log("_.toLower");
+  const lodashLower = _.toLower("bbB");
+  console.log("lodashLower", lodashLower);
 })();
