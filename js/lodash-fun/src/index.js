@@ -138,4 +138,30 @@ import _ from "lodash";
   console.log("_.snakeCase");
   const lodashSnakeCase = _.snakeCase("bro-you-go-tit");
   console.log("lodashSnakeCase", lodashSnakeCase);
+
+  console.log("_.random");
+  const lodashRandom = _.random(100);
+  console.log("lodashRandom", lodashRandom);
+
+  console.log("_.flatten");
+  const lodashFlatten = _.flatten([
+    [1, 2],
+    [3, 4],
+  ]);
+  console.log("lodashFlatten", lodashFlatten);
+
+  console.log("_.compact");
+  const lodashCompact = _.compact([1, 2, null, 3, undefined, 0, false, 4, ""]);
+  console.log("lodashCompact", lodashCompact);
+
+  console.log("_.assign");
+  const lodashAssign = _.assign(
+    { isLoading: true, data: null, error: null },
+    { isLoading: false, data: { id: 1, name: "John" } }
+  );
+  console.log("lodashAssign", lodashAssign);
+
+  console.log("_.clone");
+  const lodashClone = _.clone({ isLoading: true, data: null, error: null });
+  console.log("lodashClone", lodashClone);
 })();
