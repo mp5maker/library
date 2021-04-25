@@ -195,4 +195,13 @@ import _ from "lodash";
       console.log(event.target.value);
     }, 250)
   );
+
+  console.log("_.throttle");
+  const buttonElement = document.querySelector(".go");
+  buttonElement.addEventListener(
+    "click",
+    _.throttle((_event) => {
+      console.log("clicked");
+    }, 2000)
+  );
 })();
