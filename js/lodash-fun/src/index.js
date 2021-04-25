@@ -72,7 +72,9 @@ import _ from "lodash";
   console.log("lodashSomeTwo", lodashSomeTwo);
 
   console.log("_.orderBy");
-  const nativeSort = sampleData.sort((a, b) => (a.likes > b.likes ? -1 : 1));
+  const nativeSort = [...sampleData].sort((a, b) =>
+    a.likes > b.likes ? -1 : 1
+  ); // mutable
   const lodashOrderBy = _.orderBy(
     sampleData,
     ["likes", "name"],
@@ -92,4 +94,20 @@ import _ from "lodash";
     .head()
     .value();
   console.log("lodashChain", lodashChain);
+
+  console.log("_.head");
+  const lodashHead = _.head(sampleData);
+  console.log("lodashHead", lodashHead);
+
+  console.log("_.tail");
+  const lodashTail = _.tail(sampleData);
+  console.log("lodashTail", lodashTail);
+
+  console.log("_.last");
+  const lodashLast = _.last(sampleData);
+  console.log("lodashLast", lodashLast);
+
+  console.log("_.initial");
+  const lodashInitial = _.initial(sampleData);
+  console.log("lodashInitial", lodashInitial);
 })();
