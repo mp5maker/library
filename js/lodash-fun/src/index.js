@@ -164,4 +164,8 @@ import _ from "lodash";
   console.log("_.clone");
   const lodashClone = _.clone({ isLoading: true, data: null, error: null });
   console.log("lodashClone", lodashClone);
+
+  console.log("_.cloneDeep");
+  const lodashCloneDeep = _.cloneDeep({ isLoading: true, data: null, error: null });
+  console.log("lodashCloneDeep", lodashCloneDeep);
 })();
