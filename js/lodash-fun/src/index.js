@@ -126,4 +126,16 @@ import _ from "lodash";
   console.log("_.join");
   const lodashJoin = _.join(["first", "second"], ", ");
   console.log("lodashJoin", lodashJoin);
+
+  console.log("_.capitalize");
+  const lodashCapitalize = _.capitalize("HOW are You, broo?");
+  console.log("lodashCapitalize", lodashCapitalize);
+
+  console.log("_.camelCase");
+  const lodashCamelCase = _.camelCase("bro-you-go-tit");
+  console.log("lodashCamelCase", lodashCamelCase);
+
+  console.log("_.snakeCase");
+  const lodashSnakeCase = _.snakeCase("bro-you-go-tit");
+  console.log("lodashSnakeCase", lodashSnakeCase);
 })();
