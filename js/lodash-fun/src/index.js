@@ -73,4 +73,8 @@ import _ from "lodash";
   );
   console.log("nativeSort", nativeSort);
   console.log("lodashOrderBy", lodashOrderBy);
+
+  console.log("_.groupBy");
+  const lodashGroupBy = _.groupBy(sampleData, (user) => user.isActive);
+  console.log("lodashGroupBy", lodashGroupBy);
 })();
