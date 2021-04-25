@@ -2,15 +2,22 @@ import _ from "lodash";
 
 (function () {
   console.log(_.VERSION);
-  const singleEmployee = { id: 1, name: "John", isActive: true, likes: 10 };
+  const singleEmployee = {
+    id: 1,
+    name: "John",
+    isActive: true,
+    likes: 10,
+    age: 17,
+  };
   const sampleData = [
     singleEmployee,
-    { id: 2, name: "Jack", isActive: false, likes: 20 },
+    { id: 2, name: "Jack", isActive: false, likes: 20, age: 37 },
     {
       id: 3,
       name: "Bob",
       isActive: true,
       likes: 1,
+      age: 22,
     },
   ];
 
@@ -77,4 +84,12 @@ import _ from "lodash";
   console.log("_.groupBy");
   const lodashGroupBy = _.groupBy(sampleData, (user) => user.isActive);
   console.log("lodashGroupBy", lodashGroupBy);
+
+  console.log("_.chain");
+  const lodashChain = _.chain(sampleData)
+    .filter("isActive")
+    .orderBy(["age"])
+    .head()
+    .value();
+  console.log("lodashChain", lodashChain);
 })();
