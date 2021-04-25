@@ -166,6 +166,33 @@ import _ from "lodash";
   console.log("lodashClone", lodashClone);
 
   console.log("_.cloneDeep");
-  const lodashCloneDeep = _.cloneDeep({ isLoading: true, data: null, error: null });
+  const lodashCloneDeep = _.cloneDeep({
+    isLoading: true,
+    data: null,
+    error: null,
+  });
   console.log("lodashCloneDeep", lodashCloneDeep);
+
+  console.log("_.isEqual");
+  const lodashIsEqual = _.isEqual(1, "1");
+  const lodashIsEqualTwo = _.isEqual({ a: "a" }, { a: "a" });
+  console.log("lodashIsEqual", lodashIsEqual);
+  console.log("lodashIsEqualTwo", lodashIsEqualTwo);
+
+  console.log("_.isEmpty");
+  const lodashIsEmpty = _.isEmpty([]);
+  console.log("lodashIsEmpty", lodashIsEmpty);
+
+  console.log("_.isNil");
+  const lodashIsNill = _.isNil(null);
+  console.log("lodashIsNill", lodashIsNill);
+
+  console.log("_.debounce");
+  const searchElement = document.querySelector(".search");
+  searchElement.addEventListener(
+    "keyup",
+    _.debounce((event) => {
+      console.log(event.target.value);
+    }, 250)
+  );
 })();
