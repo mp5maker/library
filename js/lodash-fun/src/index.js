@@ -118,4 +118,12 @@ import _ from "lodash";
   console.log("_.toLower");
   const lodashLower = _.toLower("bbB");
   console.log("lodashLower", lodashLower);
+
+  console.log("_.split");
+  const lodashSplit = _.split("first/second", "/");
+  console.log("lodashSplit", lodashSplit);
+
+  console.log("_.join");
+  const lodashJoin = _.join(["first", "second"], ", ");
+  console.log("lodashJoin", lodashJoin);
 })();
