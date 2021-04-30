@@ -51,3 +51,7 @@ Private IP is assigned to device
 WebRTC needs to communicate using the Public IP
 In order to solve this problem, device requests to STUN Server *Session Traversal Utilities for NAT*
 Stun server helps the browser to generate candidates and get the public IP
+
+# Firewall
+WebRTC uses non standard ports. Some firewall do not allow a direct connection between browsers
+Hence to solve this TURN Server *Traversal Using Relay NAT*, this acts as a relay
