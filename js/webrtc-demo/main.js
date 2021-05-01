@@ -46,7 +46,7 @@ const hangupButton = document.getElementById("hangupButton");
 webcamButton.onclick = async () => {
   localStream = await navigator.mediaDevices.getUserMedia({
     video: true,
-    // audio: true,
+    audio: true,
   });
   remoteStream = new MediaStream();
 
