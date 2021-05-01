@@ -16,6 +16,7 @@ const firebaseConfig = {
 if (!firebase.apps.length) {
   firebase.initializeApp(firebaseConfig);
 }
+const firestore = firebase.firestore();
 
 const servers = {
   iceServers: [
@@ -26,32 +27,35 @@ const servers = {
   iceCandidatePoolSize: 10,
 };
 
-const firestore = firebase.firestore();
-let pc = new RTCPeerConnection(servers);
+// Global State
+const pc = new RTCPeerConnection(servers);
 let localStream = null;
 let remoteStream = null;
-let offerCandidates;
-let answerCandidates;
-let callDoc;
 
-const webcamVideo = document.querySelector("#webcamVideo");
-const remoteVideo = document.querySelector("#remoteVideo");
-const webcamButton = document.querySelector("#webcamButton");
-const callButton = document.querySelector("#callButton");
-const callInput = document.querySelector("#callInput");
-const answerButton = document.querySelector("#answerButton");
-const hangupButton = document.querySelector("#hangupButton");
+// HTML elements
+const webcamButton = document.getElementById("webcamButton");
+const webcamVideo = document.getElementById("webcamVideo");
+const callButton = document.getElementById("callButton");
+const callInput = document.getElementById("callInput");
+const answerButton = document.getElementById("answerButton");
+const remoteVideo = document.getElementById("remoteVideo");
+const hangupButton = document.getElementById("hangupButton");
 
-webcamButton.addEventListener("click", async () => {
+// 1. Setup media sources
+
+webcamButton.onclick = async () => {
   localStream = await navigator.mediaDevices.getUserMedia({
     video: true,
-    audio: true,
+    // audio: true,
   });
   remoteStream = new MediaStream();
+
+  // Push tracks from local stream to peer connection
   localStream.getTracks().forEach((track) => {
     pc.addTrack(track, localStream);
   });
 
+  // Pull tracks from remote stream, add to video stream
   pc.ontrack = (event) => {
     event.streams[0].getTracks().forEach((track) => {
       remoteStream.addTrack(track);
@@ -60,34 +64,35 @@ webcamButton.addEventListener("click", async () => {
 
   webcamVideo.srcObject = localStream;
   remoteVideo.srcObject = remoteStream;
-});
 
-/**
- * Caller Needs
- * > Create Offer
- * > Set Local Description
- * > Remote Answer
- * > Set Remote Description
- */
-callButton.addEventListener("click", async () => {
-  callDoc = firestore.collection("calls").doc();
-  offerCandidates = callDoc.collection("offerCandidates");
-  answerCandidates = callDoc.collection("answerCandidates");
+  callButton.disabled = false;
+  answerButton.disabled = false;
+  webcamButton.disabled = true;
+};
 
-  // Get candidates from the caller (contains IP Address and Port Information)
+// 2. Create an offer
+callButton.onclick = async () => {
+  // Reference Firestore collections for signaling
+  const callDoc = firestore.collection("calls").doc();
+  const offerCandidates = callDoc.collection("offerCandidates");
+  const answerCandidates = callDoc.collection("answerCandidates");
+
+  callInput.value = callDoc.id;
+
+  // Get candidates for caller, save to db
   pc.onicecandidate = (event) => {
     event.candidate && offerCandidates.add(event.candidate.toJSON());
   };
 
-  callInput.value = callDoc.id;
-
-  // Create Offer
+  // Create offer
   const offerDescription = await pc.createOffer();
   await pc.setLocalDescription(offerDescription);
+
   const offer = {
     sdp: offerDescription.sdp,
     type: offerDescription.type,
   };
+
   await callDoc.set({ offer });
 
   // Listen for remote answer
@@ -108,9 +113,12 @@ callButton.addEventListener("click", async () => {
       }
     });
   });
-});
 
-answerButton.addEventListener("click", async () => {
+  hangupButton.disabled = false;
+};
+
+// 3. Answer the call with the unique ID
+answerButton.onclick = async () => {
   const callId = callInput.value;
   const callDoc = firestore.collection("calls").doc(callId);
   const answerCandidates = callDoc.collection("answerCandidates");
@@ -121,6 +129,7 @@ answerButton.addEventListener("click", async () => {
   };
 
   const callData = (await callDoc.get()).data();
+
   const offerDescription = callData.offer;
   await pc.setRemoteDescription(new RTCSessionDescription(offerDescription));
 
@@ -136,9 +145,11 @@ answerButton.addEventListener("click", async () => {
 
   offerCandidates.onSnapshot((snapshot) => {
     snapshot.docChanges().forEach((change) => {
+      console.log(change);
       if (change.type === "added") {
-        pc.addIceCandidate(new RTCIceCandidate(change.doc.data()));
+        let data = change.doc.data();
+        pc.addIceCandidate(new RTCIceCandidate(data));
       }
     });
   });
-});
+};
