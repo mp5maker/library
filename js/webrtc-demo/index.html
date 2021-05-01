@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <link rel="icon" type="image/svg+xml" href="favicon.svg" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Vite App</title>
+  </head>
+  <body>
+    <div id="app">
+      <h2>Start You Webcam</h2>
+      <div class="videos">
+        <span>
+          <h3>Local</h3>
+          <video id="webcamVideo" autoplay playsinline></video>
+        </span>
+        <span>
+          <h3>Remove</h3>
+          <video id="remotevideo" autoplay playsinline></video>
+        </span>
+      </div>
+      <button id="webcamButton">Start Webcam</button>
+      <button id="callButton">Call</button>
+
+      <h2>Join a Call</h2>
+      <input id="callInput" />
+      <button id="answerButton">Answer</button>
+      <button id="hangupButton">Hangup</button>
+    </div>
+    <!-- <script src="https://www.gstatic.com/firebasejs/8.4.3/firebase-app.js"></script> -->
+    <script type="module" src="/main.js"></script>
+  </body>
+</html>
