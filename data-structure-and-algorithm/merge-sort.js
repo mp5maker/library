@@ -46,5 +46,13 @@ const mergeSort = (list) => {
   return merge(_left, _right);
 };
 
+const verifySorted = (list) => {
+  if (list.length == 0 || list.length == 1) return true
+  return (list[0] < list[1]) && verifySorted(list.slice(1, list.length))
+}
+
 const sample = [4, 3, 6, 9, 13, 20, 21, 1, 2];
-console.log(mergeSort(sample));
+const sortedData = mergeSort(sample);
+console.log(sortedData);
+console.log(verifySorted([234,5,2,5]))
+console.log(verifySorted(sortedData))
