@@ -18,3 +18,6 @@ class LinearSearch {
 const ls = new LinearSearch([43,52,12,51])
 console.log(ls.findByValue(12))
 console.log(ls.findByValue(100))
+
+
+module.exports = LinearSearch

@@ -85,6 +85,19 @@ class LinkedList {
     const next = (current.next).next
     current.next = next
   }
+
+  nodeAtIndex(index) {
+    if (index == 0) return this.head
+    else {
+      let current = this.head
+      let position = 0
+      while (position < index) {
+        current = current.next
+        position++
+      }
+      return current
+    }
+  }
 }
 
 const ll = new LinkedList()
@@ -99,3 +112,5 @@ ll.remove(1)
 console.log("🚀 ~ file: linked-list.js ~ line 82 ~ ll.print()", ll.print())
 console.log("🚀 ~ file: linked-list.js ~ line 80 ~ ll.size()", ll.size())
 console.log("🚀 ~ file: linked-list.js ~ line 81 ~ ll.search(30)", ll.search(30))
+
+module.exports = LinkedList
