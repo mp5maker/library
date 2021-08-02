@@ -100,17 +100,17 @@ class LinkedList {
   }
 }
 
-const ll = new LinkedList()
-ll.append(10)
-ll.append(30)
-ll.append(27)
-ll.append(4)
-console.log("🚀 ~ file: linked-list.js ~ line 82 ~ ll.print()", ll.print())
-ll.insert(1, 23)
-console.log("🚀 ~ file: linked-list.js ~ line 82 ~ ll.print()", ll.print())
-ll.remove(1)
-console.log("🚀 ~ file: linked-list.js ~ line 82 ~ ll.print()", ll.print())
-console.log("🚀 ~ file: linked-list.js ~ line 80 ~ ll.size()", ll.size())
-console.log("🚀 ~ file: linked-list.js ~ line 81 ~ ll.search(30)", ll.search(30))
+// const ll = new LinkedList()
+// ll.append(10)
+// ll.append(30)
+// ll.append(27)
+// ll.append(4)
+// console.log("🚀 ~ file: linked-list.js ~ line 82 ~ ll.print()", ll.print())
+// ll.insert(1, 23)
+// console.log("🚀 ~ file: linked-list.js ~ line 82 ~ ll.print()", ll.print())
+// ll.remove(1)
+// console.log("🚀 ~ file: linked-list.js ~ line 82 ~ ll.print()", ll.print())
+// console.log("🚀 ~ file: linked-list.js ~ line 80 ~ ll.size()", ll.size())
+// console.log("🚀 ~ file: linked-list.js ~ line 81 ~ ll.search(30)", ll.search(30))
 
 module.exports = LinkedList

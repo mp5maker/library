@@ -1,23 +1,17 @@
 const LinkedList = require("./linked-list");
 
-const ll = new LinkedList();
-ll.append(10);
-ll.append(30);
-ll.append(27);
-ll.append(4);
-
 const mergeSort = (linkedList) => {
   const split = (linkedList) => {
     if (linkedList == null || linkedList.head == null) {
-      left = linkedList;
-      right = null;
+      const left = linkedList;
+      const right = null;
       return { left, right };
     } else {
       const size = linkedList.size();
       const mid = Math.floor(size / 2);
-      midNode = linkedList.node_at_index(mid - 1);
-      left = linkedList
-      right = new LinkedList()
+      midNode = linkedList.nodeAtIndex(mid - 1);
+      const left = linkedList
+      const right = new LinkedList()
       right.head = midNode.next
       midNode.next = null
       return { left, right }
@@ -25,30 +19,29 @@ const mergeSort = (linkedList) => {
   };
 
   const merge = (left, right) => {
-    const merged = new LinkedLis()
-    merged.add(0)
-    const current = merged.head
-    const left = left.head
-    const right = right.head
+    let merged = new LinkedList()
+    merged.append(0)
+    let current = merged.head
+    let leftHead = left.head
+    let rightHead = right.head
 
-    while (left || right) {
-      if (left.head == null) {
-        current.next = right
-        right = right.next
+    while (leftHead || rightHead) {
+      if (leftHead == null) {
+        current.next = rightHead
+        right = rightHead.next
       }
-      else if (right.head == null) {
-        current.next = left
-        left = left.next
+      else if (rightHead == null) {
+        current.next = leftHead
+        left = leftHead.next
       } else {
-        left = left.current
-        right = right.current
-        if (left < right) {
-          current.next = left
-          left = left.next
-        }
-        if (right > left) {
-          current.next = right
-          right = right.next
+        leftHead = leftHead.current
+        rightHead = rightHead.current
+        if (left.current < right.current) {
+          current.next = leftHead
+          leftHead = leftHead.next
+        } else {
+            current.next = rightHead;
+            rightHead = rightHead.next;
         }
       }
     }
@@ -68,7 +61,11 @@ const mergeSort = (linkedList) => {
   return merge(_left, _right);
 };
 
+const ll = new LinkedList();
+ll.append(10);
+ll.append(30);
+ll.append(27);
+ll.append(4);
 
-const sortedLL = mergeSort(ll)
-console.log("🚀 ~ file: linked-list.js ~ line 82 ~ sortedLL.print()", sortedLL.print());
-console.log("🚀 ~ file: linked-list.js ~ line 80 ~ sortedLL.size()", sortedLL.size());
+console.log('hello')
+console.log("🚀 ~ file: linked-list.js ~ line 82 ~ sortedLL.print()", mergeSort(ll));
