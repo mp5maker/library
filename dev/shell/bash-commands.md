@@ -405,5 +405,17 @@ awk '
     else if (avg >= 50 && avg < 60) print $1" "$2" "$3" "$4" : C"
     else if (avg < 50) print $1" "$2" "$3" "$4" : FAIL"
 }'
-# Print with coplex conditions
+# Print with complex conditions
+
+awk '{
+    if (NR % 2 == 0) print $1" "$2" "$3" "$4
+    else printf $1" "$2" "$3" "$4";"
+}'
+# A 25 27 50
+# B 35 37 75
+# C 75 78 80
+# D 99 88 76
+
+# A 25 27 50;B 35 37 75
+# C 75 78 80;D 99 88 76
 ```
