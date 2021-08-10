@@ -20,7 +20,7 @@ echo "Welcome, ${FULLNAME}"
 # SIMPLE IF-ELSE-IF STATEMENT
 # DON'T FORGET TO PUT SPACES
 echo "IF-ELSE-IF"
-if [ "${FULLNAME}" == "Photon" ] 
+if [ "${FULLNAME}" == "Photon" ]
 then
     echo "Thank you for using bash, ${NAME}"
 elif [ "${FULLNAME}" == "Narnia" ]
@@ -40,7 +40,7 @@ fi
 echo "COMPARISON"
 NUM1=5
 NUM2=16
-if [ "${NUM1}" -gt "${NUM2}" ] 
+if [ "${NUM1}" -gt "${NUM2}" ]
 then
     echo "${NUM1} is greater than ${NUM2}"
 else
@@ -50,7 +50,7 @@ fi
 # FILE CONDITIONS
 # -f :: Checks file
 # -d :: Checks directory
-# -g :: Checks group id set 
+# -g :: Checks group id set
 # -r :: Checks readable
 # -u :: Checks user set
 # -s :: Checks non-zero value
@@ -62,7 +62,7 @@ FILE="test.txt"
 if [ -f "$FILE" ]
 then
     echo "$FILE is a file"
-else 
+else
     echo "$FILE is not a file"
 fi
 
@@ -71,7 +71,7 @@ DIR="random"
 if [ -e "$DIR" ]
 then
     echo "$DIR is a directory"
-else 
+else
     echo "$DIR is not a directory"
 fi
 
