@@ -255,6 +255,33 @@ arr=(4 5 7)
 echo ${arr[2]}
 # 7
 ```
+> Update
+
+```bash
+arr=(4 5 7)
+index=1
+arr[$index]=42
+# 42 5 7
+```
+
+> Delete Using Value (Not absolutely true, if all the items are completely unique)
+
+```bash
+arr=(4 5 7)
+value=5
+echo ${arr[@]/$value}
+# 4 7
+```
+
+> Delete Using Index
+
+```bash
+arr=(4 5 7)
+unset "arr[2]"
+echo ${arr[@]}
+# 4 7
+```
+
 
 > Length
 ```bash
@@ -282,4 +309,20 @@ echo ${arr[@]/*[a]*/} # Filters the words which do not contain the character 'a'
 arr=(naru paru nope pope)
 echo ${arr[1]:1}
 # aru aru ope ope
+```
+
+#### Looping Using Arrays ####
+
+```bash
+arr=(Namibia Nauru Nepal Netherlands NewZealand Nicaragua Niger Nigeria NorthKorea Norway)
+for (( i=0 ; i < ${#arr[@]} ; i++))
+    do
+        arr[$i]=".${arr[$i]:1}"
+    done
+echo ${arr[@]}
+
+for item in ${arr[@]}
+    do
+        echo $item
+    done
 ```
