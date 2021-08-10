@@ -364,5 +364,46 @@ sed -E "s/(thy)/{\1}/gi" # Replace all occurance of "thy" to "{thy} and it is ca
 sed -E "s/[0-9]{4}([ ])[0-9]{4}([ ])[0-9]{4}/**** **** ****/"
 # 1234 5678 9101 1234   to  **** **** **** 1234
 sed -E "s/([0-9]{4})[ ]([0-9]{4})[ ]([0-9]{4})[ ]([0-9]{4})/\4 \3 \2 \1/" # Reverse the order
-# 1234 5678 9101 1234 to 1234 9101 5678 1234 
+# 1234 5678 9101 1234 to 1234 9101 5678 1234
+```
+
+#### Awk ####
+
+awk needs to be written in **single quotes**
+
+```bash
+awk  '{ print }' ./sample3.txt
+# Prints all the lines of a text file
+awk  '{ print $1,$2}' ./sample3.txt
+# Prints column one and two
+awk '/salmon/ { print }' ./random.csv
+# Prints the row which contains salmon
+awk '{ if($1 ~ /horse/) print }' ./random.csv
+# Prints the row which contains horse
+awk '{ if($4 !~ /[0-9]+/) print "Not all scores are available for "$1 }'
+# A 25 27 50
+# B 35 75
+# C 75 78
+# D 99 88 76
+
+# Not all scores are available for B
+# Not all scores are available for C
+
+awk '{
+    if($2 >= 50 && $3 >= 50 && $4 >= 50)
+        print $1" : Pass"
+    else
+        print $1" : Fail"
+}'
+# Writing if else with spacing
+
+awk '
+{
+    avg=($2 + $3 + $4) / 3
+    if (avg >= 80) print $1" "$2" "$3" "$4" : A"
+    else if (avg >= 60 && avg < 80) print $1" "$2" "$3" "$4" : B"
+    else if (avg >= 50 && avg < 60) print $1" "$2" "$3" "$4" : C"
+    else if (avg < 50) print $1" "$2" "$3" "$4" : FAIL"
+}'
+# Print with coplex conditions
 ```
