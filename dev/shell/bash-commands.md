@@ -160,6 +160,7 @@ tail -c 20 $file # Show last 20 characters
 
 #### Replace ####
 -d => delimeter
+-s => squash duplicates
 
 ```bash
 expression=(23+5)*2
@@ -167,6 +168,36 @@ echo $expression | tr "(" "[" | tr ")" "]"
 # [23+5]*2
 
 expression="How are you"
-echo "$expression" | tr '[a-z]'  ' '
+echo "$expression" | tr -d '[a-z]'  ' '
 # H
+
+expression="How  are"
+echo "$expression" | tr -s '   '
+#How are
+```
+
+#### Sort ####
+-r => reverses the sorting order
+-n => sorts on the basis of numerical fields, first available column
+-k => specify column of the csv or the file
+-t => delimeter
+
+```bash
+sort $file # Organizes the lines in lexicographical order
+sort -r $file # Organizes the lines in reverse order
+sort -n $file # Organizes the lines on the basis of numerical fields
+sort -rn $file # Organizes the lines on the basis of numerical fields and reverse
+sort -t '|' -k2 -rn $data # Organizes the lines using the 2nd column which is a number and reverse order and the delimeter is '|'
+```
+
+#### Uniq ####
+-c => counts the number of duplicates [It also creates a space on the left hand side]
+-i => case insensitive
+-u => succeeded and preceded by different lines
+
+```bash
+uniq $file # Removes duplicates
+uniq -c $file | tr -s '  ' | cut -d '  ' -f2- # Counts the number of duplicates
+uniq $file -c -i | tr -s ' ' | cut -d ' ' -f2- # Counts the number of duplicates and it is case insensitive
+uniq -u $file # Prints only thos lines which are succeeded ar preceded by different lines
 ```
