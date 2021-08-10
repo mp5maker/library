@@ -340,6 +340,7 @@ Both of them uses regular expression
 Sed: It is similar to find and replace
 Grep: It is similar to find
 
+#### Grep ####
 -n => line number
 -i => case insensitive
 -v => show not matching line
@@ -349,4 +350,19 @@ grep 'work\s' < ./sample.txt # It returns the line that contains the word "work"
 grep -iv 'work\s' < ./sample.txt # It returns the line that do not match "work"
 grep -i "\(the\|that\|then\|those\)\s" < ./sample.txt # For regular expression use escape the characters
 grep -i -E "(the|that|then|those)\s" < ./sample.txt # Escaping not needed
+```
+
+#### Sed ####
+
+> Search And Replace
+s => denoting it will be search and replace
+
+```bash
+sed "s/the\s/this /" $lines # Replacing the first occurance of "the " to "this "
+sed -E "s/(thy)\s/your /gi" # Replacing all occurance of "thy " to "your " and it is case insensitive
+sed -E "s/(thy)/{\1}/gi" # Replace all occurance of "thy" to "{thy} and it is case insensitive
+sed -E "s/[0-9]{4}([ ])[0-9]{4}([ ])[0-9]{4}/**** **** ****/"
+# 1234 5678 9101 1234   to  **** **** **** 1234
+sed -E "s/([0-9]{4})[ ]([0-9]{4})[ ]([0-9]{4})[ ]([0-9]{4})/\4 \3 \2 \1/" # Reverse the order
+# 1234 5678 9101 1234 to 1234 9101 5678 1234 
 ```
