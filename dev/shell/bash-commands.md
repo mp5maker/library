@@ -370,6 +370,8 @@ sed -E "s/([0-9]{4})[ ]([0-9]{4})[ ]([0-9]{4})[ ]([0-9]{4})/\4 \3 \2 \1/" # Reve
 #### Awk ####
 
 awk needs to be written in **single quotes**
+ORS special variable, it is set to "\n" by defeault
+NR counts the number of lines, starting from index 1
 
 ```bash
 awk  '{ print }' ./sample3.txt
