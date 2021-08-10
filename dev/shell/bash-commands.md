@@ -326,3 +326,27 @@ for item in ${arr[@]}
         echo $item
     done
 ```
+
+### Read Files ###
+
+```bash
+file=$(cat ./sample.csv)
+echo $file
+```
+
+#### Sed And Grep ####
+Both of them uses regular expression
+
+Sed: It is similar to find and replace
+Grep: It is similar to find
+
+-n => line number
+-i => case insensitive
+-v => show not matching line
+
+```bash
+grep 'work\s' < ./sample.txt # It returns the line that contains the word "work"
+grep -iv 'work\s' < ./sample.txt # It returns the line that do not match "work"
+grep -i "\(the\|that\|then\|those\)\s" < ./sample.txt # For regular expression use escape the characters
+grep -i -E "(the|that|then|those)\s" < ./sample.txt # Escaping not needed
+```
