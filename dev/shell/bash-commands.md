@@ -44,6 +44,15 @@ then
   echo 'YES'
 fi
 # YES
+
+sentence="nope"
+if [[ $sentence != *"A"* && $sentence != *"a"* ]] # Works like wildcard
+then
+  echo 'YES'
+else
+ echo 'NO'
+fi
+# YES
 ```
 
 #### If (Mixed Condition) ####
@@ -200,4 +209,77 @@ uniq $file # Removes duplicates
 uniq -c $file | tr -s '  ' | cut -d '  ' -f2- # Counts the number of duplicates
 uniq $file -c -i | tr -s ' ' | cut -d ' ' -f2- # Counts the number of duplicates and it is case insensitive
 uniq -u $file # Prints only thos lines which are succeeded ar preceded by different lines
+```
+
+#### Paste ####
+-s => Show in horizontal manner
+-d => Delimeter for joining by
+
+```bash
+paste -s -d';' $file # Join the lines in horizontal manner with ';' joining
+paste - - - -d';' # Three columns per line with ';' joining
+```
+
+#### Array ####
+Indexing starts from 1
+
+> Create an array and retrieve all elements
+```bash
+arr=(4 5 7)
+echo ${arr[@]} # Loop through array
+# 4 5 7
+```
+
+> Append Value
+```bash
+arr=(4 5 7)
+arr+=(12) # push data to array
+echo ${arr[@]}
+
+arr=(4 5 7)
+arr=("${arr[@]}" 12) # push data to array
+echo ${arr[@]}
+# 4 5 7 12
+```
+
+> Retrieve 2nd element
+```bash
+arr=(4 5 7)
+echo ${arr[2]}
+# 7
+```
+
+> Index
+```bash
+arr=(4 5 7)
+echo ${arr[2]}
+# 7
+```
+
+> Length
+```bash
+arr=(4 5 7)
+echo ${#arr[@]}
+# 3
+```
+
+> Slice
+```bash
+arr=(4 5 7)
+echo ${arr[@]:2:3} # Starting index 2, Ending index 3
+# 7
+```
+
+> Filter
+```bash
+arr=(naru paru nope pope)
+echo ${arr[@]/*[a]*/} # Filters the words which do not contain the character 'a'
+# nope pope
+```
+
+> Remove first character of the first word
+```bash
+arr=(naru paru nope pope)
+echo ${arr[1]:1}
+# aru aru ope ope
 ```
