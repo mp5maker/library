@@ -73,6 +73,7 @@ Reset
     git reset --soft HEAD~1 {Reset to the last commit}
     git reset c34bb9a {Removes the commit and shows the changes}
     git reset c34bb9a --hard {Removes the commit and dissappears}
+    git reset --soft HEAD^ {Sets Head to the previous commit and changes undone commit to staged}
 ---
 Rebase
 ---
@@ -104,4 +105,11 @@ Merging
 New Connection
 ---
     git remote add origin {...url}
+---
+
+Bisect
+---
+    git bisect start { Used for debugging where the bad commit lies }
+    git bisect bad { The code is working properly }
+    git bisect good c34bb9a { Git does a binary such between good and and commit }
 ---
