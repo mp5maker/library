@@ -45,6 +45,7 @@ Commit
 ----
     git commit -m "Some Text" {Commit}
     git commit --amend -m "Git Hub Starting {Change the name of the commit}
+    git commit -a -m "Refactor the code" {It stages then commits the message}
 ---
 Revert
 ---
@@ -78,6 +79,7 @@ Reset
 Rebase
 ---
     git rebase experimental {Rebasing with the experimental branch}
+    git rebase -i HEAD~10 {To list the last 10 commits and modify them with either the squash or fixup command}
 ---
 Log
 ---
@@ -112,4 +114,5 @@ Bisect
     git bisect start { Used for debugging where the bad commit lies }
     git bisect bad { The code is working properly }
     git bisect good c34bb9a { Git does a binary such between good and and commit }
+    git bisect reset
 ---
