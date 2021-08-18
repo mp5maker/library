@@ -100,6 +100,22 @@ class BinarySearchTree {
     return traverse(current);
   }
 
+  levelOrderTraverse() {
+    let current = this.root
+    if (current == null) return null
+    let values = []
+    let arr = [current]
+
+    while(arr.length > 0) {
+      values.push(arr[0].data)
+      let node = arr.shift()
+      if (node.left) arr.push(node.left)
+      if (node.right) arr.push(node.right)
+    }
+
+    return values
+  }
+
   search(value) {
     let current = this.root;
 
@@ -128,3 +144,4 @@ console.log(bst.inOrderTraverse());
 console.log(bst.preOrderTraverse());
 console.log(bst.postOrderTraverse());
 console.log(bst.search(23));
+console.log(bst.levelOrderTraverse());
