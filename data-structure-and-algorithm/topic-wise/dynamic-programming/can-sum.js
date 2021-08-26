@@ -16,3 +16,4 @@ const canSum = (n, arr, memo = {}) => {
 }
 
 console.log(canSum(7, [5, 3, 4, 7]))
+console.log(canSum(300, [7, 14]))
