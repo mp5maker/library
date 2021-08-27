@@ -1,7 +1,8 @@
-const bestSum = (_num, _arr) => {
+const bestSum = (_num, _arr, memo = {}) => {
   const recursive = (num, arr) => {
     if (num == 0) return [];
     if (num < 0) return null;
+    if (memo[num]) return memo[num]
 
     let shortestCombination = null;
 
@@ -19,7 +20,8 @@ const bestSum = (_num, _arr) => {
       }
     }
 
-    return shortestCombination;
+    memo[num] = shortestCombination
+    return memo[num];
   };
 
   return recursive(_num, _arr);
