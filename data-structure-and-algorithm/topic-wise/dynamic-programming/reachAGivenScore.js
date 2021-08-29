@@ -13,21 +13,27 @@
 
 // console.log(reachAGivenScore(20));
 
-const reachAGivenScore = (num) => {
-  const recursive = (targetNum, combo = [], combinations = []) => {
-    if (targetNum < 0) return 0
-    if (targetNum == 0) {
-      combinations.push(combo)
-      return 1
+const canConstruct = (_s, _arr) => {
+  const recursive = (s, arr) => {
+    if (s == 0) return [[]];
+
+    const result = [];
+
+    for (let num of arr) {
+      let remaining = s - num
+      if (remaining >  0) {
+        const remainingWays = recursive(remaining, arr);
+        const targetWays = remainingWays.map((item) => [num, ...item]);
+        result.push(...targetWays);
+      }
     }
-    for (item of [3, 5, 10]) {
-      const remainder = targetNum - item
-      recursive(remainder, [item, ...combo], combinations)
-    }
-    return combinations
+
+    return result;
   };
 
-  return recursive(num);
+  return recursive(_s, _arr);
 };
 
-console.log(reachAGivenScore(20));
+console.log(
+  canConstruct(20, [3, 5, 10])
+);
