@@ -3,7 +3,7 @@ const fibonacci = (_n) => {
     if (n == 0) return 0
     if (n == 1) return 1
     if (memo[n]) return memo[n]
-    memo[n] = recursive(n - 2, memo) + recursive(n - 2, memo)
+    memo[n] = recursive(n - 2, memo) + recursive(n - 1, memo)
     return memo[n]
   }
 
