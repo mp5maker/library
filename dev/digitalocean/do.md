@@ -118,3 +118,15 @@ sudo ufw delete allow 'Nginx HTTP'
 sudo certbot --nginx -d example.com -d www.example.com
 sudo certbot renew --dry-run
 ```
+
+
+### Update Nginx Configuration
+
+```bash
+  sudo mkdir -p /var/www/example.com/html
+  sudo chwon -R $USER:$USER /var/www/example.com/html
+  sudo chmod -R 755 /var/www
+  sudo nano /etc/nginx/sites-available/default
+  root /var/www/example.com/html;
+  sudo nginx -t
+```
