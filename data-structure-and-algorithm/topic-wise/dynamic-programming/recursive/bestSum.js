@@ -8,7 +8,7 @@ const bestSum = (_num, _arr, memo = {}) => {
 
     for (let item of arr) {
       const remainder = num - item;
-      const remainderCombination = bestSum(remainder, arr);
+      const remainderCombination = recursive(remainder, arr);
       if (remainderCombination) {
         const combination = [...remainderCombination, item];
         if (
