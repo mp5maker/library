@@ -1,6 +1,6 @@
 const explore = (grid, r, c, visited) => {
   const rowInbounds = r >= 0 && r < grid.length
-  const colInbounds = c >= 0 && c < grid.length
+  const colInbounds = c >= 0 && c < grid[0].length
   if (!rowInbounds || !colInbounds) return false;
   if (grid[r][c] == 'W') return false
 
