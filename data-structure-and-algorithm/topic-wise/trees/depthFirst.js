@@ -34,4 +34,22 @@ const depthFirst = (root) => {
   return result
 };
 
+const _depthFirst = (root) => {
+  let current = root
+  let arr = []
+
+  const __depthFirst = (node) => {
+    if (node && node.val) arr.push(node.val)
+    else return
+
+    depthFirst(node.left)
+    depthFirst(node.right)
+
+    return
+  }
+
+  __depthFirst(current)
+  return arr
+}
+
 console.log(depthFirst(a));
