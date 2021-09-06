@@ -172,7 +172,7 @@ The userInput we receive is an instance of the **Node Buffer Class**
 
 ```javascript
 process.stdin.on("data", (userInput) => {
-  userInput.toString()
+  userInput.toString();
 });
 ```
 
@@ -191,29 +191,77 @@ The buffer object will have a range of integers from 0 to 255 inclusive
 Buffer provides various methods
 
 > alloc()
+
 alloc() => creates a new Buffer object with the size specified as the first parameter
 It accepts three arguments size, fill (size with values default is 0), encoding (default is UTF-8)
 
 > toString()
+
 toString() => buffer converted to string
 
 > from()
+
 from() => converts the string to buffer
 
 > concat()
+
 concat() => concats to buffer array
 
 ```javascript
-const bufferAlloc = Buffer.alloc(15, 'b')
-const buffer1 = Buffer.from('hello')
-const buffer2 = Buffer.from('world')
-const bufferArray = [buffer1, buffer2]
-const bufferConcat = Buffer.concat(bufferArray)
-const bufferString = bufferConcat.toString()
-console.log(bufferString)
+const bufferAlloc = Buffer.alloc(15, "b");
+const buffer1 = Buffer.from("hello");
+const buffer2 = Buffer.from("world");
+const bufferArray = [buffer1, buffer2];
+const bufferConcat = Buffer.concat(bufferArray);
+const bufferString = bufferConcat.toString();
+console.log(bufferString);
 ```
 
+### Fs Module
 
 - The fs module is used to interact with the user's filesystem
-- The timer module provides the setImemediate() funciton which runs immediately
+- Each method available through the fs modules has synchronous version and an asynchronous version
+
+> readFile()
+> Reading the contents of the entire file
+
+```javascript
+const fs = require("fs");
+
+let readDataCallback = (err, data) => {
+  if (err) console.log(`Something went wrong: ${err}`);
+  else console.log(`Provided file contained: ${data}`);
+};
+
+fs.readFile("./file.txt", "utf-8", readDataCallback);
+```
+
+### Readable Streams
+
+```javascript
+const readline = require("readline");
+const fs = require("fs");
+
+const myInterface = readline.createInterface({
+  input: fs.createReadStream("text.txt"),
+});
+
+myInterface.on("line", (fileLine) => {
+  console.log(`The line read: ${fileLine}`);
+});
+```
+
+### Writable Streams
+
+```javascript
+const fs = require("fs");
+const fileStream = fs.createWriteStream("output.txt");
+
+fileStream.write("This is the first line");
+fileStream.write("This is the second line");
+fileStream.end();
+```
+
+### Timers Module
+- The timer module provides the setImemediate() function which runs immediately
   after the current poll phase is completed.
