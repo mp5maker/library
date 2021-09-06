@@ -139,3 +139,81 @@ getUserPromise(id)
     console.log("User not found", error);
   });
 ```
+
+### Node Package Manager
+
+- Npm is an online collection, or registry, of software
+
+### Events
+
+- The events module provides EventEmitter objects used to assign listener functions triggered on specified events
+  > Events
+
+```javascript
+let events = require("events");
+
+let listenerCallback = (data) => {
+  console.log("Celebrate " + data);
+};
+
+const myEmitter = new events.EventEmitter();
+
+myEmitter.on("celebration", listenerCallback);
+myEmitter.emit("celebration", "Happy New Year");
+```
+
+### User Input / Output
+
+process.stdin is an instance of EventEmitter
+When a user hits enter, a 'data' event is fired
+
+The buffer module is used to handle binary data.
+The userInput we receive is an instance of the **Node Buffer Class**
+
+```javascript
+process.stdin.on("data", (userInput) => {
+  userInput.toString()
+});
+```
+
+### Error Module
+
+Javascript Errors: EvalError, SyntaxError, RangeError, ReferenceError, TypeError, URIError
+
+### Buffer Module
+
+The buffer module is used to handle binary data.
+Buffer module is within the global scope
+Buffer object represents a fixed amount of memory that cannot be resized.
+Buffer object are similar to an array of integers where each element in the array represents a byte of data.
+The buffer object will have a range of integers from 0 to 255 inclusive
+
+Buffer provides various methods
+
+> alloc()
+alloc() => creates a new Buffer object with the size specified as the first parameter
+It accepts three arguments size, fill (size with values default is 0), encoding (default is UTF-8)
+
+> toString()
+toString() => buffer converted to string
+
+> from()
+from() => converts the string to buffer
+
+> concat()
+concat() => concats to buffer array
+
+```javascript
+const bufferAlloc = Buffer.alloc(15, 'b')
+const buffer1 = Buffer.from('hello')
+const buffer2 = Buffer.from('world')
+const bufferArray = [buffer1, buffer2]
+const bufferConcat = Buffer.concat(bufferArray)
+const bufferString = bufferConcat.toString()
+console.log(bufferString)
+```
+
+
+- The fs module is used to interact with the user's filesystem
+- The timer module provides the setImemediate() funciton which runs immediately
+  after the current poll phase is completed.
