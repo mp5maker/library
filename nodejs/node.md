@@ -275,3 +275,180 @@ and put into a queue. This queue is processed at every iteration of the event lo
 ```javascript
 setImmediate(() => {});
 ```
+
+### HTTP
+
+> Request
+
+1. Http Method is usually a verb => GET, POST, PUT, DELETE
+2. Http Method is usually a noun => OPTIONS, HEAD
+3. Path denotes the path of the resource relative to the root URL
+4. HTTP protocol version HTTP/1.1, HTTP/2, HTTP/3
+5. Headeres are optional and are used to convey additional information that may be important
+6. Body are attached with the request
+
+> Response
+
+1. HTTP Protocol Version
+2. Status Code
+3. Status Message
+4. Headers
+5. Body
+
+Using Transport Layer Security (TLS) allows to have https
+
+### TCP
+
+Transport Control Protocol: It allows two hosts to connect and exchange data streams and deliver the data
+in the same order as they are sent
+
+### Server
+
+```javascript
+const http = require("http");
+
+const server = http.createServer((req, res) => {
+  res.end("Hello World");
+});
+
+server.listen(4001, () => {
+  const { address, port } = server.address();
+  console.log(`Server is listening on http://${address}:${port}`);
+});
+```
+
+### The Anatomy of the URL
+
+https:// => Protocol
+codecademy => Domain Name
+/articles => Path
+?search=node => query
+https://codecademy/articles/?search=node
+
+```javascript
+const url = new URL("https://www.example.com/p/a/t/h?query=string");
+const host = url.hostname;
+const pathname = url.pathname;
+const searchParams = url.searchParams;
+
+const createdUrl = new URL("https://www.example.com");
+createdUrl.pathname = "/p/a/t/h";
+createdUrl.search = "?query=string";
+createUrl.toString();
+```
+
+### Query String Module
+
+```javascript
+const querystring = require("querystring");
+const str = "prop1=value1&prop2=value2";
+querystring.parse(str);
+```
+
+```javascript
+const querystring = require("querystring");
+const url = "https://www.example.com/p/a/t/h?course=node&lesson=http";
+const queryToParse = url.split("?")[1];
+const parsedQuery = querystring.parse(queryToParse);
+parsedQuery.exercise = "querystring";
+const modifiedQueryString = querystring.stringify(parsedQuery);
+```
+
+### Routing
+
+```javascript
+const http = require("http");
+
+const handleGetRequest = (req, res) => {
+  // Set GET status code here
+  res.writeHeader(200, { "Content-Type": "application/json" });
+  // res.statusCode = 200;
+  return res.end(JSON.stringify({ data: [] }));
+};
+
+const handlePostRequest = (req, res) => {
+  // Set POST status code here
+  res.statusCode = 500;
+  return res.end("Unable to create record");
+};
+
+// Creates server instance
+const server = http.createServer((req, res) => {
+  const { method } = req;
+
+  switch (method) {
+    case "GET":
+      return handleGetRequest(req, res);
+    case "POST":
+      return handlePostRequest(req, res);
+    default:
+      throw new Error(`Unsupported request method: ${method}`);
+  }
+});
+
+// Starts server listening on specified port
+server.listen(4001, () => {
+  const { address, port } = server.address();
+  console.log(`Server is listening on: http://${address}:${port}`);
+});
+```
+
+### Status Codes
+
+1. Informational [100-199]
+2. Successful [200-299]
+3. Redirects [300-399]
+4. Client Errors [400-499]
+5. Server Errors [500-599]
+
+### Using HTTP
+
+```javascript
+const http = require("http");
+
+const handleGetRequest = (req, res) => {
+  const options = {
+    hostname: "static-assets.codecademy.com",
+    path: "/Courses/Learn-Node/http/data.json",
+    method: "GET",
+    headers: {
+      "Content-Type": "application/json",
+    },
+  };
+
+  const request = http.request(options, (response) => {
+    let data = "";
+
+    // Aggregate data chunks as they come in from the API
+    response.on("data", (chunk) => {
+      data += chunk;
+    });
+
+    // Handle the end of the request
+    response.on("end", () => {
+      console.log("Retrieved Data:", data);
+      res.end(data);
+    });
+  });
+
+  request.end();
+};
+
+// Creates server instance
+const server = http.createServer((req, res) => {
+  const { method } = req;
+
+  switch (method) {
+    case "GET":
+      return handleGetRequest(req, res);
+    default:
+      throw new Error(`Unsupported request method: ${method}`);
+  }
+});
+
+// Starts server listening on specified port
+server.listen(4001, () => {
+  const { address, port } = server.address();
+  console.log(`Server is listening on: http://${address}:${port}`);
+});
+```
