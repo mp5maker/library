@@ -263,5 +263,15 @@ fileStream.end();
 ```
 
 ### Timers Module
+
+There are times when we want some of our code to be executed at a specified point in time.
+Timer functions in Node.js behave similarly to how they work in front-end JavaScript programs, but the difference
+si that they are added to the Node.js event loop. This means that the timer functions are scheduled
+and put into a queue. This queue is processed at every iteration of the event loop.
+
 - The timer module provides the setImemediate() function which runs immediately
   after the current poll phase is completed.
+
+```javascript
+setImmediate(() => {});
+```
