@@ -1,8 +1,8 @@
 ### Installing Postgres
 
 ```bash
-sudo install postgresql
-sudo install postgresql-contrib
+sudo apt-get install postgresql
+sudo apt-get install postgresql-contrib
 ```
 
 ### Testing Postgress
@@ -129,4 +129,47 @@ sudo certbot renew --dry-run
   sudo nano /etc/nginx/sites-available/default
   root /var/www/example.com/html;
   sudo nginx -t
+  sudo systemctl reload nginx
+```
+
+### Running Both Frontend and Backend
+
+```bash
+sudo touch /etc/nginx/sites-available/domain.com.conf
+sudo touch /etc/nginx/sites-available/api.domain.com.conf
+```
+
+
+```sphotonkhan.com.conf
+server {
+   server_name domain.com www.domain.com;
+   location / {
+        proxy_pass http://localhost:8080;
+        proxy_http_version 1.1;
+        proxy_set_header Upgrade $http_upgrade;
+        proxy_set_header Connection 'upgrade';
+        proxy_set_header Host $host;
+        proxy_cache_bypass $http_upgrade;
+  }
+}
+```
+
+```api.sphotonkhan.com.conf
+server {
+  server_name api.domain.com;
+    location / {
+    proxy_pass http://localhost:4000;
+    proxy_http_version 1.1;
+    proxy_set_header Upgrade $http_upgrade;
+    proxy_set_header Connection 'upgrade';
+    proxy_set_header Host $host;
+    proxy_cache_bypass $http_upgrade;
+  }
+}
+```
+
+```bash
+sudo ln -s /etc/nginx/sites-available/api.domain.com.conf /etc/nginx/sites-enabled/api.domain.com.conf
+sudo ln -s /etc/nginx/sites-available/domain.com.conf /etc/nginx/sites-enabled/domain.com.conf
+sudo systemctl reload nginx
 ```
