@@ -93,6 +93,9 @@ Stash
     git stash {Stash the working directory and moved to a new branch without comitting}
     git stash pop {Open up the stash}
     git stash drop {Drop the stash}
+    git stash save [name]
+    git stash list
+    git stash apply [index-to-use-it]
 ---
 Cherry Pick
 ---
@@ -115,4 +118,9 @@ Bisect
     git bisect bad { The code is working properly }
     git bisect good c34bb9a { Git does a binary such between good and and commit }
     git bisect reset
+---
+
+Log
+---
+git log --graph --oneline --decorate
 ---
