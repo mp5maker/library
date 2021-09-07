@@ -299,3 +299,13 @@ createuser --interactive
 
 sudo adduser photon
 ```
+
+```javascript
+const pool = new Pool({
+ user: '[new-user]',
+ host: 'localhost',
+ database: 'test',
+ password: '[new-password]',
+ port: '5432'
+})
+```
