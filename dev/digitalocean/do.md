@@ -196,6 +196,7 @@ mv default default-back
 ```bash
 sudo touch /etc/nginx/sites-available/domain.com.conf
 sudo touch /etc/nginx/sites-available/api.domain.com.conf
+or create just one configuration file
 ```
 
 > Frontend
@@ -226,6 +227,29 @@ server {
     proxy_set_header Connection 'upgrade';
     proxy_set_header Host $host;
     proxy_cache_bypass $http_upgrade;
+  }
+}
+```
+
+> Together
+```
+server {
+  server_name api.domain.com;
+    # Backend
+    location /api {
+    proxy_pass http://localhost:4000;
+    proxy_http_version 1.1;
+    proxy_set_header Upgrade $http_upgrade;
+    proxy_set_header Connection 'upgrade';
+    proxy_set_header Host $host;
+    proxy_cache_bypass $http_upgrade;
+  }
+
+  # Frontend
+   location / {
+        root /var/www/example.com/html;
+        index index.html
+        try_files   $uri $uri/ /index.html;
   }
 }
 ```
