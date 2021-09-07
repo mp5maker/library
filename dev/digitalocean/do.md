@@ -120,7 +120,6 @@ sudo certbot --nginx -d example.com -d www.example.com
 sudo certbot renew --dry-run
 ```
 
-
 ### Update Nginx Configuration
 
 > Creating HTML and giving permssion to the folders
@@ -156,12 +155,14 @@ sudo certbot renew --dry-run
 
 ```javascript
 #!/usr/bin/env nodejs
-var http = require('http');
-http.createServer(function (req, res) {
-  res.writeHead(200, {'Content-Type': 'text/plain'});
-  res.end('Hello World\n');
-}).listen(8080, 'localhost');
-console.log('Server running at http://localhost:8080/');
+var http = require("http");
+http
+  .createServer(function (req, res) {
+    res.writeHead(200, { "Content-Type": "text/plain" });
+    res.end("Hello World\n");
+  })
+  .listen(8080, "localhost");
+console.log("Server running at http://localhost:8080/");
 ```
 
 ```bash
@@ -232,6 +233,7 @@ server {
 ```
 
 > Together
+
 ```
 server {
   server_name api.domain.com;
@@ -258,4 +260,42 @@ server {
 sudo ln -s /etc/nginx/sites-available/api.domain.com.conf /etc/nginx/sites-enabled/api.domain.com.conf
 sudo ln -s /etc/nginx/sites-available/domain.com.conf /etc/nginx/sites-enabled/domain.com.conf
 sudo systemctl start nginx
+```
+
+### Integrating Postgress with Node
+
+```bash
+npm install pg
+pm2 logs [id]
+```
+
+```javascript
+const { Pool } = require('pg)
+const http = require('http');
+const pool = new Pool({
+  ...configuration
+})
+
+const server = http.createServer(function (req, res) {
+  pool.query('SELECT NOW()', (err, queryResponse) => {
+    res.writeHead(200, {'Content-Type': 'text/plain'});
+    res.end('Hello World\n');
+  })
+})
+
+server.listen(8080, () => {
+  console.log('Server running at http://localhost:8080/');
+});
+```
+
+
+### Create new user in postgres
+
+```bash
+sudo -i -u postgres
+createuser --interactive
+
+[Logout from postgres]
+
+sudo adduser photon
 ```
