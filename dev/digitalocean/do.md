@@ -176,3 +176,62 @@ npm install -g pm2
 pm2 start index.js
 pm2 stop [id]
 ```
+
+> System Reboot
+
+```bash
+pm2 startup
+sudo env PATH=$PATH:/usr/bin /usr/lib/node_modules/pm2/bin/pm2 startup systemd -u ubuntu –hp /home/ubuntu
+```
+
+### Running Both Frontend and Backend
+
+```bash
+cd /etc/nginx/sites-available/
+cp default sphotonkhan.com.conf
+cp default api.sphotonkhan.com.conf
+mv default default-back
+```
+
+```bash
+sudo touch /etc/nginx/sites-available/domain.com.conf
+sudo touch /etc/nginx/sites-available/api.domain.com.conf
+```
+
+> Frontend
+
+```
+server {
+   server_name domain.com www.domain.com;
+   location / {
+        proxy_pass http://localhost:4200;
+        proxy_http_version 1.1;
+        proxy_set_header Upgrade $http_upgrade;
+        proxy_set_header Connection 'upgrade';
+        proxy_set_header Host $host;
+        proxy_cache_bypass $http_upgrade;
+  }
+}
+```
+
+> Backend
+
+```
+server {
+  server_name api.domain.com;
+    location /api {
+    proxy_pass http://localhost:4000;
+    proxy_http_version 1.1;
+    proxy_set_header Upgrade $http_upgrade;
+    proxy_set_header Connection 'upgrade';
+    proxy_set_header Host $host;
+    proxy_cache_bypass $http_upgrade;
+  }
+}
+```
+
+```bash
+sudo ln -s /etc/nginx/sites-available/api.domain.com.conf /etc/nginx/sites-enabled/api.domain.com.conf
+sudo ln -s /etc/nginx/sites-available/domain.com.conf /etc/nginx/sites-enabled/domain.com.conf
+sudo systemctl start nginx
+```
