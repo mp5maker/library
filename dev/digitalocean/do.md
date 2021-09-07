@@ -28,6 +28,7 @@ vim ~/.bashrc
 nvm install node --lts
 nvm use 14.17.5
 nvm alias default 14.17.5
+sudo apt-get install build-essentials
 ```
 
 ### Accessing the remote PC using ssh
@@ -122,54 +123,56 @@ sudo certbot renew --dry-run
 
 ### Update Nginx Configuration
 
+> Creating HTML and giving permssion to the folders
+
 ```bash
   sudo mkdir -p /var/www/example.com/html
   sudo chwon -R $USER:$USER /var/www/example.com/html
   sudo chmod -R 755 /var/www
-  sudo nano /etc/nginx/sites-available/default
+```
+
+> Edit Nginx
+
+```bash
+  sudo vim /etc/nginx/sites-available/default
+```
+
+> Configuration
+
+```bash
   root /var/www/example.com/html;
+```
+
+> After Editing
+
+```bash
   sudo nginx -t
   sudo systemctl reload nginx
 ```
 
-### Running Both Frontend and Backend
+### Running Backend
 
-```bash
-sudo touch /etc/nginx/sites-available/domain.com.conf
-sudo touch /etc/nginx/sites-available/api.domain.com.conf
-```
+> index.js
 
-
-```sphotonkhan.com.conf
-server {
-   server_name domain.com www.domain.com;
-   location / {
-        proxy_pass http://localhost:8080;
-        proxy_http_version 1.1;
-        proxy_set_header Upgrade $http_upgrade;
-        proxy_set_header Connection 'upgrade';
-        proxy_set_header Host $host;
-        proxy_cache_bypass $http_upgrade;
-  }
-}
-```
-
-```api.sphotonkhan.com.conf
-server {
-  server_name api.domain.com;
-    location / {
-    proxy_pass http://localhost:4000;
-    proxy_http_version 1.1;
-    proxy_set_header Upgrade $http_upgrade;
-    proxy_set_header Connection 'upgrade';
-    proxy_set_header Host $host;
-    proxy_cache_bypass $http_upgrade;
-  }
-}
+```javascript
+#!/usr/bin/env nodejs
+var http = require('http');
+http.createServer(function (req, res) {
+  res.writeHead(200, {'Content-Type': 'text/plain'});
+  res.end('Hello World\n');
+}).listen(8080, 'localhost');
+console.log('Server running at http://localhost:8080/');
 ```
 
 ```bash
-sudo ln -s /etc/nginx/sites-available/api.domain.com.conf /etc/nginx/sites-enabled/api.domain.com.conf
-sudo ln -s /etc/nginx/sites-available/domain.com.conf /etc/nginx/sites-enabled/domain.com.conf
-sudo systemctl reload nginx
+chmod +x ./index.js
+```
+
+Install process manager for Node.js applications. PM2 provides
+an easy way to manage and daemonize application (run theme in the background as a service)
+
+```bash
+npm install -g pm2
+pm2 start index.js
+pm2 stop [id]
 ```
