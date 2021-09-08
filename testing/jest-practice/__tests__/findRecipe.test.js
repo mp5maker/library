@@ -11,17 +11,10 @@ test("Asynchronously fetch the recipe", (done) => {
   };
 
   findRecipe(dish)
-    .then(
-      (actualRecipe) => {
-        try {
-          expect(actualRecipe).toEqual(expectedRecipe);
-          done();
-        } catch (error) {
-          done(error);
-        }
-      },
-      (error) => done(error)
-    )
+    .then((actualRecipe) => {
+      expect(actualRecipe).toEqual(expectedRecipe);
+      done();
+    })
     .catch((error) => {
       done(error);
     });
