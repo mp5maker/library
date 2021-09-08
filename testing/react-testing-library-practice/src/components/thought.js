@@ -1,6 +1,6 @@
 import React, { useEffect } from "react";
 
-export function Thought(props) {
+const Thought = (props) => {
   const { thought, removeThought } = props;
 
   const handleRemoveClick = () => {
@@ -30,3 +30,5 @@ export function Thought(props) {
     </li>
   );
 }
+
+export default Thought
