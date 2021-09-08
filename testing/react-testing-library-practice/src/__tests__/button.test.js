@@ -7,4 +7,6 @@ test("A Submit button is rendered", () => {
   const button = screen.getByText("Submit");
   const buttonTwo = screen.getByRole("button");
   expect(button).toBeDisabled();
+  expect(buttonTwo).toHaveTextContent('Submit')
+  expect(button).toBeInTheDocument();
 });
