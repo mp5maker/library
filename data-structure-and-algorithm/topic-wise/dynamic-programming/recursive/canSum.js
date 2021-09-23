@@ -1,17 +1,21 @@
-const canSum = (_num, _arr) => {
-  const recursive = (num, arr, memo = {}) => {
-    if (num < 0) return false;
-    if (num == 0) return true;
-    if (memo[num]) return memo[num]
-    for (let item of arr) {
-      const remainder = num - item;
-      memo[num] = canSum(remainder, arr, memo)
-      if (memo[num]) return true
+const canSum = (_target, _numbers) => {
+  const recursive = (target, numbers, memo = {}) => {
+    if (target == 0) return true;
+    if (target < 0) return false;
+    if (memo[target]) return memo[target];
+
+    for (let i = 0; i < numbers.length; i++) {
+      const current = numbers[i];
+      const metTarget = recursive(target - current, numbers, memo);
+      memo[target] = metTarget;
+      if (metTarget) return true;
     }
-    return false
-  };
 
-  return recursive(_num, _arr)
-};
+    memo[target] = false;
+    return memo[target];
+  }
 
-console.log(canSum(7, [1, 2, 6, 7]));
+  return recursive(_target, _numbers)
+}
+
+console.log(canSum(7, [5, 3, 4, 7]));
