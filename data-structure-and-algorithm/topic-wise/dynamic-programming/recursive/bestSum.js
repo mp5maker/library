@@ -1,30 +1,30 @@
-const bestSum = (_num, _arr, memo = {}) => {
-  const recursive = (num, arr) => {
-    if (num == 0) return [];
-    if (num < 0) return null;
-    if (memo[num]) return memo[num]
+const bestSum = (_targetSum, _numbers) => {
+  const recursive = (targetSum, numbers, memo = {}) => {
+    if (targetSum == 0) return [];
+    if (targetSum < 0) return null;
+    if (memo[targetSum]) return memo[targetSum];
 
     let shortestCombination = null;
+    for (let i = 0; i < numbers.length; i++) {
+      const current = numbers[i];
+      const pathCombo = recursive(targetSum - current, numbers, memo);
+      memo[targetSum] = pathCombo;
 
-    for (let item of arr) {
-      const remainder = num - item;
-      const remainderCombination = recursive(remainder, arr);
-      if (remainderCombination) {
-        const combination = [...remainderCombination, item];
-        if (
-          shortestCombination == null ||
-          combination.length < shortestCombination.length
-        ) {
-          shortestCombination = combination;
+      if (pathCombo) {
+        let combinations = [current, ...pathCombo];
+        if (shortestCombination == null) shortestCombination = combinations;
+        else {
+          if (shortestCombination.length > combinations.length)
+            shortestCombination = combinations;
         }
       }
     }
 
-    memo[num] = shortestCombination
-    return memo[num];
+    memo[targetSum] = shortestCombination;
+    return shortestCombination;
   };
 
-  return recursive(_num, _arr);
+  return recursive(_targetSum, _numbers);
 };
 
 console.log(bestSum(8, [2, 3, 5]));
