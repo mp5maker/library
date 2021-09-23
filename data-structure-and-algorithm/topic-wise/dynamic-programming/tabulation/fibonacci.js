@@ -1,12 +1,11 @@
 const fibonacci = (num) => {
-  let table = Array(num + 1).fill(0)
-  table[1] = 1
-  for (let i = 0; i <= num; i++) {
-    const current = table[i]
-    table[i + 1] += current
-    table[i + 2] += current
+  let arr = Array.from({ length: num + 1 }).fill(0)
+  arr[0] = 0
+  arr[1] = 1
+  for (let i = 2; i <= num; i++) {
+    arr[i] += arr[i - 1] + arr[i - 2]
   }
-  return table[num]
+  return arr[arr.length - 1]
 }
 
 console.log(fibonacci(6))
