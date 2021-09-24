@@ -22,34 +22,19 @@ c.right = f;
 e.left = g;
 
 const depthFirst = (root) => {
-  if (root == null) return [];
-  let result = [];
-  const stack = [root];
+  let stack = [root];
+  let arr = [];
+
   while (stack.length) {
-    const current = stack.pop();
-    result.push(current.val);
-    if (current.right) stack.push(current.right);
-    if (current.left) stack.push(current.left);
+    let node = stack.pop();
+    if (node) {
+      if (node.val) arr.push(node.val);
+      if (node.right) stack.push(node.right);
+      if (node.left) stack.push(node.left);
+    }
   }
-  return result
+
+  return arr;
 };
 
-const _depthFirst = (root) => {
-  let current = root
-  let arr = []
-
-  const __depthFirst = (node) => {
-    if (node && node.val) arr.push(node.val)
-    else return
-
-    depthFirst(node.left)
-    depthFirst(node.right)
-
-    return
-  }
-
-  __depthFirst(current)
-  return arr
-}
-
-console.log(depthFirst(a));
+console.log(depthFirst(a)); // [ 'a', 'c', 'e', 'b', 'd', 'f' ]

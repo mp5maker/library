@@ -13,6 +13,7 @@ const d = new Node("d");
 const e = new Node("e");
 const f = new Node("f");
 const g = new Node("g");
+const h = new Node("h");
 
 a.left = b;
 a.right = c;
@@ -20,21 +21,23 @@ b.left = d;
 b.right = e;
 c.right = f;
 e.left = g;
+f.right = h;
 
 const breadthFirstValues = (root) => {
-  if (root === null) return [];
-  let stack = [root];
-  let arr = [];
+  let queue = [root]
+  let arr = []
 
-  while (stack.length) {
-    const node = stack.shift();
-    if (node && node.val) arr.push(node.val);
-    if (node.left) stack.push(node.left);
-    if (node.right) stack.push(node.right);
+  while(queue.length) {
+    let node = queue.shift()
+    if (node) {
+      if (node.val) arr.push(node.val)
+      if (node.left) queue.push(node.left)
+      if (node.right) queue.push(node.right)
+    }
   }
 
-  return arr;
+  return arr
 };
 
 
-console.log(breadthFirstValues(a));
+console.log(breadthFirstValues(a)); // [ 'a', 'c', 'b', 'e', 'd', 'f' ]
