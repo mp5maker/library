@@ -1,3 +1,7 @@
+/**
+ * Can't rob two adjacent house, the houses are circle
+ * Therefore first house is connected to last house
+ */
 const houseRobber2 = (nums) => {
   const performAction = (numbers) => {
     let table = Array.from({ length: numbers.length });
