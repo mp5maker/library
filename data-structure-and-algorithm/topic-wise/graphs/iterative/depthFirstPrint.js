@@ -1,16 +1,3 @@
-const depthFirstPrint = (graph, source) => {
-  const stack = [source];
-
-  while (stack.length > 0) {
-    const current = stack.pop();
-    console.log(current);
-
-    for (let neighbor of graph[current]) {
-      stack.push(neighbor);
-    }
-  }
-};
-
 const graph = {
   a: ["b", "c"],
   b: ["d"],
@@ -20,4 +7,18 @@ const graph = {
   f: [],
 };
 
-depthFirstPrint(graph, "a");
+const depthFirstPrint = (graph, source) => {
+  const stack = [source];
+  const print = []
+
+  while (stack.length) {
+    const current = stack.pop();
+    print.push(current)
+    const neighbors = graph[current];
+    for (let neighbor of  neighbors) stack.push(neighbor);
+  }
+
+  return print
+};
+
+console.log(depthFirstPrint(graph, "a"));

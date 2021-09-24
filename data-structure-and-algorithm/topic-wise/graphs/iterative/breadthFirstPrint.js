@@ -1,17 +1,21 @@
 const breadthFirstPrint = (graph, source) => {
-  const queue = [ source ];
+  const queue = [source]
+  let arr = []
 
-  while (queue.length > 0) {
-    const shift = queue.shift()
-    console.log(shift)
-    for (let neighbor of graph[shift]) {
+  while(queue.length > 0) {
+    const current = queue.shift()
+    arr.push(current)
+    const neighbors = graph[current]
+    for (let neighbor of neighbors) {
       queue.push(neighbor)
     }
   }
+
+  return arr
 }
 
 const graph = {
-  a: ["b", "c"],
+  a: ["c", "b"],
   b: ["d"],
   c: ["e"],
   d: ["f"],
@@ -19,4 +23,4 @@ const graph = {
   f: [],
 };
 
-breadthFirstPrint(graph, 'a')
+console.log(breadthFirstPrint(graph, 'a'))

@@ -1,11 +1,3 @@
-const depthFirstPrint = (graph, source) => {
-  console.log(source)
-  for (let neighbor of graph[source]) {
-    depthFirstPrint(graph, neighbor)
-  }
-}
-
-
 const graph = {
   a: ["b", "c"],
   b: ["d"],
@@ -15,4 +7,13 @@ const graph = {
   f: [],
 };
 
-depthFirstPrint(graph, 'a')
+let arr = []
+const depthFirstPrint = (graph, source) => {
+  arr.push(source)
+  for (let neighbor of graph[source]) {
+    depthFirstPrint(graph, neighbor)
+  }
+  return arr
+}
+
+console.log(depthFirstPrint(graph, 'a'))
