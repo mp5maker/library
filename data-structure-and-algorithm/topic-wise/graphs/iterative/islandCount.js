@@ -53,7 +53,7 @@ const islandCount = (grid) => {
   return counter;
 };
 
-const grid = [
+let grid = [
   ["W", "L", "W", "W", "W"],
   ["W", "L", "W", "W", "W"],
   ["W", "W", "W", "L", "W"],
@@ -63,3 +63,12 @@ const grid = [
 ];
 
 console.log(islandCount(grid)); // -> 3
+
+
+grid = [
+  ["L", "L", "L"],
+  ["L", "L", "L"],
+  ["L", "L", "L"],
+];
+
+console.log(islandCount(grid)); // 1
