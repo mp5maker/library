@@ -1,26 +1,26 @@
-const canConstruct = (_s, _arr) => {
-  const recursive = (s, arr, memo = {}) => {
-    if (memo[s]) return memo[s];
-    if (s == "") return [[]];
+const canConstruct = (target, wordBank, memo = {}) => {
+  if (target in memo) return memo[target];
+  if (target === "") return true;
 
-    const result = [];
-
-    for (let word of arr) {
-      if (s.indexOf(word) == 0) {
-        const remainingWord = s.slice(word.length);
-        const suffixWays = recursive(remainingWord, arr, memo);
-        const targetWays = suffixWays.map((item) => [word, ...item]);
-        result.push(...targetWays);
-      }
+  for (let word of wordBank) {
+    if (target.indexOf(word) === 0) {
+      const isConstructed = canConstruct(
+        target.substring(word.length),
+        wordBank,
+        memo
+      );
+      memo[target] = true;
+      if (isConstructed) return true;
     }
+  }
 
-    memo[s] = result;
-    return result;
-  };
-
-  return recursive(_s, _arr);
+  memo[target] = false;
+  return false;
 };
 
 console.log(
   canConstruct("abcdef", ["ab", "abc", "cd", "def", "abcd", "ef", "c"])
-);
+); // true
+console.log(
+  canConstruct("abcdef", ["bo", "rd", "ate", "t", "ska", "sk", "boar"])
+); // false
