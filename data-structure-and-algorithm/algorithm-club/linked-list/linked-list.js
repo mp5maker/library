@@ -96,6 +96,29 @@ class LinkedList {
 
     return false;
   }
+
+  sumList() {
+    let sum = 0
+    let current = this.head
+
+    while(current) {
+      sum += current.val
+      current = current.next
+    }
+
+    return sum
+  }
+
+  recursiveSumList() {
+    const recursive = (node, sum = 0) => {
+      sum += node.val
+      if (!node.next) return sum
+      return recursive(node.next, sum)
+    }
+
+    let current = this.head
+    return recursive(current)
+  }
 }
 
 const ll = new LinkedList();
@@ -109,5 +132,7 @@ console.log("contains", ll.contains(11));
 ll.recursiveAppend(200);
 console.log(ll.print());
 console.log(ll.recursivePrint());
-console.log("contains", ll.recursiveContains(11));
-console.log("contains", ll.recursiveContains(15));
+console.log("recursiveContains", ll.recursiveContains(11));
+console.log("recursiveContains", ll.recursiveContains(15));
+console.log("sumList", ll.sumList());
+console.log("recursiveSumList", ll.recursiveSumList());
