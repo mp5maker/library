@@ -135,9 +135,28 @@ class LinkedList {
       prev = current;
       current = current.next;
     }
-    prev.next = current.next;
+    prev.next = current && current.next ? current.next : null;
 
     return this.head;
+  }
+
+  recursiveDeleteValue(value) {
+    let current = this.head
+
+    const recursive = (current, val, prev = null) => {
+      if (!current || !current.next) return this.head
+      if (current.val == val) {
+        if (prev) {
+          prev.next = current && current.next ? current.next : null;
+        } else {
+          this.head = current.next
+        }
+        return this.head
+      }
+      return recursive(current.next, val, current)
+    }
+
+    return recursive(current, value)
   }
 
   hasCycle() {}
@@ -158,4 +177,5 @@ console.log("recursiveContains", ll.recursiveContains(11));
 console.log("recursiveContains", ll.recursiveContains(15));
 console.log("sumList", ll.sumList());
 console.log("recursiveSumList", ll.recursiveSumList());
-console.log("deleteValue", ll.deleteValue(5));
+console.log("deleteValue", ll.deleteValue(100));
+console.log("deleteValue", ll.recursiveDeleteValue(5));
