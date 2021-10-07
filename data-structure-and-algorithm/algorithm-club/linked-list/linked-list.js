@@ -42,13 +42,13 @@ class LinkedList {
 
   recursiveContains(value) {
     const recursive = (node, val) => {
-      if (node.val == val) return true
-      if (!node.next) return false
-      return recursive(node.next, val)
-    }
+      if (node.val == val) return true;
+      if (!node.next) return false;
+      return recursive(node.next, val);
+    };
 
-    let current = this.head
-    return recursive(current, value)
+    let current = this.head;
+    return recursive(current, value);
   }
 
   append(val) {
@@ -98,27 +98,49 @@ class LinkedList {
   }
 
   sumList() {
-    let sum = 0
-    let current = this.head
+    let sum = 0;
+    let current = this.head;
 
-    while(current) {
-      sum += current.val
-      current = current.next
+    while (current) {
+      sum += current.val;
+      current = current.next;
     }
 
-    return sum
+    return sum;
   }
 
   recursiveSumList() {
     const recursive = (node, sum = 0) => {
-      sum += node.val
-      if (!node.next) return sum
-      return recursive(node.next, sum)
+      sum += node.val;
+      if (!node.next) return sum;
+      return recursive(node.next, sum);
+    };
+
+    let current = this.head;
+    return recursive(current);
+  }
+
+  deleteValue(val) {
+    let current = this.head;
+    if (current == null) return this.head;
+
+    if (current.val == val) {
+      this.head = current.next;
+      return this.head;
     }
 
-    let current = this.head
-    return recursive(current)
+    let prev = null;
+    while (current) {
+      if (current.val == val) break;
+      prev = current;
+      current = current.next;
+    }
+    prev.next = current.next;
+
+    return this.head;
   }
+
+  hasCycle() {}
 }
 
 const ll = new LinkedList();
@@ -136,3 +158,4 @@ console.log("recursiveContains", ll.recursiveContains(11));
 console.log("recursiveContains", ll.recursiveContains(15));
 console.log("sumList", ll.sumList());
 console.log("recursiveSumList", ll.recursiveSumList());
+console.log("deleteValue", ll.deleteValue(5));
