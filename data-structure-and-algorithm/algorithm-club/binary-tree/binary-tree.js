@@ -51,23 +51,69 @@ class BinaryTree {
   }
 
   breadthFirstSearch(val) {
-    let current = this.root
-    const queue = [current]
+    let current = this.root;
+    const queue = [current];
 
-    while(queue.length) {
-      const current = queue.shift()
-      if (current.val == val) return true
-      if (current.left) queue.push(current.left)
-      if (current.right) queue.push(current.right)
+    while (queue.length) {
+      const current = queue.shift();
+      if (current.val == val) return true;
+      if (current.left) queue.push(current.left);
+      if (current.right) queue.push(current.right);
     }
 
-    return false
+    return false;
+  }
+
+  height() {
+    let current = this.root;
+    const queue = [[current, 0]];
+
+    let x = 0;
+    while (queue.length) {
+      const [current, distance] = queue.shift();
+      if (current.left) queue.push([current.left, distance + 1]);
+      if (current.right) queue.push([current.right, distance + 1]);
+      if (queue.length == 0) x = distance;
+    }
+    return x;
+  }
+
+  sumTree() {
+    let current = this.root;
+    let queue = [current];
+
+    let sum = 0;
+    while (queue.length) {
+      const current = queue.shift();
+      sum += current.val;
+      if (current.left) queue.push(current.left);
+      if (current.right) queue.push(current.right);
+    }
+
+    return sum;
+  }
+
+  depthFirstPrint() {
+    let current = this.root;
+    const stack = [current];
+    while (stack.length) {
+      const current = stack.pop();
+      console.log(current.val);
+      if (current.right) stack.push(current.right);
+      if (current.left) stack.push(current.left);
+    }
   }
 }
 
 const bt = new BinaryTree();
 Array(...[10, 5, 23, 3, 4, 25]).forEach((item) => bt.insert(item));
 console.log(bt.root);
+console.log("===");
 bt.breadthFirstPrint();
-console.log(bt.breadthFirstSearch(4))
-console.log(bt.breadthFirstSearch(71))
+console.log("===");
+console.log(bt.breadthFirstSearch(4));
+console.log(bt.breadthFirstSearch(71));
+console.log(bt.height());
+console.log(bt.sumTree());
+console.log("===");
+bt.depthFirstPrint();
