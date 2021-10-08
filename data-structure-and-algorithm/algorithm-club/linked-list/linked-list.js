@@ -159,7 +159,32 @@ class LinkedList {
     return recursive(current, value)
   }
 
-  hasCycle() {}
+  hasCycle() {
+    let visited = new Set()
+
+    let current = this.head
+    while(current) {
+      if (visited.has(current.val)) return true
+      visited.add(current.val)
+      current = current.next
+    }
+
+    return false
+  }
+
+  reverse() {
+    let current = this.head
+    let prev = null
+
+    while(current) {
+      const next = current.next
+      current.next = prev
+      prev = current
+      current = next
+    }
+
+    return prev
+  }
 }
 
 const ll = new LinkedList();
@@ -179,3 +204,6 @@ console.log("sumList", ll.sumList());
 console.log("recursiveSumList", ll.recursiveSumList());
 console.log("deleteValue", ll.deleteValue(100));
 console.log("deleteValue", ll.recursiveDeleteValue(5));
+ll.append(12)
+console.log("hasCycle", ll.hasCycle());
+console.log('reverse', ll.reverse())
