@@ -141,49 +141,63 @@ class LinkedList {
   }
 
   recursiveDeleteValue(value) {
-    let current = this.head
+    let current = this.head;
 
     const recursive = (current, val, prev = null) => {
-      if (!current || !current.next) return this.head
+      if (!current || !current.next) return this.head;
       if (current.val == val) {
         if (prev) {
           prev.next = current && current.next ? current.next : null;
         } else {
-          this.head = current.next
+          this.head = current.next;
         }
-        return this.head
+        return this.head;
       }
-      return recursive(current.next, val, current)
-    }
+      return recursive(current.next, val, current);
+    };
 
-    return recursive(current, value)
+    return recursive(current, value);
   }
 
   hasCycle() {
-    let visited = new Set()
+    let visited = new Set();
 
-    let current = this.head
-    while(current) {
-      if (visited.has(current.val)) return true
-      visited.add(current.val)
-      current = current.next
+    let current = this.head;
+    while (current) {
+      if (visited.has(current.val)) return true;
+      visited.add(current.val);
+      current = current.next;
     }
 
-    return false
+    return false;
   }
 
   reverse() {
-    let current = this.head
-    let prev = null
+    let current = this.head;
+    let prev = null;
 
-    while(current) {
-      const next = current.next
-      current.next = prev
-      prev = current
-      current = next
+    while (current) {
+      const next = current.next;
+      current.next = prev;
+      prev = current;
+      current = next;
     }
 
-    return prev
+    this.head = prev;
+    return this.head;
+  }
+
+  recursiveReverse() {
+    const recursive = (current, prev = null) => {
+      if (!current) return prev;
+      const next = current.next;
+      current.next = prev;
+      return recursive(next, current);
+    };
+
+    const current = this.head;
+    this.head = recursive(current);
+    return this.head;
   }
 }
 
@@ -204,6 +218,10 @@ console.log("sumList", ll.sumList());
 console.log("recursiveSumList", ll.recursiveSumList());
 console.log("deleteValue", ll.deleteValue(100));
 console.log("deleteValue", ll.recursiveDeleteValue(5));
-ll.append(12)
+ll.append(12);
 console.log("hasCycle", ll.hasCycle());
-console.log('reverse', ll.reverse())
+console.log(ll.print());
+ll.reverse();
+console.log(ll.print());
+ll.recursiveReverse();
+console.log(ll.print());
