@@ -103,6 +103,70 @@ class BinaryTree {
       if (current.left) stack.push(current.left);
     }
   }
+
+  recursiveDepthFirstPrint() {
+    const recursive = (node, arr = []) => {
+      if (node == null) return arr;
+      arr.push(node.val);
+      recursive(node.left, arr);
+      recursive(node.right, arr);
+      return arr;
+    };
+    let current = this.root;
+    return recursive(current);
+  }
+
+  recursiveSumTree() {
+    const recursive = (node) => {
+      if (node == null) return 0;
+      return recursive(node.left) + node.val + recursive(node.right);
+    };
+
+    let current = this.root;
+    return recursive(current);
+  }
+
+  preOrder() {
+    let arr = [];
+    const recursive = (node) => {
+      if (node) {
+        arr.push(node.val);
+        recursive(node.left);
+        recursive(node.right);
+      }
+      return arr;
+    };
+    let current = this.root;
+    return recursive(current);
+  }
+
+  inOrder() {
+    let arr = [];
+    const recursive = (node) => {
+      if (node) {
+        recursive(node.left);
+        arr.push(node.val);
+        recursive(node.right);
+      }
+      return arr;
+    };
+    let current = this.root;
+    return recursive(current);
+  }
+
+  postOrder() {
+    let arr = [];
+    const recursive = (node) => {
+      if (node) {
+        recursive(node.left);
+        recursive(node.right);
+        arr.push(node.val);
+      }
+      return arr;
+    };
+    let current = this.root;
+    return recursive(current);
+  }
 }
 
 const bt = new BinaryTree();
@@ -114,6 +178,11 @@ console.log("===");
 console.log(bt.breadthFirstSearch(4));
 console.log(bt.breadthFirstSearch(71));
 console.log(bt.height());
-console.log(bt.sumTree());
+console.log("sumTree", bt.sumTree());
+console.log("recursiveSumTree", bt.recursiveSumTree());
 console.log("===");
 bt.depthFirstPrint();
+console.log(bt.recursiveDepthFirstPrint());
+console.log(bt.preOrder());
+console.log(bt.inOrder());
+console.log(bt.postOrder());
