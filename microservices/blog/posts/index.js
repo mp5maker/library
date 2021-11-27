@@ -2,8 +2,10 @@ const express = require("express");
 const { v4 } = require('uuid');
 const get = require("lodash/get");
 const app = express();
+const cors = require('cors')
 
 app.use(express.json());
+app.use(cors());
 
 const posts = {};
 
