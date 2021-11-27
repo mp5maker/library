@@ -9,6 +9,7 @@ app.use(cors());
 
 app.post("/events", (request, response) => {
   const event = get(request, "body", {});
+  console.log("🚀 ~ file: index.js ~ line 12 ~ app.post ~ event", event)
   axios
     .post("http://localhost:4000/events", event)
     .then(() => {})
