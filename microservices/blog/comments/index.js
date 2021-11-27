@@ -24,9 +24,12 @@ app.post("/posts/:id/comments", async (request, response) => {
   comments.push(comment)
   commentsByPostId[postId] = comments
   try {
-    await axios.post('http://localhost:4000/events', {
+    await axios.post('http://localhost:4002/events', {
       type: 'CommentCreated',
-      data: comment
+      data: {
+        ...comment,
+        postId
+      }
     })
     return response.status(201).json(comment)
   } catch(error) {
@@ -35,7 +38,7 @@ app.post("/posts/:id/comments", async (request, response) => {
 });
 
 app.post("/events", (request, response) => {
-  console.log("Received Event", get(request, "body.type", ""));
+  console.log("Comment Event:", get(request, "body.type", ""));
   response.send({});
 });
 
