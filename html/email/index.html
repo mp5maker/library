@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+    <style>
+      :root {
+        --width: 500px;
+      }
+      .mt-sm {
+        margin-top: 12px;
+      }
+      .mt-md {
+        margin-top: 24px;
+      }
+      .box {
+        padding: 24px;
+        margin: 12px;
+      }
+      .topic {
+        width: var(--width);
+        word-wrap: break-word;
+      }
+      .download-app {
+        width: var(--width);
+        word-wrap: break-word;
+      }
+    </style>
+  </head>
+  <body>
+    <div class="box">
+      <div class="topic">
+        建設${userName}さんから現場コミュニケーションアプリ「コントラ」へ招待されました。
+      </div>
+      <div class="download-app mt-md">
+        アプリダウンロードはこちら:
+        <a href="${downloadLink}">${downloadLink}</a>
+      </div>
+      <div class="qrcode-link mt-md">
+        建設
+        太郎さんを仲間追加するには、以下のURLにアクセスするか、以下のQRコードをスキャンしてください。
+      </div>
+      <div class="qrcode-link mt-md">
+        <a href="${qrCodeLink}">${qrCodeLink}</a>
+      </div>
+    </div>
+  </body>
+</html>
