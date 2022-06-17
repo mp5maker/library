@@ -1,12 +1,12 @@
 declare global {
-  interface GlobalReducerEvent {
+  interface ActionTypes {
     LOG_IN: {
       type: "LOGIN_IN";
-      isAuthenticated: true
+      isAuthenticated: boolean
     },
     LOG_OUT: {
       type: "LOG_OUT";
-      isAuthenticated: false
+      isAuthenticated: boolean
     }
   }
 }
@@ -14,10 +14,10 @@ declare global {
 export type GlobalReducer<TState> = (
   state: TState,
   action: {
-    [ActionType in keyof GlobalReducerEvent]: {
+    [ActionType in keyof ActionTypes]: {
       type: ActionType;
-    } & GlobalReducerEvent[ActionType];
-  }[keyof GlobalReducerEvent]
+    } & ActionTypes[ActionType];
+  }[keyof ActionTypes]
 ) => TState;
 
 export const authenticationReducer: GlobalReducer<{ isAuthenticated: boolean }> = (state, action) => {
