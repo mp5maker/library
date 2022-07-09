@@ -20,6 +20,7 @@
 19) CSS Grid vs CSS Flexbox
 20) React JS
 21) Vue JS
+22) Typescript
 
 All thanks to [Traversy Media](http://www.traversymedia.com)
 
