@@ -47,3 +47,20 @@ theHarvester -d goodhackingblog.com -b google -l 100
 ```
 
 
+### Whois
+This package provides a commandline client for the WHOIS (RFC 3912) protocol, which queries online servers for information such as contact details for domains and IP address assignments.
+
+```bash
+whois [site_name]
+whois ethicalhackingblog.com
+```
+
+
+### DNS Reconnaissance
+
+```bash
+fierce -dns [sitename]
+fierce --domain [sitename]
+fierce -dns [ethicalhackingblog.com]
+fierce --domain [ethicalhackingblog.com]
+```
