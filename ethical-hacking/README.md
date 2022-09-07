@@ -10,3 +10,5 @@
 7. recon-ng
 8. discover
 9. whois
+10. Nmap
+11. traceroute
