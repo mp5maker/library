@@ -64,3 +64,46 @@ fierce --domain [sitename]
 fierce -dns [ethicalhackingblog.com]
 fierce --domain [ethicalhackingblog.com]
 ```
+
+### Deepmagic information gathering tool (dmitry)
+
+```bash
+dmitry -winsepfbo [site_name]
+dmitry -winsepfbo ethicalhackingblog.com
+```
+
+
+### Discover Scripts
+
+```bash
+git clone https://github.com/leebaird/discover.git
+./discover.sh
+```
+
+### Recon-ng
+
+```bash
+recong-ng
+help
+show modules
+show keys
+marketplace search
+marketplace install ipinfodb
+keys add [ipinfodb_key]
+```
+
+```bash
+load ipinfodb
+show info
+workspace add [name]
+add domains [domain_name]
+load bing_domain_web
+run
+show hosts
+```
+
+### Built with
+
+```bash
+https://builtwith.com
+```
