@@ -31,3 +31,7 @@ sudo apt-get install -y dmidecode
 dmidecode -t system
 dmidecode -t bios
 ```
+
+```bash
+sudo lshw -class disk
+```
