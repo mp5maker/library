@@ -1,0 +1,100 @@
+$color: #bdbdbd;
+
+$flex-directions: (
+  "left": row-reverse,
+  "right": row,
+);
+
+$text-aligns: (
+  "left": right,
+  "right": left,
+);
+
+@mixin get-flex-direction($type) {
+  @if $type == "alternate" {
+    &:nth-of-type(even) {
+      flex-direction: map-get($flex-directions, "left");
+    }
+    &::before {
+      content: "";
+      padding: 6px 16px;
+      flex: 1;
+    }
+  } @else {
+    flex-direction: map-get($flex-directions, $type);
+  }
+}
+
+@mixin get-text-align($type) {
+  @if $type == "alternate" {
+    &:nth-of-type(even) {
+      .timeline-content {
+        text-align: right;
+      }
+    }
+    &:nth-of-type(odd) {
+      .timeline-content {
+        text-align: left;
+      }
+    }
+  } @else {
+    .timeline-content {
+      text-align: map-get($text-aligns, $type);
+    }
+  }
+}
+
+@mixin timeline-item($type) {
+  &.#{$type} {
+    .timeline-item {
+      display: flex;
+      position: relative;
+      min-height: 70px;
+      @include get-flex-direction($type);
+
+      .timeline-separator {
+        display: flex;
+        flex-direction: column;
+        flex: 0;
+        align-items: center;
+      }
+
+      .timeline-connector {
+        background-color: $color;
+        height: 100%;
+        width: 2px;
+        flex-grow: 1;
+      }
+
+      .timeline-dot {
+        box-sizing: border-box;
+        display: flex;
+        background-color: $color;
+        border-radius: 50%;
+        padding: 4px;
+        border-style: solid;
+        border-color: transparent;
+        margin: 12px 0;
+        align-self: baseline;
+      }
+
+      @include get-text-align($type);
+      .timeline-content {
+        padding: 6px 16px;
+        margin: 0;
+        flex: 1;
+      }
+    }
+  }
+}
+
+.timeline-container {
+  display: flex;
+  flex-direction: column;
+  padding: 6px 16px;
+  flex-grow: 1;
+
+  @include timeline-item("left");
+  @include timeline-item("right");
+  @include timeline-item("alternate");
+}
