@@ -4,6 +4,7 @@ import { TimelineContent } from "./components/timeline/timelineContent";
 import { TimelineDot } from "./components/timeline/timelineDot";
 import { TimelineItem } from "./components/timeline/timelineItem";
 import { TimelineSeparator } from "./components/timeline/timelineSeparator";
+import FaceSVG from './components/icon/face'
 
 function App() {
   return (
@@ -18,7 +19,9 @@ function App() {
         </TimelineItem>
         <TimelineItem>
           <TimelineSeparator>
-            <TimelineDot />
+            <TimelineDot>
+              <FaceSVG />
+            </TimelineDot>
             <TimelineConnector />
           </TimelineSeparator>
           <TimelineContent>Hello</TimelineContent>
