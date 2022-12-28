@@ -22,10 +22,9 @@ stopBtn.addEventListener("click", () => {
 });
 
 // Reset
-stopBtn.addEventListener("reset", () => {
+resetBtn.addEventListener("click", () => {
   chrome.storage.local.set({
-    timer: 0,
-    isRunning: true,
+    timer: 0
   });
 });
 
