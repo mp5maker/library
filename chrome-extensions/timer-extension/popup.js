@@ -5,10 +5,14 @@ chrome.storage.sync.get(["name"], (response) => {
 });
 
 const timerElement = document.getElementById("timer")
-chrome.storage.local.get(["timer"], (response) => {
-  const time = response.timer ?? 0
-  timerElement.textContent = `The timer is at: ${time} seconds`
-})
+const updateTimeElements = () => {
+  chrome.storage.local.get(["timer"], (response) => {
+    const time = response.timer ?? 0
+    timerElement.textContent = `The timer is at: ${time} seconds`
+  })
+}
+updateTimeElements()
+setInterval(updateTimeElements, 1000);
 
 const timeElement = document.getElementById('time')
 timeElement.textContent = `The time is: ${currentTime}`
