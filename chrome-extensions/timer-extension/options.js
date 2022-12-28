@@ -14,5 +14,5 @@ saveBtn.addEventListener("click", () => {
 })
 
 chrome.storage.sync.get(["name"], (response) => {
-  console.log(response)
+  nameInput.value = response.name || ''
 })

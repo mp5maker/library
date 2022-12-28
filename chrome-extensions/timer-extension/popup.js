@@ -16,5 +16,5 @@ chrome.action.setBadgeText({
  * Getting Storage
  */
 chrome.storage.sync.get(["name"], (response) => {
-  nameElement.textContent = `Your name is: ${response.name}`
+  nameElement.textContent = response.name ? `Your name is: ${response.name}` : ''
 });
