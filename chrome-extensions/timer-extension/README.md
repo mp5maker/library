@@ -11,3 +11,5 @@
 
 * chrome.alarms.create
 * chrome.alarms.onAlarm
+
+* chrome.notifications (this.registration.showNotification)
