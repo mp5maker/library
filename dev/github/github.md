@@ -124,3 +124,35 @@ Log
 ---
 git log --graph --oneline --decorate
 ---
+
+
+Advanced Commands
+
+
+```bash
+#! /bin/sh
+
+message=$1
+currentBranch=$(git symbolic-ref --short -q HEAD)
+empty=""
+currentBranchWithoutM1=${currentBranch/-m1-branch/$empty}
+echo "$currentBranchWithoutM1"
+
+if [ ! -z "$1" ]
+then
+  git add .
+  git commit -m "$message"
+  sleep .5
+  currentCommit=$(git rev-parse -q HEAD)
+  if git show-ref -q --heads "$currentBranchWithoutM1"
+  then
+    git checkout -b "$currentBranchWithoutM1"
+  else
+    git checkout "$currentBranchWithoutM1"
+  fi
+  git cherry-pick currentCommit
+  git checkout currentBranch
+else
+  echo "Commit Message is not provided"
+fi
+```
