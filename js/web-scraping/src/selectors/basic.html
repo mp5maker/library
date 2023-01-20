@@ -1,0 +1,75 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+    <style>
+      #family-tree {
+        background-color: palevioletred;
+        min-height: 300px;
+      }
+
+      .grand-parent {
+        background-color: green;
+        padding: 12px
+      }
+
+      /* :first-child, :last-child */
+      #family-tree .grand-parent .parent .children:nth-child(1) {
+        background-color: red;
+      }
+
+      /* .grand-parent ~ div {
+        background-color: whitesmoke;
+      } */
+
+      .parent {
+        background-color: blue;
+        padding: 12px;
+      }
+
+      /* #family-tree .grand-parent .parent {
+        background-color: sandybrown;
+      } */
+
+      .children {
+        background-color: yellow;
+        padding: 12px;
+      }
+
+      .grand-parent-sibling {
+        background-color: violet;
+        padding: 12px;
+      }
+    </style>
+  </head>
+  <body>
+    <div id="family-tree">
+      <div class="grand-parent">
+        Im a grand parent
+        <div class="parent">
+          I am a parent
+          <div class="children">I am a child</div>
+          <div class="children">I am a child</div>
+          <div class="children">I am a child</div>
+        </div>
+      </div>
+      <div class="grand-parent-sibling">I am grand parent sibling</div>
+    </div>
+    <script>
+      (function () {
+        // // Navigating through the family
+        // const prevParent = document.querySelector('#family-tree .grand-parent .parent')
+        // prevParent.style.backgroundColor = "black"
+        // prevParent.style.color = "white"
+
+        // // Directly choosing the container
+        // const parent = document.querySelector('.parent')
+        // parent.style.backgroundColor = "purple"
+        // parent.style.color = "unset"
+      })();
+    </script>
+  </body>
+</html>
