@@ -125,3 +125,17 @@ cd ~/
 cd /opt/homebrew/bin/jmeter
 cd [jmeter-version]/libexec/bin
 ```
+
+### Use Templates
+* Recording
+* Recording with think time
+
+
+## Blazemeter
+
+Steps
+1. Create a blazemeter account
+2. Get blazemeter extension
+3. Record Test
+4. Save as JMX
+5. Add JMX in Jmeter and run
