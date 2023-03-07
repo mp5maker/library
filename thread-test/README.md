@@ -83,9 +83,45 @@ Checks of the request/response
 
 ---
 
-### Test Script Recorder
+## Test Script Recorder
+
+Instead of manually typing down all the apis
+we can just record and add the api in that manner
 
 1. Add Http(s) Test Script Recorder
 2. Thread Group with Recording Controller
 3. Add Proxy through Chrome settings
 4. Add Certificate through Chrome
+
+### Generate Apache JmeterTemporaryRootCA.crt
+As of `jmeter 5.5`
+By default <br/>
+`ApacheJMeterTemporaryRootCA.crt` is not generated in the libexec <br/>
+
+# Generate `ApacheJMeterTemporaryRootCA.crt`
+
+**TLDR**
+ * Add Https Test Script Recorder
+ * Add Thread Group
+ * Add Recording Controller
+ * Run the Http Test Script Recording
+ * This will generate `ApacheJMeterTemporaryRootCA.crt`
+
+**Short Form**
+ * RC --> Right Click
+
+
+### Steps
+ * Test Plan -> RC -> Non Test Elements -> HTTP(S) Test Script Recorder
+ * Test Plan -> RC -> Threads -> Thread Group
+ * Thread Group -> RC -> Logic Controller -> Recording Controller
+ * HTTP Test Script Recorder -> Click -> Test Plan Creation -> Choose your target controller
+ * Click on start
+
+### Confirmation
+```bash
+which jmeter # /opt/homebrew/bin/jmeter
+cd ~/
+cd /opt/homebrew/bin/jmeter
+cd [jmeter-version]/libexec/bin
+```
