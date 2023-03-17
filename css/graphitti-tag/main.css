@@ -1,0 +1,69 @@
+@font-face {
+  font-family: "Aerosol";
+  src: url(./Aerosol.ttf);
+}
+
+@font-face {
+  font-family: "Bombing";
+  src: url(./Bombing.ttf);
+}
+
+@font-face {
+  font-family: "Brooklyn";
+  src: url(./Brooklyn.ttf);
+}
+
+@font-face {
+  font-family: "Wild";
+  src: url(./Wild.ttf);
+}
+
+@font-face {
+  font-family: "Throwupz";
+  src: url(./Throwupz.ttf);
+}
+
+@font-face {
+  font-family: "Tagtype";
+  src: url(./Tagtype.ttf);
+}
+
+.graffiti-aerosol {
+  font-family: "Aerosol", sans-serif;
+  color: black;
+  text-shadow: 0 0 10px #fff;
+}
+
+.graffiti-bombing {
+  font-family: "Bombing", sans-serif;
+  color: black;
+  text-shadow: 0 0 10px #fff;
+}
+
+.graffiti-brooklyn {
+  font-family: "Brooklyn", sans-serif;
+  color: black;
+  text-shadow: 0 0 10px #fff;
+}
+
+.graffiti-wild {
+  font-family: "Wild", sans-serif;
+  color: black;
+  text-shadow: 0 0 10px #fff;
+}
+
+.graffiti-throwupz {
+  font-family: "Throwupz", sans-serif;
+  color: black;
+  text-shadow: 0 0 10px #fff;
+}
+
+.graffiti-tagtype {
+  font-family: "Tagtype", sans-serif;
+  color: black;
+  text-shadow: 0 0 10px #fff;
+}
+
+.font-size-24 {
+  font-size: 24px;
+}
